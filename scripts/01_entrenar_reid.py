@@ -1,245 +1,264 @@
 #!/usr/bin/env python3
 """
-01_entrenar_reid.py
-
-Script autocontenido para entrenar un modelo de Re-Identificación (Re-ID) de ganado
-usando PyTorch + Torchvision, partiendo desde un dataset local organizado por carpetas
-(ImageFolder).
-
-Salida final importante:
-- Guarda SOLO el extractor de embeddings (256-D) en: src/mi_modelo_reid.pt
+Script 01: Entrenamiento Re-ID de ganado.
+Lógica de División:
+- Si hay >1 subcarpetas: Toma la ÚLTIMA subcarpeta completa para Test, el resto para Train.
+- Si hay 1 sola subcarpeta: Hace un split interno 80/20 dentro de esa misma carpeta.
 """
 
-import argparse
 import os
-from typing import Tuple
+from collections import defaultdict
+from PIL import Image
 
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
+import torch.nn.functional as F
+from torch.utils.data import DataLoader, Subset, Dataset
+from torchvision import transforms
 from torchvision.models import ResNet18_Weights, resnet18
 
 
-class ReIDResNet18(nn.Module):
-    """
-    Modelo completo para entrenamiento supervisado tipo clasificación.
-
-    Estructura conceptual:
-    1) BackBone ResNet18 (extrae representación visual de alto nivel de 512-D).
-    2) Cuello de botella (512 -> 256): comprime la representación para obtener
-       un embedding compacto y útil para comparación en Re-ID.
-    3) BatchNorm1d(256): estabiliza la escala del embedding durante entrenamiento.
-    4) Capa clasificadora final (256 -> num_classes): usada SOLO para entrenar con
-       CrossEntropy y forzar que embeddings separen identidades.
-
-    Nota matemática breve del cuello de botella:
-    Si h \in R^512 es la salida del backbone, el embedding e \in R^256 se obtiene como:
-        e = W*h + b
-    donde W \in R^(256x512), b \in R^256.
-    Esta proyección lineal aprende a conservar información discriminativa en menos
-    dimensiones, lo que reduce coste de búsqueda y almacenamiento en FAISS.
-    """
-
+class ReIDModel(nn.Module):
     def __init__(self, num_classes: int):
         super().__init__()
+        base = resnet18(weights=ResNet18_Weights.DEFAULT)
+        self.backbone = nn.Sequential(*list(base.children())[:-1])
+        self.embedding = nn.Linear(512, 256)
+        self.classifier = nn.Linear(256, num_classes)
 
-        # ResNet18 preentrenada en ImageNet para aprovechar features visuales robustas.
-        base_model = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
-
-        # Guardamos cuántas features entran a la capa final original (512 en ResNet18).
-        in_features = base_model.fc.in_features
-
-        # Reemplazamos la 'fc' por el bloque pedido:
-        #   a) Linear 512 -> 256  (embedding puro)
-        #   b) BatchNorm1d(256)
-        #   c) Linear 256 -> num_classes
-        base_model.fc = nn.Sequential(
-            nn.Linear(in_features, 256),
-            nn.BatchNorm1d(256),
-            nn.Linear(256, num_classes),
-        )
-
-        self.model = base_model
+    def forward_features(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.backbone(x)               
+        x = torch.flatten(x, 1)            
+        z = self.embedding(x)              
+        e = F.normalize(z, p=2, dim=1)     
+        return e
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward para clasificación durante entrenamiento."""
-        return self.model(x)
+        emb = self.forward_features(x)
+        logits = self.classifier(emb)
+        return logits
 
 
 class ReIDFeatureExtractor(nn.Module):
-    """
-    Extractor puro de embeddings 256-D.
-
-    Este módulo elimina la última capa clasificadora y conserva:
-    - BackBone ResNet18 hasta pooling global
-    - Proyección lineal 512 -> 256
-
-    Su salida es el vector de características que luego puedes indexar en FAISS.
-    """
-
-    def __init__(self, trained_model: ReIDResNet18):
+    def __init__(self, trained_model: ReIDModel):
         super().__init__()
-
-        # Copiamos todas las capas de ResNet18 excepto la 'fc'.
-        self.backbone = nn.Sequential(*list(trained_model.model.children())[:-1])
-
-        # Del bloque secuencial [Linear(512->256), BN, Linear(256->num_classes)],
-        # tomamos SOLO la primera capa lineal para producir embedding puro.
-        self.embedding = trained_model.model.fc[0]
+        self.backbone = trained_model.backbone
+        self.embedding = trained_model.embedding
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # 1) Features espaciales -> pooling global (N, 512, 1, 1)
         x = self.backbone(x)
-
-        # 2) Aplanar a (N, 512)
         x = torch.flatten(x, 1)
-
-        # 3) Proyectar a embedding de 256-D
         x = self.embedding(x)
-
+        x = F.normalize(x, p=2, dim=1)
         return x
 
 
-def crear_dataloader(data_dir: str, batch_size: int, num_workers: int) -> Tuple[DataLoader, int]:
+class SafeImageFolder(Dataset):
+    def __init__(self, root_dir, transform=None):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.samples = [] 
+        
+        print("⏳ Escaneando carpetas de forma segura (búsqueda profunda)...")
+        
+        if not os.path.exists(root_dir):
+            raise FileNotFoundError(f"No se encontró la ruta: {root_dir}")
+            
+        carpetas = [d for d in os.listdir(root_dir) if os.path.isdir(os.path.join(root_dir, d))]
+        self.classes = sorted(carpetas)
+        self.class_to_idx = {cls_name: i for i, cls_name in enumerate(self.classes)}
+        
+        for class_name in self.classes:
+            class_path = os.path.join(root_dir, class_name)
+            class_idx = self.class_to_idx[class_name]
+            
+            try:
+                for carpeta_actual, subcarpetas, archivos in os.walk(class_path):
+                    subcarpeta_name = os.path.relpath(carpeta_actual, class_path)
+                    
+                    for file_name in archivos:
+                        if not file_name.startswith('.'):
+                            full_path = os.path.join(carpeta_actual, file_name)
+                            if '.' not in file_name or file_name.lower().endswith(('.jpg', '.jpeg', '.png')):
+                                self.samples.append((full_path, class_idx, subcarpeta_name))
+                                
+            except OSError as e:
+                print(f"🚨 ALERTA DE HARDWARE: Error al leer sector de la clase {class_name}. Saltando. Detalle: {e}")
+                continue 
+                    
+        print(f"✅ Escaneo exitoso: {len(self.samples)} imágenes válidas detectadas.")
+
+    def __len__(self):
+        return len(self.samples)
+
+    def __getitem__(self, idx):
+        path, class_idx, subfolder = self.samples[idx]
+        try:
+            image = Image.open(path).convert('RGB')
+        except Exception as e:
+            image = Image.new('RGB', (224, 224)) 
+
+        if self.transform:
+            image = self.transform(image)
+
+        return image, class_idx
+
+
+def dividir_train_test_cross_pose(dataset: Dataset):
     """
-    Crea DataLoader de entrenamiento usando ImageFolder con augmentations pedidas.
-
-    Transformaciones:
-    - Resize(224,224): entrada estándar para ResNet.
-    - RandomHorizontalFlip: robustez a orientación.
-    - ColorJitter: robustez a cambios de iluminación/cámara.
-    - ToTensor + Normalización ImageNet: alinea distribución esperada por backbone.
+    Reglas de división:
+    1. Si hay >1 subcarpeta: La última subcarpeta va 100% a Test. El resto 100% a Train.
+    2. Si hay 1 subcarpeta: Divide internamente 80% Train y 20% Test.
     """
-    transform_train = transforms.Compose(
-        [
-            transforms.Resize((224, 224)),
-            transforms.RandomHorizontalFlip(p=0.5),
-            transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ]
-    )
+    indices_train = []
+    indices_test = []
 
-    dataset = datasets.ImageFolder(root=data_dir, transform=transform_train)
+    agrupado = defaultdict(lambda: defaultdict(list))
 
-    if len(dataset.classes) < 2:
-        raise ValueError(
-            "Se detectaron menos de 2 clases en el dataset. "
-            "Verifica que 'datos/entrenamiento/' tenga al menos dos carpetas de vacas."
-        )
+    for idx, (path, class_idx, subfolder) in enumerate(dataset.samples):
+        agrupado[class_idx][subfolder].append(idx)
 
-    dataloader = DataLoader(
-        dataset,
-        batch_size=batch_size,
-        shuffle=True,
-        num_workers=num_workers,
-        pin_memory=torch.cuda.is_available(),
-    )
+    print("\n📊 Resumen de División (Lógica: Última carpeta a Test / Fallback 80-20):")
+    print("-" * 80)
+    
+    for class_idx in sorted(agrupado.keys()):
+        nombre_clase = dataset.classes[class_idx]
+        subfolders = sorted(agrupado[class_idx].keys())
+        num_subfolders = len(subfolders)
 
-    return dataloader, len(dataset.classes)
+        if num_subfolders == 1:
+            # Plan B: Solo 1 subcarpeta. Split tradicional interno 80/20.
+            sf = subfolders[0]
+            fotos = agrupado[class_idx][sf]
+            n_total = len(fotos)
+            n_train = int(n_total * 0.8)
+
+            train_idx = fotos[:n_train]
+            test_idx = fotos[n_train:]
+
+            indices_train.extend(train_idx)
+            indices_test.extend(test_idx)
+
+            print(f"🐄 Clase '{nombre_clase:2}' (1 subcarpeta) -> Split interno | Train: {len(train_idx)} | Test: {len(test_idx)}")
+
+        else:
+            # Plan A: Varias subcarpetas. Tomar la última entera para Test.
+            subfolders_train = subfolders[:-1]
+            subfolder_test = subfolders[-1]
+
+            c_train, c_test = 0, 0
+            
+            for sf in subfolders_train:
+                indices_train.extend(agrupado[class_idx][sf])
+                c_train += len(agrupado[class_idx][sf])
+
+            indices_test.extend(agrupado[class_idx][subfolder_test])
+            c_test += len(agrupado[class_idx][subfolder_test])
+
+            print(f"🐄 Clase '{nombre_clase:2}' ({num_subfolders} subcarpetas) -> Train ({len(subfolders_train)} subc.): {c_train} fotos | Test (Carpeta '{subfolder_test}'): {c_test} fotos")
+
+    print("-" * 80)
+    return Subset(dataset, indices_train), Subset(dataset, indices_test)
 
 
-def entrenar(
-    model: nn.Module,
-    dataloader: DataLoader,
-    criterion: nn.Module,
-    optimizer: torch.optim.Optimizer,
-    device: torch.device,
-    num_epochs: int,
-) -> None:
-    """
-    Bucle de entrenamiento principal.
-
-    Métricas por época:
-    - Loss promedio por muestra.
-    - Accuracy de entrenamiento.
-    """
+def entrenar_modelo(model, train_loader, criterion, optimizer, device, num_epochs=10):
     model.train()
+    os.makedirs("models", exist_ok=True)
 
-    total_samples = len(dataloader.dataset)
-
+    print("\n🚀 Iniciando entrenamiento (Validando solo con datos Train en consola)...")
     for epoch in range(num_epochs):
         running_loss = 0.0
         running_corrects = 0
+        processed_samples = 0
 
-        for images, labels in dataloader:
-            images = images.to(device)
-            labels = labels.to(device)
+        for images, labels in train_loader:
+            try:
+                images, labels = images.to(device), labels.to(device)
 
-            optimizer.zero_grad()
+                optimizer.zero_grad()
+                logits = model(images)
+                loss = criterion(logits, labels)
 
-            logits = model(images)
-            loss = criterion(logits, labels)
+                loss.backward()
+                optimizer.step()
 
-            loss.backward()
-            optimizer.step()
+                batch_size = images.size(0)
+                running_loss += loss.item() * batch_size
+                preds = torch.argmax(logits, dim=1)
+                running_corrects += torch.sum(preds == labels).item()
+                processed_samples += batch_size
+                
+            except Exception as e:
+                continue
 
-            # Acumuladores para métricas.
-            batch_size_actual = images.size(0)
-            running_loss += loss.item() * batch_size_actual
-
-            preds = torch.argmax(logits, dim=1)
-            running_corrects += torch.sum(preds == labels).item()
-
-        epoch_loss = running_loss / total_samples
-        epoch_acc = running_corrects / total_samples
-
-        print(
-            f"Época [{epoch + 1}/{num_epochs}] - "
-            f"Loss: {epoch_loss:.4f} - Accuracy: {epoch_acc:.4f}"
-        )
+        if processed_samples > 0:
+            epoch_loss = running_loss / processed_samples
+            epoch_acc = running_corrects / processed_samples
+            print(f"Época [{epoch + 1}/{num_epochs}] - Loss: {epoch_loss:.4f} - Train Accuracy: {epoch_acc:.4f}")
+            
+            torch.save(model.state_dict(), f"models/checkpoint_epoch_{epoch+1}.pt")
+        else:
+            print(f"Época [{epoch + 1}/{num_epochs}] falló por completo.")
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Entrenamiento Re-ID de ganado con ResNet18")
-    parser.add_argument("--data_dir", type=str, default="datos/entrenamiento/", help="Ruta del dataset")
-    parser.add_argument("--num_epochs", type=int, default=15, help="Número de épocas")
-    parser.add_argument("--batch_size", type=int, default=32, help="Tamaño de batch")
-    parser.add_argument("--lr", type=float, default=1e-4, help="Learning rate para Adam")
-    parser.add_argument("--num_workers", type=int, default=2, help="Workers de DataLoader")
-    args = parser.parse_args()
+def main():
+    device = torch.device("cpu")
+    print(f"Dispositivo forzado: {device}")
 
-    if not os.path.isdir(args.data_dir):
-        raise FileNotFoundError(
-            f"No existe la ruta de dataset: {args.data_dir}. "
-            "Asegúrate de tener carpetas por vaca dentro de esa ruta."
-        )
+    data_dir = "datos/entrenamiento/fotos/"
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Dispositivo detectado: {device}")
+    train_transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ])
 
-    dataloader, num_classes = crear_dataloader(
-        data_dir=args.data_dir,
-        batch_size=args.batch_size,
-        num_workers=args.num_workers,
+    full_dataset = SafeImageFolder(root_dir=data_dir, transform=train_transform)
+
+    if len(full_dataset.samples) == 0:
+        print("\n❌ CRÍTICO: No se encontraron imágenes válidas.")
+        return
+        
+    if len(full_dataset.classes) < 2:
+        print("\n❌ CRÍTICO: Se detectaron menos de 2 clases.")
+        return
+
+    # APLICAMOS EL NUEVO SPLIT
+    train_subset, test_subset = dividir_train_test_cross_pose(full_dataset)
+
+    print(f"\n✅ Total Imágenes: {len(full_dataset)}")
+    print(f"✅ Subset Train: {len(train_subset)}")
+    print(f"✅ Subset Test (Prueba): {len(test_subset)}\n")
+
+    train_loader = DataLoader(
+        train_subset,
+        batch_size=16, 
+        shuffle=True,
+        num_workers=0, 
     )
-    print(f"Clases detectadas: {num_classes}")
-    print(f"Imágenes detectadas: {len(dataloader.dataset)}")
 
-    model = ReIDResNet18(num_classes=num_classes).to(device)
+    num_classes = len(full_dataset.classes)
+    model = ReIDModel(num_classes=num_classes).to(device)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
-    entrenar(
+    entrenar_modelo(
         model=model,
-        dataloader=dataloader,
+        train_loader=train_loader,
         criterion=criterion,
         optimizer=optimizer,
         device=device,
-        num_epochs=args.num_epochs,
+        num_epochs=10,
     )
 
-    # Al final, aislamos el extractor de embeddings (sin capa clasificadora final).
-    feature_extractor = ReIDFeatureExtractor(model).to(device)
-
-    os.makedirs("src", exist_ok=True)
-    output_path = "src/mi_modelo_reid.pt"
-
-    # Guardamos SOLO los pesos del extractor 256-D.
-    torch.save(feature_extractor.state_dict(), output_path)
-    print(f"Extractor de embeddings guardado en: {output_path}")
+    # Guardado del extractor final
+    output_path = "models/mi_modelo_reid.pt"
+    extractor = ReIDFeatureExtractor(model).to(device)
+    torch.save(extractor.state_dict(), output_path)
+    print(f"🎉 Extractor Re-ID (Libre de Data Leakage) guardado en: {output_path}")
 
 
 if __name__ == "__main__":
