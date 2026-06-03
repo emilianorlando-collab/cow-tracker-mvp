@@ -47,10 +47,11 @@
     "expected_total_cows_base_report": 14,
     "estimated_total_cows_base_report": 14,
     "real_total_cows_final_video_visual_confirmation": 13,
-    "estimated_total_cows_final_video": 13,
-    "count_accuracy_percent": 100.0,
-    "absolute_count_error": 0,
-    "unknown_cows_final_video": 10
+    "unknown_cows_final_video_visual_confirmation": 10,
+    "known_cows_final_video": 3,
+    "counting_method_final_video": "visual confirmation of the final presentation fragment",
+    "automatic_tracking_count_status": "partial",
+    "automatic_tracking_count_note": "The Re-ID of Marta, Maria and Margarita is validated, but automatic counting from tracker IDs is partial because some non-catalogued cows are fragmented into more than one track label."
   },
   "identity_metrics": {
     "expected_known_identities": 3,
@@ -96,14 +97,6 @@
     "visible_cows_per_frame_median": 12.0,
     "visible_cows_per_frame_p95": 13.0,
     "visible_cows_per_frame_max": 13
-  },
-  "fragmentation_metrics": {
-    "global_track_count_after_clustering_base_report": 22,
-    "unique_internal_global_ids_visible_in_final_video": 16,
-    "max_visible_internal_id_number_in_final_video": 21,
-    "real_total_cows_final_video_visual_confirmation": 13,
-    "unique_internal_id_fragmentation_over_real_cows_final_video": 3,
-    "suppressed_duplicate_known_detections_in_render": 3
   },
   "non_calculable_from_current_json": {
     "precision_detection_bbox": "requires annotated ground-truth bounding boxes",

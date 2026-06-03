@@ -52,8 +52,9 @@ El resultado final genera un video HD donde:
   decisiones aisladas frame a frame.
 - Las vacas desconocidas también se detectan y se contabilizan.
 - En el fragmento final de presentación se observan **13 vacas reales**.
-- El render muestra IDs internos de tracking cuya numeración llega hasta
-  `Vaca 21`, pero esos IDs no equivalen directamente al conteo físico de vacas.
+- La reidentificación de Marta, Maria y Margarita queda validada.
+- El conteo automático por IDs de tracking presenta fragmentación y se considera
+  una limitación del MVP.
 - Los cambios de ID internos del tracker no se interpretan automáticamente como
   vacas nuevas.
 
@@ -149,21 +150,25 @@ Cálculo usado:
 
 | Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
-| Conteo real del fragmento final | **13/13 vacas** | Error absoluto <= 1 vaca | ✅ Superado |
-| Accuracy de conteo | **100.0%** | > 90.0% | ✅ Superado |
-| Error absoluto de conteo | **0 vacas** | <= 1 vaca | ✅ Superado |
+| Conteo real del fragmento final | **13 vacas** | Referencia visual del fragmento | ✅ Confirmado |
+| Conteo automático por IDs de tracking | **Parcial** | Coincidir con el conteo real sin fragmentar IDs | ⚠️ No superado |
 | Presencia temporal promedio de identidades en video final | **99.81%** | > 90.0% | ✅ Superado |
 | Score Re-ID promedio de asignaciones finales | **92.34%** | > 85.0% | ✅ Superado |
 | ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
 | Huecos largos en medio del plano | **0** | 0 | ✅ Superado |
-| Vacas desconocidas reales en el fragmento final | **10** | 10 esperadas | ✅ Superado |
-| IDs internos únicos visibles en el fragmento final | **16** | Métrica diagnóstica | ⚠️ Informativo |
-| Máxima numeración de ID visible | **Vaca 21** | Métrica diagnóstica | ⚠️ Informativo |
+| Vacas desconocidas reales en el fragmento final | **10** | Referencia visual del fragmento | ✅ Confirmado |
 | Presencia conjunta de Marta, Maria y Margarita en video final | **1401 frames (99.43%)** | Evidencia de las 3 juntas | ✅ Superado |
 
 Nota metodológica: el mAP@0.5 reportado en la tabla principal corresponde a
 Re-ID de identidades objetivo. Un mAP@0.5 de detección por bounding boxes
 requiere frames anotados manualmente con cajas ground truth.
+
+Nota sobre conteo: en `VERSION_FINAL.mp4` se observan **13 vacas reales**. El
+sistema logra detectar y seguir animales, pero el conteo automático basado en
+IDs de tracking no queda completamente resuelto porque algunos animales no
+catalogados pueden fragmentarse en más de una etiqueta. Por ese motivo, el
+conteo final se reporta como confirmación visual del fragmento, mientras que el
+conteo automático por IDs queda documentado como resultado parcial.
 
 ### Render final Erondina
 
@@ -188,8 +193,6 @@ reports/final/16_metricas_calculadas_desde_json.json
 | FPS | 29.97 |
 | Conteo real confirmado visualmente en video final | 13 |
 | Vacas desconocidas reales en video final | 10 |
-| IDs internos únicos visibles en video final | 16 |
-| Máxima numeración de ID visible | Vaca 21 |
 | Identidades reidentificadas | Marta, Maria, Margarita |
 | Auditoría de tracking bloqueado | Aprobada |
 | Huecos largos en medio del plano | 0 |
@@ -203,12 +206,11 @@ Continuidad de las vacas reidentificadas:
 | Maria | 1409/1409 | 100.00% | 1 | 1409 |
 | Marta | 1401/1409 | 99.43% | 1 | 1409 |
 
-En el fragmento final se observan **13 vacas reales**. El render, sin embargo,
-puede mostrar numeraciones internas como `Vaca 21` porque los IDs del tracker
-son identificadores técnicos y pueden fragmentarse por giros del dron,
-oclusiones o cambios de ángulo. Por eso el conteo final no se infiere a partir
-del número máximo de ID, sino de la confirmación visual del fragmento y de las
-métricas de vacas visibles por frame.
+En el fragmento final se observan **13 vacas reales**: 3 reidentificadas
+(`Marta`, `Maria` y `Margarita`) y 10 no catalogadas. La Re-ID de las vacas
+objetivo es estable, pero el conteo automático de las vacas no catalogadas no
+alcanza la misma solidez porque el tracker puede fragmentar una misma vaca en
+más de una etiqueta.
 
 ---
 
@@ -594,6 +596,9 @@ El MVP está completo, pero el escenario real tiene limitaciones importantes:
 - Los giros bruscos del dron pueden fragmentar tracks internos.
 - Las oclusiones fuertes pueden requerir continuidad espacial para sostener una
   etiqueta.
+- El conteo automático por IDs de tracking queda como resultado parcial: el
+  fragmento final tiene 13 vacas reales, pero algunas vacas no catalogadas se
+  fragmentan en más de una etiqueta.
 - El procesamiento actual es offline, no en tiempo real.
 - No se versionan videos ni datasets pesados dentro del repositorio.
 
@@ -614,7 +619,9 @@ pipeline capaz de:
 - Reconocer tres vacas catalogadas.
 - Mantener sus etiquetas de forma estable.
 - Priorizar visualmente las identidades relevantes.
-- Contabilizar aproximadamente el rodeo completo.
+- Documentar el conteo real del fragmento final.
+- Identificar como limitación el conteo automático de vacas no catalogadas por
+  fragmentación de IDs.
 - Documentar métricas, decisiones y pruebas intermedias.
 
 El resultado final alcanza los criterios de éxito definidos para el MVP:
@@ -623,7 +630,8 @@ El resultado final alcanza los criterios de éxito definidos para el MVP:
 - ✅ Galería Erondina construida con fotos extraídas del campo Erondina.
 - ✅ Re-ID individual de Marta, Maria y Margarita.
 - ✅ Tracking temporal estable en el render final.
-- ✅ Conteo consolidado de 13 vacas reales en el fragmento final.
+- ✅ Conteo visual confirmado de 13 vacas reales en el fragmento final.
+- ⚠️ Conteo automático por IDs de tracking con resultado parcial.
 - ✅ Video final listo para presentación.
 
 Con este resultado, **CowTrack MVP queda completo**.
