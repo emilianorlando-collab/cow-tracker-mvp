@@ -202,7 +202,6 @@ reports/final/16_metricas_calculadas_desde_json.json
 | Métrica Operativa | Resultado |
 | --- | ---: |
 | Resolución procesada | 1920x1080 |
-| Frames auditados en reporte base | 4881 |
 | Frames del video final de presentación | 1409 |
 | Duración del video final | 47.01 s |
 | FPS | 29.97 |
@@ -398,8 +397,8 @@ analiza la evidencia completa del segmento. Recién después de esa auditoría
 decide qué identidad global corresponde a Marta, Maria y Margarita.
 
 Esta decisión fue central para resolver los ID switches: el render final no
-debe decidir en cada frame quién es cada vaca, sino usar una identidad ya
-bloqueada y seguirla temporalmente.
+debe decidir en cada frame quién es cada vaca, sino usar la identidad de la
+vaca reconocida y seguirla temporalmente.
 
 Pipeline final:
 
