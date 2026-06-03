@@ -1409,7 +1409,7 @@ def main():
         "candidate_sheet": candidate_sheet,
         "metric_note": (
             "Precision y recall reales por bounding box requieren anotaciones ground truth por frame. "
-            "Este JSON reporta metricas automaticas: conteo vs 14, primeras/ultimas apariciones "
+            "Este JSON reporta metricas automaticas: conteo estimado, primeras/ultimas apariciones "
             "de identidades conocidas, duplicados antes de la supresion de render, pureza/margen ReID, "
             "vacas visibles por frame y fragmentacion de tracks."
         ),
@@ -1451,7 +1451,7 @@ def main():
     print(f"Frames procesados        : {processed}")
     print(f"Vacas estimadas por frame: {estimated_visible_total}")
     print(f"Tracks globales cluster  : {len(set(local_to_global.values()))}")
-    print(f"Accuracy conteo vs 14    : {100.0 * count_accuracy:.2f}%")
+    print(f"Accuracy conteo estimado    : {100.0 * count_accuracy:.2f}%")
     print(f"Conocidas encontradas    : {', '.join(report['known_found']) if report['known_found'] else 'ninguna'}")
     print(f"Primer frame conocido    : {report['known_first_render_frame']}")
     print(f"Duplicados previos render: {report['duplicate_known_label_frames_before_render_suppression']}")

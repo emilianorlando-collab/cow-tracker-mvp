@@ -2533,7 +2533,7 @@
   },
   "contact_sheet": "reports/16_contact_sheet_prueba_1200_timeline_hd_head_v2.jpg",
   "candidate_sheet": "reports/16_candidate_sheet_prueba_1200_timeline_hd_head_v2.jpg",
-  "metric_note": "Precision y recall reales por bounding box requieren anotaciones ground truth por frame. Este JSON reporta metricas automaticas: conteo vs 14, primeras/ultimas apariciones de identidades conocidas, duplicados antes de la supresion de render, pureza/margen ReID, vacas visibles por frame y fragmentacion de tracks.",
+  "metric_note": "Precision y recall reales por bounding box requieren anotaciones ground truth por frame. Este JSON reporta metricas automaticas: conteo estimado, primeras/ultimas apariciones de identidades conocidas, duplicados antes de la supresion de render, pureza/margen ReID, vacas visibles por frame y fragmentacion de tracks.",
   "params": {
     "video_in": "datos/video campo erondina a procesar.MP4",
     "video_out": "datos/Resultados/resultado_prueba_1200_timeline_hd_head_v2.mp4",

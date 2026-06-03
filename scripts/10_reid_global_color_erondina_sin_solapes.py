@@ -348,7 +348,7 @@ def main() -> None:
     print("============================================================")
     print(f"Frames procesados        : {processed}")
     print(f"Vacas globales estimadas : {estimated_total}")
-    print(f"Accuracy conteo vs 14    : {100.0 * count_accuracy:.2f}%")
+    print(f"Accuracy conteo estimado    : {100.0 * count_accuracy:.2f}%")
     print(f"Conocidas encontradas    : {', '.join(known_found) if known_found else 'ninguna'}")
     print(f"Conocidas faltantes      : {', '.join(missing_known) if missing_known else 'ninguna'}")
     print(f"Duplicados conocidos     : {duplicate_report['duplicate_known_label_frames']}")

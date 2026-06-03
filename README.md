@@ -51,7 +51,8 @@ El resultado final genera un video HD donde:
 - Las tres identidades se sostienen mediante una línea temporal estable, no por
   decisiones aisladas frame a frame.
 - Las vacas desconocidas también se detectan y se contabilizan.
-- En el fragmento final de presentación se observan **13 vacas reales**.
+- El conteo general queda documentado como **13 vacas reales vs 21 etiquetas
+  automáticas**.
 - La reidentificación de Marta, Maria y Margarita queda validada.
 - El conteo automático por IDs de tracking presenta fragmentación y se considera
   una limitación del MVP.
@@ -62,20 +63,6 @@ El video final de presentación se llama:
 
 ```text
 VERSION_FINAL.mp4
-```
-
-Por tamaño, el video final no se sube al repositorio. Los videos, datasets,
-caches y resultados pesados viven dentro de:
-
-```text
-datos/
-```
-
-La carpeta `datos/` está excluida por `.gitignore`. El criterio de manejo de
-artefactos está documentado en:
-
-```text
-artifacts/README.md
 ```
 
 Detalles verificados del archivo final:
@@ -190,7 +177,7 @@ MVP, mientras que la Re-ID de Marta, Maria y Margarita se evalúa por separado.
 Reporte final versionado:
 
 ```text
-reports/final/16_segunda_mitad_original_timeline_hd_head_render.json
+reports/final/16_erondina_final_render.json
 ```
 
 Métricas derivadas versionadas:
@@ -534,12 +521,11 @@ Análisis:
 python3 scripts/16_reid_timeline_erondina.py \
   --process_width 1920 \
   --process_height 1080 \
-  --start_frame 4880 \
-  --report_out reports/16_segunda_mitad_original_timeline_hd_head_analysis.json \
-  --contact_sheet_out reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg \
-  --candidate_sheet_out reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg \
+  --report_out reports/16_erondina_timeline_analysis.json \
+  --contact_sheet_out reports/16_erondina_timeline_contact_sheet.jpg \
+  --candidate_sheet_out reports/16_erondina_timeline_candidate_sheet.jpg \
   --video_out datos/resultados/resultado_erondina_reid.mp4 \
-  --evidence_cache_out reports/16_evidence_segunda_mitad_original_timeline_hd_head.pkl
+  --evidence_cache_out reports/16_erondina_timeline_evidence.pkl
 ```
 
 Render:
@@ -548,16 +534,13 @@ Render:
 python3 scripts/16_reid_timeline_erondina.py \
   --process_width 1920 \
   --process_height 1080 \
-  --start_frame 4880 \
-  --evidence_cache_in reports/16_evidence_segunda_mitad_original_timeline_hd_head.pkl \
-  --report_out reports/16_segunda_mitad_original_timeline_hd_head_render.json \
-  --contact_sheet_out reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_render.jpg \
-  --candidate_sheet_out reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_render.jpg \
+  --evidence_cache_in reports/16_erondina_timeline_evidence.pkl \
+  --report_out reports/16_erondina_final_render.json \
+  --contact_sheet_out reports/16_erondina_final_contact_sheet.jpg \
+  --candidate_sheet_out reports/16_erondina_final_candidate_sheet.jpg \
   --video_out datos/resultados/resultado_erondina_reid.mp4 \
   --render
 ```
-
-Los caches `.pkl` y videos `.mp4` quedan fuera del repositorio por tamaño.
 
 ---
 
@@ -591,8 +574,6 @@ scripts/16_reid_timeline_erondina.py
   Erondina**.
 - Se recortaron y enfocaron fotos extraídas del campo Erondina para aislar
   mejor cada vaca y mejorar la calidad de los embeddings.
-- Se procesó la segunda mitad del video porque la escala y visibilidad de las
-  vacas era más adecuada para reidentificación.
 - Se dejó de decidir identidad frame a frame y se pasó a una asignación global
   por línea temporal.
 - Se incorporaron subembeddings de cabeza/región superior para aportar
@@ -601,8 +582,6 @@ scripts/16_reid_timeline_erondina.py
   las vacas desconocidas.
 - Se evitó contar cada ID interno como una vaca nueva, porque el giro del dron
   puede fragmentar trayectorias.
-- Se mantuvo `datos/` fuera de Git para preservar un repositorio liviano,
-  reproducible y profesional.
 
 ---
 
@@ -618,7 +597,6 @@ El MVP está completo, pero el escenario real tiene limitaciones importantes:
   fragmento final tiene 13 vacas reales, pero algunas vacas no catalogadas se
   fragmentan en más de una etiqueta.
 - El procesamiento actual es offline, no en tiempo real.
-- No se versionan videos ni datasets pesados dentro del repositorio.
 
 Estas limitaciones no invalidan el MVP. Son el punto de partida natural para
 una fase futura de optimización, validación con más videos y eventual
@@ -637,7 +615,8 @@ pipeline capaz de:
 - Reconocer tres vacas catalogadas.
 - Mantener sus etiquetas de forma estable.
 - Priorizar visualmente las identidades relevantes.
-- Documentar el conteo real del fragmento final.
+- Documentar el conteo general como 13 vacas reales vs 21 etiquetas
+  automáticas.
 - Identificar como limitación el conteo automático de vacas no catalogadas por
   fragmentación de IDs.
 - Documentar métricas, decisiones y pruebas intermedias.
@@ -648,8 +627,7 @@ El resultado final alcanza los criterios de éxito definidos para el MVP:
 - ✅ Galería Erondina construida con fotos extraídas del campo Erondina.
 - ✅ Re-ID individual de Marta, Maria y Margarita.
 - ✅ Tracking temporal estable en el render final.
-- ✅ Conteo visual confirmado de 13 vacas reales en el fragmento final.
-- ⚠️ Conteo automático por IDs de tracking con resultado parcial.
+- ⚠️ Conteo general documentado: 13 vacas reales vs 21 etiquetas automáticas.
 - ✅ Video final listo para presentación.
 
 Con este resultado, **CowTrack MVP queda completo**.

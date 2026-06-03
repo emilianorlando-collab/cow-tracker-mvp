@@ -757,7 +757,7 @@ def main():
         "candidate_sheet": candidate_sheet,
         "metric_note": (
             "Precision/recall reales por bounding box requieren anotaciones ground truth por frame. "
-            "Este JSON reporta metricas operativas automaticas: conteo vs 14, estabilidad de IDs conocidos, "
+            "Este JSON reporta metricas operativas automaticas: conteo estimado, estabilidad de IDs conocidos, "
             "duplicados de identidad por frame, margen/pureza de ReID, vacas visibles por frame y fragmentacion de tracks."
         ),
         "params": vars(args),
@@ -772,7 +772,7 @@ def main():
     print(f"Frames procesados        : {processed}")
     print(f"Vacas estimadas por frame: {estimated_visible_total}")
     print(f"Tracks globales cluster  : {estimated_total}")
-    print(f"Accuracy conteo vs 14    : {100.0 * count_accuracy:.2f}%")
+    print(f"Accuracy conteo estimado    : {100.0 * count_accuracy:.2f}%")
     print(f"Error absoluto conteo    : {absolute_count_error}")
     print(f"Vacas visibles mediana   : {report['visible_cows_per_frame']['median']:.2f}")
     print(f"Conocidas encontradas    : {', '.join(report['known_found']) if report['known_found'] else 'ninguna'}")

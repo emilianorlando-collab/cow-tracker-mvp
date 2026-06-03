@@ -54,22 +54,19 @@ Erondina. El archivo incluye:
 
 ## Comando de analisis final
 
-El analisis final se ejecuto sobre la segunda mitad del video original, desde
-el frame `4880`, equivalente a aproximadamente `00:02:43` del video completo.
+El analisis final se ejecuta primero para consolidar evidencia temporal,
+auditar identidades y generar los artefactos de revision antes del render.
 
 ```bash
 python scripts/16_reid_timeline_erondina.py \
   --process_width 1920 \
   --process_height 1080 \
-  --start_frame 4880 \
-  --report_out reports/16_segunda_mitad_original_timeline_hd_head_analysis.json \
-  --contact_sheet_out reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg \
-  --candidate_sheet_out reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg \
-  --video_out datos/Resultados/resultado_erondina_reid_timeline_hd_head_segunda_mitad_original.mp4 \
-  --evidence_cache_out reports/16_evidence_segunda_mitad_original_timeline_hd_head.pkl
+  --report_out reports/16_erondina_timeline_analysis.json \
+  --contact_sheet_out reports/16_erondina_timeline_contact_sheet.jpg \
+  --candidate_sheet_out reports/16_erondina_timeline_candidate_sheet.jpg \
+  --video_out datos/Resultados/resultado_erondina_reid_final.mp4 \
+  --evidence_cache_out reports/16_erondina_timeline_evidence.pkl
 ```
-
-El cache `.pkl` es un artefacto pesado/intermedio y no debe subirse al repo.
 
 ## Comando de render final
 
@@ -79,51 +76,48 @@ Una vez validada la auditoria, el render se genero desde cache:
 python scripts/16_reid_timeline_erondina.py \
   --process_width 1920 \
   --process_height 1080 \
-  --start_frame 4880 \
-  --evidence_cache_in reports/16_evidence_segunda_mitad_original_timeline_hd_head.pkl \
-  --report_out reports/16_segunda_mitad_original_timeline_hd_head_render.json \
-  --contact_sheet_out reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_render.jpg \
-  --candidate_sheet_out reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_render.jpg \
-  --video_out datos/Resultados/resultado_erondina_reid_timeline_hd_head_segunda_mitad_original.mp4 \
+  --evidence_cache_in reports/16_erondina_timeline_evidence.pkl \
+  --report_out reports/16_erondina_final_render.json \
+  --contact_sheet_out reports/16_erondina_final_contact_sheet.jpg \
+  --candidate_sheet_out reports/16_erondina_final_candidate_sheet.jpg \
+  --video_out datos/Resultados/resultado_erondina_reid_final.mp4 \
   --render
 ```
 
-Luego se recorto el video desde `00:01:08` del render de segunda mitad y se
-genero una version final de presentacion de `47.01 s`:
+La version final de presentacion se consolido como:
 
 ```bash
 VERSION_FINAL.mp4
 ```
-
-Este video final queda en `datos/` o en la carpeta local de trabajo, pero no se
-versiona en Git porque supera el limite practico de GitHub.
 
 ## Metricas finales
 
 Reporte final versionado:
 
 ```bash
-reports/final/16_segunda_mitad_original_timeline_hd_head_render.json
+reports/final/16_erondina_final_render.json
 ```
 
 Metricas operativas principales:
 
 | Metrica | Resultado |
 | --- | ---: |
-| Frames procesados | 4881 |
 | Resolucion | 1920x1080 |
-| Conteo estimado | 14 |
-| Tracks globales internos | 22 |
-| Accuracy conteo vs 14 | 100% |
+| Frames del video final | 1409 |
+| Duracion del video final | 47.01 s |
+| Vacas reales confirmadas | 13 |
+| Etiquetas automaticas contabilizadas | 21 |
+| Error absoluto de conteo | +8 vacas |
+| Precision de conteo automatico | 61.90% |
+| Recall de deteccion/conteo visual | 100.0% |
 | Huecos largos en medio del plano | 0 |
 | Margarita visible | 100.0% |
-| Maria visible | 99.75% |
-| Marta visible | 96.13% |
+| Maria visible | 100.0% |
+| Marta visible | 99.43% |
 
-El contador de tracks internos (`22`) no representa vacas reales, sino
-fragmentacion causada por giros del dron, oclusiones y cambios de angulo. Para
-conteo se usa la estimacion por vacas visibles por frame y fusion de
-fragmentos.
+El conteo automatico se documenta como resultado parcial: el video final tiene
+13 vacas reales confirmadas visualmente, mientras que las etiquetas automaticas
+contabilizan 21 por fragmentacion de algunos animales no catalogados.
 
 ## Prioridad visual de etiquetas
 
@@ -150,10 +144,3 @@ Pruebas tecnicas intermedias:
 ```bash
 reports/intermediate/
 ```
-
-Artefactos pesados no versionados:
-
-- Videos `.mp4`
-- Datasets y zips
-- Caches `.pkl`
-- Videos raw del dron

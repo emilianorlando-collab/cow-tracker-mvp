@@ -1,6 +1,6 @@
 {
   "video_in": "datos/video campo erondina a procesar.MP4",
-  "video_out": "datos/Resultados/resultado_erondina_reid_timeline_hd_head_segunda_mitad_original.mp4",
+  "video_out": "datos/Resultados/resultado_erondina_reid_final.mp4",
   "processed_frames": 4881,
   "processing_video_size": {
     "width": 1920,
@@ -3024,15 +3024,15 @@
     "548": 10,
     "552": 5
   },
-  "contact_sheet": "reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_render.jpg",
-  "candidate_sheet": "reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_render.jpg",
-  "metric_note": "Precision y recall reales por bounding box requieren anotaciones ground truth por frame. Este JSON reporta metricas automaticas: conteo vs 14, primeras/ultimas apariciones de identidades conocidas, duplicados antes de la supresion de render, pureza/margen ReID, vacas visibles por frame y fragmentacion de tracks.",
+  "contact_sheet": "reports/16_erondina_final_contact_sheet.jpg",
+  "candidate_sheet": "reports/16_erondina_final_candidate_sheet.jpg",
+  "metric_note": "Precision y recall reales por bounding box requieren anotaciones ground truth por frame. Este JSON reporta metricas automaticas de auditoria temporal, primeras/ultimas apariciones de identidades conocidas, duplicados antes de la supresion de render, pureza/margen ReID, vacas visibles por frame y fragmentacion de tracks.",
   "params": {
     "video_in": "datos/video campo erondina a procesar.MP4",
-    "video_out": "datos/Resultados/resultado_erondina_reid_timeline_hd_head_segunda_mitad_original.mp4",
-    "report_out": "reports/16_segunda_mitad_original_timeline_hd_head_render.json",
-    "contact_sheet_out": "reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_render.jpg",
-    "candidate_sheet_out": "reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_render.jpg",
+    "video_out": "datos/Resultados/resultado_erondina_reid_final.mp4",
+    "report_out": "reports/16_erondina_final_render.json",
+    "contact_sheet_out": "reports/16_erondina_final_contact_sheet.jpg",
+    "candidate_sheet_out": "reports/16_erondina_final_candidate_sheet.jpg",
     "yolo_model": "scripts/yolov8m.pt",
     "tracker": "botsort.yaml",
     "reid_model": "models/mi_modelo_reid.pt",
@@ -3084,7 +3084,7 @@
     "known_reacquire_max_center_factor": 0.85,
     "known_exit_edge_margin_ratio": 0.05,
     "unknown_suppress_iou_with_known": 0.12,
-    "evidence_cache_in": "reports/16_evidence_segunda_mitad_original_timeline_hd_head.pkl",
+    "evidence_cache_in": "reports/16_erondina_timeline_evidence.pkl",
     "evidence_cache_out": "",
     "render": true
   },

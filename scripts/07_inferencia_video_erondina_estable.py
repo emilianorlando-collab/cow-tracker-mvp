@@ -405,7 +405,7 @@ def main() -> None:
     print("============================================================")
     print(f"Frames procesados             : {processed}")
     print(f"Tracks confirmados vivos       : {estimated_total}")
-    print(f"Accuracy conteo vs 14          : {100.0 * count_accuracy:.2f}%")
+    print(f"Accuracy conteo estimado          : {100.0 * count_accuracy:.2f}%")
     print(f"Media cajas dibujadas/frame    : {report['mean_drawn_count_per_frame']:.2f}")
     print(f"ID switches aprox.             : {id_switches}")
     print(f"Identidades bloqueadas         : {', '.join(locked_identities) if locked_identities else 'ninguna'}")

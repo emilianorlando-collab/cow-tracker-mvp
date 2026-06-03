@@ -500,7 +500,7 @@ def main():
     print("============================================================")
     print(f"Frames procesados        : {processed}")
     print(f"Vacas globales estimadas : {estimated_total}")
-    print(f"Accuracy conteo vs 14    : {100.0 * count_accuracy:.2f}%")
+    print(f"Accuracy conteo estimado    : {100.0 * count_accuracy:.2f}%")
     print(f"Conocidas encontradas    : {', '.join(report['known_found']) if report['known_found'] else 'ninguna'}")
     print(f"Conocidas faltantes      : {', '.join(report['known_missing']) if report['known_missing'] else 'ninguna'}")
     print(f"Duplicados conocidos     : {duplicates}")
