@@ -425,8 +425,6 @@ scripts/16_reid_timeline_erondina.py
 
 - Se separó el **modelo Re-ID general** de la **galería específica de
   Erondina**.
-- Se eligieron fotos del propio video para reducir la diferencia de dominio
-  entre entrenamiento puntual y render final.
 - Se recortaron y enfocaron las fotos de Erondina para aislar mejor cada vaca y
   mejorar la calidad de los embeddings.
 - Se procesó la segunda mitad del video porque la escala y visibilidad de las
