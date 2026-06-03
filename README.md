@@ -150,8 +150,12 @@ Cálculo usado:
 
 | Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
-| Conteo real del fragmento final | **13 vacas** | Referencia visual del fragmento | ✅ Confirmado |
-| Conteo automático por IDs de tracking | **Parcial** | Coincidir con el conteo real sin fragmentar IDs | ⚠️ No superado |
+| Vacas reales en el fragmento final | **13** | Referencia visual del fragmento | ✅ Confirmado |
+| Vacas contadas por etiquetas del sistema | **21** | Coincidir con el conteo real | ⚠️ No superado |
+| Error absoluto de conteo automático | **+8 vacas** | <= 1 vaca | ⚠️ No superado |
+| Precisión de conteo automático | **61.90%** | > 80.0% | ⚠️ No superado |
+| Recall de detección/conteo visual | **100.0%** | > 80.0% | ✅ Superado |
+| Accuracy de conteo automático | **38.46%** | > 90.0% | ⚠️ No superado |
 | Presencia temporal promedio de identidades en video final | **99.81%** | > 90.0% | ✅ Superado |
 | Score Re-ID promedio de asignaciones finales | **92.34%** | > 85.0% | ✅ Superado |
 | ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
@@ -165,10 +169,21 @@ requiere frames anotados manualmente con cajas ground truth.
 
 Nota sobre conteo: en `VERSION_FINAL.mp4` se observan **13 vacas reales**. El
 sistema logra detectar y seguir animales, pero el conteo automático basado en
-IDs de tracking no queda completamente resuelto porque algunos animales no
-catalogados pueden fragmentarse en más de una etiqueta. Por ese motivo, el
-conteo final se reporta como confirmación visual del fragmento, mientras que el
-conteo automático por IDs queda documentado como resultado parcial.
+etiquetas de tracking contabiliza **21 IDs**, generando un sobreconteo de
+`+8` vacas. La precisión de conteo se calcula como `13 / 21 = 61.90%`; el
+recall de detección/conteo visual se informa como `13 / 13 = 100.0%` porque las
+vacas reales del fragmento aparecen detectadas, aunque algunas sean contadas
+más de una vez; y el accuracy de conteo se calcula como
+`1 - |21 - 13| / 13 = 38.46%`.
+
+Esta diferencia no contradice el resultado de Re-ID. La Re-ID se evalúa sobre
+las tres vacas catalogadas, que cuentan con galería específica, embeddings
+individuales y subembeddings de regiones corporales usados para estabilizar la
+asignación final. Las vacas no catalogadas, en cambio, se contabilizan mediante
+detección y tracking general; por eso pueden fragmentarse en más de una
+etiqueta durante giros del dron, cambios de ángulo u oclusiones. En
+consecuencia, el conteo automático queda documentado como una limitación del
+MVP, mientras que la Re-ID de Marta, Maria y Margarita se evalúa por separado.
 
 ### Render final Erondina
 
@@ -192,6 +207,8 @@ reports/final/16_metricas_calculadas_desde_json.json
 | Duración del video final | 47.01 s |
 | FPS | 29.97 |
 | Conteo real confirmado visualmente en video final | 13 |
+| Conteo automático por etiquetas del sistema | 21 |
+| Error absoluto de conteo automático | +8 vacas |
 | Vacas desconocidas reales en video final | 10 |
 | Identidades reidentificadas | Marta, Maria, Margarita |
 | Auditoría de tracking bloqueado | Aprobada |
@@ -210,7 +227,9 @@ En el fragmento final se observan **13 vacas reales**: 3 reidentificadas
 (`Marta`, `Maria` y `Margarita`) y 10 no catalogadas. La Re-ID de las vacas
 objetivo es estable, pero el conteo automático de las vacas no catalogadas no
 alcanza la misma solidez porque el tracker puede fragmentar una misma vaca en
-más de una etiqueta.
+más de una etiqueta. Por eso se reportan dos resultados distintos: Re-ID
+individual validada para las tres vacas objetivo y conteo general automático con
+error de sobreconteo.
 
 ---
 
