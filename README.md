@@ -58,7 +58,7 @@ El resultado final genera un video HD donde:
 El video final de presentación se llama:
 
 ```text
-RESULTADO_FINAL.mp4
+VERSION_FINAL.mp4
 ```
 
 Por tamaño, el video final no se sube al repositorio. Los videos, datasets,
@@ -74,6 +74,16 @@ artefactos está documentado en:
 ```text
 artifacts/README.md
 ```
+
+Detalles verificados del archivo final:
+
+| Métrica del video final | Valor |
+| --- | ---: |
+| Duración | 47.01 s |
+| Resolución | 1920x1080 |
+| FPS | 29.97 |
+| Frames | 1409 |
+| Tamaño aproximado | 264 MB |
 
 ---
 
@@ -138,7 +148,9 @@ reports/final/16_metricas_calculadas_desde_json.json
 | Métrica Operativa | Resultado |
 | --- | ---: |
 | Resolución procesada | 1920x1080 |
-| Frames procesados en render base | 4881 |
+| Frames auditados en reporte base | 4881 |
+| Frames del video final de presentación | 1409 |
+| Duración del video final | 47.01 s |
 | FPS | 29.97 |
 | Conteo estimado de vacas | 14 |
 | Tracks globales internos después de clustering | 22 |

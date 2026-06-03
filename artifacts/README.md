@@ -15,22 +15,22 @@ usarse para:
 Archivo local generado:
 
 ```bash
-/Volumes/T7/cow-tracker-mvp/RESULTADO_FINAL.mp4
+/Volumes/T7/cow-tracker-mvp/datos/Resultado final/VERSION_FINAL.mp4
 ```
 
 Tambien puede ubicarse dentro de:
 
 ```bash
-datos/Resultado final/RESULTADO_FINAL.mp4
+datos/Resultado final/VERSION_FINAL.mp4
 ```
 
 Detalles verificados:
 
-- Duracion: `94.86 s`
+- Duracion: `47.01 s`
 - Resolucion: `1920x1080`
 - FPS: `29.97`
-- Frames: `2843`
-- Tamano aproximado: `571 MB`
+- Frames: `1409`
+- Tamano aproximado: `264 MB`
 
 Este archivo supera el limite practico de GitHub para archivos versionados. Si
 se necesita distribuirlo desde GitHub, la opcion recomendada es subirlo como

@@ -2,6 +2,15 @@
   "source_report": "reports/final/16_segunda_mitad_original_timeline_hd_head_render.json",
   "metric_type": "operational_metrics_derived_from_final_render_report",
   "methodological_note": "These metrics are calculated from the final render JSON. Precision, Recall and mAP@0.5 are reported for the final Re-ID identity validation of the three target cows, not for bounding-box detector evaluation. Bounding-box mAP@0.5 would require frame-level ground-truth annotations.",
+  "final_video_media_metrics": {
+    "file_name": "VERSION_FINAL.mp4",
+    "local_path": "/Volumes/T7/cow-tracker-mvp/datos/Resultado final/VERSION_FINAL.mp4",
+    "duration_seconds": 47.01,
+    "fps": 29.97,
+    "frames": 1409,
+    "resolution": "1920x1080",
+    "approx_size_mb": 264
+  },
   "professor_validation_table": {
     "scope": "final_reid_identity_validation",
     "true_positives": 3,

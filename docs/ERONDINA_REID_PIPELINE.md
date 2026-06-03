@@ -88,11 +88,11 @@ python scripts/16_reid_timeline_erondina.py \
   --render
 ```
 
-Luego se recorto el video desde `00:01:08` del render de segunda mitad para la
-version de presentacion:
+Luego se recorto el video desde `00:01:08` del render de segunda mitad y se
+genero una version final de presentacion de `47.01 s`:
 
 ```bash
-RESULTADO_FINAL.mp4
+VERSION_FINAL.mp4
 ```
 
 Este video final queda en `datos/` o en la carpeta local de trabajo, pero no se
