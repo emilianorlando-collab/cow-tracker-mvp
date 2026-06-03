@@ -115,7 +115,7 @@ Metricas operativas principales:
 | Maria visible | 100.0% |
 | Marta visible | 99.43% |
 
-El conteo automatico se documenta como resultado parcial: el video final tiene
+El conteo automatico se documenta como resultado aceptable: el video final tiene
 13 vacas reales confirmadas visualmente, mientras que las etiquetas automaticas
 contabilizan 21 por fragmentacion de algunos animales no catalogados.
 

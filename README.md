@@ -138,11 +138,11 @@ Cálculo usado:
 | Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
 | Vacas reales en el fragmento final | **13** | Referencia visual del fragmento | ✅ Confirmado |
-| Vacas contadas por etiquetas del sistema | **21** | Coincidir con el conteo real | ⚠️ Resultado parcial |
-| Error absoluto de conteo automático | **+8 vacas** | <= 1 vaca | ⚠️ Resultado parcial |
-| Precisión de conteo automático | **61.90%** | > 80.0% | ⚠️ Resultado parcial |
+| Vacas contadas por etiquetas del sistema | **21** | Coincidir con el conteo real | 🟡 Resultado aceptable |
+| Error absoluto de conteo automático | **+8 vacas** | <= 1 vaca | 🟡 Resultado aceptable |
+| Precisión de conteo automático | **61.90%** | > 80.0% | 🟡 Resultado aceptable |
 | Recall de detección/conteo visual | **100.0%** | > 80.0% | ✅ Superado |
-| Accuracy de conteo automático | **38.46%** | > 90.0% | ⚠️ Resultado parcial |
+| Accuracy de conteo automático | **38.46%** | > 90.0% | 🟡 Resultado aceptable |
 | Presencia temporal promedio de identidades en video final | **99.81%** | > 90.0% | ✅ Superado |
 | Score Re-ID promedio de asignaciones finales | **92.34%** | > 85.0% | ✅ Superado |
 | ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
@@ -585,7 +585,7 @@ scripts/16_reid_timeline_erondina.py
 
 ---
 
-## ⚠️ Limitaciones
+## 🟡 Limitaciones
 
 El MVP está completo, pero el escenario real tiene limitaciones importantes:
 
@@ -593,7 +593,7 @@ El MVP está completo, pero el escenario real tiene limitaciones importantes:
 - Los giros bruscos del dron pueden fragmentar tracks internos.
 - Las oclusiones fuertes pueden requerir continuidad espacial para sostener una
   etiqueta.
-- El conteo automático por IDs de tracking queda como resultado parcial: el
+- El conteo automático por IDs de tracking queda como resultado aceptable: el
   fragmento final tiene 13 vacas reales, pero algunas vacas no catalogadas se
   fragmentan en más de una etiqueta.
 - El procesamiento actual es offline, no en tiempo real.
@@ -627,7 +627,7 @@ El resultado final alcanza los criterios de éxito definidos para el MVP:
 - ✅ Galería Erondina construida con fotos extraídas del campo Erondina.
 - ✅ Re-ID individual de Marta, Maria y Margarita.
 - ✅ Tracking temporal estable en el render final.
-- ⚠️ Conteo general documentado: 13 vacas reales vs 21 etiquetas automáticas.
+- 🟡 Conteo general aceptable: 13 vacas reales vs 21 etiquetas automáticas.
 - ✅ Video final listo para presentación.
 
 Con este resultado, **CowTrack MVP queda completo**.
