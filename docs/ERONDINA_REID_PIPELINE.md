@@ -43,8 +43,8 @@ La galeria final versionada es:
 models/erondina_gallery_embeddings_enfocada_filtrada.npz
 ```
 
-Contiene embeddings de las fotos seleccionadas manualmente desde el propio
-video de Erondina. El archivo incluye:
+Contiene embeddings de fotos seleccionadas manualmente y extraidas del campo
+Erondina. El archivo incluye:
 
 - `gallery_vectors`
 - `gallery_labels`

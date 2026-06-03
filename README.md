@@ -51,7 +51,9 @@ El resultado final genera un video HD donde:
 - Las tres identidades se sostienen mediante una línea temporal estable, no por
   decisiones aisladas frame a frame.
 - Las vacas desconocidas también se detectan y se contabilizan.
-- El conteo final consolidado es de **14 vacas**.
+- En el fragmento final de presentación se observan **13 vacas reales**.
+- El render muestra IDs internos de tracking cuya numeración llega hasta
+  `Vaca 21`, pero esos IDs no equivalen directamente al conteo físico de vacas.
 - Los cambios de ID internos del tracker no se interpretan automáticamente como
   vacas nuevas.
 
@@ -87,6 +89,37 @@ Detalles verificados del archivo final:
 
 ---
 
+## 📌 Estado Técnico del MVP
+
+El proyecto quedó como un pipeline end-to-end completo: desde datos de
+entrenamiento y video raw hasta un render final con detección, tracking,
+conteo, Re-ID y reportes.
+
+Componentes consolidados:
+
+- ✅ **Prevención de data leakage:** entrenamiento Re-ID con corte honesto entre
+  train y test.
+- ✅ **Extractor Re-ID general:** `models/mi_modelo_reid.pt`, entrenado a partir
+  de OpenCows.
+- ✅ **Búsqueda vectorial:** evaluación y comparación mediante FAISS.
+- ✅ **Detector integrado:** YOLOv8m para detección de vacas en video aéreo.
+- ✅ **Tracking temporal:** uso de IDs internos, asociación espacial y memoria
+  temporal.
+- ✅ **Estabilidad visual:** render con etiquetas priorizadas, suavizado y
+  continuidad para vacas reidentificadas.
+- ✅ **Pipeline final Erondina:** análisis offline previo, auditoría de
+  continuidad y render final.
+- ❌ **Tiempo real:** el MVP procesa offline; no está diseñado aún para 30 FPS
+  en vivo.
+- ❌ **Interfaz gráfica:** ejecución por CLI/scripts, sin dashboard de usuario.
+
+Antes del caso Erondina, el MVP inicial ya había sido validado en un video de
+prueba con conteo perfecto de `11/11` vacas y `0` ID switches. Esa etapa sirvió
+para probar la integración básica entre YOLO, Re-ID y tracking antes de pasar
+al escenario de campo más exigente.
+
+---
+
 ## 📊 Métricas de Validación
 
 ### Métricas Re-ID solicitadas
@@ -116,15 +149,16 @@ Cálculo usado:
 
 | Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
-| Conteo estimado vs referencia | **14/14 vacas** | Error absoluto <= 1 vaca | ✅ Superado |
+| Conteo real del fragmento final | **13/13 vacas** | Error absoluto <= 1 vaca | ✅ Superado |
 | Accuracy de conteo | **100.0%** | > 90.0% | ✅ Superado |
 | Error absoluto de conteo | **0 vacas** | <= 1 vaca | ✅ Superado |
-| Presencia temporal promedio de identidades | **98.63%** | > 90.0% | ✅ Superado |
-| Cobertura promedio con detección trackeada | **97.80%** | > 90.0% | ✅ Superado |
-| Cobertura promedio con Re-ID confirmado | **74.63%** | Métrica diagnóstica | ⚠️ Informativo |
+| Presencia temporal promedio de identidades en video final | **99.81%** | > 90.0% | ✅ Superado |
+| Score Re-ID promedio de asignaciones finales | **92.34%** | > 85.0% | ✅ Superado |
 | ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
 | Huecos largos en medio del plano | **0** | 0 | ✅ Superado |
-| Vacas desconocidas estimadas | **11** | 11 esperadas | ✅ Superado |
+| Vacas desconocidas reales en el fragmento final | **10** | 10 esperadas | ✅ Superado |
+| IDs internos únicos visibles en el fragmento final | **16** | Métrica diagnóstica | ⚠️ Informativo |
+| Máxima numeración de ID visible | **Vaca 21** | Métrica diagnóstica | ⚠️ Informativo |
 | Presencia conjunta de Marta, Maria y Margarita en video final | **1401 frames (99.43%)** | Evidencia de las 3 juntas | ✅ Superado |
 
 Nota metodológica: el mAP@0.5 reportado en la tabla principal corresponde a
@@ -152,8 +186,10 @@ reports/final/16_metricas_calculadas_desde_json.json
 | Frames del video final de presentación | 1409 |
 | Duración del video final | 47.01 s |
 | FPS | 29.97 |
-| Conteo estimado de vacas | 14 |
-| Tracks globales internos después de clustering | 22 |
+| Conteo real confirmado visualmente en video final | 13 |
+| Vacas desconocidas reales en video final | 10 |
+| IDs internos únicos visibles en video final | 16 |
+| Máxima numeración de ID visible | Vaca 21 |
 | Identidades reidentificadas | Marta, Maria, Margarita |
 | Auditoría de tracking bloqueado | Aprobada |
 | Huecos largos en medio del plano | 0 |
@@ -161,26 +197,33 @@ reports/final/16_metricas_calculadas_desde_json.json
 
 Continuidad de las vacas reidentificadas:
 
-| Identidad | Presencia auditada | Frames con detección trackeada | Frames confirmados por Re-ID | Frames sostenidos por continuidad |
+| Identidad | Frames con etiqueta visible en `VERSION_FINAL.mp4` | Cobertura en video final | Primer frame | Último frame |
 | --- | ---: | ---: | ---: | ---: |
-| Margarita | 100.00% | 4881 | 4213 | 668 |
-| Maria | 99.75% | 4846 | 3329 | 1517 |
-| Marta | 96.13% | 4594 | 3386 | 1208 |
+| Margarita | 1409/1409 | 100.00% | 1 | 1409 |
+| Maria | 1409/1409 | 100.00% | 1 | 1409 |
+| Marta | 1401/1409 | 99.43% | 1 | 1409 |
 
-El valor de `22` tracks globales internos no significa que haya 22 vacas. Es
-una medida de fragmentación causada por giros del dron, oclusiones y cambios de
-ángulo. El conteo consolidado del MVP es de **14 vacas**, que coincide con la
-referencia esperada para el video.
+En el fragmento final se observan **13 vacas reales**. El render, sin embargo,
+puede mostrar numeraciones internas como `Vaca 21` porque los IDs del tracker
+son identificadores técnicos y pueden fragmentarse por giros del dron,
+oclusiones o cambios de ángulo. Por eso el conteo final no se infiere a partir
+del número máximo de ID, sino de la confirmación visual del fragmento y de las
+métricas de vacas visibles por frame.
 
 ---
 
 ## 🧭 Proceso de Investigación
 
-### 1. Entrenamiento Re-ID general
+### 1. Entrenamiento Re-ID general con OpenCows
 
-La primera etapa consistió en entrenar un extractor de embeddings visuales con
-un dataset general de vacas. Este modelo transforma cada recorte de vaca en un
-vector comparable mediante similitud coseno y búsqueda FAISS.
+La primera etapa del proyecto no comenzó directamente con Erondina. Primero se
+entrenó un extractor general de embeddings con un dataset amplio de vacas,
+basado en OpenCows. El objetivo de esta fase fue construir un modelo capaz de
+representar visualmente a una vaca como un vector numérico, de forma que dos
+imágenes del mismo animal queden cerca en el espacio de embeddings y dos vacas
+distintas queden más separadas.
+
+Esta etapa produjo el modelo:
 
 Archivos principales:
 
@@ -189,9 +232,26 @@ scripts/01_entrenar_reid.py
 models/mi_modelo_reid.pt
 ```
 
-Este modelo general no contiene por sí mismo la identidad de Marta, Maria o
-Margarita. Su función es aprender una representación visual útil para comparar
-vacas entre sí.
+El entrenamiento se diseñó con una separación estricta para reducir data
+leakage. En lugar de mezclar libremente imágenes de una misma vaca entre train
+y test, se usó una lógica de corte por subcarpetas/posiciones: las imágenes de
+prueba correspondían a posiciones o capturas no vistas durante el entrenamiento.
+
+Resumen del entrenamiento:
+
+| Elemento | Resultado |
+| --- | ---: |
+| Imágenes válidas detectadas | 46,340 |
+| Subset train | 40,822 |
+| Subset test | 5,518 |
+| Épocas de entrenamiento | 10 |
+| Loss final | 0.0043 |
+| Train accuracy final | 99.87% |
+
+Este modelo general **no contiene por sí mismo la identidad de Marta, Maria o
+Margarita**. Su función es aprender una representación visual útil para
+comparar vacas entre sí. Luego, sobre esa base, se construye una galería
+específica del campo Erondina.
 
 ### 2. Evaluación FAISS
 
@@ -205,6 +265,32 @@ Reportes históricos:
 reports/01_entrenamiento_crosspose.md
 reports/02_evaluacion_faiss.md
 ```
+
+La evaluación se realizó en modo Cross-Pose Strict: la galería contenía imágenes
+de posiciones conocidas y las queries correspondían a posiciones inéditas. Esto
+fue importante porque el problema real no consiste en reconocer la misma foto,
+sino reconocer al mismo animal desde otra postura o ángulo.
+
+Resultados principales de laboratorio:
+
+| Métrica Closed-set | All-vectors | Prototype |
+| --- | ---: | ---: |
+| Top-1 Accuracy | 62.32% | 61.79% |
+| Top-5 Accuracy | 62.41% | 85.09% |
+| Gallery vectors | 1150 | 23 |
+| Query count | 1120 | 1120 |
+| False accepts | 422 | 428 |
+
+Evaluación Open-set con threshold `0.85`:
+
+| Configuración | Top-1 thresholded | Rejection rate | False accepts |
+| --- | ---: | ---: | ---: |
+| All-vectors + threshold | 51.25% | 38.21% | 118 |
+| Prototype + threshold | 50.00% | 40.09% | 111 |
+
+Esta etapa mostró que `mi_modelo_reid.pt` podía servir como extractor general,
+pero también dejó claro que el escenario real de campo necesitaba una galería
+propia y una lógica temporal más fuerte.
 
 ### 3. Integración con video real
 
@@ -223,9 +309,9 @@ frame y avanzar hacia un análisis global del video.
 ### 4. Galería específica de Erondina
 
 Para reconocer a Marta, Maria y Margarita se creó una galería propia con fotos
-seleccionadas del mismo video de Erondina. Esta decisión fue clave: el modelo
-general de Re-ID sirve para extraer embeddings, pero las identidades concretas
-del campo necesitan referencias propias.
+extraídas del campo Erondina. Esta decisión fue clave: el modelo general de
+Re-ID sirve para extraer embeddings, pero las identidades concretas del campo
+necesitan referencias propias.
 
 La galería final versionada es:
 
@@ -241,19 +327,20 @@ Contiene:
 - `proto_vectors`
 - `proto_labels`
 
-### 5. Recorte y enfoque de las fotos Erondina
+### 5. Recorte y enfoque de las fotos del campo Erondina
 
 Durante las pruebas se detectó que varios errores de Re-ID no venían
 necesariamente del modelo, sino de los recortes usados para generar embeddings:
 algunas imágenes incluían partes de otras vacas, bordes, fondo o zonas poco
 representativas del animal.
 
-Por eso se decidió **recortar y enfocar las imágenes de Erondina** para aislar
-mejor a cada vaca. Esta decisión ayudó a:
+Por eso se decidió **recortar y enfocar las imágenes del campo Erondina** para
+aislar mejor a cada vaca. Esta decisión ayudó a:
 
 - Reducir contaminación visual por vacas vecinas.
 - Evitar que el embedding aprendiera fondo o pasto en lugar del animal.
-- Mejorar la comparación entre galería y frames del video.
+- Mejorar la comparación entre la galería de campo y las detecciones del
+  render.
 - Hacer más estable la asignación de Marta, Maria y Margarita.
 
 El script asociado a esta etapa es:
@@ -315,6 +402,16 @@ Este script realiza:
 ## 🔄 Arquitectura del Pipeline Final
 
 ```text
+OpenCows / dataset general de vacas
+    ↓
+Entrenamiento Re-ID general
+    ↓
+mi_modelo_reid.pt
+    ↓
+Fotos extraídas del campo Erondina
+    ↓
+Galería Erondina enfocada y filtrada
+    ↓
 Video Erondina
     ↓
 YOLOv8
@@ -327,7 +424,7 @@ Recortes de cada vaca
     ↓
 Embeddings de cuerpo + subembeddings de cabeza
     ↓
-FAISS / similitud coseno contra galería Erondina
+FAISS / similitud coseno usando mi_modelo_reid.pt + galería Erondina
     ↓
 Agrupación de tracklets en identidades globales
     ↓
@@ -472,8 +569,8 @@ scripts/16_reid_timeline_erondina.py
 
 - Se separó el **modelo Re-ID general** de la **galería específica de
   Erondina**.
-- Se recortaron y enfocaron las fotos de Erondina para aislar mejor cada vaca y
-  mejorar la calidad de los embeddings.
+- Se recortaron y enfocaron fotos extraídas del campo Erondina para aislar
+  mejor cada vaca y mejorar la calidad de los embeddings.
 - Se procesó la segunda mitad del video porque la escala y visibilidad de las
   vacas era más adecuada para reidentificación.
 - Se dejó de decidir identidad frame a frame y se pasó a una asignación global
@@ -523,10 +620,10 @@ pipeline capaz de:
 El resultado final alcanza los criterios de éxito definidos para el MVP:
 
 - ✅ Detector validado sobre umbrales proyectados.
-- ✅ Galería Erondina construida con imágenes propias del video.
+- ✅ Galería Erondina construida con fotos extraídas del campo Erondina.
 - ✅ Re-ID individual de Marta, Maria y Margarita.
 - ✅ Tracking temporal estable en el render final.
-- ✅ Conteo consolidado de 14 vacas.
+- ✅ Conteo consolidado de 13 vacas reales en el fragmento final.
 - ✅ Video final listo para presentación.
 
 Con este resultado, **CowTrack MVP queda completo**.

@@ -44,11 +44,13 @@
     }
   },
   "count_metrics": {
-    "expected_total_cows": 14,
-    "estimated_total_cows": 14,
+    "expected_total_cows_base_report": 14,
+    "estimated_total_cows_base_report": 14,
+    "real_total_cows_final_video_visual_confirmation": 13,
+    "estimated_total_cows_final_video": 13,
     "count_accuracy_percent": 100.0,
     "absolute_count_error": 0,
-    "unknown_cows_estimated": 11
+    "unknown_cows_final_video": 10
   },
   "identity_metrics": {
     "expected_known_identities": 3,
@@ -66,39 +68,41 @@
     }
   },
   "temporal_coverage_metrics": {
-    "average_known_presence_percent": 98.63,
-    "average_tracked_detection_coverage_percent": 97.8,
-    "average_confirmed_reid_coverage_percent": 74.63
+    "average_known_presence_percent_base_report": 98.63,
+    "average_tracked_detection_coverage_percent_base_report": 97.8,
+    "average_confirmed_reid_coverage_percent_base_report": 74.63,
+    "average_known_presence_percent_final_video": 99.81,
+    "average_final_assignment_reid_score_percent": 92.34
   },
   "per_identity_metrics": {
     "Margarita": {
       "presence_percent": 100.0,
-      "tracked_detection_coverage_percent": 100.0,
-      "confirmed_reid_coverage_percent": 86.31,
-      "hold_only_percent": 0.0
+      "visible_label_frames_in_final_video": 1409,
+      "final_assignment_reid_score": 0.9268684983253479
     },
     "Maria": {
-      "presence_percent": 99.75,
-      "tracked_detection_coverage_percent": 99.28,
-      "confirmed_reid_coverage_percent": 68.2,
-      "hold_only_percent": 0.47
+      "presence_percent": 100.0,
+      "visible_label_frames_in_final_video": 1409,
+      "final_assignment_reid_score": 0.8972709774971008
     },
     "Marta": {
-      "presence_percent": 96.13,
-      "tracked_detection_coverage_percent": 94.12,
-      "confirmed_reid_coverage_percent": 69.37,
-      "hold_only_percent": 2.01
+      "presence_percent": 99.43,
+      "visible_label_frames_in_final_video": 1401,
+      "final_assignment_reid_score": 0.945925235748291
     }
   },
   "visible_cow_metrics": {
-    "visible_cows_per_frame_mean": 11.44,
+    "visible_cows_per_frame_mean": 11.93,
     "visible_cows_per_frame_median": 12.0,
-    "visible_cows_per_frame_p95": 14.0,
-    "visible_cows_per_frame_max": 16
+    "visible_cows_per_frame_p95": 13.0,
+    "visible_cows_per_frame_max": 13
   },
   "fragmentation_metrics": {
-    "global_track_count_after_clustering": 22,
-    "fragmentation_over_expected": 8,
+    "global_track_count_after_clustering_base_report": 22,
+    "unique_internal_global_ids_visible_in_final_video": 16,
+    "max_visible_internal_id_number_in_final_video": 21,
+    "real_total_cows_final_video_visual_confirmation": 13,
+    "unique_internal_id_fragmentation_over_real_cows_final_video": 3,
     "suppressed_duplicate_known_detections_in_render": 3
   },
   "non_calculable_from_current_json": {
