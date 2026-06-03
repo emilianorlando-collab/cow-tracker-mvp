@@ -1,0 +1,1080 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": "datos/Resultados/resultado_erondina_reid_embeddings_laxo_marta_min1.mp4",
+  "processed_frames": 7961,
+  "estimated_global_cows": 20,
+  "expected_total_cows": 14,
+  "count_error": 6,
+  "count_accuracy": 0.5714285714285714,
+  "known_found": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_missing": [],
+  "duplicate_known_label_frames": {
+    "margarita": 2
+  },
+  "ready_for_render_by_automatic_checks": false,
+  "known_assignments_by_global_id": {
+    "6": {
+      "global_id": 6,
+      "label": "margarita",
+      "score": 0.9571131467819214,
+      "margin": 0.08576458692550659,
+      "median": 0.925013542175293,
+      "max": 0.9674773812294006,
+      "support_075": 0.7377049180327869,
+      "source_local_track_id": 1020,
+      "cluster_local_track_ids": [
+        6,
+        293,
+        1020
+      ],
+      "cluster_frames": 7731,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9571131467819214,
+          "median": 0.925013542175293,
+          "max": 0.9674773812294006,
+          "support_075": 0.7377049180327869,
+          "embedding_count": 61,
+          "source_local_track_id": 1020
+        },
+        "maria": {
+          "score": 0.8713485598564148,
+          "median": 0.8012109398841858,
+          "max": 0.9123357534408569,
+          "support_075": 0.6065573770491803,
+          "embedding_count": 61,
+          "source_local_track_id": 1020
+        },
+        "marta": {
+          "score": 0.8264337778091431,
+          "median": 0.695743203163147,
+          "max": 0.9090459942817688,
+          "support_075": 0.3798449612403101,
+          "embedding_count": 774,
+          "source_local_track_id": 293
+        }
+      }
+    },
+    "11": {
+      "global_id": 11,
+      "label": "marta",
+      "score": 0.9162297248840332,
+      "margin": 0.05554074048995972,
+      "median": 0.8641903400421143,
+      "max": 0.9723341464996338,
+      "support_075": 0.9144736842105263,
+      "source_local_track_id": 324,
+      "cluster_local_track_ids": [
+        11,
+        324,
+        65,
+        732,
+        986,
+        633
+      ],
+      "cluster_frames": 4514,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8606889843940735,
+          "median": 0.6348037123680115,
+          "max": 0.9570584297180176,
+          "support_075": 0.34868421052631576,
+          "embedding_count": 304,
+          "source_local_track_id": 324
+        },
+        "maria": {
+          "score": 0.8494570255279541,
+          "median": 0.7934095859527588,
+          "max": 0.9123489856719971,
+          "support_075": 0.625,
+          "embedding_count": 304,
+          "source_local_track_id": 324
+        },
+        "marta": {
+          "score": 0.9162297248840332,
+          "median": 0.8641903400421143,
+          "max": 0.9723341464996338,
+          "support_075": 0.9144736842105263,
+          "embedding_count": 304,
+          "source_local_track_id": 324
+        }
+      }
+    },
+    "15": {
+      "global_id": 15,
+      "label": "maria",
+      "score": 0.9164290428161621,
+      "margin": 0.04437953233718872,
+      "median": 0.8601455688476562,
+      "max": 0.9471780061721802,
+      "support_075": 0.6785714285714286,
+      "source_local_track_id": 95,
+      "cluster_local_track_ids": [
+        95,
+        187,
+        942
+      ],
+      "cluster_frames": 5007,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8428347110748291,
+          "median": 0.6219128370285034,
+          "max": 0.9566008448600769,
+          "support_075": 0.2693798449612403,
+          "embedding_count": 516,
+          "source_local_track_id": 187
+        },
+        "maria": {
+          "score": 0.9164290428161621,
+          "median": 0.8601455688476562,
+          "max": 0.9471780061721802,
+          "support_075": 0.6785714285714286,
+          "embedding_count": 28,
+          "source_local_track_id": 95
+        },
+        "marta": {
+          "score": 0.8720495104789734,
+          "median": 0.819605827331543,
+          "max": 0.9110792279243469,
+          "support_075": 0.7951807228915663,
+          "embedding_count": 83,
+          "source_local_track_id": 942
+        }
+      }
+    }
+  },
+  "all_known_candidates": [
+    {
+      "global_id": 1,
+      "label": "margarita",
+      "score": 0.9542919993400574,
+      "margin": 0.11659526824951172,
+      "median": 0.938080370426178,
+      "max": 0.9682885408401489,
+      "support_075": 1.0,
+      "source_local_track_id": 1027,
+      "cluster_local_track_ids": [
+        1,
+        422,
+        538,
+        1027
+      ],
+      "cluster_frames": 4381,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9542919993400574,
+          "median": 0.938080370426178,
+          "max": 0.9682885408401489,
+          "support_075": 1.0,
+          "embedding_count": 53,
+          "source_local_track_id": 1027
+        },
+        "maria": {
+          "score": 0.8376967310905457,
+          "median": 0.7867487668991089,
+          "max": 0.905255138874054,
+          "support_075": 0.7244897959183674,
+          "embedding_count": 294,
+          "source_local_track_id": 1
+        },
+        "marta": {
+          "score": 0.768613338470459,
+          "median": 0.6144158244132996,
+          "max": 0.9494708180427551,
+          "support_075": 0.16993464052287582,
+          "embedding_count": 153,
+          "source_local_track_id": 538
+        }
+      }
+    },
+    {
+      "global_id": 2,
+      "label": "margarita",
+      "score": 0.9450672268867493,
+      "margin": 0.08976894617080688,
+      "median": 0.9008954763412476,
+      "max": 0.9887227416038513,
+      "support_075": 0.9385290889132821,
+      "source_local_track_id": 2,
+      "cluster_local_track_ids": [
+        2
+      ],
+      "cluster_frames": 7292,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9450672268867493,
+          "median": 0.9008954763412476,
+          "max": 0.9887227416038513,
+          "support_075": 0.9385290889132821,
+          "embedding_count": 911,
+          "source_local_track_id": 2
+        },
+        "maria": {
+          "score": 0.8552982807159424,
+          "median": 0.7835008502006531,
+          "max": 0.9032475352287292,
+          "support_075": 0.6783754116355654,
+          "embedding_count": 911,
+          "source_local_track_id": 2
+        },
+        "marta": {
+          "score": 0.7612612247467041,
+          "median": 0.6835255026817322,
+          "max": 0.9303984045982361,
+          "support_075": 0.19978046103183314,
+          "embedding_count": 911,
+          "source_local_track_id": 2
+        }
+      }
+    },
+    {
+      "global_id": 3,
+      "label": "maria",
+      "score": 0.8999309539794922,
+      "margin": 0.04015660285949707,
+      "median": 0.8412205576896667,
+      "max": 0.958391010761261,
+      "support_075": 0.8033898305084746,
+      "source_local_track_id": 423,
+      "cluster_local_track_ids": [
+        3,
+        423,
+        853
+      ],
+      "cluster_frames": 6718,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8597743511199951,
+          "median": 0.599704921245575,
+          "max": 0.9214287400245667,
+          "support_075": 0.3559322033898305,
+          "embedding_count": 295,
+          "source_local_track_id": 423
+        },
+        "maria": {
+          "score": 0.8999309539794922,
+          "median": 0.8412205576896667,
+          "max": 0.958391010761261,
+          "support_075": 0.8033898305084746,
+          "embedding_count": 295,
+          "source_local_track_id": 423
+        },
+        "marta": {
+          "score": 0.8273969888687134,
+          "median": 0.7482424974441528,
+          "max": 0.8980230689048767,
+          "support_075": 0.49101796407185627,
+          "embedding_count": 334,
+          "source_local_track_id": 3
+        }
+      }
+    },
+    {
+      "global_id": 4,
+      "label": "maria",
+      "score": 0.903626024723053,
+      "margin": 0.06844770908355713,
+      "median": 0.8151904344558716,
+      "max": 0.9741393327713013,
+      "support_075": 0.6688453159041394,
+      "source_local_track_id": 4,
+      "cluster_local_track_ids": [
+        4
+      ],
+      "cluster_frames": 7360,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8351783156394958,
+          "median": 0.7419321537017822,
+          "max": 0.9784181118011475,
+          "support_075": 0.4673202614379085,
+          "embedding_count": 918,
+          "source_local_track_id": 4
+        },
+        "maria": {
+          "score": 0.903626024723053,
+          "median": 0.8151904344558716,
+          "max": 0.9741393327713013,
+          "support_075": 0.6688453159041394,
+          "embedding_count": 918,
+          "source_local_track_id": 4
+        },
+        "marta": {
+          "score": 0.819396436214447,
+          "median": 0.669211745262146,
+          "max": 0.9381571412086487,
+          "support_075": 0.28322440087145967,
+          "embedding_count": 918,
+          "source_local_track_id": 4
+        }
+      }
+    },
+    {
+      "global_id": 5,
+      "label": "margarita",
+      "score": 0.9307292103767395,
+      "margin": 0.10436850786209106,
+      "median": 0.7509782910346985,
+      "max": 0.9845489263534546,
+      "support_075": 0.5046082949308756,
+      "source_local_track_id": 5,
+      "cluster_local_track_ids": [
+        5
+      ],
+      "cluster_frames": 6954,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9307292103767395,
+          "median": 0.7509782910346985,
+          "max": 0.9845489263534546,
+          "support_075": 0.5046082949308756,
+          "embedding_count": 868,
+          "source_local_track_id": 5
+        },
+        "maria": {
+          "score": 0.8263607025146484,
+          "median": 0.6934926509857178,
+          "max": 0.9524745941162109,
+          "support_075": 0.3548387096774194,
+          "embedding_count": 868,
+          "source_local_track_id": 5
+        },
+        "marta": {
+          "score": 0.7670263648033142,
+          "median": 0.6413382887840271,
+          "max": 0.8923090100288391,
+          "support_075": 0.1728110599078341,
+          "embedding_count": 868,
+          "source_local_track_id": 5
+        }
+      }
+    },
+    {
+      "global_id": 6,
+      "label": "margarita",
+      "score": 0.9571131467819214,
+      "margin": 0.08576458692550659,
+      "median": 0.925013542175293,
+      "max": 0.9674773812294006,
+      "support_075": 0.7377049180327869,
+      "source_local_track_id": 1020,
+      "cluster_local_track_ids": [
+        6,
+        293,
+        1020
+      ],
+      "cluster_frames": 7731,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9571131467819214,
+          "median": 0.925013542175293,
+          "max": 0.9674773812294006,
+          "support_075": 0.7377049180327869,
+          "embedding_count": 61,
+          "source_local_track_id": 1020
+        },
+        "maria": {
+          "score": 0.8713485598564148,
+          "median": 0.8012109398841858,
+          "max": 0.9123357534408569,
+          "support_075": 0.6065573770491803,
+          "embedding_count": 61,
+          "source_local_track_id": 1020
+        },
+        "marta": {
+          "score": 0.8264337778091431,
+          "median": 0.695743203163147,
+          "max": 0.9090459942817688,
+          "support_075": 0.3798449612403101,
+          "embedding_count": 774,
+          "source_local_track_id": 293
+        }
+      }
+    },
+    {
+      "global_id": 7,
+      "label": "marta",
+      "score": 0.8906024098396301,
+      "margin": 0.02495473623275757,
+      "median": 0.8466343879699707,
+      "max": 0.9238144755363464,
+      "support_075": 0.8063063063063063,
+      "source_local_track_id": 719,
+      "cluster_local_track_ids": [
+        7,
+        483,
+        719,
+        931
+      ],
+      "cluster_frames": 5114,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.781863272190094,
+          "median": 0.3107164800167084,
+          "max": 0.9529989361763,
+          "support_075": 0.17886178861788618,
+          "embedding_count": 123,
+          "source_local_track_id": 931
+        },
+        "maria": {
+          "score": 0.8656476736068726,
+          "median": 0.8103463649749756,
+          "max": 0.9462963938713074,
+          "support_075": 0.6818181818181818,
+          "embedding_count": 132,
+          "source_local_track_id": 483
+        },
+        "marta": {
+          "score": 0.8906024098396301,
+          "median": 0.8466343879699707,
+          "max": 0.9238144755363464,
+          "support_075": 0.8063063063063063,
+          "embedding_count": 222,
+          "source_local_track_id": 719
+        }
+      }
+    },
+    {
+      "global_id": 8,
+      "label": "marta",
+      "score": 0.8297217488288879,
+      "margin": 0.0019403696060180664,
+      "median": 0.657813310623169,
+      "max": 0.9167478084564209,
+      "support_075": 0.21981981981981982,
+      "source_local_track_id": 8,
+      "cluster_local_track_ids": [
+        8
+      ],
+      "cluster_frames": 4448,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8062103986740112,
+          "median": 0.718942403793335,
+          "max": 0.9651843309402466,
+          "support_075": 0.3891891891891892,
+          "embedding_count": 555,
+          "source_local_track_id": 8
+        },
+        "maria": {
+          "score": 0.8277813792228699,
+          "median": 0.7444124221801758,
+          "max": 0.9271454215049744,
+          "support_075": 0.47927927927927927,
+          "embedding_count": 555,
+          "source_local_track_id": 8
+        },
+        "marta": {
+          "score": 0.8297217488288879,
+          "median": 0.657813310623169,
+          "max": 0.9167478084564209,
+          "support_075": 0.21981981981981982,
+          "embedding_count": 555,
+          "source_local_track_id": 8
+        }
+      }
+    },
+    {
+      "global_id": 9,
+      "label": "marta",
+      "score": 0.9517847299575806,
+      "margin": 0.0063193440437316895,
+      "median": 0.8907914757728577,
+      "max": 0.9813314080238342,
+      "support_075": 1.0,
+      "source_local_track_id": 582,
+      "cluster_local_track_ids": [
+        9,
+        91,
+        442,
+        718,
+        582,
+        1029
+      ],
+      "cluster_frames": 3964,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9454653859138489,
+          "median": 0.8555914759635925,
+          "max": 0.9710001945495605,
+          "support_075": 1.0,
+          "embedding_count": 33,
+          "source_local_track_id": 582
+        },
+        "maria": {
+          "score": 0.7909747362136841,
+          "median": 0.7403347492218018,
+          "max": 0.8192445635795593,
+          "support_075": 0.4230769230769231,
+          "embedding_count": 52,
+          "source_local_track_id": 1029
+        },
+        "marta": {
+          "score": 0.9517847299575806,
+          "median": 0.8907914757728577,
+          "max": 0.9813314080238342,
+          "support_075": 1.0,
+          "embedding_count": 33,
+          "source_local_track_id": 582
+        }
+      }
+    },
+    {
+      "global_id": 10,
+      "label": "maria",
+      "score": 0.880836009979248,
+      "margin": 0.01378542184829712,
+      "median": 0.8267046213150024,
+      "max": 0.8988690972328186,
+      "support_075": 0.723404255319149,
+      "source_local_track_id": 126,
+      "cluster_local_track_ids": [
+        10,
+        126,
+        284,
+        660,
+        1007
+      ],
+      "cluster_frames": 4893,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8564032316207886,
+          "median": 0.738919734954834,
+          "max": 0.9575830698013306,
+          "support_075": 0.47619047619047616,
+          "embedding_count": 42,
+          "source_local_track_id": 1007
+        },
+        "maria": {
+          "score": 0.880836009979248,
+          "median": 0.8267046213150024,
+          "max": 0.8988690972328186,
+          "support_075": 0.723404255319149,
+          "embedding_count": 47,
+          "source_local_track_id": 126
+        },
+        "marta": {
+          "score": 0.8670505881309509,
+          "median": 0.7334431409835815,
+          "max": 0.9309120178222656,
+          "support_075": 0.425,
+          "embedding_count": 240,
+          "source_local_track_id": 660
+        }
+      }
+    },
+    {
+      "global_id": 11,
+      "label": "marta",
+      "score": 0.9162297248840332,
+      "margin": 0.05554074048995972,
+      "median": 0.8641903400421143,
+      "max": 0.9723341464996338,
+      "support_075": 0.9144736842105263,
+      "source_local_track_id": 324,
+      "cluster_local_track_ids": [
+        11,
+        324,
+        65,
+        732,
+        986,
+        633
+      ],
+      "cluster_frames": 4514,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8606889843940735,
+          "median": 0.6348037123680115,
+          "max": 0.9570584297180176,
+          "support_075": 0.34868421052631576,
+          "embedding_count": 304,
+          "source_local_track_id": 324
+        },
+        "maria": {
+          "score": 0.8494570255279541,
+          "median": 0.7934095859527588,
+          "max": 0.9123489856719971,
+          "support_075": 0.625,
+          "embedding_count": 304,
+          "source_local_track_id": 324
+        },
+        "marta": {
+          "score": 0.9162297248840332,
+          "median": 0.8641903400421143,
+          "max": 0.9723341464996338,
+          "support_075": 0.9144736842105263,
+          "embedding_count": 304,
+          "source_local_track_id": 324
+        }
+      }
+    },
+    {
+      "global_id": 12,
+      "label": "margarita",
+      "score": 0.9546289443969727,
+      "margin": 0.009583473205566406,
+      "median": 0.9095394015312195,
+      "max": 0.9751244783401489,
+      "support_075": 0.8117647058823529,
+      "source_local_track_id": 635,
+      "cluster_local_track_ids": [
+        12,
+        355,
+        635,
+        435,
+        741
+      ],
+      "cluster_frames": 4762,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9546289443969727,
+          "median": 0.9095394015312195,
+          "max": 0.9751244783401489,
+          "support_075": 0.8117647058823529,
+          "embedding_count": 85,
+          "source_local_track_id": 635
+        },
+        "maria": {
+          "score": 0.8072249293327332,
+          "median": 0.7655771970748901,
+          "max": 0.9107621312141418,
+          "support_075": 0.6493506493506493,
+          "embedding_count": 77,
+          "source_local_track_id": 435
+        },
+        "marta": {
+          "score": 0.9450454711914062,
+          "median": 0.8853919506072998,
+          "max": 0.9880430698394775,
+          "support_075": 0.7764705882352941,
+          "embedding_count": 85,
+          "source_local_track_id": 635
+        }
+      }
+    },
+    {
+      "global_id": 13,
+      "label": "maria",
+      "score": 0.8525453209877014,
+      "margin": 0.014868378639221191,
+      "median": 0.700707197189331,
+      "max": 0.9278123378753662,
+      "support_075": 0.4166666666666667,
+      "source_local_track_id": 164,
+      "cluster_local_track_ids": [
+        14,
+        164,
+        710,
+        299
+      ],
+      "cluster_frames": 2593,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8376769423484802,
+          "median": 0.5657173991203308,
+          "max": 0.8729649186134338,
+          "support_075": 0.3333333333333333,
+          "embedding_count": 48,
+          "source_local_track_id": 164
+        },
+        "maria": {
+          "score": 0.8525453209877014,
+          "median": 0.700707197189331,
+          "max": 0.9278123378753662,
+          "support_075": 0.4166666666666667,
+          "embedding_count": 48,
+          "source_local_track_id": 164
+        },
+        "marta": {
+          "score": 0.8359716534614563,
+          "median": 0.6546163558959961,
+          "max": 0.9219793677330017,
+          "support_075": 0.3333333333333333,
+          "embedding_count": 48,
+          "source_local_track_id": 164
+        }
+      }
+    },
+    {
+      "global_id": 14,
+      "label": "margarita",
+      "score": 0.9423972964286804,
+      "margin": 0.09133946895599365,
+      "median": 0.8827992677688599,
+      "max": 0.9871880412101746,
+      "support_075": 0.8425925925925926,
+      "source_local_track_id": 50,
+      "cluster_local_track_ids": [
+        50
+      ],
+      "cluster_frames": 5178,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9423972964286804,
+          "median": 0.8827992677688599,
+          "max": 0.9871880412101746,
+          "support_075": 0.8425925925925926,
+          "embedding_count": 648,
+          "source_local_track_id": 50
+        },
+        "maria": {
+          "score": 0.8510578274726868,
+          "median": 0.7398325204849243,
+          "max": 0.9341183304786682,
+          "support_075": 0.4737654320987654,
+          "embedding_count": 648,
+          "source_local_track_id": 50
+        },
+        "marta": {
+          "score": 0.8230187892913818,
+          "median": 0.6844899654388428,
+          "max": 0.9450107216835022,
+          "support_075": 0.30246913580246915,
+          "embedding_count": 648,
+          "source_local_track_id": 50
+        }
+      }
+    },
+    {
+      "global_id": 15,
+      "label": "maria",
+      "score": 0.9164290428161621,
+      "margin": 0.04437953233718872,
+      "median": 0.8601455688476562,
+      "max": 0.9471780061721802,
+      "support_075": 0.6785714285714286,
+      "source_local_track_id": 95,
+      "cluster_local_track_ids": [
+        95,
+        187,
+        942
+      ],
+      "cluster_frames": 5007,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8428347110748291,
+          "median": 0.6219128370285034,
+          "max": 0.9566008448600769,
+          "support_075": 0.2693798449612403,
+          "embedding_count": 516,
+          "source_local_track_id": 187
+        },
+        "maria": {
+          "score": 0.9164290428161621,
+          "median": 0.8601455688476562,
+          "max": 0.9471780061721802,
+          "support_075": 0.6785714285714286,
+          "embedding_count": 28,
+          "source_local_track_id": 95
+        },
+        "marta": {
+          "score": 0.8720495104789734,
+          "median": 0.819605827331543,
+          "max": 0.9110792279243469,
+          "support_075": 0.7951807228915663,
+          "embedding_count": 83,
+          "source_local_track_id": 942
+        }
+      }
+    },
+    {
+      "global_id": 16,
+      "label": "marta",
+      "score": 0.9174460768699646,
+      "margin": 0.014326632022857666,
+      "median": 0.8792365789413452,
+      "max": 0.9451943635940552,
+      "support_075": 0.8601398601398601,
+      "source_local_track_id": 757,
+      "cluster_local_track_ids": [
+        154,
+        413,
+        757
+      ],
+      "cluster_frames": 5752,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7477127313613892,
+          "median": 0.6047272682189941,
+          "max": 0.9308679699897766,
+          "support_075": 0.1488095238095238,
+          "embedding_count": 168,
+          "source_local_track_id": 413
+        },
+        "maria": {
+          "score": 0.9031194448471069,
+          "median": 0.8537179231643677,
+          "max": 0.9648752212524414,
+          "support_075": 0.8690476190476191,
+          "embedding_count": 168,
+          "source_local_track_id": 413
+        },
+        "marta": {
+          "score": 0.9174460768699646,
+          "median": 0.8792365789413452,
+          "max": 0.9451943635940552,
+          "support_075": 0.8601398601398601,
+          "embedding_count": 286,
+          "source_local_track_id": 757
+        }
+      }
+    },
+    {
+      "global_id": 17,
+      "label": "marta",
+      "score": 0.8764228224754333,
+      "margin": 0.04540407657623291,
+      "median": 0.8404629230499268,
+      "max": 0.9029139876365662,
+      "support_075": 0.9411764705882353,
+      "source_local_track_id": 279,
+      "cluster_local_track_ids": [
+        279,
+        784
+      ],
+      "cluster_frames": 829,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7462402582168579,
+          "median": 0.4419426918029785,
+          "max": 0.8805876970291138,
+          "support_075": 0.14705882352941177,
+          "embedding_count": 68,
+          "source_local_track_id": 784
+        },
+        "maria": {
+          "score": 0.8310187458992004,
+          "median": 0.793910026550293,
+          "max": 0.8889105916023254,
+          "support_075": 0.7647058823529411,
+          "embedding_count": 34,
+          "source_local_track_id": 279
+        },
+        "marta": {
+          "score": 0.8764228224754333,
+          "median": 0.8404629230499268,
+          "max": 0.9029139876365662,
+          "support_075": 0.9411764705882353,
+          "embedding_count": 34,
+          "source_local_track_id": 279
+        }
+      }
+    },
+    {
+      "global_id": 18,
+      "label": "maria",
+      "score": 0.9100369811058044,
+      "margin": 0.008810460567474365,
+      "median": 0.8584422469139099,
+      "max": 0.9313921928405762,
+      "support_075": 1.0,
+      "source_local_track_id": 303,
+      "cluster_local_track_ids": [
+        303,
+        527,
+        786,
+        927,
+        699
+      ],
+      "cluster_frames": 2762,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.6593990325927734,
+          "median": 0.24691987037658691,
+          "max": 0.939888060092926,
+          "support_075": 0.1206896551724138,
+          "embedding_count": 58,
+          "source_local_track_id": 927
+        },
+        "maria": {
+          "score": 0.9100369811058044,
+          "median": 0.8584422469139099,
+          "max": 0.9313921928405762,
+          "support_075": 1.0,
+          "embedding_count": 39,
+          "source_local_track_id": 303
+        },
+        "marta": {
+          "score": 0.9012265205383301,
+          "median": 0.870987057685852,
+          "max": 0.9351506233215332,
+          "support_075": 0.7931034482758621,
+          "embedding_count": 58,
+          "source_local_track_id": 927
+        }
+      }
+    },
+    {
+      "global_id": 19,
+      "label": "maria",
+      "score": 0.8944788575172424,
+      "margin": 0.06414532661437988,
+      "median": 0.7787334322929382,
+      "max": 0.9740657806396484,
+      "support_075": 0.5657370517928287,
+      "source_local_track_id": 307,
+      "cluster_local_track_ids": [
+        307
+      ],
+      "cluster_frames": 6024,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8303335309028625,
+          "median": 0.5738380551338196,
+          "max": 0.9658885598182678,
+          "support_075": 0.2337317397078353,
+          "embedding_count": 753,
+          "source_local_track_id": 307
+        },
+        "maria": {
+          "score": 0.8944788575172424,
+          "median": 0.7787334322929382,
+          "max": 0.9740657806396484,
+          "support_075": 0.5657370517928287,
+          "embedding_count": 753,
+          "source_local_track_id": 307
+        },
+        "marta": {
+          "score": 0.8167138695716858,
+          "median": 0.700606107711792,
+          "max": 0.9356950521469116,
+          "support_075": 0.3784860557768924,
+          "embedding_count": 753,
+          "source_local_track_id": 307
+        }
+      }
+    },
+    {
+      "global_id": 20,
+      "label": "marta",
+      "score": 0.9008048176765442,
+      "margin": 0.04174381494522095,
+      "median": 0.8711867928504944,
+      "max": 0.9189020991325378,
+      "support_075": 0.9836065573770492,
+      "source_local_track_id": 843,
+      "cluster_local_track_ids": [
+        707,
+        843
+      ],
+      "cluster_frames": 849,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.29833900928497314,
+          "median": 0.24714040756225586,
+          "max": 0.3420790135860443,
+          "support_075": 0.0,
+          "embedding_count": 61,
+          "source_local_track_id": 843
+        },
+        "maria": {
+          "score": 0.8590610027313232,
+          "median": 0.8303856253623962,
+          "max": 0.8791305422782898,
+          "support_075": 0.9180327868852459,
+          "embedding_count": 61,
+          "source_local_track_id": 843
+        },
+        "marta": {
+          "score": 0.9008048176765442,
+          "median": 0.8711867928504944,
+          "max": 0.9189020991325378,
+          "support_075": 0.9836065573770492,
+          "embedding_count": 61,
+          "source_local_track_id": 843
+        }
+      }
+    }
+  ],
+  "local_to_global": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12,
+    "14": 13,
+    "50": 14,
+    "65": 11,
+    "91": 9,
+    "95": 15,
+    "126": 10,
+    "154": 16,
+    "164": 13,
+    "187": 15,
+    "279": 17,
+    "284": 10,
+    "293": 6,
+    "299": 13,
+    "303": 18,
+    "307": 19,
+    "324": 11,
+    "355": 12,
+    "413": 16,
+    "422": 1,
+    "423": 3,
+    "435": 12,
+    "442": 9,
+    "483": 7,
+    "527": 18,
+    "538": 1,
+    "582": 9,
+    "633": 11,
+    "635": 12,
+    "660": 10,
+    "699": 18,
+    "707": 20,
+    "710": 13,
+    "718": 9,
+    "719": 7,
+    "732": 11,
+    "741": 12,
+    "757": 16,
+    "784": 17,
+    "786": 18,
+    "843": 20,
+    "853": 3,
+    "927": 18,
+    "931": 7,
+    "942": 15,
+    "986": 11,
+    "1007": 10,
+    "1020": 6,
+    "1027": 1,
+    "1029": 9
+  },
+  "contact_sheet": "reports/11_contact_sheet_embeddings_laxo_marta_min1.jpg",
+  "params": {
+    "video_in": "datos/video campo erondina a procesar.MP4",
+    "video_out": "datos/Resultados/resultado_erondina_reid_embeddings_laxo_marta_min1.mp4",
+    "report_out": "reports/11_reid_embeddings_laxo_marta_min1.json",
+    "contact_sheet_out": "reports/11_contact_sheet_embeddings_laxo_marta_min1.jpg",
+    "yolo_model": "scripts/yolov8m.pt",
+    "tracker": "botsort.yaml",
+    "reid_model": "models/mi_modelo_reid.pt",
+    "identity_gallery": "models/erondina_gallery_embeddings.npz",
+    "start_frame": 1800,
+    "max_frames": 0,
+    "det_conf": 0.18,
+    "imgsz": 1280,
+    "reid_every": 8,
+    "min_track_frames": 200,
+    "merge_threshold": 0.78,
+    "max_overlap_frames": 5,
+    "identity_threshold": 0.78,
+    "identity_margin": 0.015,
+    "min_identity_support": 0.0,
+    "expected_total_cows": 14,
+    "render": true
+  }
+}

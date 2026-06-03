@@ -1,0 +1,48 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": null,
+  "processed_frames": 601,
+  "start_frame": 500,
+  "max_frames": 600,
+  "expected_total_cows": 14,
+  "estimated_confirmed_tracks_alive": 20,
+  "count_error": 6,
+  "count_accuracy": 0.5714285714285714,
+  "mean_drawn_count_per_frame": 10.728333333333333,
+  "median_drawn_count_per_frame": 13.0,
+  "max_drawn_count_per_frame": 20,
+  "id_switches_approx": 216,
+  "locked_identities": [
+    "Margarita"
+  ],
+  "identity_frame_hits": {
+    "Margarita": 582
+  },
+  "unknown_frame_hits": 5855,
+  "params": {
+    "video_in": "datos/video campo erondina a procesar.MP4",
+    "video_out": "datos/Resultados/resultado_erondina_reid_estable_preview.mp4",
+    "report_out": "reports/07_inferencia_erondina_estable_prueba.json",
+    "yolo_model": "scripts/yolov8m.pt",
+    "reid_model": "models/mi_modelo_reid.pt",
+    "identity_gallery": "models/erondina_gallery_embeddings.npz",
+    "identity_mode": "prototype",
+    "identity_threshold": 0.78,
+    "identity_lock_hits": 8,
+    "det_conf": 0.25,
+    "sim_threshold": 0.35,
+    "max_spatial_ratio": 0.35,
+    "iou_threshold": 0.7,
+    "ema_alpha": 0.15,
+    "min_track_hits": 8,
+    "max_missed": 180,
+    "expected_total_cows": 14,
+    "min_area_ratio": 8e-05,
+    "max_area_ratio": 0.025,
+    "min_aspect": 0.3,
+    "max_aspect": 4.0,
+    "start_frame": 500,
+    "max_frames": 600,
+    "no_render": true
+  }
+}

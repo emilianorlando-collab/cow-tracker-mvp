@@ -186,6 +186,12 @@ Métricas derivadas versionadas:
 reports/final/16_metricas_calculadas_desde_json.json
 ```
 
+El historial completo de reportes livianos del proceso se conserva en:
+
+```text
+reports/archive/t7_reports/
+```
+
 | Métrica Operativa | Resultado |
 | --- | ---: |
 | Resolución procesada | 1920x1080 |

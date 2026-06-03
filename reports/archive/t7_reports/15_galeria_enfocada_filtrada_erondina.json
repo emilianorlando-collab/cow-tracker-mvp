@@ -1,0 +1,687 @@
+{
+  "input": "models/erondina_gallery_embeddings_enfocada.npz",
+  "output": "models/erondina_gallery_embeddings_enfocada_filtrada.npz",
+  "sheet_out": "reports/15_galeria_enfocada_filtrada_erondina.jpg",
+  "original_count": 66,
+  "filtered_count": 48,
+  "removed_count": 18,
+  "counts_by_identity": {
+    "Margarita": 21,
+    "Maria": 14,
+    "Marta": 13
+  },
+  "params": {
+    "input": "models/erondina_gallery_embeddings_enfocada.npz",
+    "output": "models/erondina_gallery_embeddings_enfocada_filtrada.npz",
+    "report_out": "reports/15_galeria_enfocada_filtrada_erondina.json",
+    "sheet_out": "reports/15_galeria_enfocada_filtrada_erondina.jpg",
+    "min_margin": 0.03,
+    "min_own_score": 0.75,
+    "min_keep_per_label": 10
+  },
+  "kept": [
+    {
+      "index": 0,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.05.25 p. m..png",
+      "nearest_own_score": 0.9227020740509033,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 47,
+      "nearest_other_score": 0.6092622876167297,
+      "margin": 0.3134397864341736
+    },
+    {
+      "index": 1,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.05.45 p. m..png",
+      "nearest_own_score": 0.9227020740509033,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 47,
+      "nearest_other_score": 0.7779773473739624,
+      "margin": 0.14472472667694092
+    },
+    {
+      "index": 2,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.06.00 p. m..png",
+      "nearest_own_score": 0.8798259496688843,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 62,
+      "nearest_other_score": 0.7514395117759705,
+      "margin": 0.12838643789291382
+    },
+    {
+      "index": 3,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.06.07 p. m..png",
+      "nearest_own_score": 0.9029011726379395,
+      "nearest_other_label": "Maria",
+      "nearest_other_index": 42,
+      "nearest_other_score": 0.5963980555534363,
+      "margin": 0.3065031170845032
+    },
+    {
+      "index": 4,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.06.36 p. m..png",
+      "nearest_own_score": 0.9147839546203613,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 59,
+      "nearest_other_score": 0.8082866072654724,
+      "margin": 0.10649734735488892
+    },
+    {
+      "index": 5,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.06.52 p. m..png",
+      "nearest_own_score": 0.9458596706390381,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 63,
+      "nearest_other_score": 0.678150475025177,
+      "margin": 0.2677091956138611
+    },
+    {
+      "index": 6,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.07.03 p. m..png",
+      "nearest_own_score": 0.9458596706390381,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 47,
+      "nearest_other_score": 0.7404876351356506,
+      "margin": 0.20537203550338745
+    },
+    {
+      "index": 7,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.07.20 p. m..png",
+      "nearest_own_score": 0.9076840281486511,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 47,
+      "nearest_other_score": 0.799415647983551,
+      "margin": 0.1082683801651001
+    },
+    {
+      "index": 8,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.07.39 p. m..png",
+      "nearest_own_score": 0.9728513360023499,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 47,
+      "nearest_other_score": 0.6799917817115784,
+      "margin": 0.2928595542907715
+    },
+    {
+      "index": 9,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.07.55 p. m..png",
+      "nearest_own_score": 0.9287952780723572,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 65,
+      "nearest_other_score": 0.8178626894950867,
+      "margin": 0.11093258857727051
+    },
+    {
+      "index": 10,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.08.03 p. m..png",
+      "nearest_own_score": 0.9321714043617249,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 65,
+      "nearest_other_score": 0.8425284028053284,
+      "margin": 0.08964300155639648
+    },
+    {
+      "index": 11,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.08.15 p. m..png",
+      "nearest_own_score": 0.9477210640907288,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 49,
+      "nearest_other_score": 0.7325981259346008,
+      "margin": 0.21512293815612793
+    },
+    {
+      "index": 12,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.08.27 p. m..png",
+      "nearest_own_score": 0.9467913508415222,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 65,
+      "nearest_other_score": 0.8119567036628723,
+      "margin": 0.1348346471786499
+    },
+    {
+      "index": 13,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.08.48 p. m..png",
+      "nearest_own_score": 0.9714007377624512,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 64,
+      "nearest_other_score": 0.7915970087051392,
+      "margin": 0.179803729057312
+    },
+    {
+      "index": 14,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/galeria/Captura de pantalla 2026-06-01 a las 3.08.58 p. m..png",
+      "nearest_own_score": 0.9714007377624512,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 64,
+      "nearest_other_score": 0.8482643961906433,
+      "margin": 0.12313634157180786
+    },
+    {
+      "index": 15,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/test/Captura de pantalla 2026-06-01 a las 3.09.33 p. m..png",
+      "nearest_own_score": 0.9147839546203613,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 59,
+      "nearest_other_score": 0.8491401672363281,
+      "margin": 0.0656437873840332
+    },
+    {
+      "index": 16,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/test/Captura de pantalla 2026-06-01 a las 3.09.42 p. m..png",
+      "nearest_own_score": 0.9029011726379395,
+      "nearest_other_label": "Maria",
+      "nearest_other_index": 28,
+      "nearest_other_score": 0.6208922266960144,
+      "margin": 0.28200894594192505
+    },
+    {
+      "index": 17,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/test/Captura de pantalla 2026-06-01 a las 3.09.50 p. m..png",
+      "nearest_own_score": 0.9047170281410217,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 65,
+      "nearest_other_score": 0.7359113693237305,
+      "margin": 0.16880565881729126
+    },
+    {
+      "index": 18,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/test/Captura de pantalla 2026-06-01 a las 3.09.58 p. m..png",
+      "nearest_own_score": 0.9728513360023499,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 64,
+      "nearest_other_score": 0.7527422308921814,
+      "margin": 0.22010910511016846
+    },
+    {
+      "index": 19,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/test/Captura de pantalla 2026-06-01 a las 3.10.05 p. m..png",
+      "nearest_own_score": 0.9660153985023499,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 65,
+      "nearest_other_score": 0.8251698613166809,
+      "margin": 0.14084553718566895
+    },
+    {
+      "index": 20,
+      "label": "Margarita",
+      "path": "datos/erondina_reid/Margarita/test/Captura de pantalla 2026-06-01 a las 3.10.12 p. m..png",
+      "nearest_own_score": 0.9477210640907288,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 65,
+      "nearest_other_score": 0.7081145644187927,
+      "margin": 0.23960649967193604
+    },
+    {
+      "index": 21,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.58.13 p. m..png",
+      "nearest_own_score": 0.9310072064399719,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 45,
+      "nearest_other_score": 0.8753963708877563,
+      "margin": 0.055610835552215576
+    },
+    {
+      "index": 25,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.58.49 p. m..png",
+      "nearest_own_score": 0.8449787497520447,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.6773326992988586,
+      "margin": 0.16764605045318604
+    },
+    {
+      "index": 26,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.58.55 p. m..png",
+      "nearest_own_score": 0.8731921315193176,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.7092230916023254,
+      "margin": 0.1639690399169922
+    },
+    {
+      "index": 28,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.59.15 p. m..png",
+      "nearest_own_score": 0.9711745977401733,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 45,
+      "nearest_other_score": 0.6704568266868591,
+      "margin": 0.3007177710533142
+    },
+    {
+      "index": 29,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.59.21 p. m..png",
+      "nearest_own_score": 0.8512805700302124,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.8001198768615723,
+      "margin": 0.05116069316864014
+    },
+    {
+      "index": 30,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.59.28 p. m..png",
+      "nearest_own_score": 0.7971721887588501,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 5,
+      "nearest_other_score": 0.661125898361206,
+      "margin": 0.13604629039764404
+    },
+    {
+      "index": 31,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.59.35 p. m..png",
+      "nearest_own_score": 0.8862884044647217,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.721061646938324,
+      "margin": 0.1652267575263977
+    },
+    {
+      "index": 33,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.59.53 p. m..png",
+      "nearest_own_score": 0.9409016370773315,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.7912011742591858,
+      "margin": 0.14970046281814575
+    },
+    {
+      "index": 35,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 3.00.09 p. m..png",
+      "nearest_own_score": 0.9283008575439453,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.645917534828186,
+      "margin": 0.2823833227157593
+    },
+    {
+      "index": 37,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 3.00.29 p. m..png",
+      "nearest_own_score": 0.7971721887588501,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 5,
+      "nearest_other_score": 0.6231842637062073,
+      "margin": 0.17398792505264282
+    },
+    {
+      "index": 39,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/test/Captura de pantalla 2026-06-01 a las 3.01.41 p. m..png",
+      "nearest_own_score": 0.9310072064399719,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 45,
+      "nearest_other_score": 0.8688201308250427,
+      "margin": 0.0621870756149292
+    },
+    {
+      "index": 41,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/test/Captura de pantalla 2026-06-01 a las 3.02.42 p. m..png",
+      "nearest_own_score": 0.8731921315193176,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.8381975889205933,
+      "margin": 0.034994542598724365
+    },
+    {
+      "index": 42,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/test/Captura de pantalla 2026-06-01 a las 3.02.53 p. m..png",
+      "nearest_own_score": 0.9711745977401733,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 49,
+      "nearest_other_score": 0.6211265921592712,
+      "margin": 0.3500480055809021
+    },
+    {
+      "index": 43,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/test/Captura de pantalla 2026-06-01 a las 3.03.08 p. m..png",
+      "nearest_own_score": 0.9409016370773315,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.8332082033157349,
+      "margin": 0.10769343376159668
+    },
+    {
+      "index": 44,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.47.26 p. m..png",
+      "nearest_own_score": 0.8929038643836975,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.7871307730674744,
+      "margin": 0.10577309131622314
+    },
+    {
+      "index": 48,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.48.23 p. m..png",
+      "nearest_own_score": 0.9716995358467102,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 15,
+      "nearest_other_score": 0.8252353668212891,
+      "margin": 0.14646416902542114
+    },
+    {
+      "index": 51,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.48.56 p. m..png",
+      "nearest_own_score": 0.8877183198928833,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.6890272498130798,
+      "margin": 0.19869107007980347
+    },
+    {
+      "index": 52,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.49.06 p. m..png",
+      "nearest_own_score": 0.9587936401367188,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.7591010928153992,
+      "margin": 0.19969254732131958
+    },
+    {
+      "index": 53,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.49.21 p. m..png",
+      "nearest_own_score": 0.9829580187797546,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.7039470672607422,
+      "margin": 0.27901095151901245
+    },
+    {
+      "index": 54,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.49.29 p. m..png",
+      "nearest_own_score": 0.9654456973075867,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.799867570400238,
+      "margin": 0.16557812690734863
+    },
+    {
+      "index": 55,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.49.41 p. m..png",
+      "nearest_own_score": 0.9829580187797546,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.6512774229049683,
+      "margin": 0.3316805958747864
+    },
+    {
+      "index": 56,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.49.51 p. m..png",
+      "nearest_own_score": 0.9441006779670715,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.6784549355506897,
+      "margin": 0.26564574241638184
+    },
+    {
+      "index": 58,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.50.05 p. m..png",
+      "nearest_own_score": 0.8790134191513062,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 15,
+      "nearest_other_score": 0.7679309844970703,
+      "margin": 0.11108243465423584
+    },
+    {
+      "index": 60,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.54.47 p. m..png",
+      "nearest_own_score": 0.9805505275726318,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.7060589790344238,
+      "margin": 0.274491548538208
+    },
+    {
+      "index": 62,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/test/Captura de pantalla 2026-06-01 a las 2.54.14 p. m..png",
+      "nearest_own_score": 0.9139934778213501,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 15,
+      "nearest_other_score": 0.8132545948028564,
+      "margin": 0.10073888301849365
+    },
+    {
+      "index": 63,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/test/Captura de pantalla 2026-06-01 a las 2.54.22 p. m..png",
+      "nearest_own_score": 0.9716995358467102,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 15,
+      "nearest_other_score": 0.8000538349151611,
+      "margin": 0.17164570093154907
+    },
+    {
+      "index": 64,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/test/Captura de pantalla 2026-06-01 a las 2.54.30 p. m..png",
+      "nearest_own_score": 0.8929038643836975,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 14,
+      "nearest_other_score": 0.8482643961906433,
+      "margin": 0.0446394681930542
+    }
+  ],
+  "removed": [
+    {
+      "index": 22,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.58.20 p. m..png",
+      "nearest_own_score": 0.7971711158752441,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 57,
+      "nearest_other_score": 0.8584838509559631,
+      "margin": -0.061312735080718994
+    },
+    {
+      "index": 23,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.58.29 p. m..png",
+      "nearest_own_score": 0.7380966544151306,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 46,
+      "nearest_other_score": 0.8298532366752625,
+      "margin": -0.09175658226013184
+    },
+    {
+      "index": 24,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.58.42 p. m..png",
+      "nearest_own_score": 0.8644672632217407,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 45,
+      "nearest_other_score": 0.8701061010360718,
+      "margin": -0.005638837814331055
+    },
+    {
+      "index": 27,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.59.01 p. m..png",
+      "nearest_own_score": 0.8013288974761963,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.8146854043006897,
+      "margin": -0.013356506824493408
+    },
+    {
+      "index": 32,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 2.59.44 p. m..png",
+      "nearest_own_score": 0.8776484131813049,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 50,
+      "nearest_other_score": 0.8533717393875122,
+      "margin": 0.024276673793792725
+    },
+    {
+      "index": 34,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 3.00.00 p. m..png",
+      "nearest_own_score": 0.6531704664230347,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 47,
+      "nearest_other_score": 0.6519607901573181,
+      "margin": 0.0012096762657165527
+    },
+    {
+      "index": 36,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/galeria/Captura de pantalla 2026-06-01 a las 3.00.21 p. m..png",
+      "nearest_own_score": 0.5893309712409973,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 3,
+      "nearest_other_score": 0.5486664175987244,
+      "margin": 0.04066455364227295
+    },
+    {
+      "index": 38,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/test/Captura de pantalla 2026-06-01 a las 3.01.35 p. m..png",
+      "nearest_own_score": 0.8881129622459412,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 45,
+      "nearest_other_score": 0.890328049659729,
+      "margin": -0.002215087413787842
+    },
+    {
+      "index": 40,
+      "label": "Maria",
+      "path": "datos/erondina_reid/Maria/test/Captura de pantalla 2026-06-01 a las 3.02.35 p. m..png",
+      "nearest_own_score": 0.7495642304420471,
+      "nearest_other_label": "Marta",
+      "nearest_other_index": 45,
+      "nearest_other_score": 0.6093894839286804,
+      "margin": 0.1401747465133667
+    },
+    {
+      "index": 45,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.47.41 p. m..png",
+      "nearest_own_score": 0.8301746845245361,
+      "nearest_other_label": "Maria",
+      "nearest_other_index": 38,
+      "nearest_other_score": 0.890328049659729,
+      "margin": -0.06015336513519287
+    },
+    {
+      "index": 46,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.47.53 p. m..png",
+      "nearest_own_score": 0.8301746845245361,
+      "nearest_other_label": "Maria",
+      "nearest_other_index": 23,
+      "nearest_other_score": 0.8298532366752625,
+      "margin": 0.00032144784927368164
+    },
+    {
+      "index": 47,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.48.14 p. m..png",
+      "nearest_own_score": 0.807698667049408,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 7,
+      "nearest_other_score": 0.799415647983551,
+      "margin": 0.008283019065856934
+    },
+    {
+      "index": 49,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.48.41 p. m..png",
+      "nearest_own_score": 0.6619895100593567,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 11,
+      "nearest_other_score": 0.7325981259346008,
+      "margin": -0.07060861587524414
+    },
+    {
+      "index": 50,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.48.48 p. m..png",
+      "nearest_own_score": 0.8028501272201538,
+      "nearest_other_label": "Maria",
+      "nearest_other_index": 32,
+      "nearest_other_score": 0.8533717393875122,
+      "margin": -0.0505216121673584
+    },
+    {
+      "index": 57,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.49.58 p. m..png",
+      "nearest_own_score": 0.8042917847633362,
+      "nearest_other_label": "Maria",
+      "nearest_other_index": 22,
+      "nearest_other_score": 0.8584838509559631,
+      "margin": -0.05419206619262695
+    },
+    {
+      "index": 59,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/galeria/Captura de pantalla 2026-06-01 a las 2.50.13 p. m..png",
+      "nearest_own_score": 0.8569733500480652,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 15,
+      "nearest_other_score": 0.8491401672363281,
+      "margin": 0.00783318281173706
+    },
+    {
+      "index": 61,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/test/Captura de pantalla 2026-06-01 a las 2.54.04 p. m..png",
+      "nearest_own_score": 0.6394028067588806,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 9,
+      "nearest_other_score": 0.5651658177375793,
+      "margin": 0.07423698902130127
+    },
+    {
+      "index": 65,
+      "label": "Marta",
+      "path": "datos/erondina_reid/Marta/test/Captura de pantalla 2026-06-01 a las 2.54.39 p. m..png",
+      "nearest_own_score": 0.8609012961387634,
+      "nearest_other_label": "Margarita",
+      "nearest_other_index": 10,
+      "nearest_other_score": 0.8425284028053284,
+      "margin": 0.01837289333343506
+    }
+  ],
+  "note": "Filtro automatico por consistencia de embeddings. No usa color, nombres manuales ni informacion del video."
+}

@@ -1,0 +1,52 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": null,
+  "processed_frames": 1201,
+  "start_frame": 1800,
+  "max_frames": 1200,
+  "expected_total_cows": 14,
+  "estimated_confirmed_tracks_alive": 15,
+  "count_error": 1,
+  "count_accuracy": 0.9285714285714286,
+  "mean_drawn_count_per_frame": 15.093333333333334,
+  "median_drawn_count_per_frame": 15.0,
+  "max_drawn_count_per_frame": 16,
+  "id_switches_approx": 132,
+  "locked_identities": [
+    "Margarita",
+    "María",
+    "Marta"
+  ],
+  "identity_frame_hits": {
+    "Margarita": 1050,
+    "María": 1193,
+    "Marta": 655
+  },
+  "unknown_frame_hits": 15214,
+  "params": {
+    "video_in": "datos/video campo erondina a procesar.MP4",
+    "video_out": "datos/Resultados/resultado_erondina_reid_estable_preview.mp4",
+    "report_out": "reports/07_calibracion_min1_thr072.json",
+    "yolo_model": "scripts/yolov8m.pt",
+    "reid_model": "models/mi_modelo_reid.pt",
+    "identity_gallery": "models/erondina_gallery_embeddings.npz",
+    "identity_mode": "prototype",
+    "identity_threshold": 0.72,
+    "identity_lock_hits": 5,
+    "det_conf": 0.25,
+    "sim_threshold": 0.35,
+    "max_spatial_ratio": 0.35,
+    "iou_threshold": 0.7,
+    "ema_alpha": 0.15,
+    "min_track_hits": 8,
+    "max_missed": 240,
+    "expected_total_cows": 14,
+    "min_area_ratio": 8e-05,
+    "max_area_ratio": 0.025,
+    "min_aspect": 0.3,
+    "max_aspect": 4.0,
+    "start_frame": 1800,
+    "max_frames": 1200,
+    "no_render": true
+  }
+}

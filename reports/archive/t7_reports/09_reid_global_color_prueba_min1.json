@@ -1,0 +1,628 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": null,
+  "processed_frames": 1201,
+  "start_frame": 1800,
+  "expected_total_cows": 14,
+  "estimated_global_cows": 14,
+  "count_error": 0,
+  "count_accuracy": 1.0,
+  "known_required": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_found": [
+    "Margarita",
+    "Marta"
+  ],
+  "known_missing": [
+    "Maria"
+  ],
+  "ready_for_render_by_automatic_checks": false,
+  "known_assignments_by_global_id": {
+    "7": {
+      "global_id": 7,
+      "label": "Marta",
+      "combined": 0.8129167437553406,
+      "reid": 0.7821849584579468,
+      "color": 0.8504778146743774,
+      "margin": 0.3271694898605347,
+      "source_local_track_id": 7,
+      "cluster_local_track_ids": [
+        7
+      ],
+      "cluster_frames": 1200
+    },
+    "12": {
+      "global_id": 12,
+      "label": "Margarita",
+      "combined": 0.7915390968322754,
+      "reid": 0.924988865852356,
+      "color": 0.6284338235855103,
+      "margin": 0.0629896432161331,
+      "source_local_track_id": 50,
+      "cluster_local_track_ids": [
+        50,
+        91
+      ],
+      "cluster_frames": 1712
+    }
+  },
+  "local_to_global": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 5,
+    "9": 8,
+    "10": 8,
+    "11": 9,
+    "12": 10,
+    "14": 11,
+    "50": 12,
+    "65": 9,
+    "91": 12,
+    "95": 4,
+    "126": 4,
+    "154": 13,
+    "164": 14,
+    "187": 4
+  },
+  "tracklets": {
+    "1": {
+      "global_id": 1,
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "color_count": 150,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.4441484574228525,
+          "reid": 0.08871736377477646,
+          "color": 0.8785642385482788
+        },
+        "María": {
+          "combined": 0.44416224360466006,
+          "reid": 0.8075677156448364,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.7828058689832689,
+          "reid": 0.7337019443511963,
+          "color": 0.8428217768669128
+        }
+      }
+    },
+    "2": {
+      "global_id": 2,
+      "frames_seen": 1199,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "color_count": 150,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.7580556064844133,
+          "reid": 0.83165442943573,
+          "color": 0.6681014895439148
+        },
+        "María": {
+          "combined": 0.46246880888938907,
+          "reid": 0.8408523797988892,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.77653848528862,
+          "reid": 0.7505751848220825,
+          "color": 0.8082714080810547
+        }
+      }
+    },
+    "3": {
+      "global_id": 3,
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "color_count": 150,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.5670111387968064,
+          "reid": 0.46592074632644653,
+          "color": 0.6905660629272461
+        },
+        "María": {
+          "combined": 0.3193026721477509,
+          "reid": 0.5805503129959106,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.7169673651456834,
+          "reid": 0.6452696919441223,
+          "color": 0.8045978546142578
+        }
+      }
+    },
+    "4": {
+      "global_id": 4,
+      "frames_seen": 1170,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 145,
+      "color_count": 145,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.6170972421765328,
+          "reid": 0.7738468647003174,
+          "color": 0.4255143702030182
+        },
+        "María": {
+          "combined": 0.4204935997724533,
+          "reid": 0.7645338177680969,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5313908398151398,
+          "reid": 0.559418261051178,
+          "color": 0.49713510274887085
+        }
+      }
+    },
+    "5": {
+      "global_id": 5,
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "color_count": 150,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.7363491952419281,
+          "reid": 0.8059661984443665,
+          "color": 0.6512617468833923
+        },
+        "María": {
+          "combined": 0.38175829052925114,
+          "reid": 0.6941059827804565,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.6356537580490113,
+          "reid": 0.5982527136802673,
+          "color": 0.6813661456108093
+        }
+      }
+    },
+    "6": {
+      "global_id": 6,
+      "frames_seen": 1063,
+      "first_frame": 1801,
+      "last_frame": 2872,
+      "embedding_count": 132,
+      "color_count": 132,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.7217740088701249,
+          "reid": 0.8053237199783325,
+          "color": 0.6196576952934265
+        },
+        "María": {
+          "combined": 0.4062842965126038,
+          "reid": 0.7386987209320068,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.6463760256767273,
+          "reid": 0.6237833499908447,
+          "color": 0.6739892959594727
+        }
+      }
+    },
+    "7": {
+      "global_id": 7,
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "color_count": 150,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.48574725389480594,
+          "reid": 0.2910846471786499,
+          "color": 0.7236682176589966
+        },
+        "María": {
+          "combined": 0.43090124130249025,
+          "reid": 0.7834568023681641,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.8129167437553406,
+          "reid": 0.7821849584579468,
+          "color": 0.8504778146743774
+        }
+      }
+    },
+    "8": {
+      "global_id": 5,
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "color_count": 150,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.7404507607221604,
+          "reid": 0.7620295882225037,
+          "color": 0.7140766382217407
+        },
+        "María": {
+          "combined": 0.3851649880409241,
+          "reid": 0.7002999782562256,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.59990051984787,
+          "reid": 0.4990272521972656,
+          "color": 0.7231900691986084
+        }
+      }
+    },
+    "9": {
+      "global_id": 8,
+      "frames_seen": 237,
+      "first_frame": 1801,
+      "last_frame": 2037,
+      "embedding_count": 29,
+      "color_count": 29,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.5871230691671372,
+          "reid": 0.6624132394790649,
+          "color": 0.4951017498970032
+        },
+        "María": {
+          "combined": 0.19148473739624025,
+          "reid": 0.34815406799316406,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5554803729057312,
+          "reid": 0.4402216672897339,
+          "color": 0.6963521242141724
+        }
+      }
+    },
+    "10": {
+      "global_id": 8,
+      "frames_seen": 326,
+      "first_frame": 1801,
+      "last_frame": 2135,
+      "embedding_count": 39,
+      "color_count": 39,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.5811875835061073,
+          "reid": 0.6488486528396606,
+          "color": 0.49849072098731995
+        },
+        "María": {
+          "combined": 0.23014715462923052,
+          "reid": 0.41844937205314636,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5440605908632279,
+          "reid": 0.41754645109176636,
+          "color": 0.6986889839172363
+        }
+      }
+    },
+    "11": {
+      "global_id": 9,
+      "frames_seen": 266,
+      "first_frame": 1801,
+      "last_frame": 2095,
+      "embedding_count": 33,
+      "color_count": 33,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.5699954748153686,
+          "reid": 0.5930572152137756,
+          "color": 0.5418089032173157
+        },
+        "María": {
+          "combined": 0.13488764837384226,
+          "reid": 0.24525026977062225,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5137687474489212,
+          "reid": 0.3451375961303711,
+          "color": 0.7198734879493713
+        }
+      }
+    },
+    "12": {
+      "global_id": 10,
+      "frames_seen": 503,
+      "first_frame": 1801,
+      "last_frame": 2327,
+      "embedding_count": 62,
+      "color_count": 62,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.6002312928438187,
+          "reid": 0.6116776466369629,
+          "color": 0.5862413048744202
+        },
+        "María": {
+          "combined": 0.3320425629615784,
+          "reid": 0.6037137508392334,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.6846636354923248,
+          "reid": 0.6088905334472656,
+          "color": 0.7772752046585083
+        }
+      }
+    },
+    "14": {
+      "global_id": 11,
+      "frames_seen": 200,
+      "first_frame": 1801,
+      "last_frame": 2061,
+      "embedding_count": 21,
+      "color_count": 21,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.628692439198494,
+          "reid": 0.6222301125526428,
+          "color": 0.636590838432312
+        },
+        "María": {
+          "combined": 0.11179351881146432,
+          "reid": 0.20326094329357147,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.4216305494308472,
+          "reid": 0.22594934701919556,
+          "color": 0.6607964634895325
+        }
+      }
+    },
+    "50": {
+      "global_id": 12,
+      "frames_seen": 927,
+      "first_frame": 2072,
+      "last_frame": 3000,
+      "embedding_count": 117,
+      "color_count": 117,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.7915390968322754,
+          "reid": 0.924988865852356,
+          "color": 0.6284338235855103
+        },
+        "María": {
+          "combined": 0.4582291394472123,
+          "reid": 0.8331438899040222,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.7285494536161423,
+          "reid": 0.6772779822349548,
+          "color": 0.7912145853042603
+        }
+      }
+    },
+    "65": {
+      "global_id": 9,
+      "frames_seen": 337,
+      "first_frame": 2102,
+      "last_frame": 2506,
+      "embedding_count": 45,
+      "color_count": 45,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.6401949644088746,
+          "reid": 0.7239288091659546,
+          "color": 0.5378535985946655
+        },
+        "María": {
+          "combined": 0.2544063925743103,
+          "reid": 0.4625570774078369,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5866495534777642,
+          "reid": 0.4791788160800934,
+          "color": 0.7180026769638062
+        }
+      }
+    },
+    "91": {
+      "global_id": 12,
+      "frames_seen": 785,
+      "first_frame": 2210,
+      "last_frame": 3000,
+      "embedding_count": 98,
+      "color_count": 98,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.7153107345104217,
+          "reid": 0.8265857696533203,
+          "color": 0.5793079137802124
+        },
+        "María": {
+          "combined": 0.38042469620704655,
+          "reid": 0.6916812658309937,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.6751261711120606,
+          "reid": 0.6152139902114868,
+          "color": 0.7483521699905396
+        }
+      }
+    },
+    "95": {
+      "global_id": 4,
+      "frames_seen": 222,
+      "first_frame": 2214,
+      "last_frame": 2462,
+      "embedding_count": 28,
+      "color_count": 28,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.6585035473108292,
+          "reid": 0.788177490234375,
+          "color": 0.5000131726264954
+        },
+        "María": {
+          "combined": 0.45790583789348605,
+          "reid": 0.8325560688972473,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5542930334806442,
+          "reid": 0.5378314852714539,
+          "color": 0.5744127035140991
+        }
+      }
+    },
+    "126": {
+      "global_id": 4,
+      "frames_seen": 368,
+      "first_frame": 2309,
+      "last_frame": 2796,
+      "embedding_count": 47,
+      "color_count": 47,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.5999526619911194,
+          "reid": 0.7941850423812866,
+          "color": 0.3625575304031372
+        },
+        "María": {
+          "combined": 0.444916045665741,
+          "reid": 0.8089382648468018,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5002413541078568,
+          "reid": 0.5700274705886841,
+          "color": 0.4149472117424011
+        }
+      }
+    },
+    "154": {
+      "global_id": 13,
+      "frames_seen": 658,
+      "first_frame": 2343,
+      "last_frame": 3000,
+      "embedding_count": 83,
+      "color_count": 83,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.46925826966762546,
+          "reid": 0.308283269405365,
+          "color": 0.6660054922103882
+        },
+        "María": {
+          "combined": 0.34061297178268435,
+          "reid": 0.6192963123321533,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.7476544797420502,
+          "reid": 0.691105842590332,
+          "color": 0.8167694807052612
+        }
+      }
+    },
+    "164": {
+      "global_id": 14,
+      "frames_seen": 397,
+      "first_frame": 2377,
+      "last_frame": 2873,
+      "embedding_count": 48,
+      "color_count": 48,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.6568163096904756,
+          "reid": 0.6883645057678223,
+          "color": 0.6182574033737183
+        },
+        "María": {
+          "combined": 0.4190610349178315,
+          "reid": 0.7619291543960571,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.7684558182954788,
+          "reid": 0.7535468935966492,
+          "color": 0.7866778373718262
+        }
+      }
+    },
+    "187": {
+      "global_id": 4,
+      "frames_seen": 510,
+      "first_frame": 2471,
+      "last_frame": 3000,
+      "embedding_count": 64,
+      "color_count": 64,
+      "known_scores": {
+        "Margarita": {
+          "combined": 0.5868070989847183,
+          "reid": 0.7362946271896362,
+          "color": 0.40410012006759644
+        },
+        "María": {
+          "combined": 0.4231097459793091,
+          "reid": 0.7692904472351074,
+          "color": 0.0
+        },
+        "Marta": {
+          "combined": 0.5104097574949265,
+          "reid": 0.5058136582374573,
+          "color": 0.5160272121429443
+        }
+      }
+    }
+  },
+  "params": {
+    "video_in": "datos/video campo erondina a procesar.MP4",
+    "video_out": "datos/Resultados/resultado_erondina_reid_global_color.mp4",
+    "report_out": "reports/09_reid_global_color_prueba_min1.json",
+    "yolo_model": "scripts/yolov8m.pt",
+    "tracker": "botsort.yaml",
+    "reid_model": "models/mi_modelo_reid.pt",
+    "identity_gallery": "models/erondina_gallery_embeddings.npz",
+    "gallery_color_dir": "datos/erondina_reid",
+    "identity_mode": "all",
+    "start_frame": 1800,
+    "max_frames": 1200,
+    "det_conf": 0.18,
+    "imgsz": 1280,
+    "reid_every": 8,
+    "min_track_frames": 200,
+    "expected_total_cows": 14,
+    "identity_threshold": 0.68,
+    "identity_margin": 0.01,
+    "merge_threshold": 0.72,
+    "w_reid_known": 0.55,
+    "w_color_known": 0.45,
+    "w_reid_merge": 0.6,
+    "w_color_merge": 0.4,
+    "no_render": true
+  }
+}

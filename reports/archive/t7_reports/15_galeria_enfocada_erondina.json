@@ -1,0 +1,18 @@
+{
+  "data_dir": "datos/erondina_reid",
+  "model_path": "models/mi_modelo_reid.pt",
+  "output": "models/erondina_gallery_embeddings_enfocada.npz",
+  "splits": [
+    "galeria",
+    "test"
+  ],
+  "focus_margin_x": 0.12,
+  "focus_margin_y": 0.18,
+  "num_images": 66,
+  "counts_by_identity": {
+    "Margarita": 21,
+    "Maria": 23,
+    "Marta": 22
+  },
+  "note": "Embeddings con recorte central previo al extractor ReID. No usa color ni IDs manuales."
+}

@@ -1,0 +1,350 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": null,
+  "processed_frames": 1201,
+  "start_frame": 1800,
+  "expected_total_cows": 14,
+  "confirmed_track_count": 21,
+  "count_error": 7,
+  "count_accuracy": 0.5,
+  "assigned_identities": {
+    "2": {
+      "track_id": 2,
+      "label": "María",
+      "score": 0.8074239492416382,
+      "margin": 0.2787132263183594,
+      "frames_seen": 1199,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "all_scores": {
+        "Margarita": 0.4769720733165741,
+        "María": 0.8074239492416382,
+        "Marta": 0.5287107229232788
+      }
+    },
+    "50": {
+      "track_id": 50,
+      "label": "Margarita",
+      "score": 0.7882053852081299,
+      "margin": 0.24168634414672852,
+      "frames_seen": 927,
+      "first_frame": 2072,
+      "last_frame": 3000,
+      "all_scores": {
+        "Margarita": 0.7882053852081299,
+        "María": 0.5394502878189087,
+        "Marta": 0.5465190410614014
+      }
+    }
+  },
+  "tracklets": {
+    "1": {
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "votes": {},
+      "global_scores": {
+        "Margarita": -0.21203583478927612,
+        "María": 0.5219647288322449,
+        "Marta": 0.21104930341243744
+      }
+    },
+    "2": {
+      "frames_seen": 1199,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "votes": {
+        "María": 122,
+        "Margarita": 1
+      },
+      "global_scores": {
+        "Margarita": 0.4769720733165741,
+        "María": 0.8074239492416382,
+        "Marta": 0.5287107229232788
+      }
+    },
+    "3": {
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "votes": {
+        "María": 10
+      },
+      "global_scores": {
+        "Margarita": 0.009288746863603592,
+        "María": 0.5541967153549194,
+        "Marta": 0.3113093376159668
+      }
+    },
+    "4": {
+      "frames_seen": 1170,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 145,
+      "votes": {},
+      "global_scores": {
+        "Margarita": 0.5637573003768921,
+        "María": 0.4186331033706665,
+        "Marta": 0.36147499084472656
+      }
+    },
+    "5": {
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "votes": {
+        "María": 20
+      },
+      "global_scores": {
+        "Margarita": 0.3584092855453491,
+        "María": 0.4911978840827942,
+        "Marta": 0.3699032962322235
+      }
+    },
+    "6": {
+      "frames_seen": 1063,
+      "first_frame": 1801,
+      "last_frame": 2872,
+      "embedding_count": 132,
+      "votes": {
+        "Margarita": 20
+      },
+      "global_scores": {
+        "Margarita": 0.7015781402587891,
+        "María": 0.21686384081840515,
+        "Marta": 0.3163796365261078
+      }
+    },
+    "7": {
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "votes": {
+        "María": 49
+      },
+      "global_scores": {
+        "Margarita": 0.010233279317617416,
+        "María": 0.6548924446105957,
+        "Marta": 0.23151922225952148
+      }
+    },
+    "8": {
+      "frames_seen": 1200,
+      "first_frame": 1801,
+      "last_frame": 3000,
+      "embedding_count": 150,
+      "votes": {
+        "María": 9
+      },
+      "global_scores": {
+        "Margarita": 0.3921421766281128,
+        "María": 0.4152667820453644,
+        "Marta": 0.3050011992454529
+      }
+    },
+    "9": {
+      "frames_seen": 237,
+      "first_frame": 1801,
+      "last_frame": 2037,
+      "embedding_count": 29,
+      "votes": {
+        "Margarita": 2
+      },
+      "global_scores": {
+        "Margarita": 0.4812532365322113,
+        "María": -0.06114177778363228,
+        "Marta": 0.11811870336532593
+      }
+    },
+    "10": {
+      "frames_seen": 326,
+      "first_frame": 1801,
+      "last_frame": 2135,
+      "embedding_count": 39,
+      "votes": {
+        "Margarita": 6
+      },
+      "global_scores": {
+        "Margarita": 0.41865265369415283,
+        "María": -0.05235825479030609,
+        "Marta": 0.14744487404823303
+      }
+    },
+    "11": {
+      "frames_seen": 266,
+      "first_frame": 1801,
+      "last_frame": 2095,
+      "embedding_count": 33,
+      "votes": {},
+      "global_scores": {
+        "Margarita": 0.483916699886322,
+        "María": -0.10409912467002869,
+        "Marta": 0.12627989053726196
+      }
+    },
+    "12": {
+      "frames_seen": 503,
+      "first_frame": 1801,
+      "last_frame": 2327,
+      "embedding_count": 62,
+      "votes": {
+        "María": 8
+      },
+      "global_scores": {
+        "Margarita": 0.4586268663406372,
+        "María": 0.5199903249740601,
+        "Marta": 0.35239577293395996
+      }
+    },
+    "14": {
+      "frames_seen": 200,
+      "first_frame": 1801,
+      "last_frame": 2061,
+      "embedding_count": 21,
+      "votes": {},
+      "global_scores": {
+        "Margarita": 0.4146581292152405,
+        "María": -0.21590754389762878,
+        "Marta": -0.04984186589717865
+      }
+    },
+    "50": {
+      "frames_seen": 927,
+      "first_frame": 2072,
+      "last_frame": 3000,
+      "embedding_count": 117,
+      "votes": {
+        "Margarita": 38,
+        "María": 5,
+        "Marta": 1
+      },
+      "global_scores": {
+        "Margarita": 0.7882053852081299,
+        "María": 0.5394502878189087,
+        "Marta": 0.5465190410614014
+      }
+    },
+    "65": {
+      "frames_seen": 337,
+      "first_frame": 2102,
+      "last_frame": 2506,
+      "embedding_count": 45,
+      "votes": {
+        "Margarita": 3,
+        "María": 1
+      },
+      "global_scores": {
+        "Margarita": 0.6457304358482361,
+        "María": 0.18709255754947662,
+        "Marta": 0.37285739183425903
+      }
+    },
+    "91": {
+      "frames_seen": 785,
+      "first_frame": 2210,
+      "last_frame": 3000,
+      "embedding_count": 98,
+      "votes": {
+        "Margarita": 10
+      },
+      "global_scores": {
+        "Margarita": 0.6194485425949097,
+        "María": 0.4815940260887146,
+        "Marta": 0.47857189178466797
+      }
+    },
+    "95": {
+      "frames_seen": 222,
+      "first_frame": 2214,
+      "last_frame": 2462,
+      "embedding_count": 28,
+      "votes": {},
+      "global_scores": {
+        "Margarita": 0.5735443830490112,
+        "María": 0.4645509719848633,
+        "Marta": 0.37400418519973755
+      }
+    },
+    "126": {
+      "frames_seen": 368,
+      "first_frame": 2309,
+      "last_frame": 2796,
+      "embedding_count": 47,
+      "votes": {
+        "Margarita": 4
+      },
+      "global_scores": {
+        "Margarita": 0.6332623362541199,
+        "María": 0.42006102204322815,
+        "Marta": 0.4013853073120117
+      }
+    },
+    "154": {
+      "frames_seen": 658,
+      "first_frame": 2343,
+      "last_frame": 3000,
+      "embedding_count": 83,
+      "votes": {
+        "María": 6
+      },
+      "global_scores": {
+        "Margarita": 0.1254906952381134,
+        "María": 0.44045668840408325,
+        "Marta": 0.20243725180625916
+      }
+    },
+    "164": {
+      "frames_seen": 397,
+      "first_frame": 2377,
+      "last_frame": 2873,
+      "embedding_count": 48,
+      "votes": {
+        "María": 5,
+        "Margarita": 2
+      },
+      "global_scores": {
+        "Margarita": 0.4960048794746399,
+        "María": 0.5061240196228027,
+        "Marta": 0.39335891604423523
+      }
+    },
+    "187": {
+      "frames_seen": 510,
+      "first_frame": 2471,
+      "last_frame": 3000,
+      "embedding_count": 64,
+      "votes": {},
+      "global_scores": {
+        "Margarita": 0.5758039355278015,
+        "María": 0.3916599154472351,
+        "Marta": 0.3462880849838257
+      }
+    }
+  },
+  "params": {
+    "video_in": "datos/video campo erondina a procesar.MP4",
+    "video_out": "datos/Resultados/resultado_erondina_reid_global.mp4",
+    "report_out": "reports/08_reid_global_prueba_min1_mtf200.json",
+    "yolo_model": "scripts/yolov8m.pt",
+    "tracker": "botsort.yaml",
+    "reid_model": "models/mi_modelo_reid.pt",
+    "identity_gallery": "models/erondina_gallery_embeddings.npz",
+    "identity_mode": "prototype",
+    "start_frame": 1800,
+    "max_frames": 1200,
+    "det_conf": 0.18,
+    "imgsz": 1280,
+    "reid_every": 8,
+    "min_track_frames": 200,
+    "identity_threshold": 0.7,
+    "identity_margin": 0.015,
+    "expected_total_cows": 14,
+    "no_render": true
+  },
+  "note": "Las identidades se asignan una sola vez por trayectoria completa. El render no vuelve a clasificar frame a frame."
+}

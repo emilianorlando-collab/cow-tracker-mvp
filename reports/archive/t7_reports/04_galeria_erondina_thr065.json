@@ -1,0 +1,123 @@
+{
+  "data_dir": "datos/erondina_reid",
+  "model_path": "models/mi_modelo_reid.pt",
+  "output": "models/erondina_gallery_embeddings.npz",
+  "counts_by_identity": {
+    "Margarita": 15,
+    "María": 17,
+    "Marta": 17
+  },
+  "num_gallery_images": 49,
+  "num_identities": 3,
+  "test_eval": {
+    "total": 17,
+    "threshold": 0.65,
+    "accuracy_thresholded": 76.47058823529412,
+    "rejection_rate": 5.882352941176471,
+    "false_accepts": 3,
+    "rows": [
+      {
+        "true_label": "Margarita",
+        "pred_label": "Margarita",
+        "score": 0.8043687343597412,
+        "accepted": true
+      },
+      {
+        "true_label": "Margarita",
+        "pred_label": "Margarita",
+        "score": 0.9431182146072388,
+        "accepted": true
+      },
+      {
+        "true_label": "Margarita",
+        "pred_label": "Margarita",
+        "score": 0.8454492688179016,
+        "accepted": true
+      },
+      {
+        "true_label": "Margarita",
+        "pred_label": "Margarita",
+        "score": 0.9241926074028015,
+        "accepted": true
+      },
+      {
+        "true_label": "Margarita",
+        "pred_label": "Margarita",
+        "score": 0.7233256101608276,
+        "accepted": true
+      },
+      {
+        "true_label": "Margarita",
+        "pred_label": "Margarita",
+        "score": 0.9263874292373657,
+        "accepted": true
+      },
+      {
+        "true_label": "María",
+        "pred_label": "María",
+        "score": 0.8190211653709412,
+        "accepted": true
+      },
+      {
+        "true_label": "María",
+        "pred_label": "María",
+        "score": 0.7658876180648804,
+        "accepted": true
+      },
+      {
+        "true_label": "María",
+        "pred_label": "María",
+        "score": 0.866168737411499,
+        "accepted": true
+      },
+      {
+        "true_label": "María",
+        "pred_label": "María",
+        "score": 0.6744294762611389,
+        "accepted": true
+      },
+      {
+        "true_label": "María",
+        "pred_label": "María",
+        "score": 0.7471523880958557,
+        "accepted": true
+      },
+      {
+        "true_label": "María",
+        "pred_label": "desconocida",
+        "score": 0.6428547501564026,
+        "accepted": false
+      },
+      {
+        "true_label": "Marta",
+        "pred_label": "María",
+        "score": 0.7921093702316284,
+        "accepted": true
+      },
+      {
+        "true_label": "Marta",
+        "pred_label": "Marta",
+        "score": 0.8054684996604919,
+        "accepted": true
+      },
+      {
+        "true_label": "Marta",
+        "pred_label": "Marta",
+        "score": 0.6935122013092041,
+        "accepted": true
+      },
+      {
+        "true_label": "Marta",
+        "pred_label": "María",
+        "score": 0.7756878137588501,
+        "accepted": true
+      },
+      {
+        "true_label": "Marta",
+        "pred_label": "María",
+        "score": 0.7472684383392334,
+        "accepted": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": "datos/Resultados/resultado_erondina_reid_completo.mp4",
+  "identity_gallery": "models/erondina_gallery_embeddings.npz",
+  "identity_mode": "prototype",
+  "identity_threshold": 0.75,
+  "det_conf": 0.15,
+  "sim_threshold": 0.55,
+  "expected_total_cows": 14,
+  "estimated_total_cows": 85,
+  "count_error": 71,
+  "absolute_count_error": 71,
+  "count_accuracy": 0.0,
+  "processed_frames": 9761,
+  "avg_detections_per_frame": 19.355393914557936,
+  "id_switches_approx": 240,
+  "avg_track_lifetime_frames": 2222.6823529411763,
+  "identity_frame_hits": {
+    "Margarita": 26439,
+    "María": 23984,
+    "Marta": 2171
+  },
+  "unknown_frame_hits": 136334,
+  "note": "Precision/recall reales sobre el video requieren anotaciones ground truth por frame. Este reporte incluye métricas operativas del video y conteo contra el total esperado."
+}

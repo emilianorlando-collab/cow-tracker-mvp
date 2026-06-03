@@ -1,0 +1,681 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "yolo_model": "scripts/yolov8m.pt",
+  "expected_total_cows": 14,
+  "sample_step": 500,
+  "sampled_frames": [
+    0,
+    500,
+    1000,
+    1500,
+    2000,
+    2500,
+    3000,
+    3500,
+    4000,
+    4500,
+    5000,
+    5500,
+    6000,
+    6500,
+    7000,
+    7500,
+    8000,
+    8500,
+    9000,
+    9500
+  ],
+  "filters": {
+    "iou_threshold": 0.7,
+    "min_area_ratio": 0.00015,
+    "max_area_ratio": 0.02,
+    "min_aspect": 0.35,
+    "max_aspect": 3.5
+  },
+  "summary": {
+    "0.15": {
+      "mean_count": 7.8,
+      "median_count": 7.5,
+      "min_count": 0,
+      "max_count": 17,
+      "mean_abs_error_vs_expected": 7.0
+    },
+    "0.25": {
+      "mean_count": 7.15,
+      "median_count": 7.0,
+      "min_count": 0,
+      "max_count": 16,
+      "mean_abs_error_vs_expected": 7.15
+    },
+    "0.35": {
+      "mean_count": 6.55,
+      "median_count": 6.5,
+      "min_count": 0,
+      "max_count": 14,
+      "mean_abs_error_vs_expected": 7.45
+    },
+    "0.45": {
+      "mean_count": 5.9,
+      "median_count": 6.0,
+      "min_count": 0,
+      "max_count": 14,
+      "mean_abs_error_vs_expected": 8.1
+    },
+    "0.55": {
+      "mean_count": 5.35,
+      "median_count": 6.0,
+      "min_count": 0,
+      "max_count": 12,
+      "mean_abs_error_vs_expected": 8.65
+    },
+    "0.65": {
+      "mean_count": 4.8,
+      "median_count": 5.5,
+      "min_count": 0,
+      "max_count": 12,
+      "mean_abs_error_vs_expected": 9.2
+    }
+  },
+  "rows": [
+    {
+      "frame": 0,
+      "threshold": 0.15,
+      "count": 0
+    },
+    {
+      "frame": 500,
+      "threshold": 0.15,
+      "count": 1
+    },
+    {
+      "frame": 1000,
+      "threshold": 0.15,
+      "count": 11
+    },
+    {
+      "frame": 1500,
+      "threshold": 0.15,
+      "count": 17
+    },
+    {
+      "frame": 2000,
+      "threshold": 0.15,
+      "count": 15
+    },
+    {
+      "frame": 2500,
+      "threshold": 0.15,
+      "count": 16
+    },
+    {
+      "frame": 3000,
+      "threshold": 0.15,
+      "count": 16
+    },
+    {
+      "frame": 3500,
+      "threshold": 0.15,
+      "count": 12
+    },
+    {
+      "frame": 4000,
+      "threshold": 0.15,
+      "count": 5
+    },
+    {
+      "frame": 4500,
+      "threshold": 0.15,
+      "count": 2
+    },
+    {
+      "frame": 5000,
+      "threshold": 0.15,
+      "count": 7
+    },
+    {
+      "frame": 5500,
+      "threshold": 0.15,
+      "count": 7
+    },
+    {
+      "frame": 6000,
+      "threshold": 0.15,
+      "count": 10
+    },
+    {
+      "frame": 6500,
+      "threshold": 0.15,
+      "count": 9
+    },
+    {
+      "frame": 7000,
+      "threshold": 0.15,
+      "count": 8
+    },
+    {
+      "frame": 7500,
+      "threshold": 0.15,
+      "count": 6
+    },
+    {
+      "frame": 8000,
+      "threshold": 0.15,
+      "count": 8
+    },
+    {
+      "frame": 8500,
+      "threshold": 0.15,
+      "count": 4
+    },
+    {
+      "frame": 9000,
+      "threshold": 0.15,
+      "count": 2
+    },
+    {
+      "frame": 9500,
+      "threshold": 0.15,
+      "count": 0
+    },
+    {
+      "frame": 0,
+      "threshold": 0.25,
+      "count": 0
+    },
+    {
+      "frame": 500,
+      "threshold": 0.25,
+      "count": 0
+    },
+    {
+      "frame": 1000,
+      "threshold": 0.25,
+      "count": 10
+    },
+    {
+      "frame": 1500,
+      "threshold": 0.25,
+      "count": 16
+    },
+    {
+      "frame": 2000,
+      "threshold": 0.25,
+      "count": 14
+    },
+    {
+      "frame": 2500,
+      "threshold": 0.25,
+      "count": 14
+    },
+    {
+      "frame": 3000,
+      "threshold": 0.25,
+      "count": 15
+    },
+    {
+      "frame": 3500,
+      "threshold": 0.25,
+      "count": 12
+    },
+    {
+      "frame": 4000,
+      "threshold": 0.25,
+      "count": 5
+    },
+    {
+      "frame": 4500,
+      "threshold": 0.25,
+      "count": 2
+    },
+    {
+      "frame": 5000,
+      "threshold": 0.25,
+      "count": 5
+    },
+    {
+      "frame": 5500,
+      "threshold": 0.25,
+      "count": 7
+    },
+    {
+      "frame": 6000,
+      "threshold": 0.25,
+      "count": 9
+    },
+    {
+      "frame": 6500,
+      "threshold": 0.25,
+      "count": 8
+    },
+    {
+      "frame": 7000,
+      "threshold": 0.25,
+      "count": 7
+    },
+    {
+      "frame": 7500,
+      "threshold": 0.25,
+      "count": 6
+    },
+    {
+      "frame": 8000,
+      "threshold": 0.25,
+      "count": 7
+    },
+    {
+      "frame": 8500,
+      "threshold": 0.25,
+      "count": 4
+    },
+    {
+      "frame": 9000,
+      "threshold": 0.25,
+      "count": 2
+    },
+    {
+      "frame": 9500,
+      "threshold": 0.25,
+      "count": 0
+    },
+    {
+      "frame": 0,
+      "threshold": 0.35,
+      "count": 0
+    },
+    {
+      "frame": 500,
+      "threshold": 0.35,
+      "count": 0
+    },
+    {
+      "frame": 1000,
+      "threshold": 0.35,
+      "count": 8
+    },
+    {
+      "frame": 1500,
+      "threshold": 0.35,
+      "count": 12
+    },
+    {
+      "frame": 2000,
+      "threshold": 0.35,
+      "count": 13
+    },
+    {
+      "frame": 2500,
+      "threshold": 0.35,
+      "count": 13
+    },
+    {
+      "frame": 3000,
+      "threshold": 0.35,
+      "count": 14
+    },
+    {
+      "frame": 3500,
+      "threshold": 0.35,
+      "count": 11
+    },
+    {
+      "frame": 4000,
+      "threshold": 0.35,
+      "count": 5
+    },
+    {
+      "frame": 4500,
+      "threshold": 0.35,
+      "count": 2
+    },
+    {
+      "frame": 5000,
+      "threshold": 0.35,
+      "count": 5
+    },
+    {
+      "frame": 5500,
+      "threshold": 0.35,
+      "count": 6
+    },
+    {
+      "frame": 6000,
+      "threshold": 0.35,
+      "count": 9
+    },
+    {
+      "frame": 6500,
+      "threshold": 0.35,
+      "count": 7
+    },
+    {
+      "frame": 7000,
+      "threshold": 0.35,
+      "count": 7
+    },
+    {
+      "frame": 7500,
+      "threshold": 0.35,
+      "count": 6
+    },
+    {
+      "frame": 8000,
+      "threshold": 0.35,
+      "count": 7
+    },
+    {
+      "frame": 8500,
+      "threshold": 0.35,
+      "count": 4
+    },
+    {
+      "frame": 9000,
+      "threshold": 0.35,
+      "count": 2
+    },
+    {
+      "frame": 9500,
+      "threshold": 0.35,
+      "count": 0
+    },
+    {
+      "frame": 0,
+      "threshold": 0.45,
+      "count": 0
+    },
+    {
+      "frame": 500,
+      "threshold": 0.45,
+      "count": 0
+    },
+    {
+      "frame": 1000,
+      "threshold": 0.45,
+      "count": 5
+    },
+    {
+      "frame": 1500,
+      "threshold": 0.45,
+      "count": 9
+    },
+    {
+      "frame": 2000,
+      "threshold": 0.45,
+      "count": 11
+    },
+    {
+      "frame": 2500,
+      "threshold": 0.45,
+      "count": 12
+    },
+    {
+      "frame": 3000,
+      "threshold": 0.45,
+      "count": 14
+    },
+    {
+      "frame": 3500,
+      "threshold": 0.45,
+      "count": 9
+    },
+    {
+      "frame": 4000,
+      "threshold": 0.45,
+      "count": 5
+    },
+    {
+      "frame": 4500,
+      "threshold": 0.45,
+      "count": 2
+    },
+    {
+      "frame": 5000,
+      "threshold": 0.45,
+      "count": 5
+    },
+    {
+      "frame": 5500,
+      "threshold": 0.45,
+      "count": 6
+    },
+    {
+      "frame": 6000,
+      "threshold": 0.45,
+      "count": 8
+    },
+    {
+      "frame": 6500,
+      "threshold": 0.45,
+      "count": 7
+    },
+    {
+      "frame": 7000,
+      "threshold": 0.45,
+      "count": 7
+    },
+    {
+      "frame": 7500,
+      "threshold": 0.45,
+      "count": 6
+    },
+    {
+      "frame": 8000,
+      "threshold": 0.45,
+      "count": 7
+    },
+    {
+      "frame": 8500,
+      "threshold": 0.45,
+      "count": 3
+    },
+    {
+      "frame": 9000,
+      "threshold": 0.45,
+      "count": 2
+    },
+    {
+      "frame": 9500,
+      "threshold": 0.45,
+      "count": 0
+    },
+    {
+      "frame": 0,
+      "threshold": 0.55,
+      "count": 0
+    },
+    {
+      "frame": 500,
+      "threshold": 0.55,
+      "count": 0
+    },
+    {
+      "frame": 1000,
+      "threshold": 0.55,
+      "count": 5
+    },
+    {
+      "frame": 1500,
+      "threshold": 0.55,
+      "count": 7
+    },
+    {
+      "frame": 2000,
+      "threshold": 0.55,
+      "count": 9
+    },
+    {
+      "frame": 2500,
+      "threshold": 0.55,
+      "count": 11
+    },
+    {
+      "frame": 3000,
+      "threshold": 0.55,
+      "count": 12
+    },
+    {
+      "frame": 3500,
+      "threshold": 0.55,
+      "count": 7
+    },
+    {
+      "frame": 4000,
+      "threshold": 0.55,
+      "count": 4
+    },
+    {
+      "frame": 4500,
+      "threshold": 0.55,
+      "count": 2
+    },
+    {
+      "frame": 5000,
+      "threshold": 0.55,
+      "count": 5
+    },
+    {
+      "frame": 5500,
+      "threshold": 0.55,
+      "count": 6
+    },
+    {
+      "frame": 6000,
+      "threshold": 0.55,
+      "count": 8
+    },
+    {
+      "frame": 6500,
+      "threshold": 0.55,
+      "count": 7
+    },
+    {
+      "frame": 7000,
+      "threshold": 0.55,
+      "count": 7
+    },
+    {
+      "frame": 7500,
+      "threshold": 0.55,
+      "count": 6
+    },
+    {
+      "frame": 8000,
+      "threshold": 0.55,
+      "count": 7
+    },
+    {
+      "frame": 8500,
+      "threshold": 0.55,
+      "count": 2
+    },
+    {
+      "frame": 9000,
+      "threshold": 0.55,
+      "count": 2
+    },
+    {
+      "frame": 9500,
+      "threshold": 0.55,
+      "count": 0
+    },
+    {
+      "frame": 0,
+      "threshold": 0.65,
+      "count": 0
+    },
+    {
+      "frame": 500,
+      "threshold": 0.65,
+      "count": 0
+    },
+    {
+      "frame": 1000,
+      "threshold": 0.65,
+      "count": 1
+    },
+    {
+      "frame": 1500,
+      "threshold": 0.65,
+      "count": 6
+    },
+    {
+      "frame": 2000,
+      "threshold": 0.65,
+      "count": 9
+    },
+    {
+      "frame": 2500,
+      "threshold": 0.65,
+      "count": 11
+    },
+    {
+      "frame": 3000,
+      "threshold": 0.65,
+      "count": 12
+    },
+    {
+      "frame": 3500,
+      "threshold": 0.65,
+      "count": 7
+    },
+    {
+      "frame": 4000,
+      "threshold": 0.65,
+      "count": 4
+    },
+    {
+      "frame": 4500,
+      "threshold": 0.65,
+      "count": 2
+    },
+    {
+      "frame": 5000,
+      "threshold": 0.65,
+      "count": 4
+    },
+    {
+      "frame": 5500,
+      "threshold": 0.65,
+      "count": 6
+    },
+    {
+      "frame": 6000,
+      "threshold": 0.65,
+      "count": 7
+    },
+    {
+      "frame": 6500,
+      "threshold": 0.65,
+      "count": 7
+    },
+    {
+      "frame": 7000,
+      "threshold": 0.65,
+      "count": 6
+    },
+    {
+      "frame": 7500,
+      "threshold": 0.65,
+      "count": 6
+    },
+    {
+      "frame": 8000,
+      "threshold": 0.65,
+      "count": 5
+    },
+    {
+      "frame": 8500,
+      "threshold": 0.65,
+      "count": 2
+    },
+    {
+      "frame": 9000,
+      "threshold": 0.65,
+      "count": 1
+    },
+    {
+      "frame": 9500,
+      "threshold": 0.65,
+      "count": 0
+    }
+  ]
+}

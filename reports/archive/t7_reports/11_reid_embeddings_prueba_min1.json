@@ -1,0 +1,109 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": null,
+  "processed_frames": 1201,
+  "estimated_global_cows": 15,
+  "expected_total_cows": 14,
+  "count_error": 1,
+  "count_accuracy": 0.9285714285714286,
+  "known_found": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_missing": [],
+  "duplicate_known_label_frames": {},
+  "ready_for_render_by_automatic_checks": true,
+  "known_assignments_by_global_id": {
+    "12": {
+      "global_id": 12,
+      "label": "marta",
+      "score": 0.8366276025772095,
+      "margin": 0.09214681386947632,
+      "median": 0.5302689671516418,
+      "max": 0.8735169768333435,
+      "support_075": 0.3253012048192771,
+      "source_local_track_id": 154,
+      "cluster_local_track_ids": [
+        12,
+        154
+      ],
+      "cluster_frames": 1161
+    },
+    "14": {
+      "global_id": 14,
+      "label": "margarita",
+      "score": 0.9211392402648926,
+      "margin": 0.0776134729385376,
+      "median": 0.8305403590202332,
+      "max": 0.9513937830924988,
+      "support_075": 0.717948717948718,
+      "source_local_track_id": 50,
+      "cluster_local_track_ids": [
+        50
+      ],
+      "cluster_frames": 927
+    },
+    "15": {
+      "global_id": 15,
+      "label": "maria",
+      "score": 0.9164290428161621,
+      "margin": 0.08813101053237915,
+      "median": 0.8601455688476562,
+      "max": 0.9471780061721802,
+      "support_075": 0.6785714285714286,
+      "source_local_track_id": 95,
+      "cluster_local_track_ids": [
+        95,
+        187
+      ],
+      "cluster_frames": 732
+    }
+  },
+  "local_to_global": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12,
+    "14": 13,
+    "50": 14,
+    "65": 11,
+    "91": 9,
+    "95": 15,
+    "126": 10,
+    "154": 12,
+    "164": 13,
+    "187": 15
+  },
+  "contact_sheet": "reports/11_contact_sheet_embeddings_prueba_min1.jpg",
+  "params": {
+    "video_in": "datos/video campo erondina a procesar.MP4",
+    "video_out": "datos/Resultados/resultado_erondina_reid_embeddings_final.mp4",
+    "report_out": "reports/11_reid_embeddings_prueba_min1.json",
+    "contact_sheet_out": "reports/11_contact_sheet_embeddings_prueba_min1.jpg",
+    "yolo_model": "scripts/yolov8m.pt",
+    "tracker": "botsort.yaml",
+    "reid_model": "models/mi_modelo_reid.pt",
+    "identity_gallery": "models/erondina_gallery_embeddings.npz",
+    "start_frame": 1800,
+    "max_frames": 1200,
+    "det_conf": 0.18,
+    "imgsz": 1280,
+    "reid_every": 8,
+    "min_track_frames": 200,
+    "merge_threshold": 0.78,
+    "max_overlap_frames": 5,
+    "identity_threshold": 0.78,
+    "identity_margin": 0.015,
+    "expected_total_cows": 14,
+    "render": false
+  }
+}
