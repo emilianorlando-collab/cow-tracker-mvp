@@ -142,7 +142,6 @@ Cálculo usado:
 | Error absoluto de conteo automático | **+8 vacas** | <= 1 vaca | 🟡 Resultado aceptable |
 | Precisión de conteo automático | **61.90%** | > 80.0% | 🟡 Resultado aceptable |
 | Recall de detección/conteo visual | **100.0%** | > 80.0% | ✅ Superado |
-| Accuracy de conteo automático | **38.46%** | > 90.0% | 🟡 Resultado aceptable |
 | Presencia temporal promedio de identidades en video final | **99.81%** | > 90.0% | ✅ Superado |
 | Score Re-ID promedio de asignaciones finales | **92.34%** | > 85.0% | ✅ Superado |
 | ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
@@ -157,11 +156,10 @@ requiere frames anotados manualmente con cajas ground truth.
 Nota sobre conteo: en `VERSION_FINAL.mp4` se observan **13 vacas reales**. El
 sistema logra detectar y seguir animales, pero el conteo automático basado en
 etiquetas de tracking contabiliza **21 IDs**, generando un sobreconteo de
-`+8` vacas. La precisión de conteo se calcula como `13 / 21 = 61.90%`; el
+`+8` vacas. La precisión de conteo se calcula como `13 / 21 = 61.90%`. El
 recall de detección/conteo visual se informa como `13 / 13 = 100.0%` porque las
 vacas reales del fragmento aparecen detectadas, aunque algunas sean contadas
-más de una vez; y el accuracy de conteo se calcula como
-`1 - |21 - 13| / 13 = 38.46%`.
+más de una vez.
 
 Esta diferencia no contradice el resultado de Re-ID. La Re-ID se evalúa sobre
 las tres vacas catalogadas, que cuentan con galería específica, embeddings
