@@ -79,18 +79,28 @@ artifacts/README.md
 
 ## 📊 Métricas de Validación
 
-### Detección
+### Métricas calculadas desde el reporte final
 
-Estas métricas resumen la validación del componente de detección dentro del
-MVP. Los umbrales fueron definidos como criterios mínimos de éxito para
-considerar que el detector era suficientemente confiable para alimentar el
-tracking y la reidentificación.
+El último reporte JSON no incluye Precision, Recall ni mAP@0.5, porque esas
+métricas requieren anotaciones ground truth por frame y por bounding box. Para
+no reportar métricas no medidas, esta sección usa únicamente valores presentes
+en el reporte final o derivados directamente de él.
 
-| Métrica Evaluada | Valor Obtenido | Umbral de Éxito Proyectado | Estado de Validación |
+| Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
-| Precisión (Precision) | **86.6%** | > 80.0% | ✅ Superado |
-| Exhaustividad (Recall) | **84.1%** | > 80.0% | ✅ Superado |
-| mAP@0.5 | **85.5%** | > 85.0% | ✅ Superado |
+| Conteo estimado vs referencia | **14/14 vacas** | Error absoluto <= 1 vaca | ✅ Superado |
+| Accuracy de conteo | **100.0%** | > 90.0% | ✅ Superado |
+| Error absoluto de conteo | **0 vacas** | <= 1 vaca | ✅ Superado |
+| Identidades objetivo encontradas | **3/3** | 3/3 | ✅ Superado |
+| ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
+| Huecos largos en medio del plano | **0** | 0 | ✅ Superado |
+| Vacas desconocidas estimadas | **11** | 11 esperadas | ✅ Superado |
+| Presencia conjunta de Marta, Maria y Margarita | **4680 frames** | Evidencia de las 3 juntas | ✅ Superado |
+
+Nota metodológica: Precision, Recall y mAP@0.5 deben calcularse con un conjunto
+de frames anotados manualmente. El reporte final actual mide desempeño operativo
+del render: conteo, continuidad temporal, presencia de identidades conocidas,
+fragmentación de tracks y consistencia de etiquetas.
 
 ### Render final Erondina
 
