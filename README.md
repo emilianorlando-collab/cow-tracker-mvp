@@ -81,26 +81,29 @@ artifacts/README.md
 
 ### Métricas calculadas desde el reporte final
 
-El último reporte JSON no incluye Precision, Recall ni mAP@0.5, porque esas
-métricas requieren anotaciones ground truth por frame y por bounding box. Para
-no reportar métricas no medidas, esta sección usa únicamente valores presentes
-en el reporte final o derivados directamente de él.
+Estas métricas fueron calculadas directamente desde el último reporte JSON
+versionado. El archivo no contiene anotaciones ground truth por frame ni por
+bounding box; por eso no se reporta mAP@0.5 real de detección. En su lugar, se
+informan métricas operativas del MVP final: conteo, recuperación de identidades,
+cobertura temporal, estabilidad de etiquetas y continuidad.
 
 | Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
 | Conteo estimado vs referencia | **14/14 vacas** | Error absoluto <= 1 vaca | ✅ Superado |
 | Accuracy de conteo | **100.0%** | > 90.0% | ✅ Superado |
 | Error absoluto de conteo | **0 vacas** | <= 1 vaca | ✅ Superado |
-| Identidades objetivo encontradas | **3/3** | 3/3 | ✅ Superado |
+| Recall de identidades objetivo | **100.0%** | 3/3 identidades | ✅ Superado |
+| Presencia temporal promedio de identidades | **98.63%** | > 90.0% | ✅ Superado |
+| Cobertura promedio con detección trackeada | **97.80%** | > 90.0% | ✅ Superado |
+| Cobertura promedio con Re-ID confirmado | **74.63%** | Métrica diagnóstica | ⚠️ Informativo |
 | ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
 | Huecos largos en medio del plano | **0** | 0 | ✅ Superado |
 | Vacas desconocidas estimadas | **11** | 11 esperadas | ✅ Superado |
-| Presencia conjunta de Marta, Maria y Margarita | **4680 frames** | Evidencia de las 3 juntas | ✅ Superado |
+| Presencia conjunta de Marta, Maria y Margarita | **2448 frames (50.15%)** | Evidencia de las 3 juntas | ✅ Superado |
 
-Nota metodológica: Precision, Recall y mAP@0.5 deben calcularse con un conjunto
-de frames anotados manualmente. El reporte final actual mide desempeño operativo
-del render: conteo, continuidad temporal, presencia de identidades conocidas,
-fragmentación de tracks y consistencia de etiquetas.
+Nota metodológica: Precision, Recall y mAP@0.5 de detección deben calcularse
+con frames anotados manualmente. El reporte final actual permite calcular
+métricas del render y del tracking, pero no mAP real de bounding boxes.
 
 ### Render final Erondina
 
@@ -108,6 +111,12 @@ Reporte final versionado:
 
 ```text
 reports/final/16_segunda_mitad_original_timeline_hd_head_render.json
+```
+
+Métricas derivadas versionadas:
+
+```text
+reports/final/16_metricas_calculadas_desde_json.json
 ```
 
 | Métrica Operativa | Resultado |

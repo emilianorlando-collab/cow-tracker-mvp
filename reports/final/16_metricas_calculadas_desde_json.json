@@ -1,0 +1,62 @@
+{
+  "source_report": "reports/final/16_segunda_mitad_original_timeline_hd_head_render.json",
+  "metric_type": "operational_metrics_derived_from_final_render_report",
+  "methodological_note": "Precision, Recall and mAP@0.5 for bounding-box detection require frame-level ground-truth annotations. The final render JSON does not contain those annotations, so this file reports operational MVP metrics derived from the available final report.",
+  "count_metrics": {
+    "expected_total_cows": 14,
+    "estimated_total_cows": 14,
+    "count_accuracy_percent": 100.0,
+    "absolute_count_error": 0,
+    "unknown_cows_estimated": 11
+  },
+  "identity_metrics": {
+    "expected_known_identities": 3,
+    "known_identities_found": 3,
+    "known_identity_recall_percent": 100.0,
+    "known_id_switches_by_design": 0,
+    "locked_midframe_gap_count_ge_2s": 0,
+    "all_known_together_frames": 2448,
+    "all_known_together_percent_of_processed_frames": 50.15
+  },
+  "temporal_coverage_metrics": {
+    "average_known_presence_percent": 98.63,
+    "average_tracked_detection_coverage_percent": 97.8,
+    "average_confirmed_reid_coverage_percent": 74.63
+  },
+  "per_identity_metrics": {
+    "Margarita": {
+      "presence_percent": 100.0,
+      "tracked_detection_coverage_percent": 100.0,
+      "confirmed_reid_coverage_percent": 86.31,
+      "hold_only_percent": 0.0
+    },
+    "Maria": {
+      "presence_percent": 99.75,
+      "tracked_detection_coverage_percent": 99.28,
+      "confirmed_reid_coverage_percent": 68.2,
+      "hold_only_percent": 0.47
+    },
+    "Marta": {
+      "presence_percent": 96.13,
+      "tracked_detection_coverage_percent": 94.12,
+      "confirmed_reid_coverage_percent": 69.37,
+      "hold_only_percent": 2.01
+    }
+  },
+  "visible_cow_metrics": {
+    "visible_cows_per_frame_mean": 11.44,
+    "visible_cows_per_frame_median": 12.0,
+    "visible_cows_per_frame_p95": 14.0,
+    "visible_cows_per_frame_max": 16
+  },
+  "fragmentation_metrics": {
+    "global_track_count_after_clustering": 22,
+    "fragmentation_over_expected": 8,
+    "suppressed_duplicate_known_detections_in_render": 3
+  },
+  "non_calculable_from_current_json": {
+    "precision_detection_bbox": "requires annotated ground-truth bounding boxes",
+    "recall_detection_bbox": "requires annotated ground-truth bounding boxes",
+    "map_50_detection_bbox": "requires annotated ground-truth bounding boxes and confidence-ranked detections"
+  }
+}
