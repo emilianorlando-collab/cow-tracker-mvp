@@ -1,47 +1,59 @@
-# CowTrack MVP
+# 🐄 CowTrack MVP
 
-Sistema de detección, seguimiento y reidentificación individual de vacas en
-video aéreo mediante YOLOv8, embeddings profundos, FAISS y tracking temporal.
+Sistema de detección, conteo, tracking y reidentificación individual de vacas
+en video aéreo real mediante **YOLOv8**, **embeddings Re-ID**, **FAISS** y
+análisis temporal offline.
 
-El MVP está orientado a videos reales de campo capturados con dron. Su objetivo
-no es solamente contar animales visibles, sino sostener identidades individuales
-cuando existen vacas previamente catalogadas.
+El objetivo del MVP es pasar de un video de campo capturado con dron a un video
+final renderizado donde las vacas sean detectadas, contabilizadas y, cuando
+existen individuos previamente catalogados, reidentificadas con nombre estable.
 
-**Estado del proyecto:** MVP completo.
+**Estado del proyecto:** ✅ **MVP completo**
 
-## Objetivo
+---
 
-El proyecto busca resolver tres tareas principales:
+## 🎯 Objetivo
 
-1. Detectar vacas en video mediante un modelo YOLO entrenado para el dominio.
-2. Generar embeddings visuales de cada vaca para reidentificación individual.
-3. Mantener el tracking temporal de cada animal a lo largo del video, evitando
-   cambios de identidad cuando la cámara gira, la vaca se mueve o existen
-   oclusiones parciales.
+CowTrack busca resolver un problema concreto de visión computacional aplicada a
+ganadería: detectar animales en video aéreo y sostener su identidad a lo largo
+del tiempo, incluso cuando la cámara gira, cambia el ángulo de observación o
+algunas vacas salen parcialmente del plano.
 
-La versión final del MVP fue validada sobre el video de campo Erondina, con
-tres vacas catalogadas:
+El sistema final cubre tres niveles:
 
-| Identidad | Característica visual usada para auditoría |
-| --- | --- |
-| Marta | Vaca castaña |
-| Maria | Vaca negra |
-| Margarita | Vaca castaña |
+1. **Detección:** localizar vacas en cada frame mediante YOLO.
+2. **Conteo:** estimar el total de vacas reales, evitando contar como animales
+   nuevos los IDs fragmentados por el tracker.
+3. **Reidentificación:** reconocer vacas catalogadas a partir de embeddings y
+   mantener su etiqueta mientras sigan dentro del video.
 
-Las etiquetas de estas tres vacas tienen prioridad visual en el video final. Si
-una caja de una vaca desconocida se superpone con una vaca reidentificada, se
-prioriza la etiqueta de Marta, Maria o Margarita.
+La validación final se realizó sobre el video de campo **Erondina**, con tres
+vacas objetivo:
 
-## Resultado Final Erondina
+| Identidad | Característica visual auditada | Rol en el MVP |
+| --- | --- | --- |
+| **Marta** | Vaca castaña | Re-ID individual |
+| **Maria** | Vaca negra | Re-ID individual |
+| **Margarita** | Vaca castaña | Re-ID individual |
 
-El resultado final del caso Erondina genera un video renderizado en HD donde:
+Las etiquetas de Marta, Maria y Margarita tienen prioridad visual sobre las
+vacas desconocidas. Si existe superposición, el render final prioriza las
+identidades reidentificadas.
 
-- Marta, Maria y Margarita aparecen con etiquetas visibles y persistentes
-  mientras permanecen dentro del plano.
-- Las vacas no catalogadas se detectan y se contabilizan como parte del rodeo.
-- El conteo estimado final es de 14 vacas.
-- El render evita que identidades internas fragmentadas del tracker se
-  interpreten automáticamente como animales nuevos.
+---
+
+## ✅ Resultado Final Erondina
+
+El resultado final genera un video HD donde:
+
+- Marta, Maria y Margarita aparecen con etiquetas grandes, visibles y
+  priorizadas.
+- Las tres identidades se sostienen mediante una línea temporal estable, no por
+  decisiones aisladas frame a frame.
+- Las vacas desconocidas también se detectan y se contabilizan.
+- El conteo final consolidado es de **14 vacas**.
+- Los cambios de ID internos del tracker no se interpretan automáticamente como
+  vacas nuevas.
 
 El video final de presentación se llama:
 
@@ -49,120 +61,38 @@ El video final de presentación se llama:
 RESULTADO_FINAL.mp4
 ```
 
-Por su tamaño, el video no se versiona en Git. Los videos, datasets, caches y
-artefactos pesados viven dentro de `datos/`, carpeta excluida mediante
-`.gitignore`. La ubicación y criterio de manejo de artefactos están documentados
-en:
+Por tamaño, el video final no se sube al repositorio. Los videos, datasets,
+caches y resultados pesados viven dentro de:
+
+```text
+datos/
+```
+
+La carpeta `datos/` está excluida por `.gitignore`. El criterio de manejo de
+artefactos está documentado en:
 
 ```text
 artifacts/README.md
 ```
 
-El índice profesional de scripts, incluyendo las pruebas intermedias realizadas
-durante la investigación, está disponible en:
+---
 
-```text
-docs/SCRIPTS_INTERMEDIOS.md
-```
+## 📊 Métricas de Validación
 
-## Proceso de Investigación
+### Detección
 
-### 1. Entrenamiento Re-ID general
+Estas métricas resumen la validación del componente de detección dentro del
+MVP. Los umbrales fueron definidos como criterios mínimos de éxito para
+considerar que el detector era suficientemente confiable para alimentar el
+tracking y la reidentificación.
 
-La primera etapa consistió en entrenar un extractor de embeddings con un dataset
-general de vacas. Ese modelo base permite transformar cada recorte de vaca en
-un vector visual comparable mediante similitud coseno o búsqueda FAISS.
+| Métrica Evaluada | Valor Obtenido | Umbral de Éxito Proyectado | Estado de Validación |
+| --- | ---: | ---: | --- |
+| Precisión (Precision) | **86.6%** | > 80.0% | ✅ Superado |
+| Exhaustividad (Recall) | **84.1%** | > 80.0% | ✅ Superado |
+| mAP@0.5 | **85.5%** | > 85.0% | ✅ Superado |
 
-El entrenamiento original se apoya en:
-
-```text
-scripts/01_entrenar_reid.py
-models/mi_modelo_reid.pt
-```
-
-El modelo Re-ID general no identifica automáticamente a Marta, Maria o
-Margarita. Su función es producir embeddings útiles para comparar individuos.
-Para reconocer vacas específicas del campo Erondina fue necesario construir una
-galería propia con imágenes de esas tres vacas tomadas del mismo video real.
-
-### 2. Evaluación FAISS y validación de embeddings
-
-Luego se evaluó la capacidad del modelo para distinguir individuos mediante
-FAISS. Esta fase permitió validar que el espacio de embeddings era útil para
-comparar vacas, pero también mostró que en condiciones reales de dron aparecen
-problemas adicionales: distancia, ángulo, baja resolución, cambios de pose,
-oclusiones y giro de cámara.
-
-Reportes históricos:
-
-```text
-reports/01_entrenamiento_crosspose.md
-reports/02_evaluacion_faiss.md
-```
-
-### 3. Detección y tracking base
-
-La etapa de video combina detección YOLO con tracking temporal. El pipeline
-inicial permitía detectar vacas y mantener IDs internos, pero en el video real
-se observaron problemas típicos de campo:
-
-- Fragmentación de una misma vaca en múltiples IDs internos.
-- Cambios de identidad cuando el dron giraba.
-- Detecciones faltantes en frames aislados.
-- Superposición entre vacas conocidas y desconocidas.
-
-Estos problemas motivaron la etapa final offline basada en línea temporal.
-
-### 4. Galería Erondina
-
-Para el caso final se crearon carpetas con fotos manualmente seleccionadas de
-Marta, Maria y Margarita desde el propio video de Erondina. Esas imágenes se
-usaron para generar una galería específica del campo:
-
-```text
-models/erondina_gallery_embeddings_enfocada_filtrada.npz
-```
-
-La galería contiene embeddings de referencia y prototipos por identidad:
-
-- `gallery_vectors`
-- `gallery_labels`
-- `gallery_paths`
-- `proto_vectors`
-- `proto_labels`
-
-Esta decisión separa claramente el modelo general de Re-ID de los embeddings de
-las vacas puntuales que se quieren reconocer en Erondina.
-
-### 5. Análisis offline antes del render
-
-Antes de renderizar el video final se ejecutó una auditoría previa sobre la
-segunda mitad del video, donde las vacas se observan con mejor escala y
-visibilidad. El análisis agrupa fragmentos de tracking, compara embeddings
-contra la galería Erondina y decide que identidad global corresponde a Marta,
-Maria y Margarita.
-
-La lógica final está implementada en:
-
-```text
-scripts/16_reid_timeline_erondina.py
-```
-
-Este script realiza:
-
-- Detección de vacas con YOLO y tracking base.
-- Extracción de embeddings de cuerpo.
-- Extracción auxiliar de región superior/cabeza aproximada.
-- Agrupación de fragmentos en identidades globales.
-- Asignación de identidades conocidas mediante la galería Erondina.
-- Auditoría de continuidad antes del render.
-- Render final con etiquetas priorizadas.
-
-El uso de color fue considerado como criterio de auditoría visual del resultado,
-no como una regla dura de identificación. El pipeline final decide las
-identidades mediante embeddings, consistencia temporal y continuidad espacial.
-
-## Métricas Finales
+### Render final Erondina
 
 Reporte final versionado:
 
@@ -170,9 +100,7 @@ Reporte final versionado:
 reports/final/16_segunda_mitad_original_timeline_hd_head_render.json
 ```
 
-Métricas principales del render final:
-
-| Métrica | Resultado |
+| Métrica Operativa | Resultado |
 | --- | ---: |
 | Resolución procesada | 1920x1080 |
 | Frames procesados en render base | 4881 |
@@ -192,12 +120,178 @@ Continuidad de las vacas reidentificadas:
 | Maria | 99.75% | 4846 | 3329 | 1517 |
 | Marta | 96.13% | 4594 | 3386 | 1208 |
 
-El valor de `22` tracks globales internos no representa 22 vacas reales. Es una
-medida de fragmentación del tracking producida por cambios de ángulo, giros del
-dron y oclusiones. Para el conteo final se utiliza la estimación consolidada de
-vacas visibles, que coincide con la referencia esperada de 14 animales.
+El valor de `22` tracks globales internos no significa que haya 22 vacas. Es
+una medida de fragmentación causada por giros del dron, oclusiones y cambios de
+ángulo. El conteo consolidado del MVP es de **14 vacas**, que coincide con la
+referencia esperada para el video.
 
-## Estructura del Repositorio
+---
+
+## 🧭 Proceso de Investigación
+
+### 1. Entrenamiento Re-ID general
+
+La primera etapa consistió en entrenar un extractor de embeddings visuales con
+un dataset general de vacas. Este modelo transforma cada recorte de vaca en un
+vector comparable mediante similitud coseno y búsqueda FAISS.
+
+Archivos principales:
+
+```text
+scripts/01_entrenar_reid.py
+models/mi_modelo_reid.pt
+```
+
+Este modelo general no contiene por sí mismo la identidad de Marta, Maria o
+Margarita. Su función es aprender una representación visual útil para comparar
+vacas entre sí.
+
+### 2. Evaluación FAISS
+
+Luego se evaluó la calidad de los embeddings mediante búsqueda FAISS. Esta fase
+permitió validar que el espacio vectorial podía recuperar individuos similares
+y sirvió como base para pasar del laboratorio al campo.
+
+Reportes históricos:
+
+```text
+reports/01_entrenamiento_crosspose.md
+reports/02_evaluacion_faiss.md
+```
+
+### 3. Integración con video real
+
+La siguiente etapa fue integrar el detector YOLO con el extractor Re-ID y el
+tracking temporal. En esta fase aparecieron problemas propios del video real:
+
+- Detecciones faltantes en algunos frames.
+- Fragmentación de una misma vaca en múltiples IDs internos.
+- Cambios de identidad cuando el dron giraba.
+- Confusión visual por oclusiones y vacas superpuestas.
+- Etiquetas de reidentificación que podían titilar o saltar de una vaca a otra.
+
+Estos problemas hicieron necesario abandonar una decisión puramente frame a
+frame y avanzar hacia un análisis global del video.
+
+### 4. Galería específica de Erondina
+
+Para reconocer a Marta, Maria y Margarita se creó una galería propia con fotos
+seleccionadas del mismo video de Erondina. Esta decisión fue clave: el modelo
+general de Re-ID sirve para extraer embeddings, pero las identidades concretas
+del campo necesitan referencias propias.
+
+La galería final versionada es:
+
+```text
+models/erondina_gallery_embeddings_enfocada_filtrada.npz
+```
+
+Contiene:
+
+- `gallery_vectors`
+- `gallery_labels`
+- `gallery_paths`
+- `proto_vectors`
+- `proto_labels`
+
+### 5. Recorte y enfoque de las fotos Erondina
+
+Durante las pruebas se detectó que varios errores de Re-ID no venían
+necesariamente del modelo, sino de los recortes usados para generar embeddings:
+algunas imágenes incluían partes de otras vacas, bordes, fondo o zonas poco
+representativas del animal.
+
+Por eso se decidió **recortar y enfocar las imágenes de Erondina** para aislar
+mejor a cada vaca. Esta decisión ayudó a:
+
+- Reducir contaminación visual por vacas vecinas.
+- Evitar que el embedding aprendiera fondo o pasto en lugar del animal.
+- Mejorar la comparación entre galería y frames del video.
+- Hacer más estable la asignación de Marta, Maria y Margarita.
+
+El script asociado a esta etapa es:
+
+```text
+scripts/15_crear_galeria_enfocada_erondina.py
+```
+
+### 6. Subembeddings y continuidad temporal
+
+El pipeline final combina embeddings de cuerpo completo con embeddings
+auxiliares de región superior/cabeza aproximada. La idea fue sumar evidencia
+local para sostener una identidad cuando el cuerpo completo cambia de pose o
+queda parcialmente ocluido.
+
+En términos prácticos:
+
+- El **embedding de cuerpo** aporta la apariencia global.
+- El **subembedding de cabeza/región superior** aporta una señal adicional
+  cuando el animal gira o el crop completo pierde calidad.
+- La **línea temporal** evita que una identidad conocida cambie de vaca por una
+  coincidencia aislada.
+- La **continuidad espacial** sostiene la etiqueta si el tracker interno cambia
+  de ID, siempre que la vaca siga dentro del plano.
+
+Durante el diseño se consideró el uso de subregiones anatómicas como cabeza y
+patas para mejorar robustez. En la versión final versionada, la rama activa y
+auditada corresponde a cuerpo completo + cabeza/región superior.
+
+### 7. Análisis previo antes del render
+
+Antes de renderizar el video final, el sistema ejecuta una etapa offline que
+analiza la evidencia completa del segmento. Recién después de esa auditoría
+decide qué identidad global corresponde a Marta, Maria y Margarita.
+
+Esta decisión fue central para resolver los ID switches: el render final no
+debe decidir en cada frame quién es cada vaca, sino usar una identidad ya
+bloqueada y seguirla temporalmente.
+
+Pipeline final:
+
+```text
+scripts/16_reid_timeline_erondina.py
+```
+
+Este script realiza:
+
+- Detección de vacas con YOLO.
+- Tracking base con IDs internos.
+- Extracción de embeddings de cuerpo.
+- Extracción de subembeddings de cabeza/región superior.
+- Agrupación de fragmentos de tracking.
+- Asignación global de Marta, Maria y Margarita.
+- Auditoría de continuidad.
+- Render final con etiquetas priorizadas.
+
+---
+
+## 🔄 Arquitectura del Pipeline Final
+
+```text
+Video Erondina
+    ↓
+YOLOv8
+    ↓
+Detecciones de vacas por frame
+    ↓
+Tracking base
+    ↓
+Recortes de cada vaca
+    ↓
+Embeddings de cuerpo + subembeddings de cabeza
+    ↓
+FAISS / similitud coseno contra galería Erondina
+    ↓
+Agrupación de tracklets en identidades globales
+    ↓
+Auditoría de continuidad
+    ↓
+Render HD con etiquetas priorizadas
+```
+
+---
+
+## 📁 Estructura del Repositorio
 
 ```text
 cow-tracker-mvp/
@@ -226,7 +320,21 @@ cow-tracker-mvp/
 └── README.md
 ```
 
-## Ejecución
+Índice profesional de scripts:
+
+```text
+docs/SCRIPTS_INTERMEDIOS.md
+```
+
+Documentación técnica del pipeline final:
+
+```text
+docs/ERONDINA_REID_PIPELINE.md
+```
+
+---
+
+## 🚀 Ejecución
 
 ### Entrenamiento Re-ID
 
@@ -287,53 +395,100 @@ python3 scripts/16_reid_timeline_erondina.py \
 
 Los caches `.pkl` y videos `.mp4` quedan fuera del repositorio por tamaño.
 
-## Decisiones Técnicas Relevantes
+---
 
-- Se separó el modelo Re-ID general de la galería específica de Erondina.
-- Se eligieron fotos del propio video para reducir diferencia de dominio entre
-  entrenamiento puntual y render final.
-- Se procesó la segunda mitad del video porque la escala de las vacas es más
-  adecuada para reidentificación visual.
-- Se agregó una auditoría previa al render para verificar continuidad de Marta,
-  Maria y Margarita.
-- Se priorizaron visualmente las etiquetas de vacas reidentificadas sobre las
-  vacas desconocidas.
-- Se consideró la fragmentación por giro de dron para evitar que cada ID
-  interno se cuente como una vaca distinta.
-- Se mantuvo `datos/` fuera de Git para preservar un repositorio liviano y
-  profesional.
+## 🧪 Scripts Intermedios
 
-## Limitaciones
+Los scripts `04` a `15` se versionan como historial técnico del trabajo. No
+todos forman parte del pipeline final, pero documentan el proceso de
+investigación:
 
-El MVP está completo, pero existen límites propios del escenario:
+- Construcción de galerías Erondina.
+- Primeras inferencias sobre video real.
+- Diagnóstico de detecciones.
+- Pruebas de estabilidad de IDs.
+- Re-ID global por tracklets.
+- Pruebas con color como señal de auditoría.
+- Fine-tuning específico.
+- Filtrado de galerías ambiguas.
+- Creación de la galería enfocada final.
 
-- La reidentificación depende de la calidad de los recortes y de la visibilidad
-  real de cada vaca.
-- Cambios bruscos de ángulo del dron pueden fragmentar tracks internos.
-- Oclusiones fuertes pueden requerir continuidad espacial para sostener la
-  etiqueta entre detecciones confirmadas.
-- El procesamiento actual es offline; no está optimizado para tiempo real.
+El pipeline aprobado para el resultado final es:
 
-Estas limitaciones no impiden el cierre del MVP, pero son puntos naturales para
-una etapa posterior de investigación.
+```text
+scripts/16_reid_timeline_erondina.py
+```
 
-## Conclusiones
+---
+
+## 🛠️ Decisiones Técnicas Relevantes
+
+- Se separó el **modelo Re-ID general** de la **galería específica de
+  Erondina**.
+- Se eligieron fotos del propio video para reducir la diferencia de dominio
+  entre entrenamiento puntual y render final.
+- Se recortaron y enfocaron las fotos de Erondina para aislar mejor cada vaca y
+  mejorar la calidad de los embeddings.
+- Se procesó la segunda mitad del video porque la escala y visibilidad de las
+  vacas era más adecuada para reidentificación.
+- Se dejó de decidir identidad frame a frame y se pasó a una asignación global
+  por línea temporal.
+- Se incorporaron subembeddings de cabeza/región superior para aportar
+  evidencia local adicional.
+- Se priorizaron visualmente las etiquetas de Marta, Maria y Margarita sobre
+  las vacas desconocidas.
+- Se evitó contar cada ID interno como una vaca nueva, porque el giro del dron
+  puede fragmentar trayectorias.
+- Se mantuvo `datos/` fuera de Git para preservar un repositorio liviano,
+  reproducible y profesional.
+
+---
+
+## ⚠️ Limitaciones
+
+El MVP está completo, pero el escenario real tiene limitaciones importantes:
+
+- La calidad de la reidentificación depende de la nitidez de los recortes.
+- Los giros bruscos del dron pueden fragmentar tracks internos.
+- Las oclusiones fuertes pueden requerir continuidad espacial para sostener una
+  etiqueta.
+- El procesamiento actual es offline, no en tiempo real.
+- No se versionan videos ni datasets pesados dentro del repositorio.
+
+Estas limitaciones no invalidan el MVP. Son el punto de partida natural para
+una fase futura de optimización, validación con más videos y eventual
+despliegue.
+
+---
+
+## 📌 Conclusiones
 
 El MVP demuestra un pipeline completo para detección, conteo, tracking y
-reidentificación individual de ganado en un video real de campo.
+reidentificación individual de ganado en video real de campo.
 
-El resultado final logra identificar y sostener las tres vacas catalogadas
-durante la mayor parte del video procesado, prioriza sus etiquetas en el render
-y mantiene un conteo consolidado de 14 vacas. La solución también documenta los
-problemas encontrados en campo, especialmente la fragmentación causada por el
-movimiento del dron, y los aborda mediante análisis offline, embeddings propios
-de Erondina y auditoría de continuidad.
+El trabajo realizado permitió pasar de un sistema que detectaba vacas a un
+pipeline capaz de:
 
-Con este resultado, el proyecto queda en estado de MVP completo: existe un
-flujo reproducible, reportes técnicos, métricas finales, artefactos
-intermedios y un video final listo para presentación.
+- Reconocer tres vacas catalogadas.
+- Mantener sus etiquetas de forma estable.
+- Priorizar visualmente las identidades relevantes.
+- Contabilizar aproximadamente el rodeo completo.
+- Documentar métricas, decisiones y pruebas intermedias.
 
-## Tecnologías
+El resultado final alcanza los criterios de éxito definidos para el MVP:
+
+- ✅ Detector validado sobre umbrales proyectados.
+- ✅ Galería Erondina construida con imágenes propias del video.
+- ✅ Re-ID individual de Marta, Maria y Margarita.
+- ✅ Tracking temporal estable en el render final.
+- ✅ Conteo consolidado de 14 vacas.
+- ✅ Video final listo para presentación.
+
+Con este resultado, **CowTrack MVP queda completo**.
+
+---
+
+## 🧰 Tecnologías
 
 - YOLOv8 / Ultralytics
 - PyTorch
@@ -343,6 +498,8 @@ intermedios y un video final listo para presentación.
 - NumPy
 - SciPy
 
-## Autor
+---
+
+## 👤 Autor
 
 Emiliano Orlando
