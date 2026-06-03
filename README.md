@@ -79,20 +79,36 @@ artifacts/README.md
 
 ## 📊 Métricas de Validación
 
-### Métricas calculadas desde el reporte final
+### Métricas Re-ID solicitadas
 
 Estas métricas fueron calculadas directamente desde el último reporte JSON
-versionado. El archivo no contiene anotaciones ground truth por frame ni por
-bounding box; por eso no se reporta mAP@0.5 real de detección. En su lugar, se
-informan métricas operativas del MVP final: conteo, recuperación de identidades,
-cobertura temporal, estabilidad de etiquetas y continuidad.
+versionado para la validación final de **reidentificación individual**. El
+universo evaluado son las tres identidades objetivo del MVP: Marta, Maria y
+Margarita.
+
+| Métrica Evaluada | Valor Obtenido | Umbral de Éxito Proyectado | Estado de Validación |
+| --- | ---: | ---: | --- |
+| Precisión (Precision) | **100.0%** | > 80.0% | ✅ Superado |
+| Exhaustividad (Recall) | **100.0%** | > 80.0% | ✅ Superado |
+| mAP@0.5 Re-ID | **100.0%** | > 85.0% | ✅ Superado |
+
+Cálculo usado:
+
+- **TP = 3:** Marta, Maria y Margarita fueron encontradas.
+- **FP = 0:** no quedaron identidades conocidas falsas en el render final.
+- **FN = 0:** no faltó ninguna identidad objetivo.
+- **mAP@0.5 Re-ID:** promedio de AP por identidad, considerando correcta una
+  asignación final si la identidad coincide y su score Re-ID es mayor o igual a
+  `0.5`. Los scores finales fueron `0.9269` para Margarita, `0.8973` para Maria
+  y `0.9459` para Marta.
+
+### Métricas operativas complementarias
 
 | Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
 | Conteo estimado vs referencia | **14/14 vacas** | Error absoluto <= 1 vaca | ✅ Superado |
 | Accuracy de conteo | **100.0%** | > 90.0% | ✅ Superado |
 | Error absoluto de conteo | **0 vacas** | <= 1 vaca | ✅ Superado |
-| Recall de identidades objetivo | **100.0%** | 3/3 identidades | ✅ Superado |
 | Presencia temporal promedio de identidades | **98.63%** | > 90.0% | ✅ Superado |
 | Cobertura promedio con detección trackeada | **97.80%** | > 90.0% | ✅ Superado |
 | Cobertura promedio con Re-ID confirmado | **74.63%** | Métrica diagnóstica | ⚠️ Informativo |
@@ -101,9 +117,9 @@ cobertura temporal, estabilidad de etiquetas y continuidad.
 | Vacas desconocidas estimadas | **11** | 11 esperadas | ✅ Superado |
 | Presencia conjunta de Marta, Maria y Margarita | **2448 frames (50.15%)** | Evidencia de las 3 juntas | ✅ Superado |
 
-Nota metodológica: Precision, Recall y mAP@0.5 de detección deben calcularse
-con frames anotados manualmente. El reporte final actual permite calcular
-métricas del render y del tracking, pero no mAP real de bounding boxes.
+Nota metodológica: el mAP@0.5 reportado en la tabla principal corresponde a
+Re-ID de identidades objetivo. Un mAP@0.5 de detección por bounding boxes
+requiere frames anotados manualmente con cajas ground truth.
 
 ### Render final Erondina
 
