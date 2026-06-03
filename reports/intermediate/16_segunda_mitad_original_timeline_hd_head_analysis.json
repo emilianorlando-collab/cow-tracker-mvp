@@ -1,0 +1,3090 @@
+{
+  "video_in": "datos/video campo erondina a procesar.MP4",
+  "video_out": null,
+  "processed_frames": 4881,
+  "processing_video_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "estimated_total_cows": 14,
+  "estimated_total_cows_method": "visible_cows_p95_per_frame",
+  "global_track_count_after_clustering": 22,
+  "fragmentation_over_expected": 8,
+  "expected_total_cows": 14,
+  "count_error": 0,
+  "absolute_count_error": 0,
+  "count_accuracy": 1.0,
+  "count_within_tolerance": true,
+  "unknown_cows_estimated": 11,
+  "visible_cows_per_frame": {
+    "mean": 11.437820118828109,
+    "median": 12.0,
+    "p95": 14.0,
+    "max": 16
+  },
+  "known_found": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_missing": [],
+  "known_frame_hits": {
+    "Margarita": 4213,
+    "Maria": 3329,
+    "Marta": 3386
+  },
+  "known_hit_ratio": {
+    "Margarita": 0.8631427986068428,
+    "Maria": 0.6820323704158984,
+    "Marta": 0.6937103052653145
+  },
+  "known_first_render_frame": {
+    "Margarita": 1,
+    "Maria": 1,
+    "Marta": 1
+  },
+  "known_last_render_frame": {
+    "Margarita": 4213,
+    "Maria": 4296,
+    "Marta": 3506
+  },
+  "all_known_together": {
+    "exists": true,
+    "frame_count": 2448,
+    "first_render_frame": 1,
+    "last_render_frame": 3506
+  },
+  "locked_track_audit": {
+    "labels": {
+      "Margarita": {
+        "present_frames": 4881,
+        "tracked_detection_frames": 4881,
+        "confirmed_reid_frames": 4213,
+        "continuity_follow_frames": 668,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 1,
+        "last_present_frame": 4881,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Maria": {
+        "present_frames": 4869,
+        "tracked_detection_frames": 4846,
+        "confirmed_reid_frames": 3329,
+        "continuity_follow_frames": 1517,
+        "hold_only_frames": 23,
+        "present_ratio": 0.9975414874001229,
+        "first_present_frame": 1,
+        "last_present_frame": 4881,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Marta": {
+        "present_frames": 4692,
+        "tracked_detection_frames": 4594,
+        "confirmed_reid_frames": 3386,
+        "continuity_follow_frames": 1208,
+        "hold_only_frames": 98,
+        "present_ratio": 0.9612784265519361,
+        "first_present_frame": 1,
+        "last_present_frame": 4706,
+        "long_gap_count_ge_2s": 1,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": [
+          {
+            "start_render_frame": 4707,
+            "end_render_frame": 4881,
+            "frames": 175,
+            "seconds": 5.839166666666666,
+            "start_original_frame": 9587,
+            "end_original_frame": 9761,
+            "classification": "left_frame_near_edge",
+            "edge_plausible": true,
+            "prev_bbox_edge": {
+              "near_edge": true,
+              "nearest_edge": "right",
+              "nearest_edge_distance_px": 0.999755859375,
+              "edge_margin_px": 54.0
+            },
+            "next_bbox_edge": null
+          }
+        ]
+      }
+    },
+    "all_known_together": {
+      "exists": true,
+      "frame_count": 4680,
+      "first_render_frame": 1,
+      "last_render_frame": 4706,
+      "intervals": [
+        {
+          "start_render_frame": 1,
+          "end_render_frame": 939,
+          "frames": 939,
+          "seconds": 31.3313
+        },
+        {
+          "start_render_frame": 941,
+          "end_render_frame": 1049,
+          "frames": 109,
+          "seconds": 3.636966666666667
+        },
+        {
+          "start_render_frame": 1063,
+          "end_render_frame": 4386,
+          "frames": 3324,
+          "seconds": 110.91080000000001
+        },
+        {
+          "start_render_frame": 4399,
+          "end_render_frame": 4706,
+          "frames": 308,
+          "seconds": 10.276933333333334
+        }
+      ]
+    }
+  },
+  "locked_track_audit_ok": true,
+  "locked_midframe_gap_count_ge_2s": 0,
+  "duplicate_known_label_frames_before_render_suppression": {
+    "Marta": 3
+  },
+  "duplicate_known_label_examples": {
+    "Marta": [
+      {
+        "render_frame": 2693,
+        "detections": [
+          [
+            11,
+            156,
+            0.3918722867965698
+          ],
+          [
+            11,
+            351,
+            0.4778773784637451
+          ]
+        ]
+      },
+      {
+        "render_frame": 2694,
+        "detections": [
+          [
+            11,
+            156,
+            0.3404978811740875
+          ],
+          [
+            11,
+            351,
+            0.5229423642158508
+          ]
+        ]
+      },
+      {
+        "render_frame": 2697,
+        "detections": [
+          [
+            11,
+            351,
+            0.5156838297843933
+          ],
+          [
+            11,
+            156,
+            0.28326597809791565
+          ]
+        ]
+      }
+    ]
+  },
+  "known_id_switches_by_design": 0,
+  "ready_for_render_by_automatic_checks": true,
+  "anchor_assignments_by_global_id": {
+    "2": {
+      "global_id": 2,
+      "label": "margarita",
+      "score": 0.9268684983253479,
+      "margin": 0.18606603145599365,
+      "median": 0.8516511917114258,
+      "max": 0.9738085269927979,
+      "support_075": 0.8193916349809885,
+      "support_080": 0.7034220532319392,
+      "nearest_vote_fraction": 0.8574144486692015,
+      "source_local_track_id": 2,
+      "source_score": 0.9268684983253479,
+      "cluster_local_track_ids": [
+        2
+      ],
+      "cluster_frames": 4213,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9268684983253479,
+          "median": 0.8516511917114258,
+          "max": 0.9738085269927979,
+          "support_075": 0.8193916349809885,
+          "support_080": 0.7034220532319392,
+          "nearest_vote_fraction": 0.8574144486692015,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.9268684983253479,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7408024668693542,
+          "median": 0.6422407627105713,
+          "max": 0.9081748723983765,
+          "support_075": 0.13307984790874525,
+          "support_080": 0.0779467680608365,
+          "nearest_vote_fraction": 0.11787072243346007,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.7408024668693542,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7153967022895813,
+          "median": 0.472494512796402,
+          "max": 0.9028297662734985,
+          "support_075": 0.11216730038022814,
+          "support_080": 0.06653992395437262,
+          "nearest_vote_fraction": 0.024714828897338403,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.7153966426849365,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "automatic_assignment_quality": 1.1105856262756029,
+      "assignment_mode": "automatic_global_all_embeddings"
+    },
+    "17": {
+      "global_id": 17,
+      "label": "marta",
+      "score": 0.9514354467391968,
+      "margin": 0.1488027572631836,
+      "median": 0.9226444959640503,
+      "max": 0.979956865310669,
+      "support_075": 0.96875,
+      "support_080": 0.96875,
+      "nearest_vote_fraction": 0.96875,
+      "source_local_track_id": 112,
+      "source_score": 0.9514354467391968,
+      "cluster_local_track_ids": [
+        112
+      ],
+      "cluster_frames": 272,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8026326894760132,
+          "median": 0.7842687368392944,
+          "max": 0.8588857650756836,
+          "support_075": 0.78125,
+          "support_080": 0.21875,
+          "nearest_vote_fraction": 0.03125,
+          "embedding_count": 32,
+          "source_local_track_id": 112,
+          "source_score": 0.8026326894760132,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.2558320164680481,
+          "median": 0.17875437438488007,
+          "max": 0.49302205443382263,
+          "support_075": 0.0,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.0,
+          "embedding_count": 32,
+          "source_local_track_id": 112,
+          "source_score": 0.2558320164680481,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.9514354467391968,
+          "median": 0.9226444959640503,
+          "max": 0.979956865310669,
+          "support_075": 0.96875,
+          "support_080": 0.96875,
+          "nearest_vote_fraction": 0.96875,
+          "embedding_count": 32,
+          "source_local_track_id": 112,
+          "source_score": 0.9514354467391968,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "automatic_assignment_quality": 1.115107557029724,
+      "assignment_mode": "automatic_global_all_embeddings"
+    },
+    "21": {
+      "global_id": 21,
+      "label": "maria",
+      "score": 0.8919739127159119,
+      "margin": 0.4802085757255554,
+      "median": 0.8507418632507324,
+      "max": 0.9589981436729431,
+      "support_075": 0.9578313253012049,
+      "support_080": 0.8433734939759037,
+      "nearest_vote_fraction": 0.9879518072289156,
+      "source_local_track_id": 313,
+      "source_score": 0.8975176215171814,
+      "cluster_local_track_ids": [
+        313,
+        431
+      ],
+      "cluster_frames": 1348,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.41176533699035645,
+          "median": 0.2901496887207031,
+          "max": 0.810327410697937,
+          "support_075": 0.006024096385542169,
+          "support_080": 0.006024096385542169,
+          "nearest_vote_fraction": 0.006024096385542169,
+          "embedding_count": 166,
+          "source_local_track_id": 431,
+          "source_score": 0.4955115020275116,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8919739127159119,
+          "median": 0.8507418632507324,
+          "max": 0.9589981436729431,
+          "support_075": 0.9578313253012049,
+          "support_080": 0.8433734939759037,
+          "nearest_vote_fraction": 0.9879518072289156,
+          "embedding_count": 166,
+          "source_local_track_id": 313,
+          "source_score": 0.8975176215171814,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.3641499876976013,
+          "median": 0.228144109249115,
+          "max": 0.7688419222831726,
+          "support_075": 0.006024096385542169,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.006024096385542169,
+          "embedding_count": 166,
+          "source_local_track_id": 431,
+          "source_score": 0.5135127305984497,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "automatic_assignment_quality": 1.0803249063473437,
+      "assignment_mode": "automatic_global_all_embeddings"
+    }
+  },
+  "timeline_assignments_by_global_id": {
+    "2": {
+      "global_id": 2,
+      "label": "margarita",
+      "score": 0.9268684983253479,
+      "margin": 0.18606603145599365,
+      "median": 0.8516511917114258,
+      "max": 0.9738085269927979,
+      "support_075": 0.8193916349809885,
+      "support_080": 0.7034220532319392,
+      "nearest_vote_fraction": 0.8574144486692015,
+      "source_local_track_id": 2,
+      "source_score": 0.9268684983253479,
+      "cluster_local_track_ids": [
+        2
+      ],
+      "cluster_frames": 4213,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9268684983253479,
+          "median": 0.8516511917114258,
+          "max": 0.9738085269927979,
+          "support_075": 0.8193916349809885,
+          "support_080": 0.7034220532319392,
+          "nearest_vote_fraction": 0.8574144486692015,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.9268684983253479,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7408024668693542,
+          "median": 0.6422407627105713,
+          "max": 0.9081748723983765,
+          "support_075": 0.13307984790874525,
+          "support_080": 0.0779467680608365,
+          "nearest_vote_fraction": 0.11787072243346007,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.7408024668693542,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7153967022895813,
+          "median": 0.472494512796402,
+          "max": 0.9028297662734985,
+          "support_075": 0.11216730038022814,
+          "support_080": 0.06653992395437262,
+          "nearest_vote_fraction": 0.024714828897338403,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.7153966426849365,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "automatic_timeline_quality": 1.0415687834515373,
+      "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+      "first_frame": 4881,
+      "last_frame": 9093,
+      "frames_seen": 4213,
+      "strict_anchor_global_id": 2,
+      "strict_anchor_score": 0.9268684983253479,
+      "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+      "timeline_relation": "anchor",
+      "compatibility_to_anchor": 1.0,
+      "embedding_count": 526,
+      "head_embedding_count": 263
+    },
+    "11": {
+      "global_id": 11,
+      "label": "marta",
+      "score": 0.945925235748291,
+      "margin": 0.11513674259185791,
+      "median": 0.6668478846549988,
+      "max": 0.9813657999038696,
+      "support_075": 0.3915094339622642,
+      "support_080": 0.33254716981132076,
+      "nearest_vote_fraction": 0.36556603773584906,
+      "source_local_track_id": 156,
+      "source_score": 0.9640527963638306,
+      "cluster_local_track_ids": [
+        11,
+        156,
+        351
+      ],
+      "cluster_frames": 3389,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.809821605682373,
+          "median": 0.6938381195068359,
+          "max": 0.895097017288208,
+          "support_075": 0.375,
+          "support_080": 0.19103773584905662,
+          "nearest_vote_fraction": 0.21462264150943397,
+          "embedding_count": 424,
+          "source_local_track_id": 11,
+          "source_score": 0.8205238580703735,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8307884931564331,
+          "median": 0.5812011361122131,
+          "max": 0.9358925223350525,
+          "support_075": 0.3231132075471698,
+          "support_080": 0.2169811320754717,
+          "nearest_vote_fraction": 0.419811320754717,
+          "embedding_count": 424,
+          "source_local_track_id": 156,
+          "source_score": 0.8507782220840454,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.945925235748291,
+          "median": 0.6668478846549988,
+          "max": 0.9813657999038696,
+          "support_075": 0.3915094339622642,
+          "support_080": 0.33254716981132076,
+          "nearest_vote_fraction": 0.36556603773584906,
+          "embedding_count": 424,
+          "source_local_track_id": 156,
+          "source_score": 0.9640527963638306,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "automatic_timeline_quality": 1.0075671116109526,
+      "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+      "first_frame": 4881,
+      "last_frame": 8386,
+      "frames_seen": 3389,
+      "strict_anchor_global_id": 17,
+      "strict_anchor_score": 0.9514354467391968,
+      "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+      "timeline_relation": "anchor",
+      "compatibility_to_anchor": 1.0,
+      "embedding_count": 424,
+      "head_embedding_count": 212
+    },
+    "13": {
+      "global_id": 13,
+      "label": "maria",
+      "score": 0.8972709774971008,
+      "margin": 0.1858106255531311,
+      "median": 0.7897506356239319,
+      "max": 0.9704369902610779,
+      "support_075": 0.6306954436450839,
+      "support_080": 0.4748201438848921,
+      "nearest_vote_fraction": 0.8369304556354916,
+      "source_local_track_id": 284,
+      "source_score": 0.9187015891075134,
+      "cluster_local_track_ids": [
+        13,
+        284
+      ],
+      "cluster_frames": 3329,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7114603519439697,
+          "median": 0.45298078656196594,
+          "max": 0.8992288112640381,
+          "support_075": 0.11750599520383694,
+          "support_080": 0.07434052757793765,
+          "nearest_vote_fraction": 0.11031175059952038,
+          "embedding_count": 417,
+          "source_local_track_id": 13,
+          "source_score": 0.8309096693992615,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8972709774971008,
+          "median": 0.7897506356239319,
+          "max": 0.9704369902610779,
+          "support_075": 0.6306954436450839,
+          "support_080": 0.4748201438848921,
+          "nearest_vote_fraction": 0.8369304556354916,
+          "embedding_count": 417,
+          "source_local_track_id": 284,
+          "source_score": 0.9187015891075134,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.5579932332038879,
+          "median": 0.2140226662158966,
+          "max": 0.9421590566635132,
+          "support_075": 0.07673860911270983,
+          "support_080": 0.047961630695443645,
+          "nearest_vote_fraction": 0.05275779376498801,
+          "embedding_count": 417,
+          "source_local_track_id": 13,
+          "source_score": 0.7926921248435974,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "automatic_timeline_quality": 0.9962005912277236,
+      "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+      "first_frame": 4881,
+      "last_frame": 9176,
+      "frames_seen": 3329,
+      "strict_anchor_global_id": 21,
+      "strict_anchor_score": 0.8919739127159119,
+      "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+      "timeline_relation": "anchor",
+      "compatibility_to_anchor": 1.0,
+      "embedding_count": 417,
+      "head_embedding_count": 209
+    }
+  },
+  "timeline_diagnostics": {
+    "anchors_by_label": {
+      "Margarita": {
+        "global_id": 2,
+        "label": "margarita",
+        "score": 0.9268684983253479,
+        "margin": 0.18606603145599365,
+        "median": 0.8516511917114258,
+        "max": 0.9738085269927979,
+        "support_075": 0.8193916349809885,
+        "support_080": 0.7034220532319392,
+        "nearest_vote_fraction": 0.8574144486692015,
+        "source_local_track_id": 2,
+        "source_score": 0.9268684983253479,
+        "cluster_local_track_ids": [
+          2
+        ],
+        "cluster_frames": 4213,
+        "all_label_scores": {
+          "margarita": {
+            "score": 0.9268684983253479,
+            "median": 0.8516511917114258,
+            "max": 0.9738085269927979,
+            "support_075": 0.8193916349809885,
+            "support_080": 0.7034220532319392,
+            "nearest_vote_fraction": 0.8574144486692015,
+            "embedding_count": 526,
+            "source_local_track_id": 2,
+            "source_score": 0.9268684983253479,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "maria": {
+            "score": 0.7408024668693542,
+            "median": 0.6422407627105713,
+            "max": 0.9081748723983765,
+            "support_075": 0.13307984790874525,
+            "support_080": 0.0779467680608365,
+            "nearest_vote_fraction": 0.11787072243346007,
+            "embedding_count": 526,
+            "source_local_track_id": 2,
+            "source_score": 0.7408024668693542,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "marta": {
+            "score": 0.7153967022895813,
+            "median": 0.472494512796402,
+            "max": 0.9028297662734985,
+            "support_075": 0.11216730038022814,
+            "support_080": 0.06653992395437262,
+            "nearest_vote_fraction": 0.024714828897338403,
+            "embedding_count": 526,
+            "source_local_track_id": 2,
+            "source_score": 0.7153966426849365,
+            "cluster_score_mode": "all_embeddings"
+          }
+        },
+        "automatic_timeline_quality": 1.0415687834515373,
+        "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+        "first_frame": 4881,
+        "last_frame": 9093,
+        "frames_seen": 4213,
+        "strict_anchor_global_id": 2,
+        "strict_anchor_score": 0.9268684983253479,
+        "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings"
+      },
+      "Maria": {
+        "global_id": 13,
+        "label": "maria",
+        "score": 0.8972709774971008,
+        "margin": 0.1858106255531311,
+        "median": 0.7897506356239319,
+        "max": 0.9704369902610779,
+        "support_075": 0.6306954436450839,
+        "support_080": 0.4748201438848921,
+        "nearest_vote_fraction": 0.8369304556354916,
+        "source_local_track_id": 284,
+        "source_score": 0.9187015891075134,
+        "cluster_local_track_ids": [
+          13,
+          284
+        ],
+        "cluster_frames": 3329,
+        "all_label_scores": {
+          "margarita": {
+            "score": 0.7114603519439697,
+            "median": 0.45298078656196594,
+            "max": 0.8992288112640381,
+            "support_075": 0.11750599520383694,
+            "support_080": 0.07434052757793765,
+            "nearest_vote_fraction": 0.11031175059952038,
+            "embedding_count": 417,
+            "source_local_track_id": 13,
+            "source_score": 0.8309096693992615,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "maria": {
+            "score": 0.8972709774971008,
+            "median": 0.7897506356239319,
+            "max": 0.9704369902610779,
+            "support_075": 0.6306954436450839,
+            "support_080": 0.4748201438848921,
+            "nearest_vote_fraction": 0.8369304556354916,
+            "embedding_count": 417,
+            "source_local_track_id": 284,
+            "source_score": 0.9187015891075134,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "marta": {
+            "score": 0.5579932332038879,
+            "median": 0.2140226662158966,
+            "max": 0.9421590566635132,
+            "support_075": 0.07673860911270983,
+            "support_080": 0.047961630695443645,
+            "nearest_vote_fraction": 0.05275779376498801,
+            "embedding_count": 417,
+            "source_local_track_id": 13,
+            "source_score": 0.7926921248435974,
+            "cluster_score_mode": "all_embeddings"
+          }
+        },
+        "automatic_timeline_quality": 0.9962005912277236,
+        "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+        "first_frame": 4881,
+        "last_frame": 9176,
+        "frames_seen": 3329,
+        "strict_anchor_global_id": 21,
+        "strict_anchor_score": 0.8919739127159119,
+        "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings"
+      },
+      "Marta": {
+        "global_id": 11,
+        "label": "marta",
+        "score": 0.945925235748291,
+        "margin": 0.11513674259185791,
+        "median": 0.6668478846549988,
+        "max": 0.9813657999038696,
+        "support_075": 0.3915094339622642,
+        "support_080": 0.33254716981132076,
+        "nearest_vote_fraction": 0.36556603773584906,
+        "source_local_track_id": 156,
+        "source_score": 0.9640527963638306,
+        "cluster_local_track_ids": [
+          11,
+          156,
+          351
+        ],
+        "cluster_frames": 3389,
+        "all_label_scores": {
+          "margarita": {
+            "score": 0.809821605682373,
+            "median": 0.6938381195068359,
+            "max": 0.895097017288208,
+            "support_075": 0.375,
+            "support_080": 0.19103773584905662,
+            "nearest_vote_fraction": 0.21462264150943397,
+            "embedding_count": 424,
+            "source_local_track_id": 11,
+            "source_score": 0.8205238580703735,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "maria": {
+            "score": 0.8307884931564331,
+            "median": 0.5812011361122131,
+            "max": 0.9358925223350525,
+            "support_075": 0.3231132075471698,
+            "support_080": 0.2169811320754717,
+            "nearest_vote_fraction": 0.419811320754717,
+            "embedding_count": 424,
+            "source_local_track_id": 156,
+            "source_score": 0.8507782220840454,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "marta": {
+            "score": 0.945925235748291,
+            "median": 0.6668478846549988,
+            "max": 0.9813657999038696,
+            "support_075": 0.3915094339622642,
+            "support_080": 0.33254716981132076,
+            "nearest_vote_fraction": 0.36556603773584906,
+            "embedding_count": 424,
+            "source_local_track_id": 156,
+            "source_score": 0.9640527963638306,
+            "cluster_score_mode": "all_embeddings"
+          }
+        },
+        "automatic_timeline_quality": 1.0075671116109526,
+        "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+        "first_frame": 4881,
+        "last_frame": 8386,
+        "frames_seen": 3389,
+        "strict_anchor_global_id": 17,
+        "strict_anchor_score": 0.9514354467391968,
+        "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings"
+      }
+    },
+    "strict_anchors_by_label": {
+      "Margarita": {
+        "global_id": 2,
+        "label": "margarita",
+        "score": 0.9268684983253479,
+        "margin": 0.18606603145599365,
+        "median": 0.8516511917114258,
+        "max": 0.9738085269927979,
+        "support_075": 0.8193916349809885,
+        "support_080": 0.7034220532319392,
+        "nearest_vote_fraction": 0.8574144486692015,
+        "source_local_track_id": 2,
+        "source_score": 0.9268684983253479,
+        "cluster_local_track_ids": [
+          2
+        ],
+        "cluster_frames": 4213,
+        "all_label_scores": {
+          "margarita": {
+            "score": 0.9268684983253479,
+            "median": 0.8516511917114258,
+            "max": 0.9738085269927979,
+            "support_075": 0.8193916349809885,
+            "support_080": 0.7034220532319392,
+            "nearest_vote_fraction": 0.8574144486692015,
+            "embedding_count": 526,
+            "source_local_track_id": 2,
+            "source_score": 0.9268684983253479,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "maria": {
+            "score": 0.7408024668693542,
+            "median": 0.6422407627105713,
+            "max": 0.9081748723983765,
+            "support_075": 0.13307984790874525,
+            "support_080": 0.0779467680608365,
+            "nearest_vote_fraction": 0.11787072243346007,
+            "embedding_count": 526,
+            "source_local_track_id": 2,
+            "source_score": 0.7408024668693542,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "marta": {
+            "score": 0.7153967022895813,
+            "median": 0.472494512796402,
+            "max": 0.9028297662734985,
+            "support_075": 0.11216730038022814,
+            "support_080": 0.06653992395437262,
+            "nearest_vote_fraction": 0.024714828897338403,
+            "embedding_count": 526,
+            "source_local_track_id": 2,
+            "source_score": 0.7153966426849365,
+            "cluster_score_mode": "all_embeddings"
+          }
+        },
+        "automatic_assignment_quality": 1.1105856262756029,
+        "assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+        "automatic_timeline_quality": 1.1105856262756029
+      },
+      "Maria": {
+        "global_id": 21,
+        "label": "maria",
+        "score": 0.8919739127159119,
+        "margin": 0.4802085757255554,
+        "median": 0.8507418632507324,
+        "max": 0.9589981436729431,
+        "support_075": 0.9578313253012049,
+        "support_080": 0.8433734939759037,
+        "nearest_vote_fraction": 0.9879518072289156,
+        "source_local_track_id": 313,
+        "source_score": 0.8975176215171814,
+        "cluster_local_track_ids": [
+          313,
+          431
+        ],
+        "cluster_frames": 1348,
+        "all_label_scores": {
+          "margarita": {
+            "score": 0.41176533699035645,
+            "median": 0.2901496887207031,
+            "max": 0.810327410697937,
+            "support_075": 0.006024096385542169,
+            "support_080": 0.006024096385542169,
+            "nearest_vote_fraction": 0.006024096385542169,
+            "embedding_count": 166,
+            "source_local_track_id": 431,
+            "source_score": 0.4955115020275116,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "maria": {
+            "score": 0.8919739127159119,
+            "median": 0.8507418632507324,
+            "max": 0.9589981436729431,
+            "support_075": 0.9578313253012049,
+            "support_080": 0.8433734939759037,
+            "nearest_vote_fraction": 0.9879518072289156,
+            "embedding_count": 166,
+            "source_local_track_id": 313,
+            "source_score": 0.8975176215171814,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "marta": {
+            "score": 0.3641499876976013,
+            "median": 0.228144109249115,
+            "max": 0.7688419222831726,
+            "support_075": 0.006024096385542169,
+            "support_080": 0.0,
+            "nearest_vote_fraction": 0.006024096385542169,
+            "embedding_count": 166,
+            "source_local_track_id": 431,
+            "source_score": 0.5135127305984497,
+            "cluster_score_mode": "all_embeddings"
+          }
+        },
+        "automatic_assignment_quality": 1.0803249063473437,
+        "assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+        "automatic_timeline_quality": 1.0803249063473437
+      },
+      "Marta": {
+        "global_id": 17,
+        "label": "marta",
+        "score": 0.9514354467391968,
+        "margin": 0.1488027572631836,
+        "median": 0.9226444959640503,
+        "max": 0.979956865310669,
+        "support_075": 0.96875,
+        "support_080": 0.96875,
+        "nearest_vote_fraction": 0.96875,
+        "source_local_track_id": 112,
+        "source_score": 0.9514354467391968,
+        "cluster_local_track_ids": [
+          112
+        ],
+        "cluster_frames": 272,
+        "all_label_scores": {
+          "margarita": {
+            "score": 0.8026326894760132,
+            "median": 0.7842687368392944,
+            "max": 0.8588857650756836,
+            "support_075": 0.78125,
+            "support_080": 0.21875,
+            "nearest_vote_fraction": 0.03125,
+            "embedding_count": 32,
+            "source_local_track_id": 112,
+            "source_score": 0.8026326894760132,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "maria": {
+            "score": 0.2558320164680481,
+            "median": 0.17875437438488007,
+            "max": 0.49302205443382263,
+            "support_075": 0.0,
+            "support_080": 0.0,
+            "nearest_vote_fraction": 0.0,
+            "embedding_count": 32,
+            "source_local_track_id": 112,
+            "source_score": 0.2558320164680481,
+            "cluster_score_mode": "all_embeddings"
+          },
+          "marta": {
+            "score": 0.9514354467391968,
+            "median": 0.9226444959640503,
+            "max": 0.979956865310669,
+            "support_075": 0.96875,
+            "support_080": 0.96875,
+            "nearest_vote_fraction": 0.96875,
+            "embedding_count": 32,
+            "source_local_track_id": 112,
+            "source_score": 0.9514354467391968,
+            "cluster_score_mode": "all_embeddings"
+          }
+        },
+        "automatic_assignment_quality": 1.115107557029724,
+        "assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+        "automatic_timeline_quality": 1.115107557029724
+      }
+    },
+    "timeline_decisions_by_label": {
+      "Margarita": [
+        {
+          "global_id": 4,
+          "label": "margarita",
+          "score": 0.9088174700737,
+          "margin": 0.11748093366622925,
+          "median": 0.8021422624588013,
+          "max": 0.96994948387146,
+          "support_075": 0.6993006993006993,
+          "support_080": 0.5034965034965035,
+          "nearest_vote_fraction": 0.7762237762237763,
+          "source_local_track_id": 4,
+          "source_score": 0.9289025068283081,
+          "cluster_local_track_ids": [
+            4,
+            73
+          ],
+          "cluster_frames": 1148,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.9088174700737,
+              "median": 0.8021422624588013,
+              "max": 0.96994948387146,
+              "support_075": 0.6993006993006993,
+              "support_080": 0.5034965034965035,
+              "nearest_vote_fraction": 0.7762237762237763,
+              "embedding_count": 143,
+              "source_local_track_id": 4,
+              "source_score": 0.9289025068283081,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.6766344904899597,
+              "median": 0.4621157646179199,
+              "max": 0.9262207746505737,
+              "support_075": 0.07692307692307693,
+              "support_080": 0.04195804195804196,
+              "nearest_vote_fraction": 0.17482517482517482,
+              "embedding_count": 143,
+              "source_local_track_id": 73,
+              "source_score": 0.7386271357536316,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.7913365364074707,
+              "median": 0.6419109106063843,
+              "max": 0.9540426135063171,
+              "support_075": 0.1958041958041958,
+              "support_080": 0.14685314685314685,
+              "nearest_vote_fraction": 0.04895104895104895,
+              "embedding_count": 143,
+              "source_local_track_id": 4,
+              "source_score": 0.8080435991287231,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 0.9930061218599107,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        }
+      ],
+      "Maria": [
+        {
+          "global_id": 21,
+          "label": "maria",
+          "score": 0.8919739127159119,
+          "margin": 0.4802085757255554,
+          "median": 0.8507418632507324,
+          "max": 0.9589981436729431,
+          "support_075": 0.9578313253012049,
+          "support_080": 0.8433734939759037,
+          "nearest_vote_fraction": 0.9879518072289156,
+          "source_local_track_id": 313,
+          "source_score": 0.8975176215171814,
+          "cluster_local_track_ids": [
+            313,
+            431
+          ],
+          "cluster_frames": 1348,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.41176533699035645,
+              "median": 0.2901496887207031,
+              "max": 0.810327410697937,
+              "support_075": 0.006024096385542169,
+              "support_080": 0.006024096385542169,
+              "nearest_vote_fraction": 0.006024096385542169,
+              "embedding_count": 166,
+              "source_local_track_id": 431,
+              "source_score": 0.4955115020275116,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.8919739127159119,
+              "median": 0.8507418632507324,
+              "max": 0.9589981436729431,
+              "support_075": 0.9578313253012049,
+              "support_080": 0.8433734939759037,
+              "nearest_vote_fraction": 0.9879518072289156,
+              "embedding_count": 166,
+              "source_local_track_id": 313,
+              "source_score": 0.8975176215171814,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.3641499876976013,
+              "median": 0.228144109249115,
+              "max": 0.7688419222831726,
+              "support_075": 0.006024096385542169,
+              "support_080": 0.0,
+              "nearest_vote_fraction": 0.006024096385542169,
+              "embedding_count": 166,
+              "source_local_track_id": 431,
+              "source_score": 0.5135127305984497,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 1.0117573266141846,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        },
+        {
+          "global_id": 19,
+          "label": "maria",
+          "score": 0.9070361852645874,
+          "margin": 0.3105340003967285,
+          "median": 0.7930164933204651,
+          "max": 0.9627408385276794,
+          "support_075": 0.5846153846153846,
+          "support_080": 0.47384615384615386,
+          "nearest_vote_fraction": 0.8553846153846154,
+          "source_local_track_id": 466,
+          "source_score": 0.9089625477790833,
+          "cluster_local_track_ids": [
+            170,
+            466
+          ],
+          "cluster_frames": 2598,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.5965021848678589,
+              "median": 0.4157600700855255,
+              "max": 0.8839967250823975,
+              "support_075": 0.06769230769230769,
+              "support_080": 0.046153846153846156,
+              "nearest_vote_fraction": 0.13230769230769232,
+              "embedding_count": 325,
+              "source_local_track_id": 170,
+              "source_score": 0.6021676659584045,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.9070361852645874,
+              "median": 0.7930164933204651,
+              "max": 0.9627408385276794,
+              "support_075": 0.5846153846153846,
+              "support_080": 0.47384615384615386,
+              "nearest_vote_fraction": 0.8553846153846154,
+              "embedding_count": 325,
+              "source_local_track_id": 466,
+              "source_score": 0.9089625477790833,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.4196109473705292,
+              "median": 0.18813075125217438,
+              "max": 0.8245248198509216,
+              "support_075": 0.018461538461538463,
+              "support_080": 0.003076923076923077,
+              "nearest_vote_fraction": 0.012307692307692308,
+              "embedding_count": 325,
+              "source_local_track_id": 170,
+              "source_score": 0.4320031404495239,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 1.0039402052764894,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        },
+        {
+          "global_id": 18,
+          "label": "maria",
+          "score": 0.8951034545898438,
+          "margin": 0.34047532081604004,
+          "median": 0.8157240748405457,
+          "max": 0.9586042165756226,
+          "support_075": 0.6528301886792452,
+          "support_080": 0.5547169811320755,
+          "nearest_vote_fraction": 0.8415094339622642,
+          "source_local_track_id": 371,
+          "source_score": 0.8995206356048584,
+          "cluster_local_track_ids": [
+            154,
+            371
+          ],
+          "cluster_frames": 2135,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.5546281337738037,
+              "median": 0.36215949058532715,
+              "max": 0.902635931968689,
+              "support_075": 0.052830188679245285,
+              "support_080": 0.03773584905660377,
+              "nearest_vote_fraction": 0.09811320754716982,
+              "embedding_count": 265,
+              "source_local_track_id": 154,
+              "source_score": 0.6702653765678406,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.8951034545898438,
+              "median": 0.8157240748405457,
+              "max": 0.9586042165756226,
+              "support_075": 0.6528301886792452,
+              "support_080": 0.5547169811320755,
+              "nearest_vote_fraction": 0.8415094339622642,
+              "embedding_count": 265,
+              "source_local_track_id": 371,
+              "source_score": 0.8995206356048584,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.45683151483535767,
+              "median": 0.1544230729341507,
+              "max": 0.9285691976547241,
+              "support_075": 0.04905660377358491,
+              "support_080": 0.03018867924528302,
+              "nearest_vote_fraction": 0.06037735849056604,
+              "embedding_count": 265,
+              "source_local_track_id": 154,
+              "source_score": 0.5950841307640076,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 0.9928446953464004,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        },
+        {
+          "global_id": 5,
+          "label": "maria",
+          "score": 0.8758397102355957,
+          "margin": 0.13073503971099854,
+          "median": 0.8111280202865601,
+          "max": 0.9417349100112915,
+          "support_075": 0.6895368782161235,
+          "support_080": 0.5643224699828473,
+          "nearest_vote_fraction": 0.8078902229845626,
+          "source_local_track_id": 5,
+          "source_score": 0.8768193125724792,
+          "cluster_local_track_ids": [
+            5,
+            552
+          ],
+          "cluster_frames": 4662,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.7451046705245972,
+              "median": 0.6096459627151489,
+              "max": 0.9200472235679626,
+              "support_075": 0.14408233276157806,
+              "support_080": 0.08061749571183534,
+              "nearest_vote_fraction": 0.1457975986277873,
+              "embedding_count": 583,
+              "source_local_track_id": 552,
+              "source_score": 0.8122591972351074,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.8758397102355957,
+              "median": 0.8111280202865601,
+              "max": 0.9417349100112915,
+              "support_075": 0.6895368782161235,
+              "support_080": 0.5643224699828473,
+              "nearest_vote_fraction": 0.8078902229845626,
+              "embedding_count": 583,
+              "source_local_track_id": 5,
+              "source_score": 0.8768193125724792,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.6122059226036072,
+              "median": 0.3761288523674011,
+              "max": 0.8862878680229187,
+              "support_075": 0.06518010291595197,
+              "support_080": 0.048027444253859346,
+              "nearest_vote_fraction": 0.04631217838765009,
+              "embedding_count": 583,
+              "source_local_track_id": 552,
+              "source_score": 0.7811502814292908,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 0.9826051164869599,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        },
+        {
+          "global_id": 20,
+          "label": "maria",
+          "score": 0.8605851531028748,
+          "margin": 0.4803506135940552,
+          "median": 0.8110485076904297,
+          "max": 0.9014381170272827,
+          "support_075": 0.7422680412371134,
+          "support_080": 0.5257731958762887,
+          "nearest_vote_fraction": 0.9896907216494846,
+          "source_local_track_id": 359,
+          "source_score": 0.8665139079093933,
+          "cluster_local_track_ids": [
+            231,
+            359
+          ],
+          "cluster_frames": 743,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.3329661190509796,
+              "median": 0.2335241585969925,
+              "max": 0.45953670144081116,
+              "support_075": 0.0,
+              "support_080": 0.0,
+              "nearest_vote_fraction": 0.0,
+              "embedding_count": 97,
+              "source_local_track_id": 231,
+              "source_score": 0.36117997765541077,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.8605851531028748,
+              "median": 0.8110485076904297,
+              "max": 0.9014381170272827,
+              "support_075": 0.7422680412371134,
+              "support_080": 0.5257731958762887,
+              "nearest_vote_fraction": 0.9896907216494846,
+              "embedding_count": 97,
+              "source_local_track_id": 359,
+              "source_score": 0.8665139079093933,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.3802345395088196,
+              "median": 0.18246665596961975,
+              "max": 0.6597464084625244,
+              "support_075": 0.0,
+              "support_080": 0.0,
+              "nearest_vote_fraction": 0.010309278350515464,
+              "embedding_count": 97,
+              "source_local_track_id": 359,
+              "source_score": 0.38075751066207886,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 0.9660516096550263,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        },
+        {
+          "global_id": 16,
+          "label": "maria",
+          "score": 0.8154032230377197,
+          "margin": 0.46173274517059326,
+          "median": 0.685252845287323,
+          "max": 0.9196290373802185,
+          "support_075": 0.3821138211382114,
+          "support_080": 0.1951219512195122,
+          "nearest_vote_fraction": 0.9512195121951219,
+          "source_local_track_id": 82,
+          "source_score": 0.8457949161529541,
+          "cluster_local_track_ids": [
+            82,
+            222
+          ],
+          "cluster_frames": 961,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.35367047786712646,
+              "median": 0.2492368221282959,
+              "max": 0.7758644223213196,
+              "support_075": 0.008130081300813009,
+              "support_080": 0.0,
+              "nearest_vote_fraction": 0.032520325203252036,
+              "embedding_count": 123,
+              "source_local_track_id": 82,
+              "source_score": 0.3599500358104706,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.8154032230377197,
+              "median": 0.685252845287323,
+              "max": 0.9196290373802185,
+              "support_075": 0.3821138211382114,
+              "support_080": 0.1951219512195122,
+              "nearest_vote_fraction": 0.9512195121951219,
+              "embedding_count": 123,
+              "source_local_track_id": 82,
+              "source_score": 0.8457949161529541,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.28860387206077576,
+              "median": 0.16208767890930176,
+              "max": 0.47733423113822937,
+              "support_075": 0.0,
+              "support_080": 0.0,
+              "nearest_vote_fraction": 0.016260162601626018,
+              "embedding_count": 123,
+              "source_local_track_id": 82,
+              "source_score": 0.32159000635147095,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 0.9016878720595043,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        }
+      ],
+      "Marta": [
+        {
+          "global_id": 17,
+          "label": "marta",
+          "score": 0.9514354467391968,
+          "margin": 0.1488027572631836,
+          "median": 0.9226444959640503,
+          "max": 0.979956865310669,
+          "support_075": 0.96875,
+          "support_080": 0.96875,
+          "nearest_vote_fraction": 0.96875,
+          "source_local_track_id": 112,
+          "source_score": 0.9514354467391968,
+          "cluster_local_track_ids": [
+            112
+          ],
+          "cluster_frames": 272,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.8026326894760132,
+              "median": 0.7842687368392944,
+              "max": 0.8588857650756836,
+              "support_075": 0.78125,
+              "support_080": 0.21875,
+              "nearest_vote_fraction": 0.03125,
+              "embedding_count": 32,
+              "source_local_track_id": 112,
+              "source_score": 0.8026326894760132,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.2558320164680481,
+              "median": 0.17875437438488007,
+              "max": 0.49302205443382263,
+              "support_075": 0.0,
+              "support_080": 0.0,
+              "nearest_vote_fraction": 0.0,
+              "embedding_count": 32,
+              "source_local_track_id": 112,
+              "source_score": 0.2558320164680481,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.9514354467391968,
+              "median": 0.9226444959640503,
+              "max": 0.979956865310669,
+              "support_075": 0.96875,
+              "support_080": 0.96875,
+              "nearest_vote_fraction": 0.96875,
+              "embedding_count": 32,
+              "source_local_track_id": 112,
+              "source_score": 0.9514354467391968,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 1.0544065294570923,
+          "assignment_mode": "timeline_candidate",
+          "accepted": false,
+          "reason": "temporal_overlap"
+        }
+      ]
+    },
+    "timeline_conflicts": [],
+    "timeline_fragments_by_label": {
+      "Margarita": [
+        {
+          "global_id": 2,
+          "label": "margarita",
+          "score": 0.9268684983253479,
+          "margin": 0.18606603145599365,
+          "median": 0.8516511917114258,
+          "max": 0.9738085269927979,
+          "support_075": 0.8193916349809885,
+          "support_080": 0.7034220532319392,
+          "nearest_vote_fraction": 0.8574144486692015,
+          "source_local_track_id": 2,
+          "source_score": 0.9268684983253479,
+          "cluster_local_track_ids": [
+            2
+          ],
+          "cluster_frames": 4213,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.9268684983253479,
+              "median": 0.8516511917114258,
+              "max": 0.9738085269927979,
+              "support_075": 0.8193916349809885,
+              "support_080": 0.7034220532319392,
+              "nearest_vote_fraction": 0.8574144486692015,
+              "embedding_count": 526,
+              "source_local_track_id": 2,
+              "source_score": 0.9268684983253479,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.7408024668693542,
+              "median": 0.6422407627105713,
+              "max": 0.9081748723983765,
+              "support_075": 0.13307984790874525,
+              "support_080": 0.0779467680608365,
+              "nearest_vote_fraction": 0.11787072243346007,
+              "embedding_count": 526,
+              "source_local_track_id": 2,
+              "source_score": 0.7408024668693542,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.7153967022895813,
+              "median": 0.472494512796402,
+              "max": 0.9028297662734985,
+              "support_075": 0.11216730038022814,
+              "support_080": 0.06653992395437262,
+              "nearest_vote_fraction": 0.024714828897338403,
+              "embedding_count": 526,
+              "source_local_track_id": 2,
+              "source_score": 0.7153966426849365,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 1.0415687834515373,
+          "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+          "first_frame": 4881,
+          "last_frame": 9093,
+          "frames_seen": 4213,
+          "strict_anchor_global_id": 2,
+          "strict_anchor_score": 0.9268684983253479,
+          "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+          "timeline_relation": "anchor",
+          "compatibility_to_anchor": 1.0,
+          "embedding_count": 526,
+          "head_embedding_count": 263
+        }
+      ],
+      "Maria": [
+        {
+          "global_id": 13,
+          "label": "maria",
+          "score": 0.8972709774971008,
+          "margin": 0.1858106255531311,
+          "median": 0.7897506356239319,
+          "max": 0.9704369902610779,
+          "support_075": 0.6306954436450839,
+          "support_080": 0.4748201438848921,
+          "nearest_vote_fraction": 0.8369304556354916,
+          "source_local_track_id": 284,
+          "source_score": 0.9187015891075134,
+          "cluster_local_track_ids": [
+            13,
+            284
+          ],
+          "cluster_frames": 3329,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.7114603519439697,
+              "median": 0.45298078656196594,
+              "max": 0.8992288112640381,
+              "support_075": 0.11750599520383694,
+              "support_080": 0.07434052757793765,
+              "nearest_vote_fraction": 0.11031175059952038,
+              "embedding_count": 417,
+              "source_local_track_id": 13,
+              "source_score": 0.8309096693992615,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.8972709774971008,
+              "median": 0.7897506356239319,
+              "max": 0.9704369902610779,
+              "support_075": 0.6306954436450839,
+              "support_080": 0.4748201438848921,
+              "nearest_vote_fraction": 0.8369304556354916,
+              "embedding_count": 417,
+              "source_local_track_id": 284,
+              "source_score": 0.9187015891075134,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.5579932332038879,
+              "median": 0.2140226662158966,
+              "max": 0.9421590566635132,
+              "support_075": 0.07673860911270983,
+              "support_080": 0.047961630695443645,
+              "nearest_vote_fraction": 0.05275779376498801,
+              "embedding_count": 417,
+              "source_local_track_id": 13,
+              "source_score": 0.7926921248435974,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 0.9962005912277236,
+          "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+          "first_frame": 4881,
+          "last_frame": 9176,
+          "frames_seen": 3329,
+          "strict_anchor_global_id": 21,
+          "strict_anchor_score": 0.8919739127159119,
+          "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+          "timeline_relation": "anchor",
+          "compatibility_to_anchor": 1.0,
+          "embedding_count": 417,
+          "head_embedding_count": 209
+        }
+      ],
+      "Marta": [
+        {
+          "global_id": 11,
+          "label": "marta",
+          "score": 0.945925235748291,
+          "margin": 0.11513674259185791,
+          "median": 0.6668478846549988,
+          "max": 0.9813657999038696,
+          "support_075": 0.3915094339622642,
+          "support_080": 0.33254716981132076,
+          "nearest_vote_fraction": 0.36556603773584906,
+          "source_local_track_id": 156,
+          "source_score": 0.9640527963638306,
+          "cluster_local_track_ids": [
+            11,
+            156,
+            351
+          ],
+          "cluster_frames": 3389,
+          "all_label_scores": {
+            "margarita": {
+              "score": 0.809821605682373,
+              "median": 0.6938381195068359,
+              "max": 0.895097017288208,
+              "support_075": 0.375,
+              "support_080": 0.19103773584905662,
+              "nearest_vote_fraction": 0.21462264150943397,
+              "embedding_count": 424,
+              "source_local_track_id": 11,
+              "source_score": 0.8205238580703735,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "maria": {
+              "score": 0.8307884931564331,
+              "median": 0.5812011361122131,
+              "max": 0.9358925223350525,
+              "support_075": 0.3231132075471698,
+              "support_080": 0.2169811320754717,
+              "nearest_vote_fraction": 0.419811320754717,
+              "embedding_count": 424,
+              "source_local_track_id": 156,
+              "source_score": 0.8507782220840454,
+              "cluster_score_mode": "all_embeddings"
+            },
+            "marta": {
+              "score": 0.945925235748291,
+              "median": 0.6668478846549988,
+              "max": 0.9813657999038696,
+              "support_075": 0.3915094339622642,
+              "support_080": 0.33254716981132076,
+              "nearest_vote_fraction": 0.36556603773584906,
+              "embedding_count": 424,
+              "source_local_track_id": 156,
+              "source_score": 0.9640527963638306,
+              "cluster_score_mode": "all_embeddings"
+            }
+          },
+          "automatic_timeline_quality": 1.0075671116109526,
+          "assignment_mode": "automatic_start_visible_anchor_by_embeddings",
+          "first_frame": 4881,
+          "last_frame": 8386,
+          "frames_seen": 3389,
+          "strict_anchor_global_id": 17,
+          "strict_anchor_score": 0.9514354467391968,
+          "strict_anchor_assignment_mode": "automatic_strict_anchor_from_global_embeddings",
+          "timeline_relation": "anchor",
+          "compatibility_to_anchor": 1.0,
+          "embedding_count": 424,
+          "head_embedding_count": 212
+        }
+      ]
+    },
+    "candidate_count": 22,
+    "global_group_count": 22
+  },
+  "all_known_candidates": [
+    {
+      "global_id": 1,
+      "label": "maria",
+      "score": 0.8186183571815491,
+      "margin": 0.00441211462020874,
+      "median": 0.7305117845535278,
+      "max": 0.936417281627655,
+      "support_075": 0.4033457249070632,
+      "support_080": 0.19888475836431227,
+      "nearest_vote_fraction": 0.6747211895910781,
+      "source_local_track_id": 1,
+      "cluster_local_track_ids": [
+        1
+      ],
+      "cluster_frames": 4310,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8142062425613403,
+          "median": 0.6097077131271362,
+          "max": 0.9204639792442322,
+          "support_075": 0.27137546468401486,
+          "support_080": 0.17843866171003717,
+          "nearest_vote_fraction": 0.2620817843866171,
+          "embedding_count": 538,
+          "source_local_track_id": 1,
+          "source_score": 0.8142062425613403,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8186183571815491,
+          "median": 0.7305117845535278,
+          "max": 0.936417281627655,
+          "support_075": 0.4033457249070632,
+          "support_080": 0.19888475836431227,
+          "nearest_vote_fraction": 0.6747211895910781,
+          "embedding_count": 538,
+          "source_local_track_id": 1,
+          "source_score": 0.8186183571815491,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7182592749595642,
+          "median": 0.2382238358259201,
+          "max": 0.9158620834350586,
+          "support_075": 0.12825278810408922,
+          "support_080": 0.05018587360594796,
+          "nearest_vote_fraction": 0.06319702602230483,
+          "embedding_count": 538,
+          "source_local_track_id": 1,
+          "source_score": 0.7182592749595642,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.2620817843866171,
+        "maria": 0.6747211895910781,
+        "marta": 0.06319702602230483
+      }
+    },
+    {
+      "global_id": 2,
+      "label": "margarita",
+      "score": 0.9268684983253479,
+      "margin": 0.18606603145599365,
+      "median": 0.8516511917114258,
+      "max": 0.9738085269927979,
+      "support_075": 0.8193916349809885,
+      "support_080": 0.7034220532319392,
+      "nearest_vote_fraction": 0.8574144486692015,
+      "source_local_track_id": 2,
+      "cluster_local_track_ids": [
+        2
+      ],
+      "cluster_frames": 4213,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9268684983253479,
+          "median": 0.8516511917114258,
+          "max": 0.9738085269927979,
+          "support_075": 0.8193916349809885,
+          "support_080": 0.7034220532319392,
+          "nearest_vote_fraction": 0.8574144486692015,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.9268684983253479,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7408024668693542,
+          "median": 0.6422407627105713,
+          "max": 0.9081748723983765,
+          "support_075": 0.13307984790874525,
+          "support_080": 0.0779467680608365,
+          "nearest_vote_fraction": 0.11787072243346007,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.7408024668693542,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7153967022895813,
+          "median": 0.472494512796402,
+          "max": 0.9028297662734985,
+          "support_075": 0.11216730038022814,
+          "support_080": 0.06653992395437262,
+          "nearest_vote_fraction": 0.024714828897338403,
+          "embedding_count": 526,
+          "source_local_track_id": 2,
+          "source_score": 0.7153966426849365,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.8574144486692015,
+        "maria": 0.11787072243346007,
+        "marta": 0.024714828897338403
+      }
+    },
+    {
+      "global_id": 3,
+      "label": "margarita",
+      "score": 0.8798468112945557,
+      "margin": 0.09728318452835083,
+      "median": 0.7939085364341736,
+      "max": 0.9421104788780212,
+      "support_075": 0.6037735849056604,
+      "support_080": 0.48427672955974843,
+      "nearest_vote_fraction": 0.6205450733752621,
+      "source_local_track_id": 3,
+      "cluster_local_track_ids": [
+        3,
+        508,
+        540
+      ],
+      "cluster_frames": 3818,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8798468112945557,
+          "median": 0.7939085364341736,
+          "max": 0.9421104788780212,
+          "support_075": 0.6037735849056604,
+          "support_080": 0.48427672955974843,
+          "nearest_vote_fraction": 0.6205450733752621,
+          "embedding_count": 477,
+          "source_local_track_id": 3,
+          "source_score": 0.8848952651023865,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7677993774414062,
+          "median": 0.6099855899810791,
+          "max": 0.9227046370506287,
+          "support_075": 0.1740041928721174,
+          "support_080": 0.10482180293501048,
+          "nearest_vote_fraction": 0.2348008385744235,
+          "embedding_count": 477,
+          "source_local_track_id": 508,
+          "source_score": 0.824227511882782,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7825636267662048,
+          "median": 0.6127461791038513,
+          "max": 0.9151797890663147,
+          "support_075": 0.22012578616352202,
+          "support_080": 0.11949685534591195,
+          "nearest_vote_fraction": 0.14465408805031446,
+          "embedding_count": 477,
+          "source_local_track_id": 508,
+          "source_score": 0.8597953915596008,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.6205450733752621,
+        "maria": 0.2348008385744235,
+        "marta": 0.14465408805031446
+      }
+    },
+    {
+      "global_id": 4,
+      "label": "margarita",
+      "score": 0.9088174700737,
+      "margin": 0.11748093366622925,
+      "median": 0.8021422624588013,
+      "max": 0.96994948387146,
+      "support_075": 0.6993006993006993,
+      "support_080": 0.5034965034965035,
+      "nearest_vote_fraction": 0.7762237762237763,
+      "source_local_track_id": 4,
+      "cluster_local_track_ids": [
+        4,
+        73
+      ],
+      "cluster_frames": 1148,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.9088174700737,
+          "median": 0.8021422624588013,
+          "max": 0.96994948387146,
+          "support_075": 0.6993006993006993,
+          "support_080": 0.5034965034965035,
+          "nearest_vote_fraction": 0.7762237762237763,
+          "embedding_count": 143,
+          "source_local_track_id": 4,
+          "source_score": 0.9289025068283081,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.6766344904899597,
+          "median": 0.4621157646179199,
+          "max": 0.9262207746505737,
+          "support_075": 0.07692307692307693,
+          "support_080": 0.04195804195804196,
+          "nearest_vote_fraction": 0.17482517482517482,
+          "embedding_count": 143,
+          "source_local_track_id": 73,
+          "source_score": 0.7386271357536316,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7913365364074707,
+          "median": 0.6419109106063843,
+          "max": 0.9540426135063171,
+          "support_075": 0.1958041958041958,
+          "support_080": 0.14685314685314685,
+          "nearest_vote_fraction": 0.04895104895104895,
+          "embedding_count": 143,
+          "source_local_track_id": 4,
+          "source_score": 0.8080435991287231,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.7762237762237763,
+        "maria": 0.17482517482517482,
+        "marta": 0.04895104895104895
+      }
+    },
+    {
+      "global_id": 5,
+      "label": "maria",
+      "score": 0.8758397102355957,
+      "margin": 0.13073503971099854,
+      "median": 0.8111280202865601,
+      "max": 0.9417349100112915,
+      "support_075": 0.6895368782161235,
+      "support_080": 0.5643224699828473,
+      "nearest_vote_fraction": 0.8078902229845626,
+      "source_local_track_id": 5,
+      "cluster_local_track_ids": [
+        5,
+        552
+      ],
+      "cluster_frames": 4662,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7451046705245972,
+          "median": 0.6096459627151489,
+          "max": 0.9200472235679626,
+          "support_075": 0.14408233276157806,
+          "support_080": 0.08061749571183534,
+          "nearest_vote_fraction": 0.1457975986277873,
+          "embedding_count": 583,
+          "source_local_track_id": 552,
+          "source_score": 0.8122591972351074,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8758397102355957,
+          "median": 0.8111280202865601,
+          "max": 0.9417349100112915,
+          "support_075": 0.6895368782161235,
+          "support_080": 0.5643224699828473,
+          "nearest_vote_fraction": 0.8078902229845626,
+          "embedding_count": 583,
+          "source_local_track_id": 5,
+          "source_score": 0.8768193125724792,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.6122059226036072,
+          "median": 0.3761288523674011,
+          "max": 0.8862878680229187,
+          "support_075": 0.06518010291595197,
+          "support_080": 0.048027444253859346,
+          "nearest_vote_fraction": 0.04631217838765009,
+          "embedding_count": 583,
+          "source_local_track_id": 552,
+          "source_score": 0.7811502814292908,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.1457975986277873,
+        "maria": 0.8078902229845626,
+        "marta": 0.04631217838765009
+      }
+    },
+    {
+      "global_id": 6,
+      "label": "margarita",
+      "score": 0.8079172372817993,
+      "margin": 0.017107784748077393,
+      "median": 0.7078144550323486,
+      "max": 0.9088044762611389,
+      "support_075": 0.37467018469656993,
+      "support_080": 0.16094986807387862,
+      "nearest_vote_fraction": 0.48284960422163586,
+      "source_local_track_id": 6,
+      "cluster_local_track_ids": [
+        6,
+        237
+      ],
+      "cluster_frames": 3033,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8079172372817993,
+          "median": 0.7078144550323486,
+          "max": 0.9088044762611389,
+          "support_075": 0.37467018469656993,
+          "support_080": 0.16094986807387862,
+          "nearest_vote_fraction": 0.48284960422163586,
+          "embedding_count": 379,
+          "source_local_track_id": 6,
+          "source_score": 0.832635223865509,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7773212790489197,
+          "median": 0.5150156021118164,
+          "max": 0.9528160691261292,
+          "support_075": 0.17678100263852242,
+          "support_080": 0.13192612137203166,
+          "nearest_vote_fraction": 0.2796833773087071,
+          "embedding_count": 379,
+          "source_local_track_id": 237,
+          "source_score": 0.8677725195884705,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7908094525337219,
+          "median": 0.655243456363678,
+          "max": 0.8738546967506409,
+          "support_075": 0.28232189973614774,
+          "support_080": 0.1345646437994723,
+          "nearest_vote_fraction": 0.23746701846965698,
+          "embedding_count": 379,
+          "source_local_track_id": 6,
+          "source_score": 0.8239579796791077,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.48284960422163586,
+        "maria": 0.2796833773087071,
+        "marta": 0.23746701846965698
+      }
+    },
+    {
+      "global_id": 7,
+      "label": "margarita",
+      "score": 0.8344506621360779,
+      "margin": 0.019707918167114258,
+      "median": 0.7828446626663208,
+      "max": 0.9233617782592773,
+      "support_075": 0.648870636550308,
+      "support_080": 0.38193018480492813,
+      "nearest_vote_fraction": 0.5872689938398358,
+      "source_local_track_id": 533,
+      "cluster_local_track_ids": [
+        7,
+        533
+      ],
+      "cluster_frames": 3920,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8344506621360779,
+          "median": 0.7828446626663208,
+          "max": 0.9233617782592773,
+          "support_075": 0.648870636550308,
+          "support_080": 0.38193018480492813,
+          "nearest_vote_fraction": 0.5872689938398358,
+          "embedding_count": 487,
+          "source_local_track_id": 533,
+          "source_score": 0.8784050345420837,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7228257656097412,
+          "median": 0.36315739154815674,
+          "max": 0.9089241027832031,
+          "support_075": 0.11704312114989733,
+          "support_080": 0.06776180698151951,
+          "nearest_vote_fraction": 0.21149897330595482,
+          "embedding_count": 487,
+          "source_local_track_id": 7,
+          "source_score": 0.7340013384819031,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.8147427439689636,
+          "median": 0.6681779026985168,
+          "max": 0.9434505701065063,
+          "support_075": 0.2669404517453799,
+          "support_080": 0.17248459958932238,
+          "nearest_vote_fraction": 0.20123203285420946,
+          "embedding_count": 487,
+          "source_local_track_id": 533,
+          "source_score": 0.922792911529541,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.5872689938398358,
+        "maria": 0.21149897330595482,
+        "marta": 0.20123203285420946
+      }
+    },
+    {
+      "global_id": 8,
+      "label": "maria",
+      "score": 0.8244132399559021,
+      "margin": 0.027965962886810303,
+      "median": 0.7046388387680054,
+      "max": 0.9372106194496155,
+      "support_075": 0.3734015345268542,
+      "support_080": 0.18925831202046037,
+      "nearest_vote_fraction": 0.5754475703324808,
+      "source_local_track_id": 8,
+      "cluster_local_track_ids": [
+        8,
+        453
+      ],
+      "cluster_frames": 3127,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7964472770690918,
+          "median": 0.6649749279022217,
+          "max": 0.9266239404678345,
+          "support_075": 0.2966751918158568,
+          "support_080": 0.14578005115089515,
+          "nearest_vote_fraction": 0.3734015345268542,
+          "embedding_count": 391,
+          "source_local_track_id": 8,
+          "source_score": 0.80910325050354,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8244132399559021,
+          "median": 0.7046388387680054,
+          "max": 0.9372106194496155,
+          "support_075": 0.3734015345268542,
+          "support_080": 0.18925831202046037,
+          "nearest_vote_fraction": 0.5754475703324808,
+          "embedding_count": 391,
+          "source_local_track_id": 8,
+          "source_score": 0.8276963829994202,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.6011054515838623,
+          "median": 0.3378995954990387,
+          "max": 0.9469168186187744,
+          "support_075": 0.04092071611253197,
+          "support_080": 0.017902813299232736,
+          "nearest_vote_fraction": 0.05115089514066496,
+          "embedding_count": 391,
+          "source_local_track_id": 8,
+          "source_score": 0.6154868602752686,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.3734015345268542,
+        "maria": 0.5754475703324808,
+        "marta": 0.05115089514066496
+      }
+    },
+    {
+      "global_id": 9,
+      "label": "margarita",
+      "score": 0.8283316493034363,
+      "margin": 0.003866136074066162,
+      "median": 0.7800146341323853,
+      "max": 0.9276930093765259,
+      "support_075": 0.6720257234726688,
+      "support_080": 0.36012861736334406,
+      "nearest_vote_fraction": 0.5209003215434084,
+      "source_local_track_id": 9,
+      "cluster_local_track_ids": [
+        9,
+        259,
+        407
+      ],
+      "cluster_frames": 2499,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8283316493034363,
+          "median": 0.7800146341323853,
+          "max": 0.9276930093765259,
+          "support_075": 0.6720257234726688,
+          "support_080": 0.36012861736334406,
+          "nearest_vote_fraction": 0.5209003215434084,
+          "embedding_count": 311,
+          "source_local_track_id": 9,
+          "source_score": 0.8322713971138,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.5934838056564331,
+          "median": 0.35059958696365356,
+          "max": 0.9331688284873962,
+          "support_075": 0.07717041800643087,
+          "support_080": 0.05466237942122187,
+          "nearest_vote_fraction": 0.1189710610932476,
+          "embedding_count": 311,
+          "source_local_track_id": 9,
+          "source_score": 0.6682111024856567,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.8244655132293701,
+          "median": 0.7516394257545471,
+          "max": 0.9074894785881042,
+          "support_075": 0.5080385852090032,
+          "support_080": 0.24115755627009647,
+          "nearest_vote_fraction": 0.36012861736334406,
+          "embedding_count": 311,
+          "source_local_track_id": 407,
+          "source_score": 0.849706768989563,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.5209003215434084,
+        "maria": 0.1189710610932476,
+        "marta": 0.36012861736334406
+      }
+    },
+    {
+      "global_id": 10,
+      "label": "margarita",
+      "score": 0.8753262758255005,
+      "margin": 0.012479960918426514,
+      "median": 0.7422319054603577,
+      "max": 0.9271226525306702,
+      "support_075": 0.4905008635578584,
+      "support_080": 0.4231433506044905,
+      "nearest_vote_fraction": 0.4835924006908463,
+      "source_local_track_id": 548,
+      "cluster_local_track_ids": [
+        10,
+        548
+      ],
+      "cluster_frames": 4628,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8753262758255005,
+          "median": 0.7422319054603577,
+          "max": 0.9271226525306702,
+          "support_075": 0.4905008635578584,
+          "support_080": 0.4231433506044905,
+          "nearest_vote_fraction": 0.4835924006908463,
+          "embedding_count": 579,
+          "source_local_track_id": 548,
+          "source_score": 0.917199432849884,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8235713839530945,
+          "median": 0.5201134085655212,
+          "max": 0.9409188628196716,
+          "support_075": 0.24352331606217617,
+          "support_080": 0.17789291882556132,
+          "nearest_vote_fraction": 0.41278065630397237,
+          "embedding_count": 579,
+          "source_local_track_id": 10,
+          "source_score": 0.8408131003379822,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.862846314907074,
+          "median": 0.6045778393745422,
+          "max": 0.9179023504257202,
+          "support_075": 0.3540587219343696,
+          "support_080": 0.27461139896373055,
+          "nearest_vote_fraction": 0.10362694300518134,
+          "embedding_count": 579,
+          "source_local_track_id": 548,
+          "source_score": 0.8997382521629333,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.4835924006908463,
+        "maria": 0.41278065630397237,
+        "marta": 0.10362694300518134
+      }
+    },
+    {
+      "global_id": 11,
+      "label": "marta",
+      "score": 0.945925235748291,
+      "margin": 0.11513674259185791,
+      "median": 0.6668478846549988,
+      "max": 0.9813657999038696,
+      "support_075": 0.3915094339622642,
+      "support_080": 0.33254716981132076,
+      "nearest_vote_fraction": 0.36556603773584906,
+      "source_local_track_id": 156,
+      "cluster_local_track_ids": [
+        11,
+        156,
+        351
+      ],
+      "cluster_frames": 3389,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.809821605682373,
+          "median": 0.6938381195068359,
+          "max": 0.895097017288208,
+          "support_075": 0.375,
+          "support_080": 0.19103773584905662,
+          "nearest_vote_fraction": 0.21462264150943397,
+          "embedding_count": 424,
+          "source_local_track_id": 11,
+          "source_score": 0.8205238580703735,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8307884931564331,
+          "median": 0.5812011361122131,
+          "max": 0.9358925223350525,
+          "support_075": 0.3231132075471698,
+          "support_080": 0.2169811320754717,
+          "nearest_vote_fraction": 0.419811320754717,
+          "embedding_count": 424,
+          "source_local_track_id": 156,
+          "source_score": 0.8507782220840454,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.945925235748291,
+          "median": 0.6668478846549988,
+          "max": 0.9813657999038696,
+          "support_075": 0.3915094339622642,
+          "support_080": 0.33254716981132076,
+          "nearest_vote_fraction": 0.36556603773584906,
+          "embedding_count": 424,
+          "source_local_track_id": 156,
+          "source_score": 0.9640527963638306,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.21462264150943397,
+        "maria": 0.419811320754717,
+        "marta": 0.36556603773584906
+      }
+    },
+    {
+      "global_id": 12,
+      "label": "maria",
+      "score": 0.8022445440292358,
+      "margin": 0.10928791761398315,
+      "median": 0.6485724449157715,
+      "max": 0.9546986222267151,
+      "support_075": 0.24754901960784315,
+      "support_080": 0.15441176470588236,
+      "nearest_vote_fraction": 0.7058823529411765,
+      "source_local_track_id": 268,
+      "cluster_local_track_ids": [
+        12,
+        268
+      ],
+      "cluster_frames": 3281,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.6929566264152527,
+          "median": 0.4340377449989319,
+          "max": 0.8991398811340332,
+          "support_075": 0.12745098039215685,
+          "support_080": 0.07107843137254902,
+          "nearest_vote_fraction": 0.25980392156862747,
+          "embedding_count": 408,
+          "source_local_track_id": 12,
+          "source_score": 0.7889057993888855,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8022445440292358,
+          "median": 0.6485724449157715,
+          "max": 0.9546986222267151,
+          "support_075": 0.24754901960784315,
+          "support_080": 0.15441176470588236,
+          "nearest_vote_fraction": 0.7058823529411765,
+          "embedding_count": 408,
+          "source_local_track_id": 268,
+          "source_score": 0.8041151165962219,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.6180273294448853,
+          "median": 0.2736094892024994,
+          "max": 0.870815634727478,
+          "support_075": 0.056372549019607844,
+          "support_080": 0.03431372549019608,
+          "nearest_vote_fraction": 0.03431372549019608,
+          "embedding_count": 408,
+          "source_local_track_id": 268,
+          "source_score": 0.6245850920677185,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.25980392156862747,
+        "maria": 0.7058823529411765,
+        "marta": 0.03431372549019608
+      }
+    },
+    {
+      "global_id": 13,
+      "label": "maria",
+      "score": 0.8972709774971008,
+      "margin": 0.1858106255531311,
+      "median": 0.7897506356239319,
+      "max": 0.9704369902610779,
+      "support_075": 0.6306954436450839,
+      "support_080": 0.4748201438848921,
+      "nearest_vote_fraction": 0.8369304556354916,
+      "source_local_track_id": 284,
+      "cluster_local_track_ids": [
+        13,
+        284
+      ],
+      "cluster_frames": 3329,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7114603519439697,
+          "median": 0.45298078656196594,
+          "max": 0.8992288112640381,
+          "support_075": 0.11750599520383694,
+          "support_080": 0.07434052757793765,
+          "nearest_vote_fraction": 0.11031175059952038,
+          "embedding_count": 417,
+          "source_local_track_id": 13,
+          "source_score": 0.8309096693992615,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8972709774971008,
+          "median": 0.7897506356239319,
+          "max": 0.9704369902610779,
+          "support_075": 0.6306954436450839,
+          "support_080": 0.4748201438848921,
+          "nearest_vote_fraction": 0.8369304556354916,
+          "embedding_count": 417,
+          "source_local_track_id": 284,
+          "source_score": 0.9187015891075134,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.5579932332038879,
+          "median": 0.2140226662158966,
+          "max": 0.9421590566635132,
+          "support_075": 0.07673860911270983,
+          "support_080": 0.047961630695443645,
+          "nearest_vote_fraction": 0.05275779376498801,
+          "embedding_count": 417,
+          "source_local_track_id": 13,
+          "source_score": 0.7926921248435974,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.11031175059952038,
+        "maria": 0.8369304556354916,
+        "marta": 0.05275779376498801
+      }
+    },
+    {
+      "global_id": 14,
+      "label": "margarita",
+      "score": 0.7887380123138428,
+      "margin": 0.049788057804107666,
+      "median": 0.7310248613357544,
+      "max": 0.883225679397583,
+      "support_075": 0.3548387096774194,
+      "support_080": 0.11290322580645161,
+      "nearest_vote_fraction": 0.5483870967741935,
+      "source_local_track_id": 14,
+      "cluster_local_track_ids": [
+        14,
+        158
+      ],
+      "cluster_frames": 1010,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7887380123138428,
+          "median": 0.7310248613357544,
+          "max": 0.883225679397583,
+          "support_075": 0.3548387096774194,
+          "support_080": 0.11290322580645161,
+          "nearest_vote_fraction": 0.5483870967741935,
+          "embedding_count": 124,
+          "source_local_track_id": 14,
+          "source_score": 0.800744354724884,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7210730314254761,
+          "median": 0.3400711715221405,
+          "max": 0.8726176619529724,
+          "support_075": 0.12096774193548387,
+          "support_080": 0.08064516129032258,
+          "nearest_vote_fraction": 0.31451612903225806,
+          "embedding_count": 124,
+          "source_local_track_id": 14,
+          "source_score": 0.8278630971908569,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7389499545097351,
+          "median": 0.6755444407463074,
+          "max": 0.8196342587471008,
+          "support_075": 0.11290322580645161,
+          "support_080": 0.008064516129032258,
+          "nearest_vote_fraction": 0.13709677419354838,
+          "embedding_count": 124,
+          "source_local_track_id": 158,
+          "source_score": 0.7508255839347839,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.5483870967741935,
+        "maria": 0.31451612903225806,
+        "marta": 0.13709677419354838
+      }
+    },
+    {
+      "global_id": 15,
+      "label": "margarita",
+      "score": 0.786780834197998,
+      "margin": 0.009296536445617676,
+      "median": 0.7054540514945984,
+      "max": 0.8938320875167847,
+      "support_075": 0.3706293706293706,
+      "support_080": 0.04895104895104895,
+      "nearest_vote_fraction": 0.4405594405594406,
+      "source_local_track_id": 249,
+      "cluster_local_track_ids": [
+        62,
+        249
+      ],
+      "cluster_frames": 1099,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.786780834197998,
+          "median": 0.7054540514945984,
+          "max": 0.8938320875167847,
+          "support_075": 0.3706293706293706,
+          "support_080": 0.04895104895104895,
+          "nearest_vote_fraction": 0.4405594405594406,
+          "embedding_count": 143,
+          "source_local_track_id": 249,
+          "source_score": 0.7940780520439148,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.7774842977523804,
+          "median": 0.4763035774230957,
+          "max": 0.9237096905708313,
+          "support_075": 0.20279720279720279,
+          "support_080": 0.11888111888111888,
+          "nearest_vote_fraction": 0.32867132867132864,
+          "embedding_count": 143,
+          "source_local_track_id": 62,
+          "source_score": 0.7960125207901001,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.7510476112365723,
+          "median": 0.6942993402481079,
+          "max": 0.8130385875701904,
+          "support_075": 0.15384615384615385,
+          "support_080": 0.02097902097902098,
+          "nearest_vote_fraction": 0.23076923076923078,
+          "embedding_count": 143,
+          "source_local_track_id": 62,
+          "source_score": 0.7547969222068787,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.4405594405594406,
+        "maria": 0.32867132867132864,
+        "marta": 0.23076923076923078
+      }
+    },
+    {
+      "global_id": 16,
+      "label": "maria",
+      "score": 0.8154032230377197,
+      "margin": 0.46173274517059326,
+      "median": 0.685252845287323,
+      "max": 0.9196290373802185,
+      "support_075": 0.3821138211382114,
+      "support_080": 0.1951219512195122,
+      "nearest_vote_fraction": 0.9512195121951219,
+      "source_local_track_id": 82,
+      "cluster_local_track_ids": [
+        82,
+        222
+      ],
+      "cluster_frames": 961,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.35367047786712646,
+          "median": 0.2492368221282959,
+          "max": 0.7758644223213196,
+          "support_075": 0.008130081300813009,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.032520325203252036,
+          "embedding_count": 123,
+          "source_local_track_id": 82,
+          "source_score": 0.3599500358104706,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8154032230377197,
+          "median": 0.685252845287323,
+          "max": 0.9196290373802185,
+          "support_075": 0.3821138211382114,
+          "support_080": 0.1951219512195122,
+          "nearest_vote_fraction": 0.9512195121951219,
+          "embedding_count": 123,
+          "source_local_track_id": 82,
+          "source_score": 0.8457949161529541,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.28860387206077576,
+          "median": 0.16208767890930176,
+          "max": 0.47733423113822937,
+          "support_075": 0.0,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.016260162601626018,
+          "embedding_count": 123,
+          "source_local_track_id": 82,
+          "source_score": 0.32159000635147095,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.032520325203252036,
+        "maria": 0.9512195121951219,
+        "marta": 0.016260162601626018
+      }
+    },
+    {
+      "global_id": 17,
+      "label": "marta",
+      "score": 0.9514354467391968,
+      "margin": 0.1488027572631836,
+      "median": 0.9226444959640503,
+      "max": 0.979956865310669,
+      "support_075": 0.96875,
+      "support_080": 0.96875,
+      "nearest_vote_fraction": 0.96875,
+      "source_local_track_id": 112,
+      "cluster_local_track_ids": [
+        112
+      ],
+      "cluster_frames": 272,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.8026326894760132,
+          "median": 0.7842687368392944,
+          "max": 0.8588857650756836,
+          "support_075": 0.78125,
+          "support_080": 0.21875,
+          "nearest_vote_fraction": 0.03125,
+          "embedding_count": 32,
+          "source_local_track_id": 112,
+          "source_score": 0.8026326894760132,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.2558320164680481,
+          "median": 0.17875437438488007,
+          "max": 0.49302205443382263,
+          "support_075": 0.0,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.0,
+          "embedding_count": 32,
+          "source_local_track_id": 112,
+          "source_score": 0.2558320164680481,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.9514354467391968,
+          "median": 0.9226444959640503,
+          "max": 0.979956865310669,
+          "support_075": 0.96875,
+          "support_080": 0.96875,
+          "nearest_vote_fraction": 0.96875,
+          "embedding_count": 32,
+          "source_local_track_id": 112,
+          "source_score": 0.9514354467391968,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.03125,
+        "maria": 0.0,
+        "marta": 0.96875
+      }
+    },
+    {
+      "global_id": 18,
+      "label": "maria",
+      "score": 0.8951034545898438,
+      "margin": 0.34047532081604004,
+      "median": 0.8157240748405457,
+      "max": 0.9586042165756226,
+      "support_075": 0.6528301886792452,
+      "support_080": 0.5547169811320755,
+      "nearest_vote_fraction": 0.8415094339622642,
+      "source_local_track_id": 371,
+      "cluster_local_track_ids": [
+        154,
+        371
+      ],
+      "cluster_frames": 2135,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.5546281337738037,
+          "median": 0.36215949058532715,
+          "max": 0.902635931968689,
+          "support_075": 0.052830188679245285,
+          "support_080": 0.03773584905660377,
+          "nearest_vote_fraction": 0.09811320754716982,
+          "embedding_count": 265,
+          "source_local_track_id": 154,
+          "source_score": 0.6702653765678406,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8951034545898438,
+          "median": 0.8157240748405457,
+          "max": 0.9586042165756226,
+          "support_075": 0.6528301886792452,
+          "support_080": 0.5547169811320755,
+          "nearest_vote_fraction": 0.8415094339622642,
+          "embedding_count": 265,
+          "source_local_track_id": 371,
+          "source_score": 0.8995206356048584,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.45683151483535767,
+          "median": 0.1544230729341507,
+          "max": 0.9285691976547241,
+          "support_075": 0.04905660377358491,
+          "support_080": 0.03018867924528302,
+          "nearest_vote_fraction": 0.06037735849056604,
+          "embedding_count": 265,
+          "source_local_track_id": 154,
+          "source_score": 0.5950841307640076,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.09811320754716982,
+        "maria": 0.8415094339622642,
+        "marta": 0.06037735849056604
+      }
+    },
+    {
+      "global_id": 19,
+      "label": "maria",
+      "score": 0.9070361852645874,
+      "margin": 0.3105340003967285,
+      "median": 0.7930164933204651,
+      "max": 0.9627408385276794,
+      "support_075": 0.5846153846153846,
+      "support_080": 0.47384615384615386,
+      "nearest_vote_fraction": 0.8553846153846154,
+      "source_local_track_id": 466,
+      "cluster_local_track_ids": [
+        170,
+        466
+      ],
+      "cluster_frames": 2598,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.5965021848678589,
+          "median": 0.4157600700855255,
+          "max": 0.8839967250823975,
+          "support_075": 0.06769230769230769,
+          "support_080": 0.046153846153846156,
+          "nearest_vote_fraction": 0.13230769230769232,
+          "embedding_count": 325,
+          "source_local_track_id": 170,
+          "source_score": 0.6021676659584045,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.9070361852645874,
+          "median": 0.7930164933204651,
+          "max": 0.9627408385276794,
+          "support_075": 0.5846153846153846,
+          "support_080": 0.47384615384615386,
+          "nearest_vote_fraction": 0.8553846153846154,
+          "embedding_count": 325,
+          "source_local_track_id": 466,
+          "source_score": 0.9089625477790833,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.4196109473705292,
+          "median": 0.18813075125217438,
+          "max": 0.8245248198509216,
+          "support_075": 0.018461538461538463,
+          "support_080": 0.003076923076923077,
+          "nearest_vote_fraction": 0.012307692307692308,
+          "embedding_count": 325,
+          "source_local_track_id": 170,
+          "source_score": 0.4320031404495239,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.13230769230769232,
+        "maria": 0.8553846153846154,
+        "marta": 0.012307692307692308
+      }
+    },
+    {
+      "global_id": 20,
+      "label": "maria",
+      "score": 0.8605851531028748,
+      "margin": 0.4803506135940552,
+      "median": 0.8110485076904297,
+      "max": 0.9014381170272827,
+      "support_075": 0.7422680412371134,
+      "support_080": 0.5257731958762887,
+      "nearest_vote_fraction": 0.9896907216494846,
+      "source_local_track_id": 359,
+      "cluster_local_track_ids": [
+        231,
+        359
+      ],
+      "cluster_frames": 743,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.3329661190509796,
+          "median": 0.2335241585969925,
+          "max": 0.45953670144081116,
+          "support_075": 0.0,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.0,
+          "embedding_count": 97,
+          "source_local_track_id": 231,
+          "source_score": 0.36117997765541077,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8605851531028748,
+          "median": 0.8110485076904297,
+          "max": 0.9014381170272827,
+          "support_075": 0.7422680412371134,
+          "support_080": 0.5257731958762887,
+          "nearest_vote_fraction": 0.9896907216494846,
+          "embedding_count": 97,
+          "source_local_track_id": 359,
+          "source_score": 0.8665139079093933,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.3802345395088196,
+          "median": 0.18246665596961975,
+          "max": 0.6597464084625244,
+          "support_075": 0.0,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.010309278350515464,
+          "embedding_count": 97,
+          "source_local_track_id": 359,
+          "source_score": 0.38075751066207886,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.0,
+        "maria": 0.9896907216494846,
+        "marta": 0.010309278350515464
+      }
+    },
+    {
+      "global_id": 21,
+      "label": "maria",
+      "score": 0.8919739127159119,
+      "margin": 0.4802085757255554,
+      "median": 0.8507418632507324,
+      "max": 0.9589981436729431,
+      "support_075": 0.9578313253012049,
+      "support_080": 0.8433734939759037,
+      "nearest_vote_fraction": 0.9879518072289156,
+      "source_local_track_id": 313,
+      "cluster_local_track_ids": [
+        313,
+        431
+      ],
+      "cluster_frames": 1348,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.41176533699035645,
+          "median": 0.2901496887207031,
+          "max": 0.810327410697937,
+          "support_075": 0.006024096385542169,
+          "support_080": 0.006024096385542169,
+          "nearest_vote_fraction": 0.006024096385542169,
+          "embedding_count": 166,
+          "source_local_track_id": 431,
+          "source_score": 0.4955115020275116,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8919739127159119,
+          "median": 0.8507418632507324,
+          "max": 0.9589981436729431,
+          "support_075": 0.9578313253012049,
+          "support_080": 0.8433734939759037,
+          "nearest_vote_fraction": 0.9879518072289156,
+          "embedding_count": 166,
+          "source_local_track_id": 313,
+          "source_score": 0.8975176215171814,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.3641499876976013,
+          "median": 0.228144109249115,
+          "max": 0.7688419222831726,
+          "support_075": 0.006024096385542169,
+          "support_080": 0.0,
+          "nearest_vote_fraction": 0.006024096385542169,
+          "embedding_count": 166,
+          "source_local_track_id": 431,
+          "source_score": 0.5135127305984497,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.006024096385542169,
+        "maria": 0.9879518072289156,
+        "marta": 0.006024096385542169
+      }
+    },
+    {
+      "global_id": 22,
+      "label": "marta",
+      "score": 0.86229407787323,
+      "margin": 0.04347264766693115,
+      "median": 0.7631815075874329,
+      "max": 0.9038305878639221,
+      "support_075": 0.5833333333333334,
+      "support_080": 0.3055555555555556,
+      "nearest_vote_fraction": 0.4722222222222222,
+      "source_local_track_id": 444,
+      "cluster_local_track_ids": [
+        444
+      ],
+      "cluster_frames": 308,
+      "all_label_scores": {
+        "margarita": {
+          "score": 0.7618378400802612,
+          "median": 0.6840554475784302,
+          "max": 0.8385173082351685,
+          "support_075": 0.19444444444444445,
+          "support_080": 0.05555555555555555,
+          "nearest_vote_fraction": 0.0,
+          "embedding_count": 36,
+          "source_local_track_id": 444,
+          "source_score": 0.7618378400802612,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "maria": {
+          "score": 0.8188214302062988,
+          "median": 0.768890380859375,
+          "max": 0.8724920153617859,
+          "support_075": 0.5555555555555556,
+          "support_080": 0.3611111111111111,
+          "nearest_vote_fraction": 0.5277777777777778,
+          "embedding_count": 36,
+          "source_local_track_id": 444,
+          "source_score": 0.8188214302062988,
+          "cluster_score_mode": "all_embeddings"
+        },
+        "marta": {
+          "score": 0.86229407787323,
+          "median": 0.7631815075874329,
+          "max": 0.9038305878639221,
+          "support_075": 0.5833333333333334,
+          "support_080": 0.3055555555555556,
+          "nearest_vote_fraction": 0.4722222222222222,
+          "embedding_count": 36,
+          "source_local_track_id": 444,
+          "source_score": 0.86229407787323,
+          "cluster_score_mode": "all_embeddings"
+        }
+      },
+      "nearest_vote_fractions": {
+        "margarita": 0.0,
+        "maria": 0.5277777777777778,
+        "marta": 0.4722222222222222
+      }
+    }
+  ],
+  "local_to_global": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12,
+    "13": 13,
+    "14": 14,
+    "62": 15,
+    "73": 4,
+    "82": 16,
+    "112": 17,
+    "154": 18,
+    "156": 11,
+    "158": 14,
+    "170": 19,
+    "222": 16,
+    "231": 20,
+    "237": 6,
+    "249": 15,
+    "259": 9,
+    "268": 12,
+    "284": 13,
+    "313": 21,
+    "351": 11,
+    "359": 20,
+    "371": 18,
+    "407": 9,
+    "431": 21,
+    "444": 22,
+    "453": 8,
+    "466": 19,
+    "508": 3,
+    "533": 7,
+    "540": 3,
+    "548": 10,
+    "552": 5
+  },
+  "contact_sheet": "reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg",
+  "candidate_sheet": "reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg",
+  "metric_note": "Precision y recall reales por bounding box requieren anotaciones ground truth por frame. Este JSON reporta metricas automaticas: conteo vs 14, primeras/ultimas apariciones de identidades conocidas, duplicados antes de la supresion de render, pureza/margen ReID, vacas visibles por frame y fragmentacion de tracks.",
+  "params": {
+    "video_in": "datos/video campo erondina a procesar.MP4",
+    "video_out": "datos/Resultados/resultado_erondina_reid_timeline_hd_head_segunda_mitad_original.mp4",
+    "report_out": "reports/16_segunda_mitad_original_timeline_hd_head_analysis.json",
+    "contact_sheet_out": "reports/16_contact_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg",
+    "candidate_sheet_out": "reports/16_candidate_sheet_segunda_mitad_original_timeline_hd_head_analysis.jpg",
+    "yolo_model": "scripts/yolov8m.pt",
+    "tracker": "botsort.yaml",
+    "reid_model": "models/mi_modelo_reid.pt",
+    "identity_gallery": "models/erondina_gallery_embeddings_enfocada_filtrada.npz",
+    "start_frame": 4880,
+    "max_frames": 0,
+    "process_width": 1920,
+    "process_height": 1080,
+    "det_conf": 0.18,
+    "imgsz": 1280,
+    "reid_every": 8,
+    "min_track_frames": 200,
+    "merge_threshold": 0.82,
+    "max_overlap_frames": 5,
+    "max_merge_gap_frames": 1800,
+    "identity_threshold": 0.78,
+    "identity_margin": 0.02,
+    "min_identity_support": 0.3,
+    "min_identity_vote_fraction": 0.4,
+    "timeline_identity_threshold": 0.76,
+    "timeline_identity_margin": 0.01,
+    "timeline_min_identity_support": 0.2,
+    "timeline_min_identity_vote_fraction": 0.18,
+    "timeline_fragment_identity_margin": 0.08,
+    "timeline_fragment_min_identity_support": 0.35,
+    "timeline_fragment_min_identity_vote_fraction": 0.7,
+    "timeline_min_reid_similarity": 0.7,
+    "timeline_min_head_similarity": 0.68,
+    "timeline_bridge_min_reid_similarity": 0.66,
+    "timeline_max_overlap_frames": 30,
+    "timeline_high_confidence_threshold": 0.88,
+    "timeline_high_confidence_margin": 0.1,
+    "timeline_high_confidence_vote_fraction": 0.7,
+    "anchor_start_window_frames": 60,
+    "expected_total_cows": 14,
+    "count_tolerance": 2,
+    "min_known_hit_ratio": 0.1,
+    "focus_margin_x": 0.12,
+    "focus_margin_y": 0.18,
+    "head_embeddings": true,
+    "head_reid_every": 16,
+    "head_crop_y_fraction": 0.72,
+    "head_crop_x_margin": 0.02,
+    "known_bbox_smoothing_alpha": 0.55,
+    "known_smoothing_reset_center_factor": 2.0,
+    "known_hold_frames": 18,
+    "known_reacquire_frames": 75,
+    "known_reacquire_min_iou": 0.08,
+    "known_reacquire_max_center_factor": 0.85,
+    "known_exit_edge_margin_ratio": 0.05,
+    "evidence_cache_in": "",
+    "evidence_cache_out": "reports/16_evidence_segunda_mitad_original_timeline_hd_head.pkl",
+    "render": false
+  }
+}
