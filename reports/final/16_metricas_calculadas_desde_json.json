@@ -56,8 +56,14 @@
     "known_identity_recall_percent": 100.0,
     "known_id_switches_by_design": 0,
     "locked_midframe_gap_count_ge_2s": 0,
-    "all_known_together_frames": 2448,
-    "all_known_together_percent_of_processed_frames": 50.15
+    "all_known_together_frames_in_base_report": 2448,
+    "all_known_together_percent_of_base_report": 50.15,
+    "all_known_together_frames_in_final_video": 1401,
+    "all_known_together_percent_of_final_video": 99.43,
+    "final_video_frame_interval_in_base_report": {
+      "start_render_frame": 2039,
+      "end_render_frame": 3447
+    }
   },
   "temporal_coverage_metrics": {
     "average_known_presence_percent": 98.63,

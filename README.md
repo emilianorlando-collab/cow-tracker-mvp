@@ -125,7 +125,7 @@ Cálculo usado:
 | ID switches de identidades conocidas | **0** | 0 | ✅ Superado |
 | Huecos largos en medio del plano | **0** | 0 | ✅ Superado |
 | Vacas desconocidas estimadas | **11** | 11 esperadas | ✅ Superado |
-| Presencia conjunta de Marta, Maria y Margarita | **2448 frames (50.15%)** | Evidencia de las 3 juntas | ✅ Superado |
+| Presencia conjunta de Marta, Maria y Margarita en video final | **1401 frames (99.43%)** | Evidencia de las 3 juntas | ✅ Superado |
 
 Nota metodológica: el mAP@0.5 reportado en la tabla principal corresponde a
 Re-ID de identidades objetivo. Un mAP@0.5 de detección por bounding boxes
