@@ -116,8 +116,8 @@ Componentes consolidados:
   continuidad para vacas reidentificadas.
 - ✅ **Pipeline final Erondina:** análisis offline previo, auditoría de
   continuidad y render final.
-- ❌ **Tiempo real:** el MVP procesa offline; no está diseñado aún para 30 FPS
-  en vivo.
+- 🟡 **Tiempo real:** el MVP por el momento procesa offline; no está diseñado
+  aún para 30 FPS en vivo.
 - 🟡 **Interfaz de usuario:** ejecución actual por CLI/scripts; se está
   trabajando en una interfaz para facilitar el uso del sistema.
 
