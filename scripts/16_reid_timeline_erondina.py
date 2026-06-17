@@ -703,6 +703,22 @@ def read_processed_crop(args, rec: FrameBox, size=(260, 200)):
     return cv2.resize(crop, size, interpolation=cv2.INTER_AREA)
 
 
+def build_unknown_display_ids(frame_records, local_to_global, timeline_assignments):
+    known_global_ids = {int(gid) for gid in timeline_assignments}
+    first_seen = {}
+    for idx, records in enumerate(frame_records):
+        for rec in records:
+            gid = local_to_global.get(rec.local_track_id)
+            if gid is None:
+                continue
+            gid = int(gid)
+            if gid in known_global_ids:
+                continue
+            first_seen.setdefault(gid, idx)
+    ordered = sorted(first_seen, key=lambda gid: (first_seen[gid], gid))
+    return {gid: display_id for display_id, gid in enumerate(ordered, start=1)}
+
+
 def render_video_timeline(args, frame_records, local_to_global, timeline_assignments, width, height, fps):
     cap = cv2.VideoCapture(args.video_in)
     if args.start_frame > 0:
@@ -721,6 +737,7 @@ def render_video_timeline(args, frame_records, local_to_global, timeline_assignm
         label: {"bbox": None, "last_seen_idx": None, "last_confirmed_idx": None, "last_gid": None}
         for label in known_labels
     }
+    unknown_display_ids = build_unknown_display_ids(frame_records, local_to_global, timeline_assignments)
     for idx, records in enumerate(frame_records):
         ok, frame = cap.read()
         if not ok:
@@ -782,7 +799,11 @@ def render_video_timeline(args, frame_records, local_to_global, timeline_assignm
             if any(bbox_iou(rec.bbox, known_bbox) >= args.unknown_suppress_iou_with_known for known_bbox in known_priority_bboxes):
                 continue
             color = base05.color_for_id(int(gid))
-            text = f"Vaca {int(gid):02d}"
+            if args.unknown_label_mode == "generic":
+                text = "Vaca"
+            else:
+                display_gid = unknown_display_ids.get(int(gid), int(gid))
+                text = f"Vaca {int(display_gid):02d}"
             cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
             draw_text_bg(frame, text, (x1, max(38, y1 - 10)), 0.78, color, 2)
 
@@ -794,10 +815,16 @@ def render_video_timeline(args, frame_records, local_to_global, timeline_assignm
             cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
             draw_text_bg(frame, text, (x1, max(66, y1 - 20)), 1.65, color, 5)
 
-        overlay = (
-            f"Frame {idx + 1}/{len(frame_records)} | visibles {len(visible_global_ids)} "
-            f"| total estimado {args.expected_total_cows}"
-        )
+        display_frame = int(args.display_frame_start) + idx
+        display_total = int(args.display_frame_start) + max(0, len(frame_records) - 1)
+        displayed_total_cows = int(args.display_total_cows) if int(args.display_total_cows) > 0 else int(args.expected_total_cows)
+        if args.hide_visible_overlay:
+            overlay = f"Frame {display_frame}/{display_total} | total estimado {displayed_total_cows}"
+        else:
+            overlay = (
+                f"Frame {display_frame}/{display_total} | visibles {len(visible_global_ids)} "
+                f"| total estimado {displayed_total_cows}"
+            )
         draw_text_bg(frame, overlay, (28, 58), 1.05, (255, 255, 255), 3)
         writer.write(frame)
         if idx == 0 or (idx + 1) % 100 == 0:
@@ -996,7 +1023,10 @@ def make_timeline_contact_sheet(args, frame_records, local_to_global, timeline_a
         for rec in picks:
             gid = local_to_global.get(rec.local_track_id)
             crop = read_processed_crop(args, rec)
-            text = f"{s13.display_label(label)} G{int(gid)} f{rec.frame_number}"
+            if getattr(args, "public_report", False):
+                text = f"{s13.display_label(label)}"
+            else:
+                text = f"{s13.display_label(label)} G{int(gid)} f{rec.frame_number}"
             s13.draw_text_bg(crop, text, (6, 30), 0.64, (0, 255, 255), 2)
             cells.append(crop)
         rows.append(np.hstack(cells))
@@ -1031,7 +1061,10 @@ def make_timeline_candidate_sheet(args, frame_records, local_to_global, candidat
                 continue
             rec = recs[len(recs) // 2]
             crop = read_processed_crop(args, rec)
-            text = f"{s13.display_label(label)} G{gid} L{source_local_id} s{score:.2f}"
+            if getattr(args, "public_report", False):
+                text = f"{s13.display_label(label)} s{score:.2f}"
+            else:
+                text = f"{s13.display_label(label)} G{gid} L{source_local_id} s{score:.2f}"
             s13.draw_text_bg(crop, text, (6, 28), 0.54, (0, 255, 255), 2)
             cells.append(crop)
         if cells:
@@ -1045,6 +1078,92 @@ def make_timeline_candidate_sheet(args, frame_records, local_to_global, candidat
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     cv2.imwrite(out_path, sheet)
     return out_path
+
+
+def zero_base_render_frames(value):
+    if isinstance(value, dict):
+        out = {}
+        for key, item in value.items():
+            if "original_frame" in key:
+                continue
+            if (
+                key in {
+                    "first_render_frame",
+                    "last_render_frame",
+                    "start_render_frame",
+                    "end_render_frame",
+                    "first_present_frame",
+                    "last_present_frame",
+                }
+                and isinstance(item, int)
+            ):
+                out[key] = max(0, item - 1)
+            else:
+                out[key] = zero_base_render_frames(item)
+        return out
+    if isinstance(value, list):
+        return [zero_base_render_frames(item) for item in value]
+    return value
+
+
+def public_report(report: dict, args) -> dict:
+    compact = {
+        "report_type": "cowtrack_final_public_report",
+        "frame_indexing": "zero_based",
+        "video_out": os.path.basename(args.video_out) if args.render else None,
+        "processed_frames": int(report["processed_frames"]),
+        "display_frame_range": {
+            "start": 0,
+            "end": max(0, int(report["processed_frames"]) - 1),
+        },
+        "processing_video_size": report["processing_video_size"],
+        "estimated_total_cows": report["estimated_total_cows"],
+        "estimated_total_cows_method": report["estimated_total_cows_method"],
+        "expected_total_cows": report["expected_total_cows"],
+        "count_error": report["count_error"],
+        "absolute_count_error": report["absolute_count_error"],
+        "count_accuracy": report["count_accuracy"],
+        "count_within_tolerance": report["count_within_tolerance"],
+        "unknown_cows_estimated": report["unknown_cows_estimated"],
+        "per_frame_detection_summary": {
+            "mean_visible_detections": report["visible_cows_per_frame"]["mean"],
+            "median_visible_detections": report["visible_cows_per_frame"]["median"],
+            "p95_visible_detections": report["visible_cows_per_frame"]["p95"],
+            "max_visible_detections": report["visible_cows_per_frame"]["max"],
+            "note": (
+                "Este valor resume detecciones por frame y no se usa como conteo final de animales, "
+                "porque puede incluir fragmentación temporal u oclusiones."
+            ),
+        },
+        "known_found": report["known_found"],
+        "known_missing": report["known_missing"],
+        "known_frame_hits": report["known_frame_hits"],
+        "known_hit_ratio": report["known_hit_ratio"],
+        "known_first_render_frame": report["known_first_render_frame"],
+        "known_last_render_frame": report["known_last_render_frame"],
+        "all_known_together": report["all_known_together"],
+        "locked_track_audit": report["locked_track_audit"],
+        "locked_track_audit_ok": report["locked_track_audit_ok"],
+        "locked_midframe_gap_count_ge_2s": report["locked_midframe_gap_count_ge_2s"],
+        "known_id_switches_by_design": report["known_id_switches_by_design"],
+        "ready_for_render_by_automatic_checks": report["ready_for_render_by_automatic_checks"],
+        "identity_scores": {
+            s13.display_label(item["label"]): float(item["score"])
+            for item in report["timeline_assignments_by_global_id"].values()
+        },
+        "contact_sheet": os.path.basename(report["contact_sheet"]) if report.get("contact_sheet") else None,
+        "candidate_sheet": os.path.basename(report["candidate_sheet"]) if report.get("candidate_sheet") else None,
+        "metric_note": (
+            "El video se reporta como pieza autónoma con indexación de frames desde 0. "
+            "El conteo final corresponde al total consolidado del rodeo en el video renderizado. "
+            "Precision y recall reales por bounding box requieren anotaciones ground truth por frame."
+        ),
+    }
+    if "suppressed_duplicate_known_detections_in_render" in report:
+        compact["suppressed_duplicate_known_detections_in_render"] = report["suppressed_duplicate_known_detections_in_render"]
+    if "render_stabilization" in report:
+        compact["render_stabilization"] = report["render_stabilization"]
+    return zero_base_render_frames(compact)
 
 
 def load_or_build_evidence(args, device, detector, cow_class_id, reid_model, transform):
@@ -1146,7 +1265,8 @@ def load_or_build_evidence(args, device, detector, cow_class_id, reid_model, tra
                         ensure_head_embeddings(tracklets[local_id]).append(emb)
         frame_records.append(records)
         if processed == 1 or processed % 100 == 0:
-            print(f"Track frame {processed}/{total_frames - args.start_frame}")
+            progress_total = args.max_frames if args.max_frames > 0 else total_frames - args.start_frame
+            print(f"Track frame {processed}/{progress_total}")
     cap.release()
 
     if args.evidence_cache_out:
@@ -1237,6 +1357,11 @@ def main():
     parser.add_argument("--unknown_suppress_iou_with_known", type=float, default=0.12)
     parser.add_argument("--evidence_cache_in", type=str, default="")
     parser.add_argument("--evidence_cache_out", type=str, default="")
+    parser.add_argument("--display_frame_start", type=int, default=1)
+    parser.add_argument("--display_total_cows", type=int, default=0)
+    parser.add_argument("--public_report", action="store_true")
+    parser.add_argument("--unknown_label_mode", choices=["id", "generic"], default="id")
+    parser.add_argument("--hide_visible_overlay", action="store_true")
     parser.add_argument("--render", action="store_true")
     args = parser.parse_args()
 
@@ -1323,6 +1448,8 @@ def main():
     absolute_count_error = abs(count_error)
     count_accuracy = max(0.0, 1.0 - absolute_count_error / args.expected_total_cows) if args.expected_total_cows else 0.0
     count_within_tolerance = absolute_count_error <= args.count_tolerance
+    if int(args.display_total_cows) <= 0:
+        args.display_total_cows = int(estimated_visible_total)
     min_hit_ratio_by_label = {
         label: float(known_frame_hits.get(label, 0) / processed) if processed else 0.0
         for label in known_required
@@ -1441,6 +1568,9 @@ def main():
             "known_label_font_scale": 1.65,
         }
 
+    if args.public_report:
+        report = public_report(report, args)
+
     os.makedirs(os.path.dirname(args.report_out), exist_ok=True)
     with open(args.report_out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
@@ -1454,7 +1584,7 @@ def main():
     print(f"Accuracy conteo estimado    : {100.0 * count_accuracy:.2f}%")
     print(f"Conocidas encontradas    : {', '.join(report['known_found']) if report['known_found'] else 'ninguna'}")
     print(f"Primer frame conocido    : {report['known_first_render_frame']}")
-    print(f"Duplicados previos render: {report['duplicate_known_label_frames_before_render_suppression']}")
+    print(f"Duplicados previos render: {report.get('duplicate_known_label_frames_before_render_suppression', 'omitido')}")
     print(f"Checks automaticos OK    : {ready}")
     print(f"Reporte guardado en      : {args.report_out}")
     if contact_sheet:

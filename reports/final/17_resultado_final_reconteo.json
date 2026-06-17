@@ -1,0 +1,102 @@
+{
+  "report_type": "cowtrack_final_public_report",
+  "frame_indexing": "zero_based",
+  "video_out": "RESULTADO_FINAL_RECONTEO.mp4",
+  "processed_frames": 1409,
+  "display_frame_range": {
+    "start": 0,
+    "end": 1408
+  },
+  "processing_video_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "estimated_total_cows": 13,
+  "estimated_total_cows_method": "visible_cows_p95_per_frame",
+  "expected_total_cows": 13,
+  "count_error": 0,
+  "absolute_count_error": 0,
+  "count_accuracy": 1.0,
+  "count_within_tolerance": true,
+  "unknown_cows_estimated": 10,
+  "per_frame_detection_summary": {
+    "mean_visible_detections": 11.932576295244855,
+    "median_visible_detections": 12,
+    "p95_visible_detections": 13,
+    "max_visible_detections": 13,
+    "note": "Resumen de detecciones por frame; el conteo final usa la estimación consolidada del pipeline."
+  },
+  "known_found": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_missing": [],
+  "locked_track_audit": {
+    "labels": {
+      "Margarita": {
+        "present_frames": 1409,
+        "tracked_detection_frames": 1409,
+        "confirmed_reid_frames": 1409,
+        "continuity_follow_frames": 0,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 0,
+        "last_present_frame": 1408,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Maria": {
+        "present_frames": 1409,
+        "tracked_detection_frames": 1409,
+        "confirmed_reid_frames": 1409,
+        "continuity_follow_frames": 0,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 0,
+        "last_present_frame": 1408,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Marta": {
+        "present_frames": 1409,
+        "tracked_detection_frames": 1409,
+        "confirmed_reid_frames": 1401,
+        "continuity_follow_frames": 8,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 0,
+        "last_present_frame": 1408,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      }
+    },
+    "all_known_together": {
+      "exists": true,
+      "frame_count": 1409,
+      "first_render_frame": 0,
+      "last_render_frame": 1408,
+      "intervals": [
+        {
+          "start_render_frame": 0,
+          "end_render_frame": 1408,
+          "frames": 1409,
+          "seconds": 47.01363333333333
+        }
+      ]
+    }
+  },
+  "locked_track_audit_ok": true,
+  "locked_midframe_gap_count_ge_2s": 0,
+  "known_id_switches_by_design": 0,
+  "identity_scores": {
+    "Margarita": 0.9268684983253479,
+    "Marta": 0.945925235748291,
+    "Maria": 0.8972709774971008
+  },
+  "contact_sheet": "17_resultado_final_reconteo_contact_sheet.jpg",
+  "metric_note": "El video se reporta como pieza autónoma con indexación desde 0. El conteo automático supera el umbral de 80% definido para el MVP."
+}

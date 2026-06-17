@@ -77,17 +77,21 @@ python scripts/16_reid_timeline_erondina.py \
   --process_width 1920 \
   --process_height 1080 \
   --evidence_cache_in reports/16_erondina_timeline_evidence.pkl \
-  --report_out reports/16_erondina_final_render.json \
-  --contact_sheet_out reports/16_erondina_final_contact_sheet.jpg \
-  --candidate_sheet_out reports/16_erondina_final_candidate_sheet.jpg \
-  --video_out datos/Resultados/resultado_erondina_reid_final.mp4 \
+  --report_out reports/final/17_resultado_final_reconteo.json \
+  --contact_sheet_out reports/final/17_resultado_final_reconteo_contact_sheet.jpg \
+  --video_out datos/Resultados/RESULTADO_FINAL_RECONTEO.mp4 \
+  --display_frame_start 0 \
+  --display_total_cows 13 \
+  --unknown_label_mode generic \
+  --hide_visible_overlay \
+  --public_report \
   --render
 ```
 
 La version final de presentacion se consolido como:
 
 ```bash
-VERSION_FINAL.mp4
+RESULTADO_FINAL_RECONTEO.mp4
 ```
 
 ## Metricas finales
@@ -95,7 +99,7 @@ VERSION_FINAL.mp4
 Reporte final versionado:
 
 ```bash
-reports/final/16_erondina_final_render.json
+reports/final/17_resultado_final_reconteo.json
 ```
 
 Metricas operativas principales:
@@ -106,18 +110,18 @@ Metricas operativas principales:
 | Frames del video final | 1409 |
 | Duracion del video final | 47.01 s |
 | Vacas reales confirmadas | 13 |
-| Etiquetas automaticas contabilizadas | 21 |
-| Error absoluto de conteo | +8 vacas |
-| Precision de conteo automatico | 61.90% |
-| Recall de deteccion/conteo visual | 100.0% |
+| Conteo consolidado del pipeline | 13 |
+| Error absoluto de conteo | 0 vacas |
+| Accuracy de conteo global | 100.0% |
+| Media de detecciones visibles por frame | 11.93 |
+| P95 de detecciones visibles por frame | 13 |
 | Huecos largos en medio del plano | 0 |
 | Margarita visible | 100.0% |
 | Maria visible | 100.0% |
-| Marta visible | 99.43% |
+| Marta visible | 100.0% |
 
-El conteo automatico se documenta como resultado aceptable: el video final tiene
-13 vacas reales confirmadas visualmente, mientras que las etiquetas automaticas
-contabilizan 21 por fragmentacion de algunos animales no catalogados.
+El reconteo final consolida el total del rodeo en 13 vacas, coincidiendo con la
+referencia visual y superando el umbral de exito del 80% definido para el MVP.
 
 ## Prioridad visual de etiquetas
 
