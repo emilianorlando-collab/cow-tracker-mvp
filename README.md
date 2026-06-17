@@ -94,6 +94,11 @@ Resultado del reconteo:
 | Umbral mínimo definido | > 80.0% |
 | Estado | ✅ Superado |
 
+Esta mejora valida funcionalmente el pipeline **YOLO + tracking + conteo** para
+el video final del MVP. No debe interpretarse como una validación completa del
+detector YOLO bajo métricas de benchmark de detección, ya que esa evaluación
+requiere cajas ground truth anotadas manualmente por frame.
+
 ---
 
 ## 📌 Estado Técnico del MVP
@@ -154,6 +159,35 @@ Cálculo usado:
   y `0.9459` para Marta.
 
 ### Métricas operativas complementarias
+
+#### Conteo global del rodeo
+
+Para responder a la validación del conteo general, se separan las métricas del
+rodeo completo de las métricas de Re-ID. En este caso, el universo evaluado es
+el total de vacas reales observadas en el video final.
+
+Definición usada a nivel conteo:
+
+- **Conteo real:** 13 vacas.
+- **Conteo estimado por el pipeline:** 13 vacas.
+- **TP de conteo:** `min(conteo real, conteo estimado) = 13`.
+- **FP de conteo:** `max(conteo estimado - conteo real, 0) = 0`.
+- **FN de conteo:** `max(conteo real - conteo estimado, 0) = 0`.
+
+| Métrica Evaluada | Valor Obtenido | Umbral de Éxito Proyectado | Estado de Validación |
+| --- | ---: | ---: | --- |
+| Precisión de conteo global | **100.0%** | > 80.0% | ✅ Superado |
+| Recall de conteo global | **100.0%** | > 80.0% | ✅ Superado |
+| F1-score de conteo global | **100.0%** | > 80.0% | ✅ Superado |
+| Accuracy de conteo global | **100.0%** | > 80.0% | ✅ Superado |
+| Error absoluto de conteo | **0 vacas** | <= 1 vaca | ✅ Superado |
+| mAP@0.5 de detección YOLO | **No reportado** | Requiere cajas ground truth | 🟡 Pendiente metodológico |
+
+El resultado permite afirmar que el pipeline quedó validado para **conteo
+general del rodeo en el video final del MVP**. Sin embargo, no se reporta un
+`mAP@0.5` de detección YOLO porque esa métrica evalúa la calidad geométrica de
+las bounding boxes contra anotaciones manuales. Lo validado aquí es el resultado
+operativo de conteo, no un benchmark formal del detector.
 
 | Métrica Evaluada | Valor Obtenido | Criterio de Éxito Proyectado | Estado de Validación |
 | --- | ---: | ---: | --- |
@@ -648,7 +682,8 @@ pipeline capaz de:
 
 El resultado final alcanza los criterios de éxito definidos para el MVP:
 
-- ✅ Detector validado sobre umbrales proyectados.
+- ✅ Pipeline YOLO + tracking + conteo validado funcionalmente para el video
+  final.
 - ✅ Galería Erondina construida con fotos extraídas del campo Erondina.
 - ✅ Re-ID individual de Marta, Maria y Margarita.
 - ✅ Tracking temporal estable en el render final.
