@@ -50,15 +50,15 @@ reidentificación, reportes PDF, historial de análisis y métricas interactivas
 
 La interfaz permite:
 
-- Iniciar sesión y acceder a un dashboard de usuario.
-- Administrar un catálogo de vacas reidentificables.
-- Subir videos del rodeo desde la web.
-- Ejecutar el conteo CowTrack con progreso visible en tiempo real.
-- Descargar el video renderizado.
-- Consultar reportes ejecutivos en PDF.
-- Revisar métricas operativas e históricas desde el dashboard.
-- Compartir reportes por Telegram.
-- Operar en modalidad online/offline, con procesamiento local para entornos
+- ✅ Iniciar sesión y acceder a un dashboard de usuario.
+- ✅ Administrar un catálogo de vacas reidentificables.
+- ✅ Subir videos del rodeo desde la web.
+- ✅ Ejecutar el conteo CowTrack con progreso visible en tiempo real.
+- ✅ Descargar el video renderizado.
+- ✅ Consultar reportes ejecutivos en PDF.
+- ✅ Revisar métricas operativas e históricas desde el dashboard.
+- ✅ Compartir reportes por Telegram.
+- ✅ Operar en modalidad online/offline, con procesamiento local para entornos
   rurales y posibilidad de compartir resultados cuando hay conectividad.
 
 El render final genera un video HD donde:
