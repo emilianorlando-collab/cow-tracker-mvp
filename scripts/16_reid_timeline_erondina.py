@@ -11,6 +11,7 @@ compatibles de la misma identidad en una linea temporal antes de renderizar.
 
 import argparse
 import importlib.util
+import itertools
 import json
 import os
 import pickle
@@ -357,6 +358,8 @@ def candidate_for_label(cand: dict, label: str, source: str = "timeline_candidat
         "nearest_vote_fraction": float(info["nearest_vote_fraction"]),
         "source_local_track_id": int(info.get("source_local_track_id", cand["cluster_local_track_ids"][0])),
         "source_score": float(info.get("source_score", info["score"])),
+        "embedding_score": float(info.get("embedding_score", info["score"])),
+        "color_similarity": float(info["color_similarity"]) if "color_similarity" in info else None,
         "cluster_local_track_ids": [int(x) for x in cand["cluster_local_track_ids"]],
         "cluster_frames": int(cand["cluster_frames"]),
         "all_label_scores": cand["all_label_scores"],
@@ -396,6 +399,27 @@ def interval_overlap(a: dict, b: dict) -> int:
 
 
 def passes_timeline_filters(item: dict, args) -> bool:
+    color_similarity_value = item.get("color_similarity")
+    if (
+        color_similarity_value is not None
+        and color_similarity_value < args.min_color_similarity
+    ):
+        return False
+
+    color_confident = (
+        color_similarity_value is not None
+        and color_similarity_value >= args.color_override_similarity
+        and item["score"] >= args.timeline_identity_threshold
+    )
+    if color_confident:
+        if item["support_075"] < args.color_override_min_identity_support:
+            return False
+        if item["nearest_vote_fraction"] < args.color_override_min_identity_vote_fraction:
+            return False
+        if item["margin"] < args.color_override_min_identity_margin:
+            return False
+        return True
+
     if item["score"] < args.timeline_identity_threshold:
         return False
     if item["support_075"] < args.timeline_min_identity_support:
@@ -419,6 +443,36 @@ def passes_fragment_extension_filters(item: dict, args) -> bool:
     return True
 
 
+def resolve_unique_anchors(anchor_options_by_label: dict, labels: list) -> dict:
+    pools = []
+    for label in labels:
+        options = anchor_options_by_label.get(label, [])
+        pools.append([None] + options[:12])
+
+    best_combo = []
+    best_key = (-1, -1.0, -1.0, -1.0)
+    for combo in itertools.product(*pools):
+        selected = [item for item in combo if item is not None]
+        gids = [int(item["global_id"]) for item in selected]
+        if len(gids) != len(set(gids)):
+            continue
+        key = (
+            len(selected),
+            sum(float(item.get("automatic_timeline_quality", item.get("score", 0.0))) for item in selected),
+            sum(float(item.get("color_similarity", 0.5)) for item in selected),
+            sum(float(item.get("nearest_vote_fraction", 0.0)) for item in selected),
+        )
+        if key > best_key:
+            best_key = key
+            best_combo = combo
+
+    return {
+        labels[idx]: item
+        for idx, item in enumerate(best_combo)
+        if item is not None
+    }
+
+
 def build_timeline_assignments(args, tracklets, local_to_global, candidates, known_assignments, gallery_labels):
     group_data = tracklet_group_data(tracklets, local_to_global)
     cand_by_gid = {int(c["global_id"]): c for c in candidates}
@@ -435,7 +489,7 @@ def build_timeline_assignments(args, tracklets, local_to_global, candidates, kno
             "assignment_mode": "automatic_strict_anchor_from_global_embeddings",
         }
 
-    anchors_by_label = {}
+    anchor_options_by_label = {}
     for label in labels:
         options = []
         for cand in candidates:
@@ -458,7 +512,7 @@ def build_timeline_assignments(args, tracklets, local_to_global, candidates, kno
                 if args.anchor_start_window_frames >= 0 and item.get("first_frame", 10**9) <= start_limit
             ]
             pool = start_options if start_options else options
-            anchor = sorted(
+            ranked_options = sorted(
                 pool,
                 key=lambda x: (
                     x["automatic_timeline_quality"],
@@ -467,15 +521,18 @@ def build_timeline_assignments(args, tracklets, local_to_global, candidates, kno
                     x["frames_seen"],
                 ),
                 reverse=True,
-            )[0]
-            anchor["assignment_mode"] = (
-                "automatic_start_visible_anchor_by_embeddings"
-                if start_options
-                else "automatic_best_anchor_by_embeddings"
             )
-            anchors_by_label[label] = anchor
+            for item in ranked_options:
+                item["assignment_mode"] = (
+                    "automatic_start_visible_anchor_by_embeddings"
+                    if start_options and item in start_options
+                    else "automatic_best_anchor_by_embeddings"
+                )
+            anchor_options_by_label[label] = ranked_options
         elif label in strict_anchors_by_label:
-            anchors_by_label[label] = strict_anchors_by_label[label]
+            anchor_options_by_label[label] = [strict_anchors_by_label[label]]
+
+    anchors_by_label = resolve_unique_anchors(anchor_options_by_label, labels)
 
     for label, anchor in list(anchors_by_label.items()):
         if label not in strict_anchors_by_label:
@@ -1513,6 +1570,11 @@ def main():
     parser.add_argument("--count_tolerance", type=int, default=2)
     parser.add_argument("--min_known_hit_ratio", type=float, default=0.10)
     parser.add_argument("--color_rerank_weight", type=float, default=0.18)
+    parser.add_argument("--min_color_similarity", type=float, default=0.58)
+    parser.add_argument("--color_override_similarity", type=float, default=0.74)
+    parser.add_argument("--color_override_min_identity_support", type=float, default=0.10)
+    parser.add_argument("--color_override_min_identity_vote_fraction", type=float, default=0.08)
+    parser.add_argument("--color_override_min_identity_margin", type=float, default=-0.06)
     parser.add_argument("--disable_color_rerank", dest="color_rerank", action="store_false")
     parser.set_defaults(color_rerank=True)
     parser.add_argument("--focus_margin_x", type=float, default=0.12)
