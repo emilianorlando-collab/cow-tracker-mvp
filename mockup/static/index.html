@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CowTrack | Inteligencia artificial para stock ganadero</title>
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div id="introVideo" class="intro-video hidden">
+      <button id="introClose" class="modal-close" aria-label="Cerrar video">×</button>
+      <video id="adVideo" src="/cowtrack-files/datos/Publicidad2.mp4" autoplay muted playsinline controls></video>
+    </div>
+
+    <div id="launchOffer" class="offer-modal hidden">
+      <div class="offer-card">
+        <button class="modal-close close-offer" aria-label="Cerrar">×</button>
+        <span class="pill">Oferta de lanzamiento</span>
+        <h2>30% de descuento para los primeros establecimientos</h2>
+        <p>Implementación inicial de CowTrack para productores que quieran automatizar conteo, reidentificación y reportes de stock ganadero.</p>
+        <div class="offer-actions">
+          <button class="primary" data-go="contacto">Contratar</button>
+          <button class="secondary close-offer">Ver producto</button>
+        </div>
+      </div>
+    </div>
+
+    <header id="siteHeader" class="site-header">
+      <a class="brand" href="#home" data-go="home">
+        <img src="/static/cowtrack-logo-dark.svg" alt="CowTrack" />
+      </a>
+      <nav class="public-nav">
+        <a href="#producto" data-go="producto">Producto</a>
+        <a href="#investigacion" data-go="investigacion">Investigación Erondina</a>
+        <a href="#precios" data-go="precios">Precios</a>
+        <a href="#equipo" data-go="equipo">Quiénes somos</a>
+        <a href="#contacto" data-go="contacto">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <button id="loginOpen" class="secondary">Iniciar sesión</button>
+        <button id="dashboardOpen" class="primary hidden">Mi dashboard</button>
+      </div>
+    </header>
+
+    <main id="publicApp">
+      <section id="home" class="hero page-section">
+        <div class="hero-media">
+          <img src="/cowtrack-files/datos/fotos_mockup/8655809304476096759.jpg" alt="Vaca reidentificada con CowTrack" />
+          <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-copy">
+          <span class="eyebrow">AgTech · visión artificial · drones</span>
+          <h1>Control de stock ganadero con inteligencia artificial.</h1>
+          <p>CowTrack transforma videos aéreos en conteos, reidentificación individual y reportes ejecutivos para productores, administradores rurales y equipos técnicos.</p>
+          <div class="hero-actions">
+            <button class="primary" data-protected="conteo">Procesar mi rodeo</button>
+            <button class="light-button" data-go="producto">Conocer la solución</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="producto" class="page-section hidden">
+        <div class="section product-intro">
+          <div>
+            <span class="eyebrow">Producto</span>
+            <h2>Una plataforma simple para contar, reconocer y seguir tu rodeo.</h2>
+          </div>
+          <p>CowTrack convierte videos de campo en información clara para la gestión ganadera: cuántas vacas hay, cuáles son las vacas catalogadas, qué evidencia visual respalda el conteo y qué reporte puede usar el productor para tomar decisiones sin depender de recorridas manuales.</p>
+        </div>
+        <div class="image-band">
+          <img src="/cowtrack-files/datos/fotos_mockup/pexels-maria-loznevaya-249159277-14837798.jpg" alt="Rodeo en campo" />
+          <div class="image-band-card">
+            <h3>Un producto pensado para las necesidades reales del campo</h3>
+            <p>El sistema contempla oclusiones, cambios de escala, movimiento de cámara y operación online u offline en zonas rurales con baja conectividad.</p>
+          </div>
+        </div>
+        <div class="section product-grid">
+          <article>
+            <span>01</span>
+            <h3>Captura aérea</h3>
+            <p>Videos tomados con dron permiten relevar zonas de difícil acceso y reducir recorridas manuales.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Detección inteligente</h3>
+            <p>El sistema localiza los animales visibles y evita que el usuario tenga que revisar el video completo cuadro por cuadro.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Reidentificación</h3>
+            <p>Las vacas catalogadas se reconocen por su identidad visual y se siguen a lo largo del análisis cuando aparecen en escena.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Reporte operativo</h3>
+            <p>El usuario recibe conteo consolidado, vacas reconocidas, métricas y evidencia visual descargable.</p>
+          </article>
+        </div>
+        <div class="section product-showcase">
+          <article>
+            <img src="/cowtrack-files/datos/fotos_mockup/2915835556925099715.jpg" alt="Vaca reidentificada en campo">
+            <div>
+              <span class="eyebrow">Identidad individual</span>
+              <h3>Reconocimiento visual de vacas catalogadas</h3>
+              <p>La galería del usuario permite guardar animales de interés y consultar si fueron localizados durante el conteo diario.</p>
+            </div>
+          </article>
+          <article>
+            <img src="/cowtrack-files/datos/fotos_mockup/c1bcd725-f0fc-48f6-9753-99b01d30ad07.jpeg" alt="Resumen visual del rodeo">
+            <div>
+              <span class="eyebrow">Informe ejecutivo</span>
+              <h3>Resultados listos para presentar</h3>
+              <p>El reporte resume el conteo del rodeo, las vacas reidentificadas y la evidencia visual más importante para el productor.</p>
+            </div>
+          </article>
+        </div>
+        <div class="product-feature-band">
+          <div>
+            <span class="eyebrow">Gestión diaria</span>
+            <h2>Del video al reporte sin transformar al productor en analista técnico.</h2>
+            <p>El usuario carga el video del rodeo, indica la cantidad esperada de animales y selecciona las vacas que quiere seguir individualmente. CowTrack procesa la evidencia visual y entrega un resultado legible: conteo obtenido, vacas reconocidas, diferencias contra referencia y material descargable para conservar o compartir.</p>
+          </div>
+          <div class="feature-list">
+            <article><strong>01</strong><span>Carga simple de videos capturados con dron o cámara de campo.</span></article>
+            <article><strong>02</strong><span>Galería de vacas catalogadas por establecimiento y usuario.</span></article>
+            <article><strong>03</strong><span>Reporte visual con conteo, reidentificación y evidencia descargable.</span></article>
+            <article><strong>04</strong><span>Funcionamiento local para zonas con conectividad limitada y opción de envío cuando hay internet.</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="investigacion" class="page-section hidden">
+        <div class="research-hero">
+          <img src="/cowtrack-files/datos/fotos_mockup/pexels-helenalopes-4766371.jpg" alt="Campo ganadero">
+          <div>
+            <span class="eyebrow">Investigación Erondina</span>
+            <h2>Una prueba aplicada sobre necesidades concretas del campo.</h2>
+            <p>La investigación se desarrolló en Campo Erondina, un establecimiento del Delta del Tigre donde el acceso terrestre, la vegetación y la baja conectividad vuelven complejo el control manual del rodeo.</p>
+          </div>
+        </div>
+        <div class="section research-layout">
+          <div>
+            <span class="eyebrow">Punto de partida</span>
+            <h2>El desafío no era solo contar vacas: era hacerlo en condiciones reales.</h2>
+            <p>El trabajo partió de una necesidad concreta: reducir el tiempo de recorrida, disminuir errores humanos y generar una forma más confiable de controlar stock en un terreno rural con canales, vegetación y accesos difíciles. En ese contexto, el uso de videos aéreos permitió observar el rodeo desde una perspectiva más amplia y convertir esa observación en información operativa.</p>
+          </div>
+          <div class="research-metrics">
+            <div><strong>Delta</strong><span>campo con acceso desafiante</span></div>
+            <div><strong>12 ha</strong><span>superficie aproximada relevada</span></div>
+            <div><strong>Online/offline</strong><span>adaptado a baja conectividad</span></div>
+            <div><strong>13</strong><span>vacas reales en el caso final</span></div>
+          </div>
+        </div>
+        <div class="research-photo-strip">
+          <img src="/cowtrack-files/datos/fotos_mockup/8655809304476096759.jpg" alt="Vaca identificada en campo">
+          <img src="/cowtrack-files/datos/fotos_mockup/7817374793011248713.jpg" alt="Reidentificación en manga">
+          <img src="/cowtrack-files/datos/fotos_mockup/pexels-helenalopes-4766371.jpg" alt="Rodeo en campo abierto">
+        </div>
+        <div class="section timeline">
+          <article><h3>Problema</h3><p>El conteo manual demanda tiempo, puede generar errores y expone al personal a recorridas poco eficientes en zonas húmedas o con caminos limitados.</p></article>
+          <article><h3>Solución</h3><p>CowTrack propone un flujo local: cargar un video, indicar la referencia del rodeo, reconocer animales catalogados y recibir un informe claro.</p></article>
+          <article><h3>Resultado</h3><p>Se alcanzó un conteo operativo aceptable, reidentificación de vacas objetivo y una interfaz preparada para uso demostrativo y evolución comercial.</p></article>
+        </div>
+        <div class="section research-story">
+          <article>
+            <img src="/cowtrack-files/datos/fotos_mockup/2915835556925099715.jpg" alt="Vaca reidentificada">
+            <div>
+              <span class="eyebrow">Identidades</span>
+              <h3>De contar animales a reconocer individuos</h3>
+              <p>La investigación incorporó una galería de vacas catalogadas para que el sistema no solo estime cuántos animales hay, sino que también pueda señalar si determinadas vacas aparecen en el rodeo. Esta decisión agrega trazabilidad: el productor puede seguir animales de interés y no depender únicamente de una cifra total.</p>
+            </div>
+          </article>
+          <article>
+            <div>
+              <span class="eyebrow">Operación rural</span>
+              <h3>Online cuando se puede, offline cuando se necesita</h3>
+              <p>La solución fue pensada para establecimientos donde la conectividad puede ser irregular. El procesamiento puede realizarse localmente y el reporte puede conservarse en el panel del usuario; cuando hay conexión, el resultado puede compartirse por canales digitales como Telegram.</p>
+            </div>
+            <img src="/cowtrack-files/datos/fotos_mockup/c1bcd725-f0fc-48f6-9753-99b01d30ad07.jpeg" alt="Reporte de rodeo activo">
+          </article>
+          <article>
+            <img src="/cowtrack-files/datos/fotos_mockup/pexels-bekah-allmark-88109507-15802380.jpg" alt="Trabajo ganadero">
+            <div>
+              <span class="eyebrow">Valor productivo</span>
+              <h3>Información de stock para decidir mejor</h3>
+              <p>El objetivo final es que el productor tenga una lectura rápida del rodeo: animales presentes, vacas catalogadas localizadas, diferencia contra la referencia esperada y evidencia visual. Esa información puede ayudar a planificar recorridas, controlar movimientos y detectar inconsistencias antes de que se conviertan en pérdidas de gestión.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="precios" class="page-section hidden">
+        <div class="section">
+          <span class="eyebrow">Planes</span>
+          <h2>Precios experimentales para adopción temprana.</h2>
+          <div class="pricing-grid">
+            <article class="price-card">
+              <h3>Básico</h3>
+              <strong>$49.000</strong>
+              <span>por mes</span>
+              <p>Para validaciones pequeñas y control inicial de rodeos.</p>
+              <ul><li>Hasta 3 vacas reidentificadas</li><li>1 usuario</li><li>Reportes descargables</li><li>Soporte por email</li></ul>
+              <button class="primary" data-go="contacto">Contratar</button>
+            </article>
+            <article class="price-card featured">
+              <h3>Intermedio</h3>
+              <strong>$89.000</strong>
+              <span>por mes</span>
+              <p>Para establecimientos que necesitan historial y monitoreo frecuente.</p>
+              <ul><li>Hasta 10 vacas reidentificadas</li><li>Historial de reportes</li><li>Envío por Telegram</li><li>Dashboard de métricas</li></ul>
+              <button class="primary" data-go="contacto">Contratar</button>
+            </article>
+            <article class="price-card">
+              <h3>Avanzado</h3>
+              <strong>Experimental</strong>
+              <span>contratación piloto</span>
+              <p>Para pilotos técnicos con mayor volumen de identidades y soporte dedicado.</p>
+              <ul><li>Hasta 25 vacas reidentificadas</li><li>Soporte de integración</li><li>Métricas técnicas ampliadas</li><li>Validación por establecimiento</li></ul>
+              <button class="primary" data-go="contacto">Contratar</button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="equipo" class="page-section hidden">
+        <div class="section">
+          <span class="eyebrow">Quiénes somos</span>
+          <h2>Equipo CowTrack</h2>
+          <p class="section-lead">Proyecto desarrollado en el Instituto de Formación Técnica Superior Nº 11, Tecnicatura Superior en Ciencia de Datos e Inteligencia Artificial.</p>
+          <div class="team-grid">
+            <article><img src="/cowtrack-files/datos/fotos_de_perfil/emiliano.png" alt="Emiliano Orlando"><h3>Emiliano Orlando</h3><strong>Software, frontend y backend</strong><p>Integración del mockup, arquitectura web local, endpoints, dashboard, experiencia de usuario y conexión con el pipeline.</p></article>
+            <article><img src="/cowtrack-files/datos/fotos_de_perfil/ramiro.png" alt="Ramiro Ottone Villar"><h3>Ramiro Ottone Villar</h3><strong>Modelos de Re-ID</strong><p>Desarrollo y análisis de embeddings, reidentificación individual y ajuste de criterios de similitud para identidades bovinas.</p></article>
+            <article><img src="/cowtrack-files/datos/fotos_de_perfil/veronica.png" alt="Verónica Arce"><h3>Verónica Arce</h3><strong>Planificación y marco teórico</strong><p>Organización metodológica, fundamentación académica, objetivos, hipótesis y documentación del proyecto.</p></article>
+            <article><img src="/cowtrack-files/datos/fotos_de_perfil/pablo.png" alt="Pablo Canteros"><h3>Pablo Canteros</h3><strong>Campo y pruebas técnicas</strong><p>Investigación de campo, validación visual del rodeo, contraste de resultados y pruebas en condiciones reales.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="page-section hidden">
+        <div class="section contact">
+          <div>
+            <span class="eyebrow">Contacto</span>
+            <h2>Solicitá una demo de CowTrack</h2>
+            <p>Completá el formulario para coordinar una implementación experimental, prueba de campo o contratación inicial.</p>
+          </div>
+          <form id="contactForm" class="contact-form">
+            <input name="nombre" placeholder="Nombre y apellido" required />
+            <input name="email" placeholder="Email" type="email" required />
+            <input name="establecimiento" placeholder="Establecimiento" />
+            <textarea name="mensaje" placeholder="Contanos qué necesitás"></textarea>
+            <button class="primary" type="submit">Enviar consulta</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <main id="dashboardApp" class="dashboard hidden">
+      <aside class="dash-sidebar">
+        <a class="brand dash-brand" data-view="overview">
+          <img src="/static/cowtrack-logo-light.svg" alt="CowTrack" />
+        </a>
+        <nav>
+          <button data-view="overview" class="active">Dashboard</button>
+          <button data-view="catalogo">Catálogo</button>
+          <button data-view="conteo">Conteo CowTrack</button>
+          <button data-view="reportes">Reportes</button>
+          <button data-view="metricas">Métricas</button>
+          <button data-view="soporte">Soporte</button>
+          <button data-view="faq">FAQ</button>
+        </nav>
+        <button id="logoutButton" class="secondary">Cerrar sesión</button>
+      </aside>
+
+      <section class="dash-content">
+        <div class="dash-top">
+          <div>
+            <span class="eyebrow">Panel de usuario</span>
+            <h1 id="helloTitle">¡Hola!</h1>
+          </div>
+          <button id="resetButton" class="secondary">Nuevo análisis</button>
+        </div>
+
+        <section id="view-overview" class="dash-view"></section>
+        <section id="view-catalogo" class="dash-view hidden"></section>
+        <section id="view-conteo" class="dash-view hidden"></section>
+        <section id="view-reportes" class="dash-view hidden"></section>
+        <section id="view-metricas" class="dash-view hidden"></section>
+        <section id="view-soporte" class="dash-view hidden"></section>
+        <section id="view-faq" class="dash-view hidden"></section>
+      </section>
+    </main>
+
+    <div id="loginModal" class="login-modal hidden">
+      <form id="loginForm" class="login-card">
+        <button type="button" id="loginClose" class="modal-close">×</button>
+        <img src="/static/cowtrack-logo-dark.svg" alt="CowTrack" />
+        <h2>Ingresar a CowTrack</h2>
+        <p>Accedé a tu panel para procesar videos, consultar reportes y administrar tu galería de vacas.</p>
+        <input name="username" placeholder="Usuario" value="admin" required />
+        <input name="password" placeholder="Contraseña" type="password" value="admin" required />
+        <button class="primary" type="submit">Iniciar sesión</button>
+        <button id="registerOpen" class="secondary" type="button">Crear usuario nuevo</button>
+      </form>
+    </div>
+
+    <div id="registerModal" class="login-modal hidden">
+      <form id="registerForm" class="login-card">
+        <button type="button" id="registerClose" class="modal-close">×</button>
+        <img src="/static/cowtrack-logo-dark.svg" alt="CowTrack" />
+        <h2>Crear usuario</h2>
+        <p>Alta local para probar el flujo completo.</p>
+        <div class="social-row">
+          <button class="social-button google" type="button" data-social="Google"><span>G</span> Continuar con Google</button>
+          <button class="social-button apple" type="button" data-social="Apple"><span></span> Continuar con Mac</button>
+        </div>
+        <input name="name" placeholder="Nombre completo" required />
+        <input name="email" placeholder="Email" type="email" />
+        <input name="username" placeholder="Usuario" required />
+        <input name="password" placeholder="Contraseña" type="password" required />
+        <button class="primary" type="submit">Crear cuenta</button>
+      </form>
+    </div>
+
+    <div id="messageModal" class="message-modal hidden">
+      <div class="message-card">
+        <button type="button" id="messageClose" class="modal-close">×</button>
+        <span id="messageKicker" class="pill">CowTrack</span>
+        <h2 id="messageTitle">Mensaje</h2>
+        <p id="messageText"></p>
+        <button id="messageOk" class="primary" type="button">Entendido</button>
+      </div>
+    </div>
+
+    <div id="telegramModal" class="message-modal hidden">
+      <form id="telegramForm" class="message-card telegram-card">
+        <button type="button" id="telegramClose" class="modal-close">×</button>
+        <span class="telegram-mark">Telegram</span>
+        <h2>Enviar reporte</h2>
+        <p>Ingresá los datos de tu bot para recibir el informe operativo de CowTrack.</p>
+        <input name="telegram_token" placeholder="Token del bot" required />
+        <input name="telegram_chat_id" placeholder="Chat ID" required />
+        <button class="primary telegram-button" type="submit"><span class="plane-icon"></span>Enviar por Telegram</button>
+      </form>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

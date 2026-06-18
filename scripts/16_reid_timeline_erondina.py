@@ -1196,6 +1196,8 @@ def load_or_build_evidence(args, device, detector, cow_class_id, reid_model, tra
     frame_records: List[List[FrameBox]] = []
     processed = 0
     frame_number = args.start_frame
+    fallback_next_id = 100000
+    fallback_prev_tracks = []
     print("Pass 1/2: tracking + evidencia ReID por embeddings")
     while True:
         if args.max_frames > 0 and processed >= args.max_frames:
@@ -1217,10 +1219,36 @@ def load_or_build_evidence(args, device, detector, cow_class_id, reid_model, tra
             classes=[cow_class_id],
         )[0]
         records = []
-        if result.boxes is not None and result.boxes.id is not None and len(result.boxes) > 0:
+        if result.boxes is not None and len(result.boxes) > 0:
             boxes = result.boxes.xyxy.cpu().numpy()
-            ids = result.boxes.id.cpu().numpy().astype(int)
             confs = result.boxes.conf.cpu().numpy()
+            if result.boxes.id is not None:
+                ids = result.boxes.id.cpu().numpy().astype(int)
+            else:
+                ids = []
+                used_prev = set()
+                next_prev_tracks = []
+                for box in boxes:
+                    bbox = tuple(map(int, box.tolist()))
+                    best_idx = None
+                    best_iou = 0.0
+                    for idx, prev in enumerate(fallback_prev_tracks):
+                        if idx in used_prev:
+                            continue
+                        iou = bbox_iou(bbox, prev["bbox"])
+                        if iou > best_iou:
+                            best_iou = iou
+                            best_idx = idx
+                    if best_idx is not None and best_iou >= 0.25:
+                        local_id = int(fallback_prev_tracks[best_idx]["id"])
+                        used_prev.add(best_idx)
+                    else:
+                        local_id = fallback_next_id
+                        fallback_next_id += 1
+                    ids.append(local_id)
+                    next_prev_tracks.append({"id": local_id, "bbox": bbox})
+                ids = np.asarray(ids, dtype=int)
+                fallback_prev_tracks = next_prev_tracks
             reid_bboxes = []
             reid_ids = []
             for box, local_id, conf in zip(boxes, ids, confs):

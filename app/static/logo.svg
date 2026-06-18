@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">CowTrack</title>
+  <desc id="desc">Logo de CowTrack con marca de campo y tracking.</desc>
+  <defs>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f8f3a"/>
+      <stop offset="1" stop-color="#2f6f60"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9ecff"/>
+      <stop offset="1" stop-color="#f8f2dc"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="48" fill="#10231e"/>
+  <circle cx="120" cy="112" r="82" fill="url(#sky)"/>
+  <path d="M41 150c34-26 63-23 94-9 25 11 44 12 64-4v45H41z" fill="url(#field)"/>
+  <path d="M73 136c2-25 20-43 45-43h18c25 0 43 18 45 43l3 36H70z" fill="#171717"/>
+  <path d="M87 96c-10-14-25-16-39-5 12 2 21 9 27 20z" fill="#171717"/>
+  <path d="M169 96c10-14 25-16 39-5-12 2-21 9-27 20z" fill="#171717"/>
+  <circle cx="103" cy="126" r="8" fill="#f7f2df"/>
+  <circle cx="153" cy="126" r="8" fill="#f7f2df"/>
+  <path d="M116 145h24c8 0 13 6 13 13v1c0 13-10 23-25 23s-25-10-25-23v-1c0-7 5-13 13-13z" fill="#f1d6bd"/>
+  <path d="M111 160h34" stroke="#473125" stroke-width="5" stroke-linecap="round"/>
+  <rect x="51" y="59" width="138" height="116" rx="20" fill="none" stroke="#39d98a" stroke-width="8"/>
+  <path d="M51 94V75c0-9 7-16 16-16h23M189 140v19c0 9-7 16-16 16h-23" fill="none" stroke="#fff8d6" stroke-width="8" stroke-linecap="round"/>
+  <path d="M57 204h126" stroke="#f4c542" stroke-width="10" stroke-linecap="round"/>
+</svg>

@@ -2,7 +2,7 @@
 
 Sistema de detección, conteo, tracking y reidentificación individual de vacas
 en video aéreo real mediante **YOLOv8**, **embeddings Re-ID**, **FAISS** y
-análisis temporal offline.
+análisis temporal con operación online/offline desde una interfaz web local.
 
 El objetivo del MVP es pasar de un video de campo capturado con dron a un video
 final renderizado donde las vacas sean detectadas, contabilizadas y, cuando
@@ -99,6 +99,26 @@ el video final del MVP. No debe interpretarse como una validación completa del
 detector YOLO bajo métricas de benchmark de detección, ya que esa evaluación
 requiere cajas ground truth anotadas manualmente por frame.
 
+Además, se completó la **interfaz de usuario CowTrack** como avance final del
+producto. La web permite iniciar sesión, administrar un catálogo de vacas,
+cargar un video del rodeo, ejecutar el procesamiento, visualizar el progreso en
+tiempo real, descargar el video renderizado, consultar reportes ejecutivos y
+explorar métricas interactivas. Con esta etapa, CowTrack deja de ser solo un
+pipeline técnico y pasa a funcionar como una experiencia de usuario completa.
+
+Avances incorporados en la interfaz:
+
+- ✅ Landing comercial con secciones de Producto, Investigación Erondina,
+  Precios, Equipo y Contacto.
+- ✅ Login local y dashboard de usuario.
+- ✅ Catálogo de vacas reidentificables.
+- ✅ Procesamiento desde la web con barra de avance en tiempo real.
+- ✅ Reporte ejecutivo descargable en PDF.
+- ✅ Historial de análisis y métricas interactivas.
+- ✅ Botón de envío por Telegram para compartir resultados.
+- ✅ Operación online/offline: procesamiento local para entornos rurales y
+  capacidad de compartir resultados cuando hay conectividad.
+
 ---
 
 ## 📌 Estado Técnico del MVP
@@ -119,12 +139,14 @@ Componentes consolidados:
   temporal.
 - ✅ **Estabilidad visual:** render con etiquetas priorizadas, suavizado y
   continuidad para vacas reidentificadas.
-- ✅ **Pipeline final Erondina:** análisis offline previo, auditoría de
+- ✅ **Pipeline final Erondina:** análisis online/offline, auditoría de
   continuidad y render final.
-- 🟡 **Tiempo real:** el MVP por el momento procesa offline; no está diseñado
-  aún para 30 FPS en vivo.
-- 🟡 **Interfaz de usuario:** ejecución actual por CLI/scripts; se está
-  trabajando en una interfaz para facilitar el uso del sistema.
+- ✅ **Interfaz de usuario completa:** landing, login, dashboard, catálogo de
+  vacas, conteo diario, historial de reportes, métricas interactivas y envío
+  opcional por Telegram.
+- ✅ **Progreso en tiempo real:** la web muestra el avance del procesamiento y
+  mantiene el estado visible aunque el usuario navegue por otras secciones del
+  dashboard.
 
 Antes del caso Erondina, el MVP inicial ya había sido validado en un video de
 prueba con conteo perfecto de `11/11` vacas y `0` ID switches. Esa etapa sirvió
@@ -434,9 +456,9 @@ auditada corresponde a cuerpo completo + cabeza/región superior.
 
 ### 7. Análisis previo antes del render
 
-Antes de renderizar el video final, el sistema ejecuta una etapa offline que
-analiza la evidencia completa del segmento. Recién después de esa auditoría
-decide qué identidad global corresponde a Marta, Maria y Margarita.
+Antes de renderizar el video final, el sistema ejecuta una etapa de análisis
+previo que revisa la evidencia completa del segmento. Recién después de esa
+auditoría decide qué identidad global corresponde a Marta, Maria y Margarita.
 
 Esta decisión fue central para resolver los ID switches: el render final no
 debe decidir en cada frame quién es cada vaca, sino usar la identidad de la
@@ -503,6 +525,10 @@ Render HD con etiquetas priorizadas
 cow-tracker-mvp/
 ├── artifacts/
 │   └── README.md
+├── mockup/
+│   ├── cowtrack_mockup.py
+│   ├── README.md
+│   └── static/
 ├── datos/
 │   └── [ignorado en Git] videos, datasets, caches y resultados pesados
 ├── docs/
@@ -541,6 +567,22 @@ docs/ERONDINA_REID_PIPELINE.md
 ---
 
 ## 🚀 Ejecución
+
+### Mockup web local
+
+```bash
+python3 mockup/cowtrack_mockup.py
+```
+
+Luego abrir:
+
+```text
+http://127.0.0.1:7860
+```
+
+El mockup incluye landing comercial, login local, dashboard
+de usuario, catálogo de vacas, ejecución del pipeline, reporte amigable e
+historial local en el disco T7.
 
 ### Entrenamiento Re-ID
 
@@ -654,9 +696,9 @@ El MVP está completo, pero el escenario real tiene limitaciones importantes:
   etiqueta.
 - El conteo global queda resuelto para el video final, aunque su robustez debe
   validarse con más videos de campo, más ángulos y mayor variabilidad de rodeo.
-- El procesamiento actual es offline, no en tiempo real.
-- La interfaz de usuario aún está en desarrollo; por ahora el sistema se opera
-  mediante scripts y línea de comandos.
+- La interfaz de usuario ya cuenta con un mockup web local completo, pero puede
+  evolucionar hacia autenticación real, multiusuario productivo y despliegue en
+  servidor.
 
 Estas limitaciones no invalidan el MVP. Son el punto de partida natural para
 una fase futura de optimización, validación con más videos y eventual
@@ -678,6 +720,8 @@ pipeline capaz de:
 - Mejorar el conteo global hasta **13 vacas reales vs 13 vacas estimadas** en
   el video final.
 - Documentar el reconteo final como avance posterior a la devolución docente.
+- Completar una interfaz web usable con procesamiento online/offline y progreso
+  en tiempo real.
 - Documentar métricas, decisiones y pruebas intermedias.
 
 El resultado final alcanza los criterios de éxito definidos para el MVP:
@@ -688,7 +732,7 @@ El resultado final alcanza los criterios de éxito definidos para el MVP:
 - ✅ Re-ID individual de Marta, Maria y Margarita.
 - ✅ Tracking temporal estable en el render final.
 - ✅ Conteo general consolidado: 13 vacas reales vs 13 vacas estimadas.
-- 🟡 Interfaz de usuario en desarrollo.
+- ✅ Interfaz web CowTrack completa para uso demostrativo.
 - ✅ Video final listo para presentación.
 
 Con este resultado, **CowTrack MVP queda completo**.

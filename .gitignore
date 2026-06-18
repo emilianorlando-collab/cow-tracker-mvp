@@ -207,6 +207,11 @@ marimo/_lsp/
 __marimo__/
 
 datos/
+app/uploads/
+app/runs/
+mockup/uploads/
+mockup/runs/
+mockup/data/
 
 # macOS metadata
 .DS_Store

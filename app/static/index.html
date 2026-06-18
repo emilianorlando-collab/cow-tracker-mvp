@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CowTrack Console</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="/static/logo.svg" alt="CowTrack" />
+        <div>
+          <strong>CowTrack</strong>
+          <span>MVP Console</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#process" class="active">Procesar</a>
+        <a href="#results">Resultados</a>
+        <a href="#notify">Telegram</a>
+      </nav>
+
+      <div class="status-card">
+        <span class="eyebrow">Estado</span>
+        <strong id="statusText">Esperando</strong>
+        <div class="progress-track">
+          <div id="progressBar"></div>
+        </div>
+        <small id="stepText">Listo para iniciar</small>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Detección, conteo y reidentificación</p>
+          <h1>CowTrack Erondina</h1>
+        </div>
+        <button id="refreshButton" class="icon-button" title="Actualizar estado">↻</button>
+      </header>
+
+      <section id="process" class="panel process-grid">
+        <form id="runForm">
+          <div class="section-title">
+            <span>1</span>
+            <div>
+              <h2>Video</h2>
+              <p>Usá una ruta local del T7 o subí un archivo desde la computadora.</p>
+            </div>
+          </div>
+
+          <label>
+            Ruta del video
+            <input id="videoPath" name="video_path" type="text" placeholder="/Volumes/T7/..." />
+          </label>
+
+          <label class="file-drop">
+            <input name="video_file" type="file" accept="video/*" />
+            <span>Subir video</span>
+            <small>Opcional. Para videos grandes conviene usar la ruta local.</small>
+          </label>
+
+          <div class="section-title compact">
+            <span>2</span>
+            <div>
+              <h2>Parámetros</h2>
+              <p>Valores preparados para el MVP final.</p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label>
+              Total esperado
+              <input name="expected_total_cows" type="number" min="1" value="13" />
+            </label>
+            <label>
+              Nombre de salida
+              <input name="output_name" type="text" value="RESULTADO_COWTRACK.mp4" />
+            </label>
+          </div>
+
+          <label>
+            Carpeta de resultados
+            <input id="resultDir" name="result_dir" type="text" placeholder="/Volumes/T7/..." />
+          </label>
+
+          <details>
+            <summary>Opciones avanzadas</summary>
+            <div class="field-row">
+              <label>
+                Frame inicial
+                <input name="start_frame" type="number" min="0" value="0" />
+              </label>
+              <label>
+                Máximo de frames
+                <input name="max_frames" type="number" min="0" value="0" />
+              </label>
+            </div>
+            <div class="field-row">
+              <label>
+                Ancho
+                <input name="process_width" type="number" min="0" value="1920" />
+              </label>
+              <label>
+                Alto
+                <input name="process_height" type="number" min="0" value="1080" />
+              </label>
+            </div>
+            <label>
+              Confianza detección
+              <input name="det_conf" type="number" min="0.01" max="1" step="0.01" value="0.18" />
+            </label>
+          </details>
+
+          <div id="notify" class="telegram-box">
+            <div class="toggle-row">
+              <label class="switch">
+                <input id="telegramEnabled" name="telegram_enabled" type="checkbox" value="true" />
+                <span></span>
+              </label>
+              <div>
+                <strong>Enviar resumen por Telegram</strong>
+                <small>Usa variables de entorno o credenciales ingresadas acá.</small>
+              </div>
+            </div>
+            <div class="field-row">
+              <label>
+                Bot token
+                <input name="telegram_token" type="password" autocomplete="off" />
+              </label>
+              <label>
+                Chat ID
+                <input name="telegram_chat_id" type="text" />
+              </label>
+            </div>
+            <button id="telegramTest" type="button" class="secondary">Probar Telegram</button>
+          </div>
+
+          <button id="runButton" type="submit" class="primary">Ejecutar CowTrack</button>
+        </form>
+
+        <section class="live-card">
+          <div class="section-title compact">
+            <span>3</span>
+            <div>
+              <h2>Progreso</h2>
+              <p>Seguimiento del pipeline en tiempo real.</p>
+            </div>
+          </div>
+          <div class="metric-strip">
+            <div>
+              <span>Conteo</span>
+              <strong id="metricCount">-</strong>
+            </div>
+            <div>
+              <span>Accuracy</span>
+              <strong id="metricAccuracy">-</strong>
+            </div>
+            <div>
+              <span>Re-ID</span>
+              <strong id="metricReid">-</strong>
+            </div>
+          </div>
+          <pre id="logBox">Los eventos del pipeline aparecerán acá.</pre>
+        </section>
+      </section>
+
+      <section id="results" class="panel results">
+        <div class="section-title">
+          <span>4</span>
+          <div>
+            <h2>Resultado final</h2>
+            <p>Resumen técnico listo para informe o presentación.</p>
+          </div>
+        </div>
+        <div id="summaryGrid" class="summary-grid"></div>
+        <div id="artifactList" class="artifact-list"></div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
