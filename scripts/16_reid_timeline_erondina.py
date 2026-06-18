@@ -77,6 +77,148 @@ def cluster_head_embedding_matrix(tracklets: Dict[int, Tracklet], local_ids: Lis
     return normalize_rows(np.vstack(mats).astype(np.float32))
 
 
+def color_feature_from_bgr(image: np.ndarray):
+    if image is None or image.size == 0:
+        return None
+    h, w = image.shape[:2]
+    if h < 8 or w < 8:
+        return None
+    y1, y2 = int(h * 0.08), int(h * 0.94)
+    x1, x2 = int(w * 0.06), int(w * 0.94)
+    roi = image[y1:y2, x1:x2]
+    if roi.size == 0:
+        return None
+    hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+    lab = cv2.cvtColor(roi, cv2.COLOR_BGR2LAB)
+    hch = hsv[:, :, 0].astype(np.float32)
+    sat = hsv[:, :, 1].astype(np.float32)
+    val = hsv[:, :, 2].astype(np.float32)
+    mask = (sat > 22) & (val > 22)
+    if int(mask.sum()) < 80:
+        mask = val > 14
+    if int(mask.sum()) < 40:
+        mask = np.ones_like(val, dtype=bool)
+
+    hue = hch[mask] / 180.0 * (2.0 * np.pi)
+    sat_m = sat[mask] / 255.0
+    val_m = val[mask] / 255.0
+    lab_m = lab[mask].astype(np.float32) / 255.0
+    brown_mask = ((hch < 24) | (hch > 166)) & (sat > 38) & (val > 34)
+    dark_mask = val < 72
+    return np.array(
+        [
+            float(np.mean(np.sin(hue))),
+            float(np.mean(np.cos(hue))),
+            float(np.median(sat_m)),
+            float(np.median(val_m)),
+            float(np.median(lab_m[:, 1])),
+            float(np.median(lab_m[:, 2])),
+            float(np.mean(brown_mask)),
+            float(np.mean(dark_mask)),
+        ],
+        dtype=np.float32,
+    )
+
+
+def color_similarity(a: np.ndarray, b: np.ndarray) -> float:
+    if a is None or b is None:
+        return 0.5
+    weights = np.array([0.65, 0.65, 0.75, 1.15, 0.55, 0.55, 1.35, 1.25], dtype=np.float32)
+    dist = float(np.linalg.norm((a.astype(np.float32) - b.astype(np.float32)) * weights) / np.sqrt(len(weights)))
+    return float(np.clip(1.0 - dist * 1.55, 0.0, 1.0))
+
+
+def gallery_color_profiles(identity_gallery: str) -> dict:
+    if not identity_gallery or not os.path.exists(identity_gallery):
+        return {}
+    data = np.load(identity_gallery, allow_pickle=True)
+    if "gallery_paths" not in data.files or "gallery_labels" not in data.files:
+        return {}
+    profiles = defaultdict(list)
+    repo_root = os.path.dirname(SCRIPT_DIR)
+    gallery_dir = os.path.dirname(os.path.abspath(identity_gallery))
+    fallback_roots = [
+        repo_root,
+        os.getcwd(),
+        os.path.dirname(gallery_dir),
+        "/Volumes/T7/cow-tracker-mvp",
+    ]
+    for raw_label, raw_path in zip(data["gallery_labels"].tolist(), data["gallery_paths"].tolist()):
+        path = str(raw_path)
+        if not os.path.isabs(path):
+            candidates = [os.path.join(root, path) for root in fallback_roots]
+            path = next((candidate for candidate in candidates if os.path.exists(candidate)), candidates[0])
+        image = cv2.imread(path)
+        feature = color_feature_from_bgr(image)
+        if feature is not None:
+            profiles[s13.label_key(raw_label)].append(feature)
+    return {
+        label: np.median(np.vstack(items).astype(np.float32), axis=0)
+        for label, items in profiles.items()
+        if items
+    }
+
+
+def enrich_candidates_with_color(args, candidates, frame_records, gallery_profiles: dict):
+    if not gallery_profiles or args.color_rerank_weight <= 0:
+        return candidates, {}
+    recs_by_local = defaultdict(list)
+    for frame in frame_records:
+        for rec in frame:
+            recs_by_local[int(rec.local_track_id)].append(rec)
+    crop_feature_cache = {}
+
+    def feature_for_local(local_id: int):
+        if local_id in crop_feature_cache:
+            return crop_feature_cache[local_id]
+        recs = recs_by_local.get(int(local_id), [])
+        if not recs:
+            crop_feature_cache[local_id] = None
+            return None
+        rec = recs[len(recs) // 2]
+        crop = read_processed_crop(args, rec)
+        feature = color_feature_from_bgr(crop)
+        crop_feature_cache[local_id] = feature
+        return feature
+
+    diagnostics = {}
+    for cand in candidates:
+        for label, info in cand.get("all_label_scores", {}).items():
+            profile = gallery_profiles.get(label)
+            source_id = int(info.get("source_local_track_id", cand["cluster_local_track_ids"][0]))
+            feature = feature_for_local(source_id)
+            sim = color_similarity(feature, profile)
+            embedding_score = float(info["score"])
+            adjusted = float(np.clip(embedding_score + args.color_rerank_weight * (sim - 0.5), 0.0, 1.0))
+            info["embedding_score"] = embedding_score
+            info["color_similarity"] = sim
+            info["score"] = adjusted
+            diagnostics.setdefault(s13.display_label(label), []).append(
+                {
+                    "global_id": int(cand["global_id"]),
+                    "source_local_track_id": source_id,
+                    "embedding_score": embedding_score,
+                    "color_similarity": sim,
+                    "adjusted_score": adjusted,
+                }
+            )
+
+        ranked = sorted(cand["all_label_scores"].items(), key=lambda x: x[1]["score"], reverse=True)
+        if ranked:
+            best_label, best_info = ranked[0]
+            second_score = ranked[1][1]["score"] if len(ranked) > 1 else -1.0
+            cand["label"] = best_label
+            cand["score"] = float(best_info["score"])
+            cand["margin"] = float(best_info["score"] - second_score)
+            cand["median"] = float(best_info["median"])
+            cand["max"] = float(best_info["max"])
+            cand["support_075"] = float(best_info["support_075"])
+            cand["support_080"] = float(best_info["support_080"])
+            cand["nearest_vote_fraction"] = float(best_info["nearest_vote_fraction"])
+            cand["source_local_track_id"] = int(best_info["source_local_track_id"])
+    return candidates, diagnostics
+
+
 def head_proxy_crop(crop_bgr: np.ndarray, y_fraction: float, x_margin: float) -> np.ndarray:
     if crop_bgr is None or crop_bgr.size == 0:
         return crop_bgr
@@ -1163,6 +1305,8 @@ def public_report(report: dict, args) -> dict:
         compact["suppressed_duplicate_known_detections_in_render"] = report["suppressed_duplicate_known_detections_in_render"]
     if "render_stabilization" in report:
         compact["render_stabilization"] = report["render_stabilization"]
+    if "color_rerank" in report:
+        compact["color_rerank"] = report["color_rerank"]
     return zero_base_render_frames(compact)
 
 
@@ -1368,6 +1512,9 @@ def main():
     parser.add_argument("--expected_total_cows", type=int, default=14)
     parser.add_argument("--count_tolerance", type=int, default=2)
     parser.add_argument("--min_known_hit_ratio", type=float, default=0.10)
+    parser.add_argument("--color_rerank_weight", type=float, default=0.18)
+    parser.add_argument("--disable_color_rerank", dest="color_rerank", action="store_false")
+    parser.set_defaults(color_rerank=True)
     parser.add_argument("--focus_margin_x", type=float, default=0.12)
     parser.add_argument("--focus_margin_y", type=float, default=0.18)
     parser.add_argument("--disable_head_embeddings", dest="head_embeddings", action="store_false")
@@ -1425,6 +1572,10 @@ def main():
         args.max_merge_gap_frames,
     )
     all_candidates = s13.collect_known_candidates(tracklets, local_to_global, gallery_vectors, gallery_labels)
+    color_diagnostics = {}
+    if args.color_rerank:
+        profiles = gallery_color_profiles(args.identity_gallery)
+        all_candidates, color_diagnostics = enrich_candidates_with_color(args, all_candidates, frame_records, profiles)
     anchor_assignments = s13.assign_known_identities(
         all_candidates,
         threshold=args.identity_threshold,
@@ -1559,6 +1710,14 @@ def main():
         "timeline_assignments_by_global_id": {str(k): v for k, v in sorted(timeline_assignments.items())},
         "timeline_diagnostics": timeline_diagnostics,
         "all_known_candidates": all_candidates,
+        "color_rerank": {
+            "enabled": bool(args.color_rerank),
+            "weight": float(args.color_rerank_weight),
+            "diagnostics": {
+                label: sorted(items, key=lambda x: x["adjusted_score"], reverse=True)[:6]
+                for label, items in color_diagnostics.items()
+            },
+        },
         "local_to_global": {str(k): int(v) for k, v in sorted(local_to_global.items())},
         "contact_sheet": contact_sheet,
         "candidate_sheet": candidate_sheet,

@@ -455,8 +455,6 @@ def build_command(form: dict, username: str, run_dir: Path) -> tuple[list[str], 
     if upload is not None and getattr(upload, "filename", ""):
         saved = save_upload_file(upload, UPLOADS_DIR / username / "videos", "video.mp4")
         video_path = str(saved)
-        if "demo 5s" in Path(saved).name.lower() and FULL_DEMO_VIDEO.exists():
-            video_path = str(FULL_DEMO_VIDEO)
     fast_demo = form.get("use_fast_demo") == "true"
     if fast_demo and FAST_DEMO_VIDEO.exists():
         video_path = str(FAST_DEMO_VIDEO)

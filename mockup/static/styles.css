@@ -383,12 +383,27 @@ textarea { min-height: 120px; resize: vertical; }
   gap: 8px;
   background: var(--blue);
 }
+.telegram-card {
+  width: min(620px, calc(100vw - 28px));
+  max-width: 620px;
+  min-width: min(420px, calc(100vw - 28px));
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+}
+.telegram-card input {
+  min-height: 50px;
+}
+.telegram-card .telegram-button {
+  min-height: 50px;
+  margin-top: 4px;
+}
 .plane-icon {
   width: 16px;
   height: 16px;
   display: inline-block;
   clip-path: polygon(0 45%, 100% 0, 72% 100%, 43% 63%);
-  background: #fff;
+  background: currentColor;
 }
 .dashboard-mode .site-header { display: none; }
 .dashboard {
@@ -618,6 +633,7 @@ textarea { min-height: 120px; resize: vertical; }
 .process-shell { align-items: stretch; }
 .process-card, .progress-card { min-height: 330px; }
 .process-form { margin-top: 22px; }
+.process-form input::placeholder { color: #8a968e; }
 .progress-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .progress-head strong { font-size: 34px; color: #2498f2; }
 .formal-progress {
@@ -700,4 +716,5 @@ textarea { min-height: 120px; resize: vertical; }
   .dash-sidebar { position: static; height: auto; }
   .dash-content { padding: 20px; }
   .report-header, .dash-top { display: grid; }
+  .telegram-card { width: calc(100vw - 20px); min-width: 0; padding: 22px; }
 }

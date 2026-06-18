@@ -40,8 +40,12 @@ function fileLink(path) {
   return "";
 }
 
+function latestReport() {
+  return dashboardData.reports[0] || {};
+}
+
 function latestValidReport() {
-  return dashboardData.reports.find((r) => r.status_tone === "ok") || dashboardData.reports[0] || {};
+  return latestReport();
 }
 
 function reportAccuracy(report) {
@@ -86,6 +90,7 @@ function showPublicPage(id = "home") {
 
 function openHashPage() {
   const id = (window.location.hash || "#home").replace("#", "");
+  if (document.body.classList.contains("dashboard-mode") && id.startsWith("dashboard-")) return;
   if (document.getElementById(id)?.classList.contains("page-section")) showPublicPage(id);
 }
 
@@ -98,6 +103,7 @@ function showDashboard(view = "overview") {
   closeIntroAndOffer();
   setView(view);
   ensureStatusPolling();
+  window.history.replaceState(null, "", `#dashboard-${view}`);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -105,6 +111,7 @@ function setView(view) {
   $$(".dash-view").forEach((el) => el.classList.add("hidden"));
   $(`#view-${view}`)?.classList.remove("hidden");
   $$(".dash-sidebar nav button").forEach((btn) => btn.classList.toggle("active", btn.dataset.view === view));
+  if (document.body.classList.contains("dashboard-mode")) window.history.replaceState(null, "", `#dashboard-${view}`);
   if (dashboardData.state?.status === "running" || dashboardData.state?.status === "queued") updatePersistentProgress(dashboardData.state);
 }
 
@@ -169,8 +176,8 @@ function renderOverview() {
     </div>
     <section class="dashboard-main-grid">
       <article class="panel executive-card">
-        <span class="eyebrow">Resumen del último reporte válido</span>
-        <h2>${latest.title || "Sin reportes válidos"}</h2>
+        <span class="eyebrow">Resumen del último reporte</span>
+        <h2>${latest.title || "Sin reportes"}</h2>
         <p>Estado: <strong>${latest.status_label || "-"}</strong>. El sistema compara el conteo consolidado contra la referencia ingresada y separa vacas catalogadas de vacas no catalogadas.</p>
         <div class="mini-metrics">
           ${donut(reportAccuracy(latest), "confiabilidad de conteo")}
@@ -235,8 +242,8 @@ function renderProcess() {
         <p>Cargá el video del rodeo, indicá la referencia esperada y ejecutá el análisis. Si hay un proceso en curso, el sistema bloquea nuevas cargas hasta finalizar o reiniciar.</p>
         <form id="runForm" class="process-form">
           <label class="file-control primary-upload"><span>Elegir video del rodeo</span><input name="video_file" type="file" accept="video/*" required></label>
-          <input name="expected_total_cows" type="number" min="1" value="13" placeholder="Cantidad total esperada">
-          <input name="output_name" value="reidentificacion_${todaySlug()}" placeholder="Nombre del resultado">
+          <input name="expected_total_cows" type="number" min="1" placeholder="Cantidad total del rodeo (ej. 13)" required>
+          <input name="output_name" placeholder="Nombre del informe (ej. Reidentificación ${todaySlug()})">
           <button class="primary" type="submit" ${running ? "disabled" : ""}>${running ? "Procesando..." : "Reidentificar rodeo"}</button>
         </form>
       </div>
@@ -618,7 +625,9 @@ async function boot() {
   if (session.authenticated) {
     currentUser = session.user || "admin";
     await loadDashboard();
-    showDashboard();
+    const hashView = (window.location.hash || "").replace("#dashboard-", "");
+    const view = document.getElementById(`view-${hashView}`) ? hashView : "overview";
+    showDashboard(view);
   } else {
     showPublicPage((window.location.hash || "#home").replace("#", ""));
     maybeShowIntro();

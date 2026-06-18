@@ -44,7 +44,24 @@ identidades reidentificadas.
 
 ## ✅ Resultado Final Erondina
 
-El resultado final genera un video HD donde:
+El resultado final del proyecto es una experiencia completa de CowTrack:
+interfaz web, carga de video, procesamiento del rodeo, render con
+reidentificación, reportes PDF, historial de análisis y métricas interactivas.
+
+La interfaz permite:
+
+- Iniciar sesión y acceder a un dashboard de usuario.
+- Administrar un catálogo de vacas reidentificables.
+- Subir videos del rodeo desde la web.
+- Ejecutar el conteo CowTrack con progreso visible en tiempo real.
+- Descargar el video renderizado.
+- Consultar reportes ejecutivos en PDF.
+- Revisar métricas operativas e históricas desde el dashboard.
+- Compartir reportes por Telegram.
+- Operar en modalidad online/offline, con procesamiento local para entornos
+  rurales y posibilidad de compartir resultados cuando hay conectividad.
+
+El render final genera un video HD donde:
 
 - Marta, Maria y Margarita aparecen con etiquetas grandes, visibles y
   priorizadas.
@@ -98,26 +115,6 @@ Esta mejora valida funcionalmente el pipeline **YOLO + tracking + conteo** para
 el video final del MVP. No debe interpretarse como una validación completa del
 detector YOLO bajo métricas de benchmark de detección, ya que esa evaluación
 requiere cajas ground truth anotadas manualmente por frame.
-
-Además, se completó la **interfaz de usuario CowTrack** como avance final del
-producto. La web permite iniciar sesión, administrar un catálogo de vacas,
-cargar un video del rodeo, ejecutar el procesamiento, visualizar el progreso en
-tiempo real, descargar el video renderizado, consultar reportes ejecutivos y
-explorar métricas interactivas. Con esta etapa, CowTrack deja de ser solo un
-pipeline técnico y pasa a funcionar como una experiencia de usuario completa.
-
-Avances incorporados en la interfaz:
-
-- ✅ Landing comercial con secciones de Producto, Investigación Erondina,
-  Precios, Equipo y Contacto.
-- ✅ Login local y dashboard de usuario.
-- ✅ Catálogo de vacas reidentificables.
-- ✅ Procesamiento desde la web con barra de avance en tiempo real.
-- ✅ Reporte ejecutivo descargable en PDF.
-- ✅ Historial de análisis y métricas interactivas.
-- ✅ Botón de envío por Telegram para compartir resultados.
-- ✅ Operación online/offline: procesamiento local para entornos rurales y
-  capacidad de compartir resultados cuando hay conectividad.
 
 ---
 
