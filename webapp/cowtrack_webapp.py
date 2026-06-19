@@ -31,7 +31,7 @@ USER_GALLERY_SCRIPT = REPO_ROOT / "scripts" / "17_crear_galeria_usuario.py"
 REID_MODEL = REPO_ROOT / "models" / "mi_modelo_reid.pt"
 BASE_IDENTITY_GALLERY = REPO_ROOT / "models" / "erondina_gallery_embeddings_enfocada_filtrada.npz"
 
-T7_ROOT = Path("/Volumes/T7/cow-tracker-mvp")
+T7_ROOT = Path(os.getenv("COWTRACK_DATA_ROOT", "/Volumes/T7/cow-tracker-mvp"))
 T7_WEBAPP = T7_ROOT / "webapp"
 USER_DATA_DIR = T7_WEBAPP / "user_data"
 REPORTS_WEBAPP_DIR = T7_WEBAPP / "reports_webapp"

@@ -22,13 +22,45 @@ Abrir:
 http://127.0.0.1:7860
 ```
 
-## Estructura local en T7
+## Inicio automático en macOS
 
-La aplicación guarda datos operativos fuera del repositorio, dentro de:
+Para que CowTrack se inicie al abrir sesión y se reinicie automáticamente si
+el servidor se detiene:
+
+```bash
+zsh webapp/macos/install_service.sh
+```
+
+El instalador crea una copia operativa autocontenida en `Application Support`,
+incluyendo los componentes del pipeline y el entorno Python. Una vez instalado,
+CowTrack no depende de Codex, de una terminal abierta ni del T7 para iniciar.
+Después de reiniciar la computadora basta con iniciar sesión en macOS; la
+aplicación queda disponible en `http://127.0.0.1:7860`.
+
+Comprobación rápida:
+
+```bash
+launchctl print gui/$(id -u)/com.cowtrack.webapp
+curl -I http://127.0.0.1:7860/
+```
+
+## Almacenamiento operativo
+
+En la ejecución manual, la aplicación conserva los datos de investigación en:
 
 ```text
 /Volumes/T7/cow-tracker-mvp/webapp/
 ```
+
+La instalación automática de macOS utiliza una copia operativa independiente:
+
+```text
+~/Library/Application Support/CowTrack/
+```
+
+Esta copia evita que la página dependa de Codex, de una terminal abierta o del
+montaje del T7. Los archivos originales del proyecto permanecen preservados en
+el disco externo.
 
 Carpetas principales:
 
