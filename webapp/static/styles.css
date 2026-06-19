@@ -297,6 +297,10 @@ p { color: var(--muted); line-height: 1.65; }
 .price-card.featured { border-color: var(--green); box-shadow: 0 22px 60px rgba(54,168,86,.16); }
 .price-card strong { font-size: 34px; }
 .price-card > span { color: var(--muted); }
+.price-stack { display: grid; gap: 5px; min-height: 68px; align-content: center; }
+.price-stack > div { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.old-price { width: max-content; color: #8b958f; font-size: 16px; text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.discount-tag { padding: 5px 8px; border-radius: 999px; color: #14552c; background: #d8f5df; font-size: 11px; font-weight: 800; }
 .price-card ul { margin: 0; padding-left: 18px; color: #4f5d55; line-height: 1.85; }
 .team-grid { grid-template-columns: repeat(4, 1fr); margin-top: 28px; }
 .team-grid article { overflow: hidden; }
@@ -485,14 +489,26 @@ textarea { min-height: 120px; resize: vertical; }
   margin: -4px 0 18px;
   padding: 14px 16px;
   color: #fff;
-  background: linear-gradient(90deg, #0b2638, #1f8ee7);
+  background: linear-gradient(105deg, #0b2638, #1f8ee7, #2aaa61, #0b2638);
+  background-size: 280% 280%;
   border-radius: 8px;
   box-shadow: 0 10px 24px rgba(31,142,231,.16);
+  animation: progressSurface 5s ease-in-out infinite;
 }
 .persistent-progress strong, .persistent-progress span { display: block; }
 .persistent-progress span { margin-top: 3px; color: rgba(255,255,255,.78); font-size: 12px; }
 .mini-progress { height: 10px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.25); }
-.mini-progress i { display: block; height: 100%; border-radius: inherit; background: #91e2a5; transition: width .45s ease; }
+.mini-progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #91e2a5, #ffffff, #68c8ff, #91e2a5);
+  background-size: 240% 100%;
+  transition: width .45s ease;
+  animation: progressFill 2.6s linear infinite;
+}
+@keyframes progressSurface { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes progressFill { from { background-position: 100% 0; } to { background-position: -140% 0; } }
 .dashboard-main-grid, .process-shell, .metrics-layout, .report-two-col {
   display: grid;
   grid-template-columns: 1.25fr .75fr;

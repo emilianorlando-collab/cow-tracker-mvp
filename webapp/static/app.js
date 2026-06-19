@@ -102,6 +102,7 @@ function showPublicPage(id = "home") {
   $$(".page-section").forEach((section) => section.classList.toggle("hidden", section.id !== id));
   setPublicActive(id);
   closeIntroAndOffer();
+  if (id === "precios" && !currentUser) $("#launchOffer").classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -155,6 +156,18 @@ function isRunningState(state = dashboardData.state || {}) {
   return state.status === "running" || state.status === "queued";
 }
 
+function friendlyProgressStep(state = dashboardData.state || {}) {
+  const progress = Number(state.progress || 0);
+  if (!isRunningState(state)) return progress >= 100 ? "Reporte listo" : "Listo para iniciar";
+  if (progress < 8) return "Preparando el video";
+  if (progress < 24) return "Detectando vacas frame a frame";
+  if (progress < 45) return "Identificando vacas catalogadas";
+  if (progress < 63) return "Reconociendo la composición del rodeo";
+  if (progress < 76) return "Siguiendo las trayectorias del rodeo";
+  if (progress < 95) return "Renderizando el video con seguimiento";
+  return "Generando el informe final";
+}
+
 function updatePersistentProgress(state = dashboardData.state || {}) {
   const running = isRunningState(state);
   const existing = $("#persistentProgress");
@@ -166,7 +179,7 @@ function updatePersistentProgress(state = dashboardData.state || {}) {
     <section id="persistentProgress" class="persistent-progress">
       <div>
         <strong>Conteo CowTrack en proceso</strong>
-        <span>${state.step || "Procesando video"} · ${state.progress || 1}%</span>
+        <span>${friendlyProgressStep(state)} · ${state.progress || 1}%</span>
       </div>
       <div class="mini-progress"><i style="width:${state.progress || 1}%"></i></div>
     </section>
@@ -270,7 +283,7 @@ function renderProcess() {
           <strong>${progress}%</strong>
         </div>
         <div class="formal-progress"><i style="width:${progress}%"></i></div>
-        <p id="friendlyStep">${running ? state.step || "Procesando video" : "Listo para iniciar"}</p>
+        <p id="friendlyStep">${friendlyProgressStep(state)}</p>
         ${running ? `<button class="secondary" onclick="resetAnalysis()">Cancelar procesamiento</button>` : ""}
       </div>
     </section>
@@ -551,7 +564,7 @@ async function updateStatus() {
   $(".formal-progress i")?.style.setProperty("width", `${progress}%`);
   const progressStrong = $(".progress-head strong");
   if (progressStrong) progressStrong.textContent = `${progress}%`;
-  if ($("#friendlyStep")) $("#friendlyStep").textContent = state.step || "Procesando";
+  if ($("#friendlyStep")) $("#friendlyStep").textContent = friendlyProgressStep(state);
   if (state.status === "completed" || state.status === "failed") {
     clearInterval(statusTimer);
     await loadDashboard();
