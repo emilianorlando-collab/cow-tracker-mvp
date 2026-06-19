@@ -182,17 +182,25 @@ function updatePersistentProgress(state = dashboardData.state || {}) {
     existing?.remove();
     return;
   }
+  const progress = state.progress || 1;
+  const progressLabel = `${friendlyProgressStep(state)} · ${progress}%`;
+  if (existing) {
+    const label = existing.querySelector("span");
+    const fill = existing.querySelector(".mini-progress i");
+    if (label) label.textContent = progressLabel;
+    if (fill) fill.style.width = `${progress}%`;
+    return;
+  }
   const html = `
     <section id="persistentProgress" class="persistent-progress">
       <div>
         <strong>Conteo CowTrack en proceso</strong>
-        <span>${friendlyProgressStep(state)} · ${state.progress || 1}%</span>
+        <span>${progressLabel}</span>
       </div>
-      <div class="mini-progress"><i style="width:${state.progress || 1}%"></i></div>
+      <div class="mini-progress"><i style="width:${progress}%"></i></div>
     </section>
   `;
-  if (existing) existing.outerHTML = html;
-  else $(".dash-top")?.insertAdjacentHTML("afterend", html);
+  $(".dash-top")?.insertAdjacentHTML("afterend", html);
 }
 
 function ensureStatusPolling() {

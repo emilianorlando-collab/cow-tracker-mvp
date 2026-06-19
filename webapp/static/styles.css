@@ -489,11 +489,11 @@ textarea { min-height: 120px; resize: vertical; }
   margin: -4px 0 18px;
   padding: 14px 16px;
   color: #fff;
-  background: linear-gradient(90deg, #0b2638, #1f8ee7, #2aaa61, #1f8ee7, #0b2638);
-  background-size: 220% 100%;
+  background: linear-gradient(90deg, #062f3d, #007f99, #f0ad37, #22a96a, #075f77);
+  background-size: 260% 100%;
   border-radius: 8px;
-  box-shadow: 0 10px 24px rgba(31,142,231,.16);
-  animation: progressSurface 4.8s ease-in-out infinite;
+  box-shadow: 0 12px 28px rgba(0,127,153,.22);
+  animation: progressSurface 3.8s ease-in-out infinite alternate;
 }
 .persistent-progress strong, .persistent-progress span { display: block; }
 .persistent-progress span { margin-top: 3px; color: rgba(255,255,255,.78); font-size: 12px; }
@@ -505,13 +505,13 @@ textarea { min-height: 120px; resize: vertical; }
   background: linear-gradient(90deg, #91e2a5, #ffffff, #68c8ff, #91e2a5);
   background-size: 240% 100%;
   transition: width .45s ease;
-  animation: progressFill 2.6s linear infinite;
+  animation: progressFill 2.8s ease-in-out infinite alternate;
 }
 @keyframes progressSurface {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
 }
-@keyframes progressFill { from { background-position: 100% 0; } to { background-position: -140% 0; } }
+@keyframes progressFill { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 .dashboard-main-grid, .process-shell, .metrics-layout, .report-two-col {
   display: grid;
   grid-template-columns: 1.25fr .75fr;
