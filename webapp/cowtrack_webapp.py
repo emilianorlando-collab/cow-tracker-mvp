@@ -100,6 +100,7 @@ def ensure_dirs() -> None:
     for path in [T7_WEBAPP, USER_DATA_DIR, REPORTS_WEBAPP_DIR, UPLOADS_DIR, RUNS_DIR]:
         path.mkdir(parents=True, exist_ok=True)
     seed_admin_data()
+    reconcile_report_history("admin")
 
 
 def copy_if_exists(src: Path, dest: Path) -> str | None:
@@ -416,6 +417,68 @@ def save_reports_history(username: str, history: list[dict]) -> None:
     path = REPORTS_WEBAPP_DIR / username / "historial_reportes.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(history, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def reconcile_report_history(username: str) -> None:
+    """Restore report entries that exist on disk but were omitted from history."""
+    history_path = REPORTS_WEBAPP_DIR / username / "historial_reportes.json"
+    history = json.loads(history_path.read_text(encoding="utf-8")) if history_path.exists() else []
+    known_paths = {
+        str(Path(entry.get("report_path", "")).resolve())
+        for entry in history
+        if entry.get("report_path")
+    }
+    candidates = sorted((RUNS_DIR / username).glob("*/reporte_tecnico.json"))
+    initial_report = REPORTS_WEBAPP_DIR / username / "reporte_real_cowtrack_47s.json"
+    if initial_report.exists():
+        candidates.append(initial_report)
+
+    changed = False
+    for report_path in candidates:
+        resolved_report = str(report_path.resolve())
+        if resolved_report in known_paths:
+            continue
+        try:
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        is_initial = report_path == initial_report
+        video_path = str(REAL_VIDEO) if is_initial and REAL_VIDEO.exists() else str(report.get("video_out") or "")
+        if not video_path or not Path(video_path).exists():
+            videos = sorted(report_path.parent.glob("*.mp4"))
+            video_path = str(videos[0]) if videos else ""
+        contact_path = str(REAL_CONTACT) if is_initial and REAL_CONTACT.exists() else str(report.get("contact_sheet") or "")
+        if not contact_path or not Path(contact_path).exists():
+            sheets = sorted(report_path.parent.glob("*captura*.jpg")) + sorted(report_path.parent.glob("*contact_sheet*.jpg"))
+            contact_path = str(sheets[0]) if sheets else ""
+
+        entry = build_user_report_entry(
+            "Reporte inicial CowTrack" if is_initial else "Conteo diario CowTrack",
+            report,
+            {
+                "video_path": video_path,
+                "report_path": resolved_report,
+                "contact_sheet_path": contact_path,
+            },
+        )
+        run_match = re.match(r"(\d{8})_(\d{6})", report_path.parent.name)
+        if run_match:
+            raw_date, raw_time = run_match.groups()
+            entry["date"] = (
+                f"{raw_date[0:4]}-{raw_date[4:6]}-{raw_date[6:8]} "
+                f"{raw_time[0:2]}:{raw_time[2:4]}"
+            )
+        else:
+            entry["date"] = time.strftime("%Y-%m-%d %H:%M", time.localtime(report_path.stat().st_mtime))
+        entry["id"] = uuid.uuid5(uuid.NAMESPACE_URL, resolved_report).hex[:10]
+        history.append(entry)
+        known_paths.add(resolved_report)
+        changed = True
+
+    if changed:
+        history.sort(key=lambda entry: str(entry.get("date") or ""), reverse=True)
+        save_reports_history(username, history)
 
 
 def build_user_report_entry(title: str, report: dict, artifacts: dict) -> dict:
@@ -735,7 +798,7 @@ def run_pipeline(form: dict, username: str, run_id: str) -> None:
         entry = build_user_report_entry("Conteo diario CowTrack", report or {}, artifacts)
         history = reports_history(username)
         history.insert(0, entry)
-        save_reports_history(username, history[:20])
+        save_reports_history(username, history)
         update_state(
             status="completed",
             step="Reporte listo",

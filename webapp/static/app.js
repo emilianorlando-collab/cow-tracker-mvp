@@ -102,7 +102,7 @@ function showPublicPage(id = "home") {
   $$(".page-section").forEach((section) => section.classList.toggle("hidden", section.id !== id));
   setPublicActive(id);
   closeIntroAndOffer();
-  if (id === "precios" && !currentUser) $("#launchOffer").classList.remove("hidden");
+  if (id === "precios" && !currentUser) openOffer("prices");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -147,9 +147,16 @@ function maybeShowIntro() {
   $("#adVideo").play().catch(() => {});
 }
 
+function openOffer(mode = "launch") {
+  const pricesMode = mode === "prices";
+  $$(".launch-offer-action").forEach((button) => button.classList.toggle("hidden", pricesMode));
+  $("#priceOfferAccept").classList.toggle("hidden", !pricesMode);
+  $("#launchOffer").classList.remove("hidden");
+}
+
 function showOfferOnce() {
   if (currentUser) return;
-  $("#launchOffer").classList.remove("hidden");
+  openOffer("launch");
 }
 
 function isRunningState(state = dashboardData.state || {}) {
@@ -301,15 +308,15 @@ function cowFaces(names = []) {
 }
 
 function renderReports() {
-  const reports = dashboardData.reports.map((r) => {
+  const reports = dashboardData.reports.map((r, index) => {
     const contact = fileLink(r.contact_sheet_path);
     const video = fileLink(r.video_path);
     const showContact = r.artifact_status?.contact_sheet && Number(r.estimated_total_cows || 0) > 0;
     return `
-      <article class="report-card ${r.status_tone === "warn" ? "report-warn" : ""} ${r.status_tone === "bad" ? "report-bad" : ""}">
+      <article class="report-card ${index === 0 ? "report-latest" : ""} ${r.status_tone === "warn" ? "report-warn" : ""} ${r.status_tone === "bad" ? "report-bad" : ""}">
         <header class="report-header">
           <div>
-            <span class="eyebrow">Informe CowTrack</span>
+            <span class="eyebrow">${index === 0 ? "Último informe" : "Informe CowTrack"}</span>
             <h3>${r.title}</h3>
             <p>${r.date}</p>
           </div>

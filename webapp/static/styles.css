@@ -489,11 +489,11 @@ textarea { min-height: 120px; resize: vertical; }
   margin: -4px 0 18px;
   padding: 14px 16px;
   color: #fff;
-  background: linear-gradient(105deg, #0b2638, #1f8ee7, #2aaa61, #0b2638);
-  background-size: 280% 280%;
+  background: repeating-linear-gradient(90deg, #0b2638 0%, #1f8ee7 12.5%, #2aaa61 25%, #1f8ee7 37.5%, #0b2638 50%);
+  background-size: 200% 100%;
   border-radius: 8px;
   box-shadow: 0 10px 24px rgba(31,142,231,.16);
-  animation: progressSurface 5s ease-in-out infinite;
+  animation: progressSurface 7s linear infinite;
 }
 .persistent-progress strong, .persistent-progress span { display: block; }
 .persistent-progress span { margin-top: 3px; color: rgba(255,255,255,.78); font-size: 12px; }
@@ -507,7 +507,7 @@ textarea { min-height: 120px; resize: vertical; }
   transition: width .45s ease;
   animation: progressFill 2.6s linear infinite;
 }
-@keyframes progressSurface { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes progressSurface { from { background-position: 0% 0; } to { background-position: -200% 0; } }
 @keyframes progressFill { from { background-position: 100% 0; } to { background-position: -140% 0; } }
 .dashboard-main-grid, .process-shell, .metrics-layout, .report-two-col {
   display: grid;
@@ -670,6 +670,19 @@ textarea { min-height: 120px; resize: vertical; }
 }
 .report-grid { display: grid; gap: 18px; }
 .report-card { padding: 0; overflow: hidden; }
+.report-latest {
+  position: relative;
+  border-color: rgba(54,168,86,.72);
+  box-shadow: 0 18px 42px rgba(37,123,66,.16);
+}
+.report-latest::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--green), #2498f2);
+}
+.report-latest .report-header { background: linear-gradient(90deg, #eff9f1, #f8fbfa); }
 .report-warn { border-color: rgba(197,138,29,.45); }
 .report-bad { border-color: rgba(185,75,66,.42); }
 .report-header {
