@@ -54,6 +54,12 @@ function fileLink(path) {
   const rootPrefix = "/Volumes/T7/cow-tracker-mvp/";
   if (path.startsWith(webappPrefix)) return `/webapp-files/${path.slice(webappPrefix.length)}`;
   if (path.startsWith(rootPrefix)) return `/cowtrack-files/${path.slice(rootPrefix.length)}`;
+  const localWebappMarker = "/storage/webapp/";
+  const localRootMarker = "/storage/";
+  const webappIndex = path.indexOf(localWebappMarker);
+  if (webappIndex >= 0) return `/webapp-files/${path.slice(webappIndex + localWebappMarker.length)}`;
+  const rootIndex = path.indexOf(localRootMarker);
+  if (rootIndex >= 0) return `/cowtrack-files/${path.slice(rootIndex + localRootMarker.length)}`;
   return "";
 }
 

@@ -52,15 +52,17 @@ En la ejecución manual, la aplicación conserva los datos de investigación en:
 /Volumes/T7/cow-tracker-mvp/webapp/
 ```
 
-La instalación automática de macOS utiliza una copia operativa independiente:
+La instalación automática de macOS utiliza una copia operativa de contingencia:
 
 ```text
 ~/Library/Application Support/CowTrack/
 ```
 
-Esta copia evita que la página dependa de Codex, de una terminal abierta o del
-montaje del T7. Los archivos originales del proyecto permanecen preservados en
-el disco externo.
+El T7 continúa siendo la fuente principal del proyecto. La copia de contingencia
+evita que la presentación dependa de Codex, de una terminal abierta o del montaje
+del disco externo. Durante la primera instalación se replican las fotos, el
+historial, las evidencias visuales y los videos operativos para conservar la
+misma experiencia de la versión original.
 
 Carpetas principales:
 

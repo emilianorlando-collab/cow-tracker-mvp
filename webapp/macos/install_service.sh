@@ -29,9 +29,26 @@ if [[ ! -d "$INSTALL_ROOT/.venv" ]]; then
   [[ -d "$T7_ROOT/.venv" ]] || { echo "No se encontró el entorno Python en el T7." >&2; exit 1; }
   ditto "$T7_ROOT/.venv" "$INSTALL_ROOT/.venv"
 fi
-if [[ ! -d "$STORAGE_DIR/webapp/user_data" && -d "$T7_ROOT/webapp/user_data" ]]; then
-  mkdir -p "$STORAGE_DIR/webapp"
-  ditto "$T7_ROOT/webapp/user_data" "$STORAGE_DIR/webapp/user_data"
+if [[ ! -f "$STORAGE_DIR/.original_data_imported" ]]; then
+  mkdir -p "$STORAGE_DIR/webapp" "$STORAGE_DIR/datos/Resultado final"
+  for directory in user_data reports_webapp runs uploads contactos soporte; do
+    if [[ -d "$T7_ROOT/webapp/$directory" ]]; then
+      ditto "$T7_ROOT/webapp/$directory" "$STORAGE_DIR/webapp/$directory"
+    fi
+  done
+  for directory in recursos_web fotos_de_perfil; do
+    if [[ -d "$T7_ROOT/datos/$directory" ]]; then
+      ditto "$T7_ROOT/datos/$directory" "$STORAGE_DIR/datos/$directory"
+    fi
+  done
+  for file in "Publicidad 3.mp4"; do
+    [[ -f "$T7_ROOT/datos/$file" ]] && cp "$T7_ROOT/datos/$file" "$STORAGE_DIR/datos/$file"
+  done
+  if [[ -f "$T7_ROOT/datos/Resultado final/RESULTADO_COWTRACK.mp4" ]]; then
+    cp "$T7_ROOT/datos/Resultado final/RESULTADO_COWTRACK.mp4" "$STORAGE_DIR/datos/Resultado final/RESULTADO_COWTRACK.mp4"
+  fi
+  /usr/bin/python3 "$SCRIPT_DIR/migrate_storage_paths.py" "$STORAGE_DIR" "$T7_ROOT" "$STORAGE_DIR"
+  touch "$STORAGE_DIR/.original_data_imported"
 fi
 
 cp "$SCRIPT_DIR/start_cowtrack.sh" "$INSTALL_ROOT/start_cowtrack.sh"
@@ -39,6 +56,10 @@ chmod +x "$INSTALL_ROOT/start_cowtrack.sh"
 cp "$SCRIPT_DIR/$SERVICE_LABEL.plist" "$DESTINATION"
 
 launchctl bootout "$DOMAIN/$SERVICE_LABEL" 2>/dev/null || true
+for _ in {1..20}; do
+  launchctl print "$DOMAIN/$SERVICE_LABEL" >/dev/null 2>&1 || break
+  sleep 0.25
+done
 rm -f /tmp/cowtrack-webapp.log /tmp/cowtrack-webapp-error.log
 launchctl bootstrap "$DOMAIN" "$DESTINATION"
 launchctl enable "$DOMAIN/$SERVICE_LABEL"
