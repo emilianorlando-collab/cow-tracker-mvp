@@ -1,0 +1,80 @@
+{
+  "report_type": "cowtrack_final_public_report",
+  "frame_indexing": "zero_based",
+  "video_out": "test_validacion_mockup.mp4",
+  "processed_frames": 1,
+  "display_frame_range": {
+    "start": 0,
+    "end": 0
+  },
+  "processing_video_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "estimated_total_cows": 0,
+  "estimated_total_cows_method": "visible_cows_p95_per_frame",
+  "expected_total_cows": 13,
+  "count_error": -13,
+  "absolute_count_error": 13,
+  "count_accuracy": 0.0,
+  "count_within_tolerance": true,
+  "unknown_cows_estimated": 0,
+  "per_frame_detection_summary": {
+    "mean_visible_detections": 0.0,
+    "median_visible_detections": 0.0,
+    "p95_visible_detections": 0.0,
+    "max_visible_detections": 0,
+    "note": "Este valor resume detecciones por frame y no se usa como conteo final de animales, porque puede incluir fragmentación temporal u oclusiones."
+  },
+  "known_found": [],
+  "known_missing": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_frame_hits": {},
+  "known_hit_ratio": {
+    "Margarita": 0.0,
+    "Maria": 0.0,
+    "Marta": 0.0
+  },
+  "known_first_render_frame": {},
+  "known_last_render_frame": {},
+  "all_known_together": {
+    "exists": false,
+    "frame_count": 0,
+    "first_render_frame": null,
+    "last_render_frame": null
+  },
+  "locked_track_audit": {
+    "labels": {},
+    "all_known_together": {
+      "exists": false,
+      "frame_count": 0,
+      "first_render_frame": null,
+      "last_render_frame": null,
+      "intervals": []
+    }
+  },
+  "locked_track_audit_ok": false,
+  "locked_midframe_gap_count_ge_2s": 0,
+  "known_id_switches_by_design": 0,
+  "ready_for_render_by_automatic_checks": false,
+  "identity_scores": {},
+  "contact_sheet": null,
+  "candidate_sheet": null,
+  "metric_note": "El video se reporta como pieza autónoma con indexación de frames desde 0. El conteo final corresponde al total consolidado del rodeo en el video renderizado. Precision y recall reales por bounding box requieren anotaciones ground truth por frame.",
+  "suppressed_duplicate_known_detections_in_render": 0,
+  "render_stabilization": {
+    "known_bbox_smoothing_alpha": 0.55,
+    "known_smoothing_reset_center_factor": 2.0,
+    "known_hold_frames": 18,
+    "known_reacquire_frames": 75,
+    "known_reacquire_min_iou": 0.08,
+    "known_reacquire_max_center_factor": 0.85,
+    "known_exit_edge_margin_ratio": 0.05,
+    "unknown_suppress_iou_with_known": 0.12,
+    "known_labels_drawn_last": true,
+    "known_label_font_scale": 1.65
+  }
+}

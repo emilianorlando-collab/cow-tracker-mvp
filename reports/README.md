@@ -8,6 +8,7 @@ Estructura:
 - `intermediate/`: pruebas intermedias seleccionadas para documentar el avance.
 - `archive/`: archivo historico con reportes livianos generados durante el
   proceso de investigacion.
+- `mockup/`: reportes JSON, PDFs y evidencias generados desde la interfaz web.
 - `01_*`, `02_*`, `03_*`: reportes iniciales de entrenamiento, evaluacion FAISS
   y tracking.
 

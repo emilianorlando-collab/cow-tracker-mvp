@@ -1,0 +1,159 @@
+{
+  "report_type": "cowtrack_final_public_report",
+  "frame_indexing": "zero_based",
+  "video_out": "RESULTADO_COWTRACK.mp4",
+  "processed_frames": 1409,
+  "display_frame_range": {
+    "start": 0,
+    "end": 1408
+  },
+  "processing_video_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "estimated_total_cows": 13,
+  "estimated_total_cows_method": "visible_cows_p95_per_frame",
+  "expected_total_cows": 13,
+  "count_error": 0,
+  "absolute_count_error": 0,
+  "count_accuracy": 1.0,
+  "count_within_tolerance": true,
+  "unknown_cows_estimated": 10,
+  "per_frame_detection_summary": {
+    "mean_visible_detections": 11.910574875798439,
+    "median_visible_detections": 12.0,
+    "p95_visible_detections": 13.0,
+    "max_visible_detections": 14,
+    "note": "Este valor resume detecciones por frame y no se usa como conteo final de animales, porque puede incluir fragmentación temporal u oclusiones."
+  },
+  "known_found": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_missing": [],
+  "known_frame_hits": {
+    "Margarita": 1409,
+    "Maria": 1409,
+    "Marta": 216
+  },
+  "known_hit_ratio": {
+    "Margarita": 1.0,
+    "Maria": 1.0,
+    "Marta": 0.1533002129169624
+  },
+  "known_first_render_frame": {
+    "Margarita": 1,
+    "Maria": 1,
+    "Marta": 632
+  },
+  "known_last_render_frame": {
+    "Margarita": 1409,
+    "Maria": 1409,
+    "Marta": 972
+  },
+  "all_known_together": {
+    "exists": true,
+    "frame_count": 216,
+    "first_render_frame": 631,
+    "last_render_frame": 971
+  },
+  "locked_track_audit": {
+    "labels": {
+      "Margarita": {
+        "present_frames": 1409,
+        "tracked_detection_frames": 1409,
+        "confirmed_reid_frames": 1409,
+        "continuity_follow_frames": 0,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 0,
+        "last_present_frame": 1408,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Maria": {
+        "present_frames": 1409,
+        "tracked_detection_frames": 1409,
+        "confirmed_reid_frames": 1409,
+        "continuity_follow_frames": 0,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 0,
+        "last_present_frame": 1408,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Marta": {
+        "present_frames": 778,
+        "tracked_detection_frames": 778,
+        "confirmed_reid_frames": 216,
+        "continuity_follow_frames": 562,
+        "hold_only_frames": 0,
+        "present_ratio": 0.5521646557842441,
+        "first_present_frame": 631,
+        "last_present_frame": 1408,
+        "long_gap_count_ge_2s": 1,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": [
+          {
+            "start_render_frame": 0,
+            "end_render_frame": 630,
+            "frames": 631,
+            "seconds": 21.05438772105439,
+            "classification": "before_first_detection",
+            "edge_plausible": true,
+            "prev_bbox_edge": null,
+            "next_bbox_edge": {
+              "near_edge": false,
+              "nearest_edge": "top",
+              "nearest_edge_distance_px": 273.0,
+              "edge_margin_px": 54.0
+            }
+          }
+        ]
+      }
+    },
+    "all_known_together": {
+      "exists": true,
+      "frame_count": 778,
+      "first_render_frame": 631,
+      "last_render_frame": 1408,
+      "intervals": [
+        {
+          "start_render_frame": 631,
+          "end_render_frame": 1408,
+          "frames": 778,
+          "seconds": 25.959292625959293
+        }
+      ]
+    }
+  },
+  "locked_track_audit_ok": true,
+  "locked_midframe_gap_count_ge_2s": 0,
+  "known_id_switches_by_design": 0,
+  "ready_for_render_by_automatic_checks": true,
+  "identity_scores": {
+    "Maria": 0.9049553275108337,
+    "Margarita": 0.8800074458122253,
+    "Marta": 0.8614204525947571
+  },
+  "contact_sheet": "cowtrack_contact_sheet.jpg",
+  "candidate_sheet": "cowtrack_candidate_sheet.jpg",
+  "metric_note": "El video se reporta como pieza autónoma con indexación de frames desde 0. El conteo final corresponde al total consolidado del rodeo en el video renderizado. Precision y recall reales por bounding box requieren anotaciones ground truth por frame.",
+  "suppressed_duplicate_known_detections_in_render": 0,
+  "render_stabilization": {
+    "known_bbox_smoothing_alpha": 0.55,
+    "known_smoothing_reset_center_factor": 2.0,
+    "known_hold_frames": 18,
+    "known_reacquire_frames": 75,
+    "known_reacquire_min_iou": 0.08,
+    "known_reacquire_max_center_factor": 0.85,
+    "known_exit_edge_margin_ratio": 0.05,
+    "unknown_suppress_iou_with_known": 0.12,
+    "known_labels_drawn_last": true,
+    "known_label_font_scale": 1.65
+  }
+}

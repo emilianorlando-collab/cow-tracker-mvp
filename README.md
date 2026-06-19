@@ -522,6 +522,8 @@ Render HD con etiquetas priorizadas
 cow-tracker-mvp/
 ├── artifacts/
 │   └── README.md
+├── assets/
+│   └── branding/          logos y recursos oficiales de CowTrack
 ├── mockup/
 │   ├── cowtrack_mockup.py
 │   ├── README.md
@@ -537,6 +539,7 @@ cow-tracker-mvp/
 ├── reports/
 │   ├── final/
 │   ├── intermediate/
+│   ├── mockup/            JSON, PDFs y evidencias de la interfaz web
 │   ├── 01_entrenamiento_crosspose.md
 │   └── 02_evaluacion_faiss.md
 ├── scripts/

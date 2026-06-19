@@ -1,0 +1,344 @@
+[
+  {
+    "run_id": "20260618_010544_1c600c",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_010544_1c600c_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_013703_8390d0",
+    "processed_frames": 1,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_013703_8390d0_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_014413_41ded5",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_014413_41ded5_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_035008_b6af13",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria"
+    ],
+    "known_missing": [
+      "Marta"
+    ],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_035008_b6af13_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_042618_de8425",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_042618_de8425_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_042727_afdf7a",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria"
+    ],
+    "known_missing": [
+      "Marta"
+    ],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_042727_afdf7a_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_042849_4e34b0",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_042849_4e34b0_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_043023_4da7aa",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_043023_4da7aa_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_043252_341e6c",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_043252_341e6c_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_045658_813b1b",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_045658_813b1b_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_051405_2c72af",
+    "processed_frames": 150,
+    "estimated_total_cows": 0,
+    "expected_total_cows": 13,
+    "known_found": [],
+    "known_missing": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "count_accuracy": 0.0,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_051405_2c72af_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_061628_0b9c2d",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria"
+    ],
+    "known_missing": [
+      "Marta"
+    ],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_061628_0b9c2d_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_064656_a66284",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria"
+    ],
+    "known_missing": [
+      "Marta"
+    ],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_064656_a66284_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_131730_3c2119",
+    "processed_frames": 1409,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "known_missing": [],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": true,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_131730_3c2119_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_135714_4ab9d2",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria"
+    ],
+    "known_missing": [
+      "Marta"
+    ],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_135714_4ab9d2_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_140317_b21217",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria"
+    ],
+    "known_missing": [
+      "Marta"
+    ],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": false,
+    "color_rerank_enabled": false,
+    "report_file": "archive/20260618_140317_b21217_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_160003_9ed613",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "known_missing": [],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": true,
+    "color_rerank_enabled": true,
+    "report_file": "archive/20260618_160003_9ed613_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_162456_874e54",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "known_missing": [],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": true,
+    "color_rerank_enabled": true,
+    "report_file": "archive/20260618_162456_874e54_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_172750_eae237",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 20,
+    "known_found": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "known_missing": [],
+    "count_accuracy": 0.7,
+    "ready_for_render": false,
+    "color_rerank_enabled": true,
+    "report_file": "archive/20260618_172750_eae237_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_192923_9c3a4f",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "known_missing": [],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": true,
+    "color_rerank_enabled": true,
+    "report_file": "archive/20260618_192923_9c3a4f_reporte_tecnico.json"
+  },
+  {
+    "run_id": "20260618_fix_reid_color",
+    "processed_frames": 150,
+    "estimated_total_cows": 14,
+    "expected_total_cows": 13,
+    "known_found": [
+      "Margarita",
+      "Maria",
+      "Marta"
+    ],
+    "known_missing": [],
+    "count_accuracy": 0.9230769230769231,
+    "ready_for_render": true,
+    "color_rerank_enabled": true,
+    "report_file": "archive/20260618_fix_reid_color_reporte_tecnico.json"
+  }
+]

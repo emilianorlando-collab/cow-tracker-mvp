@@ -1,0 +1,281 @@
+{
+  "report_type": "cowtrack_final_public_report",
+  "frame_indexing": "zero_based",
+  "video_out": "reidentificacion_2026-06-18.mp4",
+  "processed_frames": 150,
+  "display_frame_range": {
+    "start": 0,
+    "end": 149
+  },
+  "processing_video_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "estimated_total_cows": 14,
+  "estimated_total_cows_method": "visible_cows_p95_per_frame",
+  "expected_total_cows": 13,
+  "count_error": 1,
+  "absolute_count_error": 1,
+  "count_accuracy": 0.9230769230769231,
+  "count_within_tolerance": true,
+  "unknown_cows_estimated": 11,
+  "per_frame_detection_summary": {
+    "mean_visible_detections": 13.133333333333333,
+    "median_visible_detections": 13.0,
+    "p95_visible_detections": 14.0,
+    "max_visible_detections": 14,
+    "note": "Este valor resume detecciones por frame y no se usa como conteo final de animales, porque puede incluir fragmentación temporal u oclusiones."
+  },
+  "known_found": [
+    "Margarita",
+    "Maria",
+    "Marta"
+  ],
+  "known_missing": [],
+  "known_frame_hits": {
+    "Margarita": 150,
+    "Maria": 102,
+    "Marta": 150
+  },
+  "known_hit_ratio": {
+    "Margarita": 1.0,
+    "Maria": 0.68,
+    "Marta": 1.0
+  },
+  "known_first_render_frame": {
+    "Margarita": 1,
+    "Maria": 36,
+    "Marta": 1
+  },
+  "known_last_render_frame": {
+    "Margarita": 150,
+    "Maria": 150,
+    "Marta": 150
+  },
+  "all_known_together": {
+    "exists": true,
+    "frame_count": 102,
+    "first_render_frame": 35,
+    "last_render_frame": 149
+  },
+  "locked_track_audit": {
+    "labels": {
+      "Margarita": {
+        "present_frames": 150,
+        "tracked_detection_frames": 150,
+        "confirmed_reid_frames": 150,
+        "continuity_follow_frames": 0,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 0,
+        "last_present_frame": 149,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Maria": {
+        "present_frames": 115,
+        "tracked_detection_frames": 115,
+        "confirmed_reid_frames": 102,
+        "continuity_follow_frames": 13,
+        "hold_only_frames": 0,
+        "present_ratio": 0.7666666666666667,
+        "first_present_frame": 35,
+        "last_present_frame": 149,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      },
+      "Marta": {
+        "present_frames": 150,
+        "tracked_detection_frames": 150,
+        "confirmed_reid_frames": 150,
+        "continuity_follow_frames": 0,
+        "hold_only_frames": 0,
+        "present_ratio": 1.0,
+        "first_present_frame": 0,
+        "last_present_frame": 149,
+        "long_gap_count_ge_2s": 0,
+        "midframe_long_gap_count_ge_2s": 0,
+        "long_gaps_ge_2s": []
+      }
+    },
+    "all_known_together": {
+      "exists": true,
+      "frame_count": 115,
+      "first_render_frame": 35,
+      "last_render_frame": 149,
+      "intervals": [
+        {
+          "start_render_frame": 35,
+          "end_render_frame": 149,
+          "frames": 115,
+          "seconds": 3.8371705038371706
+        }
+      ]
+    }
+  },
+  "locked_track_audit_ok": true,
+  "locked_midframe_gap_count_ge_2s": 0,
+  "known_id_switches_by_design": 0,
+  "ready_for_render_by_automatic_checks": true,
+  "identity_scores": {
+    "Marta": 0.8392268257202689,
+    "Margarita": 0.8855075743622026,
+    "Maria": 0.9046065864643493
+  },
+  "contact_sheet": "capturas_reidentificacion.jpg",
+  "candidate_sheet": "candidatos_tecnicos.jpg",
+  "metric_note": "El video se reporta como pieza autónoma con indexación de frames desde 0. El conteo final corresponde al total consolidado del rodeo en el video renderizado. Precision y recall reales por bounding box requieren anotaciones ground truth por frame.",
+  "suppressed_duplicate_known_detections_in_render": 0,
+  "render_stabilization": {
+    "known_bbox_smoothing_alpha": 0.55,
+    "known_smoothing_reset_center_factor": 2.0,
+    "known_hold_frames": 18,
+    "known_reacquire_frames": 75,
+    "known_reacquire_min_iou": 0.08,
+    "known_reacquire_max_center_factor": 0.85,
+    "known_exit_edge_margin_ratio": 0.05,
+    "unknown_suppress_iou_with_known": 0.12,
+    "known_labels_drawn_last": true,
+    "known_label_font_scale": 1.65
+  },
+  "color_rerank": {
+    "enabled": true,
+    "weight": 0.18,
+    "diagnostics": {
+      "Margarita": [
+        {
+          "global_id": 7,
+          "source_local_track_id": 7,
+          "embedding_score": 0.8326244950294495,
+          "color_similarity": 0.7937948851819621,
+          "adjusted_score": 0.8855075743622026
+        },
+        {
+          "global_id": 1,
+          "source_local_track_id": 1,
+          "embedding_score": 0.7945681810379028,
+          "color_similarity": 0.7931372484117292,
+          "adjusted_score": 0.847332885752014
+        },
+        {
+          "global_id": 6,
+          "source_local_track_id": 6,
+          "embedding_score": 0.8736671209335327,
+          "color_similarity": 0.21892029875572727,
+          "adjusted_score": 0.8230727747095636
+        },
+        {
+          "global_id": 12,
+          "source_local_track_id": 12,
+          "embedding_score": 0.8505359888076782,
+          "color_similarity": 0.15761144246760073,
+          "adjusted_score": 0.7889060484518463
+        },
+        {
+          "global_id": 10,
+          "source_local_track_id": 10,
+          "embedding_score": 0.846433162689209,
+          "color_similarity": 0.11226512764115071,
+          "adjusted_score": 0.7766408856646161
+        },
+        {
+          "global_id": 4,
+          "source_local_track_id": 4,
+          "embedding_score": 0.7465546131134033,
+          "color_similarity": 0.6506000517259156,
+          "adjusted_score": 0.7736626224240681
+        }
+      ],
+      "Maria": [
+        {
+          "global_id": 15,
+          "source_local_track_id": 17,
+          "embedding_score": 0.8871507048606873,
+          "color_similarity": 0.5969771200203449,
+          "adjusted_score": 0.9046065864643493
+        },
+        {
+          "global_id": 8,
+          "source_local_track_id": 8,
+          "embedding_score": 0.8555158376693726,
+          "color_similarity": 0.7118322460576145,
+          "adjusted_score": 0.8936456419597432
+        },
+        {
+          "global_id": 3,
+          "source_local_track_id": 3,
+          "embedding_score": 0.8600416779518127,
+          "color_similarity": 0.656547151174909,
+          "adjusted_score": 0.8882201651632964
+        },
+        {
+          "global_id": 2,
+          "source_local_track_id": 2,
+          "embedding_score": 0.7875426411628723,
+          "color_similarity": 0.7044136747402316,
+          "adjusted_score": 0.824337102616114
+        },
+        {
+          "global_id": 4,
+          "source_local_track_id": 4,
+          "embedding_score": 0.7978904247283936,
+          "color_similarity": 0.4857455861425388,
+          "adjusted_score": 0.7953246302340505
+        },
+        {
+          "global_id": 7,
+          "source_local_track_id": 7,
+          "embedding_score": 0.7995196580886841,
+          "color_similarity": 0.46675053678365497,
+          "adjusted_score": 0.793534754709742
+        }
+      ],
+      "Marta": [
+        {
+          "global_id": 7,
+          "source_local_track_id": 7,
+          "embedding_score": 0.7979024648666382,
+          "color_similarity": 0.8560851092374049,
+          "adjusted_score": 0.861997784529371
+        },
+        {
+          "global_id": 6,
+          "source_local_track_id": 6,
+          "embedding_score": 0.8563541769981384,
+          "color_similarity": 0.40484804845627986,
+          "adjusted_score": 0.8392268257202689
+        },
+        {
+          "global_id": 11,
+          "source_local_track_id": 11,
+          "embedding_score": 0.8163825869560242,
+          "color_similarity": 0.2679793126087625,
+          "adjusted_score": 0.7746188632256015
+        },
+        {
+          "global_id": 12,
+          "source_local_track_id": 12,
+          "embedding_score": 0.7923810482025146,
+          "color_similarity": 0.3462436901094822,
+          "adjusted_score": 0.7647049124222215
+        },
+        {
+          "global_id": 14,
+          "source_local_track_id": 14,
+          "embedding_score": 0.796242892742157,
+          "color_similarity": 0.300538138727092,
+          "adjusted_score": 0.7603397577130335
+        },
+        {
+          "global_id": 9,
+          "source_local_track_id": 9,
+          "embedding_score": 0.7653322219848633,
+          "color_similarity": 0.13824879461803208,
+          "adjusted_score": 0.7002170050161091
+        }
+      ]
+    }
+  }
+}
