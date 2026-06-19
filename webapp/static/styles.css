@@ -355,6 +355,7 @@ textarea { min-height: 120px; resize: vertical; }
 .offer-card h2, .login-card h2, .message-card h2 { margin-top: 16px; font-size: 28px; }
 .offer-card p, .login-card p, .message-card p { margin-top: 12px; }
 .offer-actions, .social-row, .report-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
 .login-card { display: grid; gap: 12px; }
 .login-card img { width: 180px; height: auto; }
 .social-row { display: grid; grid-template-columns: 1fr 1fr; }

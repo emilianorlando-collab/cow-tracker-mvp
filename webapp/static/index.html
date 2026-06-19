@@ -297,8 +297,8 @@
         <img src="/static/cowtrack-logo-dark.svg" alt="CowTrack" />
         <h2>Ingresar a CowTrack</h2>
         <p>Accedé a tu panel para procesar videos, consultar reportes y administrar tu galería de vacas.</p>
-        <input name="username" placeholder="Usuario" value="admin" required />
-        <input name="password" placeholder="Contraseña" type="password" value="admin" required />
+        <input name="username" placeholder="Usuario" required />
+        <input name="password" placeholder="Contraseña" type="password" required />
         <button class="primary" type="submit">Iniciar sesión</button>
         <button id="registerOpen" class="secondary" type="button">Crear usuario nuevo</button>
       </form>
@@ -311,8 +311,8 @@
         <h2>Crear usuario</h2>
         <p>Alta local para probar el flujo completo.</p>
         <div class="social-row">
-          <button class="social-button google" type="button" data-social="Google"><span>G</span> Continuar con Google</button>
-          <button class="social-button apple" type="button" data-social="Apple"><span></span> Continuar con Mac</button>
+          <button class="social-button google" type="button" data-oauth="google"><span>G</span> Continuar con Google</button>
+          <button class="social-button apple" type="button" data-oauth="apple"><span></span> Continuar con Apple</button>
         </div>
         <input name="name" placeholder="Nombre completo" required />
         <input name="email" placeholder="Email" type="email" />
@@ -328,7 +328,10 @@
         <span id="messageKicker" class="pill">CowTrack</span>
         <h2 id="messageTitle">Mensaje</h2>
         <p id="messageText"></p>
-        <button id="messageOk" class="primary" type="button">Entendido</button>
+        <div class="modal-actions">
+          <button id="messageCancel" class="secondary hidden" type="button">Cancelar</button>
+          <button id="messageOk" class="primary" type="button">Entendido</button>
+        </div>
       </div>
     </div>
 
@@ -336,11 +339,9 @@
       <form id="telegramForm" class="message-card telegram-card">
         <button type="button" id="telegramClose" class="modal-close">×</button>
         <span class="telegram-mark">Telegram</span>
-        <h2>Enviar reporte</h2>
-        <p>Ingresá los datos de tu bot para recibir el informe operativo de CowTrack.</p>
-        <input name="telegram_token" placeholder="Token del bot" required />
-        <input name="telegram_chat_id" placeholder="Chat ID" required />
-        <button class="primary telegram-button" type="submit"><span class="plane-icon"></span>Enviar por Telegram</button>
+        <h2>Compartir reporte</h2>
+        <p>Abriremos Telegram con el resumen preparado. Solo elegí el contacto o grupo y confirmá el envío.</p>
+        <button class="primary telegram-button" type="submit"><span class="plane-icon"></span>Abrir Telegram</button>
       </form>
     </div>
 

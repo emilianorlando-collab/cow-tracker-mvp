@@ -5,6 +5,7 @@ let dashboardData = { catalog: [], reports: [], state: {} };
 let statusTimer = null;
 let currentUser = null;
 let metricMode = "general";
+let messageOnAccept = null;
 
 async function api(path, options = {}) {
   const response = await fetch(path, { credentials: "same-origin", ...options });
@@ -16,14 +17,30 @@ async function api(path, options = {}) {
 function formData(form) { return new FormData(form); }
 function todaySlug() { return new Date().toISOString().slice(0, 10); }
 
-function showMessage(title, text, kicker = "CowTrack") {
+function showMessage(title, text, kicker = "CowTrack", onAccept = null) {
   $("#messageKicker").textContent = kicker;
   $("#messageTitle").textContent = title;
   $("#messageText").textContent = text;
+  $("#messageOk").textContent = "Entendido";
+  $("#messageCancel").classList.add("hidden");
+  messageOnAccept = onAccept;
   $("#messageModal").classList.remove("hidden");
 }
 
-function hideMessage() { $("#messageModal").classList.add("hidden"); }
+function showConfirmation(title, text, onAccept) {
+  showMessage(title, text, "Confirmación", onAccept);
+  $("#messageOk").textContent = "Confirmar";
+  $("#messageCancel").classList.remove("hidden");
+}
+
+function hideMessage(accepted = false) {
+  $("#messageModal").classList.add("hidden");
+  const callback = messageOnAccept;
+  messageOnAccept = null;
+  if (accepted && callback) {
+    Promise.resolve(callback()).catch((error) => showMessage("No se pudo completar la acción", error.message));
+  }
+}
 function openLogin() { $("#loginModal").classList.remove("hidden"); }
 function closeLogin() { $("#loginModal").classList.add("hidden"); }
 function openRegister() { closeLogin(); $("#registerModal").classList.remove("hidden"); }
@@ -439,8 +456,14 @@ function renderSupport() {
   `;
   $("#supportForm").addEventListener("submit", async (event) => {
     event.preventDefault();
-    showMessage("Solicitud registrada", "El pedido de soporte quedó registrado y asociado a tu usuario.");
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    const result = await api("/api/support", { method: "POST", body: formData(form) });
+    showMessage(
+      "Solicitud registrada",
+      `El pedido ${result.ticket_id} quedó registrado y asociado a tu usuario.`,
+      "Soporte CowTrack",
+      () => form.reset(),
+    );
   });
 }
 
@@ -487,10 +510,17 @@ async function saveCow(event) {
 }
 
 async function deleteCow(name) {
-  const body = new URLSearchParams({ cow_name: name });
-  await api("/api/catalog/delete", { method: "POST", body });
-  await loadDashboard();
-  setView("catalogo");
+  showConfirmation(
+    "Eliminar identidad",
+    `¿Confirmás que querés eliminar a ${name} del catálogo y de la galería de reidentificación?`,
+    async () => {
+      const body = new URLSearchParams({ cow_name: name });
+      await api("/api/catalog/delete", { method: "POST", body });
+      await loadDashboard();
+      setView("catalogo");
+      showMessage("Identidad eliminada", `${name} dejó de participar en los próximos análisis.`);
+    },
+  );
 }
 
 async function resetAnalysis() {
@@ -547,10 +577,18 @@ async function updateStatus() {
 
 async function sendTelegram(event) {
   event.preventDefault();
-  const body = new URLSearchParams(new FormData(event.currentTarget));
+  const telegramWindow = window.open("about:blank", "cowtrack_telegram");
+  const body = new URLSearchParams();
   const result = await api("/api/telegram", { method: "POST", body });
   closeTelegram();
-  showMessage("Telegram actualizado", result.message || "El reporte fue enviado correctamente.");
+  if (result.mode === "share" && result.share_url) {
+    if (telegramWindow) telegramWindow.location.href = result.share_url;
+    else window.location.href = result.share_url;
+    showMessage("Reporte preparado", result.message);
+  } else {
+    if (telegramWindow) telegramWindow.close();
+    showMessage("Reporte enviado", result.message || "El reporte fue enviado correctamente.");
+  }
 }
 
 function bindFileControls() {
@@ -580,21 +618,30 @@ async function boot() {
   $("#registerOpen").addEventListener("click", openRegister);
   $("#registerClose").addEventListener("click", closeRegister);
   $("#dashboardOpen").addEventListener("click", async () => { await loadDashboard(); showDashboard(); });
-  $("#messageClose").addEventListener("click", hideMessage);
-  $("#messageOk").addEventListener("click", hideMessage);
+  $("#messageClose").addEventListener("click", () => hideMessage(false));
+  $("#messageCancel").addEventListener("click", () => hideMessage(false));
+  $("#messageOk").addEventListener("click", () => hideMessage(true));
   $("#telegramClose").addEventListener("click", closeTelegram);
   $("#telegramForm").addEventListener("submit", sendTelegram);
-  $$("[data-social]").forEach((btn) => btn.addEventListener("click", async () => {
-    const body = new URLSearchParams({ provider: btn.dataset.social });
-    const result = await api("/api/social_login", { method: "POST", body });
-    currentUser = result.user;
-    closeRegister();
-    await loadDashboard();
-    showDashboard();
+  $$("[data-oauth]").forEach((btn) => btn.addEventListener("click", async () => {
+    const provider = btn.dataset.oauth;
+    const config = await api("/api/oauth/config");
+    if (!config[provider]) {
+      showMessage(
+        "Acceso externo pendiente de configuración",
+        provider === "apple"
+          ? "Apple exige una cuenta Apple Developer, un Services ID y un dominio HTTPS asociado. La aplicación ya admite el flujo real cuando esas credenciales se configuran en el servidor."
+          : "Google exige registrar CowTrack en Google Cloud y configurar las credenciales OAuth del servidor. La aplicación ya admite el flujo real una vez cargadas.",
+        provider === "apple" ? "Apple" : "Google",
+      );
+      return;
+    }
+    window.location.href = `/auth/${provider}`;
   }));
   $("#logoutButton").addEventListener("click", async () => {
     await api("/api/logout", { method: "POST" });
     currentUser = null;
+    history.replaceState({}, "", `${window.location.pathname}#home`);
     showPublicPage("home");
   });
   $("#resetButton").addEventListener("click", resetAnalysis);
@@ -617,9 +664,9 @@ async function boot() {
   });
   $("#contactForm").addEventListener("submit", async (event) => {
     event.preventDefault();
-    const data = await api("/api/contact", { method: "POST", body: formData(event.currentTarget) });
-    showMessage("Consulta recibida", data.message);
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    const data = await api("/api/contact", { method: "POST", body: formData(form) });
+    showMessage("Consulta recibida", data.message, "CowTrack", () => form.reset());
   });
   const session = await api("/api/session");
   if (session.authenticated) {
@@ -629,8 +676,22 @@ async function boot() {
     const view = document.getElementById(`view-${hashView}`) ? hashView : "overview";
     showDashboard(view);
   } else {
-    showPublicPage((window.location.hash || "#home").replace("#", ""));
+    const requestedPage = (window.location.hash || "#home").replace("#", "");
+    const publicPage = requestedPage.startsWith("dashboard-") ? "home" : requestedPage;
+    if (publicPage !== requestedPage) history.replaceState({}, "", `${window.location.pathname}#home`);
+    showPublicPage(publicPage);
     maybeShowIntro();
+  }
+  const oauthError = new URLSearchParams(window.location.search).get("oauth_error");
+  if (oauthError) {
+    showMessage(
+      "No se pudo iniciar sesión",
+      oauthError.includes("not_configured")
+        ? "La integración externa todavía no tiene las credenciales del proveedor configuradas en este equipo."
+        : "La validación de seguridad del proveedor venció o fue rechazada. Volvé a intentarlo.",
+      "Acceso seguro",
+    );
+    history.replaceState({}, "", `${window.location.pathname}${window.location.hash || "#home"}`);
   }
 }
 

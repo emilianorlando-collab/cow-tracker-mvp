@@ -580,9 +580,10 @@ Luego abrir:
 http://127.0.0.1:7860
 ```
 
-La aplicación web incluye landing comercial, login local, dashboard
-de usuario, catálogo de vacas, ejecución del pipeline, reporte amigable e
-historial local en el disco T7.
+La aplicación web incluye landing comercial, login local y OAuth configurable,
+dashboard de usuario, catálogo con regeneración real de embeddings, ejecución
+del pipeline, informes PDF con identidad CowTrack, envío simplificado mediante
+Telegram e historial local en el disco T7.
 
 ### Entrenamiento Re-ID
 
@@ -696,9 +697,12 @@ El MVP está completo, pero el escenario real tiene limitaciones importantes:
   etiqueta.
 - El conteo global queda resuelto para el video final, aunque su robustez debe
   validarse con más videos de campo, más ángulos y mayor variabilidad de rodeo.
-- El prototipo funcional ya cuenta con una aplicación web local completa, pero puede
-  evolucionar hacia autenticación real, multiusuario productivo y despliegue en
-  servidor.
+- El prototipo funcional implementa autenticación federada real, pero Google y
+  Apple requieren credenciales oficiales y URI de retorno registradas por el
+  responsable del despliegue. Apple exige además una membresía Developer y un
+  dominio HTTPS verificado.
+- La persistencia multiusuario actual está orientada a demostración local; una
+  versión productiva requerirá una base de datos y despliegue en servidor.
 
 Estas limitaciones no invalidan el MVP. Son el punto de partida natural para
 una fase futura de optimización, validación con más videos y eventual

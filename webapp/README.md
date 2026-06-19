@@ -45,3 +45,19 @@ Carpetas principales:
 4. Ejecutar `Reidentificar / Conteo`.
 5. Ver el progreso del procesamiento en tiempo real.
 6. Consultar el reporte amigable y enviarlo por Telegram.
+
+Al agregar o eliminar una identidad, la aplicación reconstruye la galería de embeddings del usuario. Los análisis siguientes consumen esa galería y no un estado visual simulado.
+
+## Integraciones externas
+
+Copiar `webapp/.env.example` como `webapp/.env` y completar solamente las integraciones que se utilizarán. El archivo `.env` es local y no se publica en Git.
+
+Para Google se debe crear una credencial OAuth de tipo **Aplicación web** y registrar exactamente esta URI de retorno:
+
+```text
+http://127.0.0.1:7860/auth/google/callback
+```
+
+Apple exige una membresía Apple Developer, un Services ID asociado a una aplicación y un dominio HTTPS verificado. Su URI de retorno es `/auth/apple/callback` sobre el dominio público configurado en `COWTRACK_PUBLIC_URL`.
+
+Telegram no necesita configuración: CowTrack abre la pantalla oficial para elegir destinatario. El token y el chat ID son opcionales y solo se usan si se desea un envío automático desde el servidor.

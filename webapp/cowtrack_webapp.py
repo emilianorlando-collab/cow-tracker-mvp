@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import cgi
+import base64
 import html
 import json
 import mimetypes
@@ -26,6 +27,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 WEBAPP_DIR = REPO_ROOT / "webapp"
 STATIC_DIR = WEBAPP_DIR / "static"
 PIPELINE_SCRIPT = REPO_ROOT / "scripts" / "16_reid_timeline_erondina.py"
+USER_GALLERY_SCRIPT = REPO_ROOT / "scripts" / "17_crear_galeria_usuario.py"
+REID_MODEL = REPO_ROOT / "models" / "mi_modelo_reid.pt"
+BASE_IDENTITY_GALLERY = REPO_ROOT / "models" / "erondina_gallery_embeddings_enfocada_filtrada.npz"
 
 T7_ROOT = Path("/Volumes/T7/cow-tracker-mvp")
 T7_WEBAPP = T7_ROOT / "webapp"
@@ -39,12 +43,27 @@ REAL_REPORT = REPO_ROOT / "app" / "runs" / "20260617_201441_cad968e6" / "cowtrac
 REAL_CONTACT = REPO_ROOT / "app" / "runs" / "20260617_201441_cad968e6" / "cowtrack_contact_sheet.jpg"
 REAL_VIDEO = T7_ROOT / "datos" / "Resultado final" / "RESULTADO_COWTRACK.mp4"
 DEFAULT_PIPELINE_PYTHON = T7_ROOT / ".venv" / "bin" / "python3"
+LOCAL_ENV_FILE = WEBAPP_DIR / ".env"
 ADMIN_COVER_SOURCES = {
     "Marta": T7_ROOT / "datos" / "erondina_reid" / "Marta" / "galeria" / "Captura de pantalla 2026-06-01 a las 2.47.26 p. m..png",
 }
 
+def load_local_env() -> None:
+    if not LOCAL_ENV_FILE.exists():
+        return
+    for raw_line in LOCAL_ENV_FILE.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+load_local_env()
+
 USERS = {"admin": {"password": "admin", "name": "admin", "role": "Administrador"}}
 SESSIONS: dict[str, str] = {}
+OAUTH_STATES: dict[str, tuple[str, float]] = {}
 
 
 @dataclass
@@ -103,7 +122,9 @@ def seed_admin_data() -> None:
         ("Maria", "Vaca negra", "Identidad catalogada para seguimiento individual."),
         ("Marta", "Vaca castaña", "Identidad catalogada para seguimiento individual."),
     ]
-    for name, phenotype, note in cows:
+    seed_marker = admin_dir / ".catalog_initialized"
+    should_seed_catalog = not seed_marker.exists()
+    for name, phenotype, note in cows if should_seed_catalog else []:
         cow_dir = catalog_dir / name
         cow_dir.mkdir(parents=True, exist_ok=True)
         cover_source = ADMIN_COVER_SOURCES.get(name)
@@ -121,6 +142,8 @@ def seed_admin_data() -> None:
         current = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
         current.update(metadata)
         meta_path.write_text(json.dumps(current, ensure_ascii=False, indent=2), encoding="utf-8")
+    if should_seed_catalog:
+        seed_marker.write_text("CowTrack admin catalog initialized\n", encoding="utf-8")
 
     report_dir = REPORTS_WEBAPP_DIR / "admin"
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -160,6 +183,20 @@ def text_response(handler: BaseHTTPRequestHandler, text: str, status: int = 200)
     handler.send_header("Content-Length", str(len(raw)))
     handler.end_headers()
     handler.wfile.write(raw)
+
+
+def redirect_response(
+    handler: BaseHTTPRequestHandler,
+    location: str,
+    cookie: str | None = None,
+    status: int = 303,
+) -> None:
+    handler.send_response(status)
+    handler.send_header("Location", location)
+    if cookie:
+        handler.send_header("Set-Cookie", cookie)
+    handler.send_header("Content-Length", "0")
+    handler.end_headers()
 
 
 def parse_cookies(handler: BaseHTTPRequestHandler) -> dict[str, str]:
@@ -217,6 +254,118 @@ def read_form(handler: BaseHTTPRequestHandler) -> dict:
 def safe_name(value: str) -> str:
     cleaned = re.sub(r"[^A-Za-z0-9ÁÉÍÓÚáéíóúÑñ _-]+", "", value).strip()
     return cleaned or "Sin nombre"
+
+
+def oauth_redirect_uri(provider: str) -> str:
+    base = os.getenv("COWTRACK_PUBLIC_URL", "http://127.0.0.1:7860").rstrip("/")
+    return f"{base}/auth/{provider}/callback"
+
+
+def oauth_config() -> dict[str, bool]:
+    return {
+        "google": bool(os.getenv("COWTRACK_GOOGLE_CLIENT_ID") and os.getenv("COWTRACK_GOOGLE_CLIENT_SECRET")),
+        "apple": bool(
+            os.getenv("COWTRACK_APPLE_CLIENT_ID")
+            and os.getenv("COWTRACK_APPLE_CLIENT_SECRET")
+        ),
+    }
+
+
+def oauth_state(provider: str) -> str:
+    state = uuid.uuid4().hex
+    OAUTH_STATES[state] = (provider, time.time() + 600)
+    return state
+
+
+def consume_oauth_state(state: str, provider: str) -> bool:
+    stored = OAUTH_STATES.pop(state, None)
+    return bool(stored and stored[0] == provider and stored[1] >= time.time())
+
+
+def post_urlencoded(url: str, payload: dict[str, str]) -> dict:
+    request = urllib.request.Request(
+        url,
+        data=urllib.parse.urlencode(payload).encode("utf-8"),
+        headers={"Accept": "application/json"},
+    )
+    with urllib.request.urlopen(request, timeout=25) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def jwt_payload(token: str) -> dict:
+    parts = token.split(".")
+    if len(parts) != 3:
+        raise ValueError("El proveedor no devolvió una identidad válida.")
+    payload = parts[1] + "=" * (-len(parts[1]) % 4)
+    return json.loads(base64.urlsafe_b64decode(payload).decode("utf-8"))
+
+
+def create_social_session(handler: BaseHTTPRequestHandler, provider: str, identity: dict) -> None:
+    subject = str(identity.get("sub") or "")
+    email = str(identity.get("email") or "")
+    if not subject:
+        raise ValueError("El proveedor no devolvió un identificador de usuario.")
+    username = safe_name(email.split("@")[0] if email else f"{provider}_{subject[:10]}").replace(" ", "_")
+    if username in USERS and USERS[username].get("provider_subject") not in (None, subject):
+        username = f"{username}_{subject[:6]}"
+    USERS[username] = {
+        "password": "",
+        "name": str(identity.get("name") or email or username),
+        "email": email,
+        "role": "Productor",
+        "provider": provider,
+        "provider_subject": subject,
+    }
+    (USER_DATA_DIR / username / "catalog").mkdir(parents=True, exist_ok=True)
+    (REPORTS_WEBAPP_DIR / username).mkdir(parents=True, exist_ok=True)
+    token = uuid.uuid4().hex
+    SESSIONS[token] = username
+    redirect_response(
+        handler,
+        "/#dashboard-overview",
+        f"cowtrack_session={token}; Path=/; HttpOnly; SameSite=Lax",
+    )
+
+
+def user_gallery_path(username: str) -> Path:
+    return USER_DATA_DIR / username / "gallery_embeddings.npz"
+
+
+def rebuild_user_gallery(username: str) -> dict:
+    catalog_dir = USER_DATA_DIR / username / "catalog"
+    identities = [path for path in catalog_dir.iterdir() if path.is_dir()]
+    gallery_path = user_gallery_path(username)
+    report_path = USER_DATA_DIR / username / "gallery_report.json"
+    if not identities:
+        gallery_path.unlink(missing_ok=True)
+        report_path.unlink(missing_ok=True)
+        return {"identities": [], "embedding_count": 0}
+
+    command = [
+        pipeline_python(),
+        str(USER_GALLERY_SCRIPT),
+        "--catalog_dir",
+        str(catalog_dir),
+        "--model_path",
+        str(REID_MODEL),
+        "--base_gallery",
+        str(BASE_IDENTITY_GALLERY),
+        "--output",
+        str(gallery_path),
+        "--report_out",
+        str(report_path),
+    ]
+    result = subprocess.run(command, capture_output=True, text=True, timeout=180)
+    if result.returncode != 0:
+        detail = (result.stderr or result.stdout or "Error desconocido").strip().splitlines()[-1]
+        raise RuntimeError(f"No se pudieron generar los embeddings: {detail}")
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    for identity_dir in identities:
+        metadata_path = identity_dir / "metadata.json"
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8")) if metadata_path.exists() else {}
+        metadata["embedding_status"] = "disponible"
+        metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+    return report
 
 
 def save_upload_file(field, dest_dir: Path, fallback_name: str) -> Path | None:
@@ -393,6 +542,12 @@ def send_telegram(text: str, token: str, chat_id: str) -> tuple[bool, str]:
         return False, str(exc)
 
 
+def telegram_share_url(entry: dict) -> str:
+    return "https://t.me/share/url?" + urllib.parse.urlencode(
+        {"url": "", "text": telegram_text(entry)}
+    )
+
+
 def update_state(**kwargs) -> None:
     with STATE_LOCK:
         for key, value in kwargs.items():
@@ -518,6 +673,9 @@ def build_command(form: dict, username: str, run_dir: Path) -> tuple[list[str], 
         str(max(2, round(expected_total * 0.20))),
         "--render",
     ]
+    gallery_path = user_gallery_path(username)
+    if gallery_path.exists():
+        cmd.extend(["--identity_gallery", str(gallery_path)])
     if max_frames > 0:
         cmd.extend(["--max_frames", str(max_frames)])
     if fast_demo:
@@ -665,12 +823,14 @@ def make_report_pdf(entry: dict) -> bytes:
         return y
 
     rect(0, 782, 612, 60, "#f2f7f1")
-    rect(46, 768, 38, 38, "#36a856")
-    text(57, 779, "C", 22, "F2", "#ffffff")
-    stream_lines.append(f"q {color('#66d978')} rg 49 809 19 8 re f Q")
-    stream_lines.append(f"q {color('#2ba657')} rg 66 812 22 8 re f Q")
-    text(96, 783, "CowTrack", 25, "F2", "#18211d")
-    text(96, 768, "Informe ejecutivo de conteo y reidentificación ganadera", 9, "F1", "#6f766f")
+    logo_path = STATIC_DIR / "cowtrack-logo-pdf.jpg"
+    logo_bytes = logo_path.read_bytes() if logo_path.exists() else b""
+    if logo_bytes:
+        stream_lines.append("q 174 0 0 42 42 790 cm /Logo Do Q")
+    else:
+        text(46, 795, "CowTrack", 25, "F2", "#18211d")
+    text(232, 798, "Informe ejecutivo", 12, "F2", "#18211d")
+    text(232, 782, "Conteo y reidentificación ganadera", 9, "F1", "#6f766f")
 
     text(46, 730, entry.get("title", "Conteo diario CowTrack"), 20, "F2", "#18211d")
     text(46, 708, f"Fecha: {entry.get('date', '-')}", 10, "F1", "#6f766f")
@@ -718,7 +878,9 @@ def make_report_pdf(entry: dict) -> bytes:
     y -= 16
     text(46, y, f"Resolución procesada: {size.get('width', '-')} x {size.get('height', '-')}", 10, "F1", "#4f5d55")
     y -= 16
-    text(46, y, f"Detecciones visibles promedio: {visible.get('mean_visible_detections', '-')}", 10, "F1", "#4f5d55")
+    visible_mean = visible.get("mean_visible_detections")
+    visible_text = f"{float(visible_mean):.2f}" if visible_mean is not None else "-"
+    text(46, y, f"Detecciones visibles promedio: {visible_text}", 10, "F1", "#4f5d55")
 
     y -= 34
     text(46, y, "Conclusión", 14, "F2", "#18211d")
@@ -733,12 +895,21 @@ def make_report_pdf(entry: dict) -> bytes:
     text(46, 24, "CowTrack · Inteligencia artificial aplicada al control de stock ganadero", 8, "F1", "#6f766f")
 
     stream = "\n".join(stream_lines).encode("latin-1", errors="replace")
+    image_object = (
+        b"<< /Type /XObject /Subtype /Image /Width 620 /Height 150 "
+        b"/ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "
+        + str(len(logo_bytes)).encode("ascii")
+        + b" >>\nstream\n"
+        + logo_bytes
+        + b"\nendstream"
+    )
     objects = [
         b"<< /Type /Catalog /Pages 2 0 R >>",
         b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>",
+        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> /XObject << /Logo 6 0 R >> >> /Contents 7 0 R >>",
         b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>",
         b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>",
+        image_object,
         b"<< /Length " + str(len(stream)).encode("ascii") + b" >>\nstream\n" + stream + b"\nendstream",
     ]
     pdf = bytearray(b"%PDF-1.4\n")
@@ -787,6 +958,51 @@ class Handler(BaseHTTPRequestHandler):
             self.serve_file(T7_WEBAPP / urllib.parse.unquote(path.removeprefix("/webapp-files/")))
         elif path.startswith("/cowtrack-files/"):
             self.serve_file(T7_ROOT / urllib.parse.unquote(path.removeprefix("/cowtrack-files/")))
+        elif path == "/auth/google":
+            if not oauth_config()["google"]:
+                redirect_response(self, "/?oauth_error=google_not_configured#home")
+                return
+            params = {
+                "client_id": os.environ["COWTRACK_GOOGLE_CLIENT_ID"],
+                "response_type": "code",
+                "scope": "openid email profile",
+                "redirect_uri": oauth_redirect_uri("google"),
+                "state": oauth_state("google"),
+                "prompt": "select_account",
+            }
+            redirect_response(self, "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode(params))
+        elif path == "/auth/google/callback":
+            query = urllib.parse.parse_qs(parsed.query)
+            state = str((query.get("state") or [""])[0])
+            code = str((query.get("code") or [""])[0])
+            if not code or not consume_oauth_state(state, "google"):
+                redirect_response(self, "/?oauth_error=invalid_state#home")
+                return
+            token_data = post_urlencoded(
+                "https://oauth2.googleapis.com/token",
+                {
+                    "code": code,
+                    "client_id": os.environ["COWTRACK_GOOGLE_CLIENT_ID"],
+                    "client_secret": os.environ["COWTRACK_GOOGLE_CLIENT_SECRET"],
+                    "redirect_uri": oauth_redirect_uri("google"),
+                    "grant_type": "authorization_code",
+                },
+            )
+            identity = jwt_payload(str(token_data.get("id_token") or ""))
+            create_social_session(self, "google", identity)
+        elif path == "/auth/apple":
+            if not oauth_config()["apple"]:
+                redirect_response(self, "/?oauth_error=apple_not_configured#home")
+                return
+            params = {
+                "client_id": os.environ["COWTRACK_APPLE_CLIENT_ID"],
+                "response_type": "code id_token",
+                "response_mode": "form_post",
+                "scope": "name email",
+                "redirect_uri": oauth_redirect_uri("apple"),
+                "state": oauth_state("apple"),
+            }
+            redirect_response(self, "https://appleid.apple.com/auth/authorize?" + urllib.parse.urlencode(params))
         elif path == "/api/session":
             username = current_user(self)
             json_response(self, {"authenticated": bool(username), "user": username, "profile": USERS.get(username or "", {})})
@@ -796,6 +1012,8 @@ class Handler(BaseHTTPRequestHandler):
                 json_response(self, {"catalog": catalog(username), "reports": reports_history(username), "state": state_payload()})
         elif path == "/api/status":
             json_response(self, state_payload())
+        elif path == "/api/oauth/config":
+            json_response(self, oauth_config())
         elif path == "/api/report_pdf":
             username = require_user(self)
             if username:
@@ -811,7 +1029,31 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802
         parsed = urllib.parse.urlparse(self.path)
         try:
-            if parsed.path == "/api/login":
+            if parsed.path == "/auth/apple/callback":
+                form = read_form(self)
+                state = str(form.get("state") or "")
+                code = str(form.get("code") or "")
+                if not code or not consume_oauth_state(state, "apple"):
+                    redirect_response(self, "/?oauth_error=invalid_state#home")
+                    return
+                token_data = post_urlencoded(
+                    "https://appleid.apple.com/auth/token",
+                    {
+                        "code": code,
+                        "client_id": os.environ["COWTRACK_APPLE_CLIENT_ID"],
+                        "client_secret": os.environ["COWTRACK_APPLE_CLIENT_SECRET"],
+                        "redirect_uri": oauth_redirect_uri("apple"),
+                        "grant_type": "authorization_code",
+                    },
+                )
+                identity = jwt_payload(str(token_data.get("id_token") or form.get("id_token") or ""))
+                user_data = json.loads(str(form.get("user") or "{}"))
+                if user_data.get("name"):
+                    identity["name"] = " ".join(
+                        part for part in [user_data["name"].get("firstName"), user_data["name"].get("lastName")] if part
+                    )
+                create_social_session(self, "apple", identity)
+            elif parsed.path == "/api/login":
                 reset_state(terminate_process=True)
                 form = read_form(self)
                 username = str(form.get("username", ""))
@@ -851,23 +1093,6 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_header("Content-Length", str(len(raw)))
                 self.end_headers()
                 self.wfile.write(raw)
-            elif parsed.path == "/api/social_login":
-                reset_state(terminate_process=True)
-                form = read_form(self)
-                provider = safe_name(str(form.get("provider") or "Social")).replace(" ", "_")
-                username = f"{provider.lower()}_demo"
-                USERS.setdefault(username, {"password": "", "name": f"Usuario {provider}", "role": "Productor"})
-                (USER_DATA_DIR / username / "catalog").mkdir(parents=True, exist_ok=True)
-                (REPORTS_WEBAPP_DIR / username).mkdir(parents=True, exist_ok=True)
-                token = uuid.uuid4().hex
-                SESSIONS[token] = username
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json; charset=utf-8")
-                self.send_header("Set-Cookie", f"cowtrack_session={token}; Path=/; SameSite=Lax")
-                raw = json.dumps({"ok": True, "user": username, "provider": provider}).encode("utf-8")
-                self.send_header("Content-Length", str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
             elif parsed.path == "/api/logout":
                 reset_state(terminate_process=True)
                 token = parse_cookies(self).get("cowtrack_session")
@@ -887,6 +1112,7 @@ class Handler(BaseHTTPRequestHandler):
                 form = read_form(self)
                 name = safe_name(str(form.get("cow_name") or "Nueva vaca"))
                 cow_dir = USER_DATA_DIR / username / "catalog" / name
+                existed = cow_dir.exists()
                 cow_dir.mkdir(parents=True, exist_ok=True)
                 files = form.get("cow_photos")
                 items = files if isinstance(files, list) else [files]
@@ -902,12 +1128,18 @@ class Handler(BaseHTTPRequestHandler):
                     "name": name,
                     "status": "catalogada",
                     "phenotype": str(form.get("phenotype") or "Identidad bovina"),
-                    "embedding_status": "disponible" if saved_count else "pendiente",
+                    "embedding_status": "generando" if saved_count else "pendiente",
                     "photos": saved_count,
                     "created_at": time.strftime("%Y-%m-%d"),
                 }
                 (cow_dir / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
-                json_response(self, {"ok": True, "catalog": catalog(username)})
+                try:
+                    gallery_report = rebuild_user_gallery(username)
+                except Exception:
+                    if not existed:
+                        shutil.rmtree(cow_dir, ignore_errors=True)
+                    raise
+                json_response(self, {"ok": True, "catalog": catalog(username), "gallery": gallery_report})
             elif parsed.path == "/api/catalog/delete":
                 username = require_user(self)
                 if not username:
@@ -917,7 +1149,8 @@ class Handler(BaseHTTPRequestHandler):
                 target = USER_DATA_DIR / username / "catalog" / name
                 if target.exists():
                     shutil.rmtree(target)
-                json_response(self, {"ok": True, "catalog": catalog(username)})
+                gallery_report = rebuild_user_gallery(username)
+                json_response(self, {"ok": True, "catalog": catalog(username), "gallery": gallery_report})
             elif parsed.path == "/api/run":
                 username = require_user(self)
                 if not username:
@@ -954,12 +1187,21 @@ class Handler(BaseHTTPRequestHandler):
                 form = read_form(self)
                 history = reports_history(username)
                 entry = history[0] if history else state_payload().get("summary", {})
-                ok, message = send_telegram(
-                    telegram_text(entry),
-                    str(form.get("telegram_token") or os.getenv("COWTRACK_TELEGRAM_BOT_TOKEN", "")),
-                    str(form.get("telegram_chat_id") or os.getenv("COWTRACK_TELEGRAM_CHAT_ID", "")),
-                )
-                json_response(self, {"ok": ok, "message": message}, 200 if ok else 400)
+                token = os.getenv("COWTRACK_TELEGRAM_BOT_TOKEN", "")
+                chat_id = os.getenv("COWTRACK_TELEGRAM_CHAT_ID", "")
+                if token and chat_id:
+                    ok, message = send_telegram(telegram_text(entry), token, chat_id)
+                    json_response(self, {"ok": ok, "message": message, "mode": "bot"}, 200 if ok else 400)
+                else:
+                    json_response(
+                        self,
+                        {
+                            "ok": True,
+                            "message": "Elegí el contacto o grupo y confirmá el envío en Telegram.",
+                            "mode": "share",
+                            "share_url": telegram_share_url(entry),
+                        },
+                    )
             elif parsed.path == "/api/contact":
                 form = read_form(self)
                 dest = T7_WEBAPP / "contactos"
@@ -967,6 +1209,21 @@ class Handler(BaseHTTPRequestHandler):
                 item = {"date": time.strftime("%Y-%m-%d %H:%M"), **{k: str(v) for k, v in form.items()}}
                 (dest / f"contacto_{int(time.time())}.json").write_text(json.dumps(item, ensure_ascii=False, indent=2), encoding="utf-8")
                 json_response(self, {"ok": True, "message": "Solicitud recibida. El equipo CowTrack se contactará a la brevedad."})
+            elif parsed.path == "/api/support":
+                username = require_user(self)
+                if not username:
+                    return
+                form = read_form(self)
+                dest = T7_WEBAPP / "soporte" / username
+                dest.mkdir(parents=True, exist_ok=True)
+                item = {
+                    "date": time.strftime("%Y-%m-%d %H:%M"),
+                    "username": username,
+                    **{key: str(value) for key, value in form.items()},
+                }
+                ticket_id = time.strftime("CT-%Y%m%d-%H%M%S")
+                (dest / f"{ticket_id}.json").write_text(json.dumps(item, ensure_ascii=False, indent=2), encoding="utf-8")
+                json_response(self, {"ok": True, "ticket_id": ticket_id})
             else:
                 text_response(self, "No encontrado", 404)
         except Exception as exc:
