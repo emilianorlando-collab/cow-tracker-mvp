@@ -189,7 +189,7 @@ p { color: var(--muted); line-height: 1.65; }
   color: #fff;
   background:
     linear-gradient(90deg, rgba(7,31,53,.93), rgba(7,31,53,.72)),
-    url("/cowtrack-files/datos/fotos_mockup/pexels-helenalopes-4766371.jpg") center/cover;
+    url("/cowtrack-files/datos/recursos_web/pexels-helenalopes-4766371.jpg") center/cover;
 }
 .product-feature-band h2 { color: #fff; }
 .product-feature-band p { margin-top: 14px; color: rgba(255,255,255,.78); }

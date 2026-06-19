@@ -1,7 +1,7 @@
-# CowTrack Mockup
+# Aplicación web CowTrack
 
-Mockup local de producto para presentar CowTrack como software de conteo y
-reidentificacion de rodeos.
+Prototipo funcional de una aplicación web para conteo, tracking y
+reidentificación de rodeos mediante el pipeline real de CowTrack.
 
 ## Credenciales de prueba
 
@@ -13,7 +13,7 @@ clave: admin
 ## Ejecucion
 
 ```bash
-python3 mockup/cowtrack_mockup.py
+python3 webapp/cowtrack_webapp.py
 ```
 
 Abrir:
@@ -24,16 +24,16 @@ http://127.0.0.1:7860
 
 ## Estructura local en T7
 
-El mockup guarda datos operativos fuera del repositorio, dentro de:
+La aplicación guarda datos operativos fuera del repositorio, dentro de:
 
 ```text
-/Volumes/T7/cow-tracker-mvp/mockup/
+/Volumes/T7/cow-tracker-mvp/webapp/
 ```
 
 Carpetas principales:
 
 - `user_data/`: usuarios, catalogos de vacas y fotos cargadas.
-- `reports_mockup/`: reportes pensados para el mockup y el usuario final.
+- `reports_webapp/`: reportes generados para el usuario final.
 - `uploads/`: videos subidos desde la interfaz.
 - `runs/`: resultados de procesamiento ejecutados desde la interfaz.
 
@@ -43,5 +43,5 @@ Carpetas principales:
 2. Iniciar sesion con `admin/admin`.
 3. Revisar o modificar el catalogo de vacas.
 4. Ejecutar `Reidentificar / Conteo`.
-5. Ver el progreso con animacion.
+5. Ver el progreso del procesamiento en tiempo real.
 6. Consultar el reporte amigable y enviarlo por Telegram.

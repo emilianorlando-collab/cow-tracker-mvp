@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CowTrack product mockup with local persistence and real pipeline hook."""
+"""CowTrack functional web prototype with local persistence and a real pipeline hook."""
 
 from __future__ import annotations
 
@@ -23,16 +23,16 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MOCKUP_DIR = REPO_ROOT / "mockup"
-STATIC_DIR = MOCKUP_DIR / "static"
+WEBAPP_DIR = REPO_ROOT / "webapp"
+STATIC_DIR = WEBAPP_DIR / "static"
 PIPELINE_SCRIPT = REPO_ROOT / "scripts" / "16_reid_timeline_erondina.py"
 
 T7_ROOT = Path("/Volumes/T7/cow-tracker-mvp")
-T7_MOCKUP = T7_ROOT / "mockup"
-USER_DATA_DIR = T7_MOCKUP / "user_data"
-REPORTS_MOCKUP_DIR = T7_MOCKUP / "reports_mockup"
-UPLOADS_DIR = T7_MOCKUP / "uploads"
-RUNS_DIR = T7_MOCKUP / "runs"
+T7_WEBAPP = T7_ROOT / "webapp"
+USER_DATA_DIR = T7_WEBAPP / "user_data"
+REPORTS_WEBAPP_DIR = T7_WEBAPP / "reports_webapp"
+UPLOADS_DIR = T7_WEBAPP / "uploads"
+RUNS_DIR = T7_WEBAPP / "runs"
 FAST_DEMO_VIDEO = T7_ROOT / "datos" / "Resultado final" / "archivo a procesar demo 5s.mp4"
 FULL_DEMO_VIDEO = T7_ROOT / "datos" / "Resultado final" / "archivo a procesar.mp4"
 REAL_REPORT = REPO_ROOT / "app" / "runs" / "20260617_201441_cad968e6" / "cowtrack_report.json"
@@ -78,7 +78,7 @@ def pipeline_python() -> str:
 
 
 def ensure_dirs() -> None:
-    for path in [T7_MOCKUP, USER_DATA_DIR, REPORTS_MOCKUP_DIR, UPLOADS_DIR, RUNS_DIR]:
+    for path in [T7_WEBAPP, USER_DATA_DIR, REPORTS_WEBAPP_DIR, UPLOADS_DIR, RUNS_DIR]:
         path.mkdir(parents=True, exist_ok=True)
     seed_admin_data()
 
@@ -122,7 +122,7 @@ def seed_admin_data() -> None:
         current.update(metadata)
         meta_path.write_text(json.dumps(current, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    report_dir = REPORTS_MOCKUP_DIR / "admin"
+    report_dir = REPORTS_WEBAPP_DIR / "admin"
     report_dir.mkdir(parents=True, exist_ok=True)
     report_path = copy_if_exists(REAL_REPORT, report_dir / "reporte_real_cowtrack_47s.json")
     contact_path = copy_if_exists(REAL_CONTACT, report_dir / "reporte_real_contact_sheet.jpg")
@@ -248,7 +248,7 @@ def catalog(username: str) -> list[dict]:
                 "phenotype": metadata.get("phenotype", "Identidad bovina"),
                 "embedding_status": metadata.get("embedding_status", "pendiente"),
                 "photo_count": len(photos),
-                "cover_url": f"/mockup-files/user_data/{username}/catalog/{urllib.parse.quote(cow_dir.name)}/{urllib.parse.quote(cover.name)}"
+                "cover_url": f"/webapp-files/user_data/{username}/catalog/{urllib.parse.quote(cow_dir.name)}/{urllib.parse.quote(cover.name)}"
                 if cover.exists()
                 else "/static/favicon.svg",
             }
@@ -257,14 +257,14 @@ def catalog(username: str) -> list[dict]:
 
 
 def reports_history(username: str) -> list[dict]:
-    path = REPORTS_MOCKUP_DIR / username / "historial_reportes.json"
+    path = REPORTS_WEBAPP_DIR / username / "historial_reportes.json"
     if not path.exists():
         return []
     return [enrich_report_entry(entry) for entry in json.loads(path.read_text(encoding="utf-8"))]
 
 
 def save_reports_history(username: str, history: list[dict]) -> None:
-    path = REPORTS_MOCKUP_DIR / username / "historial_reportes.json"
+    path = REPORTS_WEBAPP_DIR / username / "historial_reportes.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(history, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -768,7 +768,7 @@ def bytes_response(handler: BaseHTTPRequestHandler, raw: bytes, content_type: st
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "CowTrackMockup/2.0"
+    server_version = "CowTrackWebApp/2.0"
 
     def do_HEAD(self) -> None:  # noqa: N802
         self.send_response(200)
@@ -783,8 +783,8 @@ class Handler(BaseHTTPRequestHandler):
             self.serve_file(STATIC_DIR / path.removeprefix("/static/"))
         elif path == "/favicon.ico":
             self.serve_file(STATIC_DIR / "favicon.svg")
-        elif path.startswith("/mockup-files/"):
-            self.serve_file(T7_MOCKUP / urllib.parse.unquote(path.removeprefix("/mockup-files/")))
+        elif path.startswith("/webapp-files/"):
+            self.serve_file(T7_WEBAPP / urllib.parse.unquote(path.removeprefix("/webapp-files/")))
         elif path.startswith("/cowtrack-files/"):
             self.serve_file(T7_ROOT / urllib.parse.unquote(path.removeprefix("/cowtrack-files/")))
         elif path == "/api/session":
@@ -841,7 +841,7 @@ class Handler(BaseHTTPRequestHandler):
                     return
                 USERS[username] = {"password": password, "name": name, "role": "Productor"}
                 (USER_DATA_DIR / username / "catalog").mkdir(parents=True, exist_ok=True)
-                (REPORTS_MOCKUP_DIR / username).mkdir(parents=True, exist_ok=True)
+                (REPORTS_WEBAPP_DIR / username).mkdir(parents=True, exist_ok=True)
                 token = uuid.uuid4().hex
                 SESSIONS[token] = username
                 self.send_response(200)
@@ -858,7 +858,7 @@ class Handler(BaseHTTPRequestHandler):
                 username = f"{provider.lower()}_demo"
                 USERS.setdefault(username, {"password": "", "name": f"Usuario {provider}", "role": "Productor"})
                 (USER_DATA_DIR / username / "catalog").mkdir(parents=True, exist_ok=True)
-                (REPORTS_MOCKUP_DIR / username).mkdir(parents=True, exist_ok=True)
+                (REPORTS_WEBAPP_DIR / username).mkdir(parents=True, exist_ok=True)
                 token = uuid.uuid4().hex
                 SESSIONS[token] = username
                 self.send_response(200)
@@ -962,7 +962,7 @@ class Handler(BaseHTTPRequestHandler):
                 json_response(self, {"ok": ok, "message": message}, 200 if ok else 400)
             elif parsed.path == "/api/contact":
                 form = read_form(self)
-                dest = T7_MOCKUP / "contactos"
+                dest = T7_WEBAPP / "contactos"
                 dest.mkdir(parents=True, exist_ok=True)
                 item = {"date": time.strftime("%Y-%m-%d %H:%M"), **{k: str(v) for k, v in form.items()}}
                 (dest / f"contacto_{int(time.time())}.json").write_text(json.dumps(item, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -974,7 +974,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def serve_file(self, path: Path) -> None:
         resolved = path.resolve()
-        allowed = [STATIC_DIR.resolve(), T7_MOCKUP.resolve(), T7_ROOT.resolve()]
+        allowed = [STATIC_DIR.resolve(), T7_WEBAPP.resolve(), T7_ROOT.resolve()]
         if not any(str(resolved).startswith(str(root)) for root in allowed):
             text_response(self, "Acceso no permitido", 403)
             return
@@ -1030,14 +1030,14 @@ class Handler(BaseHTTPRequestHandler):
                     break
 
     def log_message(self, fmt: str, *args) -> None:
-        print(f"[CowTrack Mockup] {fmt % args}")
+        print(f"[CowTrack WebApp] {fmt % args}")
 
 
 def main() -> None:
     ensure_dirs()
     port = int(os.getenv("COWTRACK_PORT", "7860"))
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
-    print(f"CowTrack mockup listo en http://127.0.0.1:{port}")
+    print(f"Aplicación web CowTrack lista en http://127.0.0.1:{port}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

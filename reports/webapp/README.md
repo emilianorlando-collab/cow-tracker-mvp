@@ -1,4 +1,4 @@
-# Reportes del mockup CowTrack
+# Reportes de la aplicación web CowTrack
 
 Esta carpeta conserva los resultados exportables generados desde la interfaz
 web local.

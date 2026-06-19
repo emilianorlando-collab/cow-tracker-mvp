@@ -524,8 +524,8 @@ cow-tracker-mvp/
 │   └── README.md
 ├── assets/
 │   └── branding/          logos y recursos oficiales de CowTrack
-├── mockup/
-│   ├── cowtrack_mockup.py
+├── webapp/
+│   ├── cowtrack_webapp.py
 │   ├── README.md
 │   └── static/
 ├── datos/
@@ -539,7 +539,7 @@ cow-tracker-mvp/
 ├── reports/
 │   ├── final/
 │   ├── intermediate/
-│   ├── mockup/            JSON, PDFs y evidencias de la interfaz web
+│   ├── webapp/            JSON, PDFs y evidencias de la aplicación web
 │   ├── 01_entrenamiento_crosspose.md
 │   └── 02_evaluacion_faiss.md
 ├── scripts/
@@ -568,10 +568,10 @@ docs/ERONDINA_REID_PIPELINE.md
 
 ## 🚀 Ejecución
 
-### Mockup web local
+### Aplicación web local
 
 ```bash
-python3 mockup/cowtrack_mockup.py
+python3 webapp/cowtrack_webapp.py
 ```
 
 Luego abrir:
@@ -580,7 +580,7 @@ Luego abrir:
 http://127.0.0.1:7860
 ```
 
-El mockup incluye landing comercial, login local, dashboard
+La aplicación web incluye landing comercial, login local, dashboard
 de usuario, catálogo de vacas, ejecución del pipeline, reporte amigable e
 historial local en el disco T7.
 
@@ -696,7 +696,7 @@ El MVP está completo, pero el escenario real tiene limitaciones importantes:
   etiqueta.
 - El conteo global queda resuelto para el video final, aunque su robustez debe
   validarse con más videos de campo, más ángulos y mayor variabilidad de rodeo.
-- La interfaz de usuario ya cuenta con un mockup web local completo, pero puede
+- El prototipo funcional ya cuenta con una aplicación web local completa, pero puede
   evolucionar hacia autenticación real, multiusuario productivo y despliegue en
   servidor.
 

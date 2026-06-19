@@ -1,7 +1,7 @@
 {
   "report_type": "cowtrack_final_public_report",
   "frame_indexing": "zero_based",
-  "video_out": "test_validacion_mockup.mp4",
+  "video_out": "test_validacion_webapp.mp4",
   "processed_frames": 1,
   "display_frame_range": {
     "start": 0,

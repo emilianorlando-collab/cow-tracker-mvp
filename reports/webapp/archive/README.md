@@ -1,4 +1,4 @@
-# Archivo histórico del mockup
+# Archivo histórico de la aplicación web
 
 Contiene reportes técnicos JSON, evidencias visuales y PDFs de corridas
 anteriores. Las corridas fallidas o parciales se preservan deliberadamente para

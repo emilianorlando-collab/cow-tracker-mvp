@@ -209,9 +209,9 @@ __marimo__/
 datos/
 app/uploads/
 app/runs/
-mockup/uploads/
-mockup/runs/
-mockup/data/
+webapp/uploads/
+webapp/runs/
+webapp/data/
 
 # macOS metadata
 .DS_Store

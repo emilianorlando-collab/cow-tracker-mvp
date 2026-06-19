@@ -33,9 +33,9 @@ function closeTelegram() { $("#telegramModal").classList.add("hidden"); }
 
 function fileLink(path) {
   if (!path) return "";
-  const mockupPrefix = "/Volumes/T7/cow-tracker-mvp/mockup/";
+  const webappPrefix = "/Volumes/T7/cow-tracker-mvp/webapp/";
   const rootPrefix = "/Volumes/T7/cow-tracker-mvp/";
-  if (path.startsWith(mockupPrefix)) return `/mockup-files/${path.slice(mockupPrefix.length)}`;
+  if (path.startsWith(webappPrefix)) return `/webapp-files/${path.slice(webappPrefix.length)}`;
   if (path.startsWith(rootPrefix)) return `/cowtrack-files/${path.slice(rootPrefix.length)}`;
   return "";
 }
