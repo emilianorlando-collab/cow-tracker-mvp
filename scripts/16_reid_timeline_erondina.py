@@ -459,7 +459,7 @@ def resolve_unique_anchors(anchor_options_by_label: dict, labels: list) -> dict:
         key = (
             len(selected),
             sum(float(item.get("automatic_timeline_quality", item.get("score", 0.0))) for item in selected),
-            sum(float(item.get("color_similarity", 0.5)) for item in selected),
+            sum(float(item.get("color_similarity") if item.get("color_similarity") is not None else 0.5) for item in selected),
             sum(float(item.get("nearest_vote_fraction", 0.0)) for item in selected),
         )
         if key > best_key:

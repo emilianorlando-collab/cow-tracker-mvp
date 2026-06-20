@@ -21,6 +21,10 @@ for script in 04_crear_galeria_erondina.py 05_inferencia_video_erondina.py 13_re
 done
 cp "$REPO_ROOT/models/mi_modelo_reid.pt" "$RUNTIME_DIR/models/mi_modelo_reid.pt"
 cp "$REPO_ROOT/models/erondina_gallery_embeddings_enfocada_filtrada.npz" "$RUNTIME_DIR/models/erondina_gallery_embeddings_enfocada_filtrada.npz"
+if [[ -d "$T7_ROOT/datos/erondina_reid" ]]; then
+  mkdir -p "$RUNTIME_DIR/datos"
+  ditto "$T7_ROOT/datos/erondina_reid" "$RUNTIME_DIR/datos/erondina_reid"
+fi
 
 if [[ -d "$REPO_ROOT/app/runs/20260617_201441_cad968e6" ]]; then
   ditto "$REPO_ROOT/app/runs/20260617_201441_cad968e6" "$RUNTIME_DIR/app/runs/20260617_201441_cad968e6"

@@ -758,6 +758,8 @@ def run_pipeline(form: dict, username: str, run_id: str) -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
     try:
         cmd, artifacts = build_command(form, username, run_dir)
+        pipeline_log = run_dir / "pipeline.log"
+        artifacts["pipeline_log_path"] = str(pipeline_log)
         update_state(
             run_id=run_id,
             username=username,
@@ -784,8 +786,11 @@ def run_pipeline(form: dict, username: str, run_id: str) -> None:
         with ACTIVE_PROCESS_LOCK:
             ACTIVE_PROCESS = process
         assert process.stdout is not None
-        for line in process.stdout:
-            append_log(line)
+        with pipeline_log.open("w", encoding="utf-8") as log_file:
+            for line in process.stdout:
+                log_file.write(line)
+                log_file.flush()
+                append_log(line)
         returncode = process.wait()
         with ACTIVE_PROCESS_LOCK:
             if ACTIVE_PROCESS is process:
@@ -794,7 +799,9 @@ def run_pipeline(form: dict, username: str, run_id: str) -> None:
         if Path(artifacts["report_path"]).exists():
             report = json.loads(Path(artifacts["report_path"]).read_text(encoding="utf-8"))
         if returncode != 0:
-            raise RuntimeError(f"El procesamiento terminó con código {returncode}")
+            with STATE_LOCK:
+                detail = STATE.logs[-1] if STATE.logs else "sin detalle adicional"
+            raise RuntimeError(f"El procesamiento terminó con código {returncode}: {detail}")
         entry = build_user_report_entry("Conteo diario CowTrack", report or {}, artifacts)
         history = reports_history(username)
         history.insert(0, entry)
